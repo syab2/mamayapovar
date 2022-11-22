@@ -1,13 +1,88 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru" class="page page--feed">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'recipes/favicon.ico' %}" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#111111">
+    <title>Мама, я повар! — платформа для кулинаров</title>
+    <link rel="preload" href="{% static 'recipes/fonts/NunitoSans-Regular.woff2' %}" as="font" type="font/woff2"
+          crossorigin>
+    <link rel="preload" href="{% static 'recipes/fonts/NunitoSans-SemiBold.woff2' %}" as="font" type="font/woff2"
+          crossorigin>
+    <link rel="preload" href="{% static 'recipes/fonts/NunitoSans-Bold.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="{% static 'recipes/css/vendor.css' %}">
+    <link rel="stylesheet" href="{% static 'recipes/css/main.css' %}">
+    <script defer src="{% static 'recipes/js/main.js' %}"></script>
 </head>
-<body>  
-    {% include 'inc/_nav.html' %}
+<body class="page__body">
 
-    {% block content %}
-    {% endblock %}
+{% block navbar %}
+
+{% include "inc/_nav.html" %}
+
+{% endblock %}
+
+<div class="container">
+    <div class="site-container">
+        {% block sidebar %}
+
+        {% include "inc/_side.html" %}
+
+        {% endblock %}
+        <main class="feed">
+
+            {% block content %}{% endblock %}
+
+        </main>
+
+
+    </div>
+</div>
+
+<!--
+  <div class="graph-modal  popup">
+    <div class="graph-modal__container  popup__container" role="dialog" aria-modal="true" data-graph-target="register">
+      <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other" aria-label="Закрыть модальное окно">
+        <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+          <use href="img/sprite.svg#cross"/>
+        </svg>
+      </button>
+      <div class="graph-modal__content  popup__content">
+        <span class="section-h2  popup__title">Регистрация</span>
+        <form id="register" action="#" class="popup__form">
+          <input type="name" name="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105">
+          <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта">
+          <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4">
+          <button type="submit" class="btn  popup__btn">Зарегистрироваться</button>
+        </form>
+        <div class="popup__bottom">
+          <span class="popup__text">Есть аккаунт? <a class="section-link  popup__link" data-graph-path="auth" data-graph-speed="0">Войти</a></span>
+        </div>
+      </div>
+    </div>
+    <div class="graph-modal__container  popup__container" role="dialog" aria-modal="true" data-graph-target="auth">
+      <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other" aria-label="Закрыть модальное окно">
+        <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+          <use href="img/sprite.svg#cross"/>
+        </svg>
+      </button>
+      <div class="graph-modal__content  popup__content">
+        <span class="section-h2  popup__title">Вход в аккаунт</span>
+        <form id="auth" action="#" class="popup__form">
+          <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта">
+          <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4">
+          <button type="submit" class="btn  popup__btn">Войти</button>
+        </form>
+        <div class="popup__bottom">
+          <a href="#" class="section-link  popup__link">Забыли пароль?</a>
+          <a class="section-link  popup__link" data-graph-path="register" data-graph-speed="0">Регистрация</a>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
 </body>
-</html>
