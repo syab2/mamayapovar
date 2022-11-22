@@ -1,0 +1,18 @@
+// https://github.com/maxdenaro/gulp-maxgraph
+
+// базовые подключения
+@import "vars";
+@import "mixins";
+@import "fonts";
+@import "settings";
+
+// подключения компонентов страницы
+@import "./components/section";
+@import "./components/btn";
+@import "./components/input";
+@import "./components/popup";
+@import "./components/header";
+@import "./components/sidebar";
+@import "./components/feed";
+@import "./components/content-header";
+@import "./components/content-footer";

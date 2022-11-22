@@ -1,0 +1,40 @@
+.content-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__left {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 24px;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+
+    span {
+      margin-left: 8px;
+      font-weight: 600;
+      font-size: var(--font-s);
+      line-height: var(--lh-primary);
+      color: var(--color-text-secondary);
+      transition: color 0.2s ease;
+    }
+
+    .content-footer__icon {
+      fill: var(--color-icons-secondary);
+    }
+
+    &:hover,
+    &:focus-visible {
+      span {
+        color: var(--color-text-accent);
+      }
+
+      .content-footer__icon {
+        fill: var(--color-icons-primary);
+      }
+    }
+  }
+}

@@ -1,0 +1,153 @@
+.header {
+  position: sticky;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  border-bottom: 1px solid var(--color-bg-global);
+  background-color: var(--color-bg-island);
+
+  &__logo {
+    width: 100px;
+    height: 37px;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.6;
+    }
+
+    &:active {
+      opacity: 0.4;
+    }
+  }
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+
+  &__search {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  &__input {
+    width: 400px;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    height: 58px;
+    font-weight: 600;
+    font-size: var(--font-s);
+    color: var(--color-text-secondary);
+  }
+
+  &__left,
+  &__right {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    gap: 32px;
+  }
+}
+
+.header-profile {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: column;
+  gap: 4px;
+
+  &__avatar {
+    display: flex;
+    overflow: hidden;
+    border-radius: 100%;
+    width: 56px;
+    height: 56px;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
+  }
+
+  &__toggle {
+    display: flex;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
+  }
+
+  &__icon {
+    fill: var(--color-icons-secondary);
+  }
+}
+
+.header-profile-menu {
+  position: absolute;
+  right: 0;
+  top: 90px;
+  display: none;
+  border: 1px solid var(--color-bg-global);
+  border-radius: 0 0 8px 8px;
+  padding: 32px 16px;
+  width: 290px;
+  box-shadow: var(--elevation-1);
+  background-color: var(--color-bg-island);
+  gap: 8px;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__label {
+    margin-bottom: 8px;
+    margin-left: 12px;
+    font-weight: 600;
+    font-size: var(--font-s);
+    line-height: var(--lh-s);
+    color: var(--color-text-primary);
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 12px;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-island);
+    transition: background-color 0.2s ease;
+
+    span {
+      margin-left: 12px;
+    }
+
+    .header-profile-menu__icon {
+      fill: var(--color-icons-secondary);
+    }
+
+    &:hover,
+    &:focus-visible {
+      background-color: var(--color-bg-island-hover);
+    }
+  }
+
+  &__avatar {
+    border-radius: 100%;
+    width: 48px;
+    height: 48px;
+  }
+
+  &.active {
+    display: grid;
+  }
+}

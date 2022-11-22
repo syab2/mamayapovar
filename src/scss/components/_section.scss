@@ -1,0 +1,42 @@
+.section-h1 {
+  font-weight: 700;
+  font-size: var(--font-h1);
+  line-height: 1;
+  color: var(--color-text-primary);
+}
+
+.section-h2 {
+  font-weight: 700;
+  font-size: var(--font-h2);
+  line-height: 1;
+  color: var(--color-text-primary);
+}
+
+.section-h3 {
+  font-weight: 700;
+  font-size: var(--font-h3);
+  line-height: 1;
+  color: var(--color-text-primary);
+}
+
+.section-link {
+  font-weight: 400;
+  font-size: var(--font-s);
+  line-height: var(--lh-s);
+  color: var(--color-text-accent);
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+
+    &:hover,
+    &:focus-visible {
+      text-decoration: none;
+    }
+  }
+}
