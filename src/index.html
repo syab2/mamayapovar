@@ -1,22 +1,41 @@
 <!DOCTYPE html>
 <html lang="ru" class="page page--feed">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#111111">
+    <title>Мама, я повар! — платформа для кулинаров</title>
+    <link rel="preload" href="fonts/NunitoSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/NunitoSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/NunitoSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
+  </head>
 
-@include('partials/head.html')
+  <body class="page__body">
+    <!-- Шапка для участника -->
+    @include('partials/header-auth.html')
 
-<body class="page__body">
-  @include('partials/header.html')
-  <div class="container">
-    <div class="site-container">
-      @include('partials/sidebar.html')
-      <main class="feed">
-        <h1 class="visually-hidden">Свежие рецепты</h1>
-        @include('partials/feed-item.html')
-        @include('partials/feed-item.html')
-        @include('partials/feed-item.html')
-      </main>
+    <!-- Шапка для гостя -->
+    @include('partials/header.html')
+
+    <div class="container">
+      <div class="site-container">
+        <!-- Сайдбар -->
+        @include('partials/sidebar.html')
+
+        <main class="feed">
+          <h1 class="visually-hidden">Свежие рецепты</h1>
+          @include('partials/feed-item.html')
+          @include('partials/feed-item.html')
+          @include('partials/feed-item.html')
+        </main>
+      </div>
     </div>
-  </div>
-  @include('partials/modals.html')
-</body>
+    @include('partials/modals.html')
+  </body>
 
 </html>

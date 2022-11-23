@@ -8,9 +8,9 @@
     <div class="graph-modal__content  popup__content">
       <span class="section-h2  popup__title">Регистрация</span>
       <form id="register" action="#" class="popup__form">
-        <input type="name" name="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105">
-        <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта">
-        <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4">
+        <input type="name" name="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" autofocus="on" required>
+        <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта" required>
+        <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4" required>
         <button type="submit" class="btn  popup__btn">Зарегистрироваться</button>
       </form>
       <div class="popup__bottom">
@@ -27,8 +27,8 @@
     <div class="graph-modal__content  popup__content">
       <span class="section-h2  popup__title">Вход в аккаунт</span>
       <form id="auth" action="#" class="popup__form">
-        <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта">
-        <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4">
+        <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта" autofocus="on" required>
+        <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4" required>
         <button type="submit" class="btn  popup__btn">Войти</button>
       </form>
       <div class="popup__bottom">
