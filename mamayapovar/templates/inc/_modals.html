@@ -1,0 +1,54 @@
+{% load static %}
+
+{% block modal %}
+<div class="graph-modal  popup">
+    <div class="graph-modal__container  popup__container" role="dialog" aria-modal="true" data-graph-target="register">
+        <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other"
+                aria-label="Закрыть модальное окно">
+            <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                <use href="{% static 'recipes/img/sprite.svg' %}#cross"/>
+            </svg>
+        </button>
+        <div class="graph-modal__content  popup__content">
+            <span class="section-h2  popup__title">Регистрация</span>
+            <form id="register" action="postindex/" class="popup__form" method="post">
+                {% csrf_token %}
+                <input type="name" name="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2"
+                       maxlength="105" autofocus="on" required>
+                <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта" required>
+                <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4"
+                       required>
+                <button form="register" type="submit" class="btn  popup__btn">Зарегистрироваться</button>
+            </form>
+            <div class="popup__bottom">
+          <span class="popup__text">Есть аккаунт? <a class="section-link  popup__link" data-graph-path="auth"
+                                                     data-graph-speed="0">Войти</a></span>
+            </div>
+        </div>
+    </div>
+    <div class="graph-modal__container  popup__container" role="dialog" aria-modal="true" data-graph-target="auth">
+        <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other"
+                aria-label="Закрыть модальное окно">
+            <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                <use href="{% static 'recipes/img/sprite.svg' %}#cross"/>
+            </svg>
+        </button>
+        <div class="graph-modal__content  popup__content">
+            <span class="section-h2  popup__title">Вход в аккаунт</span>
+            <form id="auth" action="postlogin/" class="popup__form" method="post">
+                {% csrf_token %}
+                <input type="name" name="username" class="input  popup__input" placeholder="Электронная почта"
+                       autofocus="on"
+                       required>
+                <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4"
+                       required>
+                <button form="auth" type="submit" class="btn  popup__btn">Войти</button>
+            </form>
+            <div class="popup__bottom">
+                <a href="#" class="section-link  popup__link">Забыли пароль?</a>
+                <a class="section-link  popup__link" data-graph-path="register" data-graph-speed="0">Регистрация</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

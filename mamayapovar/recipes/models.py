@@ -6,7 +6,7 @@ class Recipe(models.Model):
     description = models.TextField(blank=True)
     time_create = models.DateTimeField(auto_now_add=True)
     cooking_time = models.CharField(max_length=20)
-    persons = models.IntegerField()
+    persons = models.CharField(max_length=20)
     cat = models.ForeignKey('Category', on_delete=models.PROTECT)
     author_id = models.IntegerField(null=True)
     ingredients = models.TextField(blank=True)
@@ -15,6 +15,15 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['-time_create']
+
+
+class User(models.Model):
+    username = models.CharField(max_length=105)
+    email = models.EmailField()
+    password = models.TextField()
 
 
 class Category(models.Model):
