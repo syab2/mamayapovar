@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ru" class="page  page--new-recipe">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="theme-color" content="#111111">
+    <title>Мама, я повар! — Создание рецепта</title>
+    <link rel="preload" href="fonts/NunitoSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/NunitoSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/NunitoSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="css/vendor.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script defer src="js/main.js"></script>
+  </head>
+
+  <body class="page__body">
+    @include('partials/header-second.html')
+    <div class="container">
+      <div class="site-container">
+        <aside class="sidebar">
+          <div class="sidebar__inner">
+            <div class="sidebar-tree">
+              <ul class="list-reset sidebar-tree__list">
+                <li class="sidebar-tree__item  sidebar-tree__item--tab  active">
+                  <a href="#" class="sidebar-tree__link">
+                    <span>Основное</span>
+                  </a>
+                </li>
+                <li class="sidebar-tree__item  sidebar-tree__item--tab">
+                  <a href="#" class="sidebar-tree__link">
+                    <span>Ингредиенты</span>
+                  </a>
+                </li>
+                <li class="sidebar-tree__item  sidebar-tree__item--tab">
+                  <a href="#" class="sidebar-tree__link">
+                    <span>Фото блюда</span>
+                  </a>
+                </li>
+                <li class="sidebar-tree__item  sidebar-tree__item--tab">
+                  <a href="#" class="sidebar-tree__link">
+                    <span>Инструкция</span>
+                  </a>
+                </li>
+                <li class="sidebar-tree__item  sidebar-tree__item--tab">
+                  <a href="#" class="sidebar-tree__link">
+                    <span>Публикация</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div class="sidebar-footer">
+              <a href="#" class="sidebar-footer__link">О проекте</a>
+            </div>
+          </div>
+        </aside>
+
+        <main class="new-recipe">
+          <h1 class="visually-hidden">Создание рецепта</h1>
+          <form action="" class="new-recipe__form">
+            <fieldset class="new-recipe-section  new-recipe-section--main" id="main">
+              <legend class="section-h2  new-recipe-section__title">Основное</legend>
+              <label class="new-recipe-field  new-recipe-field--title">
+                <span class="input__label">Название рецепта</span>
+                <input type="text" name="title" class="input new-recipe-field__input" autofocus="on" autocomplete="off" maxlength="100" required>
+              </label>
+              <label class="new-recipe-field  new-recipe-field--desc">
+                <span class="input__label">Описание рецепта</span>
+                <textarea name="description" class="input  input--textarea  new-recipe-field__input" placeholder="Старый, испытанный временем, но всегда желанный рецепт классической ароматной шарлотки. Уютный запах корицы и чашечка горячего чая с мелиссой..." autocomplete="off" maxlength="200"></textarea>
+              </label>
+              <label class="new-recipe-field  new-recipe-field--cat">
+                <span class="input__label">Категория блюда</span>
+                <select name="cat" class="select  new-recipe-field__select" required>
+                  <option>——</option>
+                  <option>Выпечка</option>
+                  <option>Супы</option>
+                  <option>Салаты</option>
+                  <option>Горячие блюда</option>
+                </select>
+              </label>
+              <div class="new-recipe-section__group">
+                <label class="new-recipe-field  new-recipe-field--persons">
+                  <span class="input__label">Кол-во порций</span>
+                  <div class="counter  new-recipe-field__counter">
+                    <button class="btn  btn--second  counter__btn  counter__btn--minus" disabled>
+                      <svg class="icon new-recipe-counter__icon" aria-hidden="true" focusable="false">
+                        <use href="img/sprite.svg#minus"/>
+                      </svg>
+                    </button>
+                    <input type="number" name="persons" value="1" class="input  counter__input"min="1" max="15" autocomplete="off" required>
+                    <button class="btn  btn--second  counter__btn  counter__btn--plus">
+                      <svg class="icon new-recipe-counter__icon" aria-hidden="true" focusable="false">
+                        <use href="img/sprite.svg#plus"/>
+                      </svg>
+                    </button>
+                  </div>
+                </label>
+                <label class="new-recipe-field  new-recipe-field--time">
+                  <span class="input__label">Время приготовления</span>
+                  <input type="number" name="cooking_time_hours" placeholder="0" class="input new-recipe-field__input  new-recipe-field--hours" autocomplete="off" max="12">
+                  <input type="number" name="cooking_time_minutes" placeholder="0" class="input new-recipe-field__input  new-recipe-field--minutes" min="1" max="59" autocomplete="off" required>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset class="new-recipe-section  new-recipe-section--ingredients" id="ingredients">
+              <legend class="section-h2  new-recipe-section__title">Ингредиенты</legend>
+              <div class="new-recipe-ingredient">
+                <input type="text" name="ingredient-name" class="input  new-recipe-ingredient__input" placeholder="Название ингредиента" autocomplete="off" required>
+                <input type="number" name="ingredient-amount" class="input  new-recipe-ingredient__input" value="1" min="1" max="5000" autocomplete="off" required>
+                <select name="ingredient-measure" class="select  new-recipe-ingredient__select" required>
+                  <option>Ед. измерения</option>
+                  <option>шт</option>
+                  <option>г</option>
+                  <option>кг</option>
+                  <option>мл</option>
+                  <option>л</option>
+                  <option>столовая ложка</option>
+                  <option>чайная ложка</option>
+                  <option>стакан</option>
+                </select>
+                <button class="btn-reset  new-recipe-ingredient__delete" aria-label="Удалить ингредиент">
+                  <svg class="icon  icon--16  new-recipe-ingredient__icon" aria-hidden="true" focusable="false">
+                    <use href="img/sprite.svg#cross"/>
+                  </svg>
+                </button>
+              </div>
+              <div class="new-recipe-ingredient">
+                <input type="text" name="ingredient-name" class="input  new-recipe-ingredient__input" placeholder="Название ингредиента" autocomplete="off" required>
+                <input type="number" name="ingredient-amount" class="input  new-recipe-ingredient__input" value="1" min="1" max="5000" autocomplete="off" required>
+                <select name="ingredient-measure" class="select  new-recipe-ingredient__select" required>
+                  <option>Ед. измерения</option>
+                  <option>шт</option>
+                  <option>г</option>
+                  <option>кг</option>
+                  <option>мл</option>
+                  <option>л</option>
+                  <option>столовая ложка</option>
+                  <option>чайная ложка</option>
+                  <option>стакан</option>
+                </select>
+                <button class="btn-reset  new-recipe-ingredient__delete" aria-label="Удалить ингредиент">
+                  <svg class="icon  icon--16  new-recipe-ingredient__icon" aria-hidden="true" focusable="false">
+                    <use href="img/sprite.svg#cross"/>
+                  </svg>
+                </button>
+              </div>
+              <button class="btn  btn--third  btn--left  new-recipe-section__btn">
+                Добавить ингредиент
+                <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                  <use href="img/sprite.svg#circle-plus"/>
+                </svg>
+              </button>
+            </fieldset>
+            <fieldset class="new-recipe-section  new-recipe-section--photo" id="photo">
+              <legend class="section-h2  new-recipe-section__title">Фото блюда</legend>
+              <div class="imageuploader">
+                <input type="file" name="photo" class="input  input--photo  imageuploader__input" accept=".jpg, .jpeg, .png" required>
+                <button class="btn  btn--other  imageuploader__btn">
+                  <svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+                    <use href="img/sprite.svg#delete"/>
+                  </svg>
+                </button>
+              </div>
+            </fieldset>
+            <fieldset class="new-recipe-section  new-recipe-section--steps" id="steps">
+              <legend class="section-h2  new-recipe-section__title">Инструкция приготовления</legend>
+              <div class="new-recipe-step">
+                <div class="new-recipe-step__header">
+                  <span class="input__label  new-recipe-step__label">Шаг</span>
+                  <button class="btn-reset  new-recipe-step__delete" aria-label="Удалить шаг">
+                    <svg class="icon  new-recipe-step__icon" aria-hidden="true" focusable="false">
+                      <use href="img/sprite.svg#cross"/>
+                    </svg>
+                  </button>
+                </div>
+                <div class="new-recipe-step__body">
+                  <div class="imageuploader  new-recipe-step__imageuploder">
+                    <input type="file" name="step-photo" class="input  input--photo  imageuploader__input" accept=".jpg, .jpeg, .png">
+                    <button class="btn  btn--other  imageuploader__btn">
+                      <svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+                        <use href="img/sprite.svg#delete"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <textarea name="step-description" class="input  input--textarea  new-recipe-field__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
+                </div>
+              </div>
+              <button class="btn  btn--third  btn--left  new-recipe-section__btn">
+                Добавить шаг
+                <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                  <use href="img/sprite.svg#circle-plus"/>
+                </svg>
+              </button>
+            </fieldset>
+            <fieldset class="new-recipe-section  new-recipe-section--pub" id="pub">
+              <legend class="section-h2  new-recipe-section__title">Публикация</legend>
+              <a href="/" class="btn  btn--second">Выйти</a>
+              <button class="btn">Опубликовать</button>
+            </fieldset>
+          </form>
+        </main>
+      </div>
+    </div>
+  </body>
+
+</html>

@@ -26,7 +26,8 @@ p {
   color: var(--color-text-primary);
   background-color: var(--color-bg-global);
 
-  &--feed {
+  &--feed,
+  &--new-recipe {
     .site-container {
       position: relative;
       display: grid;

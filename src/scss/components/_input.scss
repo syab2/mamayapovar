@@ -53,6 +53,11 @@
     }
   }
 
+  &--textarea {
+    height: 168px;
+    resize: none;
+  }
+
   &::-webkit-search-decoration,
   &::-webkit-search-cancel-button,
   &::-webkit-search-results-button,
