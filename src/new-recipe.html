@@ -58,7 +58,7 @@
 
         <main class="new-recipe">
           <h1 class="visually-hidden">Создание рецепта</h1>
-          <form action="" class="new-recipe__form">
+          <form action="https://echo.htmlacademy.ru" method="POST" class="new-recipe__form">
             <fieldset class="new-recipe-section  new-recipe-section--main" id="main">
               <legend class="section-h2  new-recipe-section__title">Основное</legend>
               <label class="new-recipe-field  new-recipe-field--title">
@@ -83,17 +83,17 @@
                 <label class="new-recipe-field  new-recipe-field--persons">
                   <span class="input__label">Кол-во порций</span>
                   <div class="counter  new-recipe-field__counter">
-                    <button class="btn  btn--second  counter__btn  counter__btn--minus" disabled>
+                    <a class="btn  btn--second  counter__btn  counter__btn--minus" disabled>
                       <svg class="icon new-recipe-counter__icon" aria-hidden="true" focusable="false">
                         <use href="img/sprite.svg#minus"/>
                       </svg>
-                    </button>
+                    </a>
                     <input type="number" name="persons" value="1" class="input  counter__input"min="1" max="15" autocomplete="off" required>
-                    <button class="btn  btn--second  counter__btn  counter__btn--plus">
+                    <a class="btn  btn--second  counter__btn  counter__btn--plus">
                       <svg class="icon new-recipe-counter__icon" aria-hidden="true" focusable="false">
                         <use href="img/sprite.svg#plus"/>
                       </svg>
-                    </button>
+                    </a>
                   </div>
                 </label>
                 <label class="new-recipe-field  new-recipe-field--time">
@@ -119,11 +119,11 @@
                   <option>чайная ложка</option>
                   <option>стакан</option>
                 </select>
-                <button class="btn-reset  new-recipe-ingredient__delete" aria-label="Удалить ингредиент">
+                <a class="btn-reset  new-recipe-ingredient__delete" aria-label="Удалить ингредиент">
                   <svg class="icon  icon--16  new-recipe-ingredient__icon" aria-hidden="true" focusable="false">
                     <use href="img/sprite.svg#cross"/>
                   </svg>
-                </button>
+                </a>
               </div>
               <div class="new-recipe-ingredient">
                 <input type="text" name="ingredient-name" class="input  new-recipe-ingredient__input" placeholder="Название ингредиента" autocomplete="off" required>
@@ -139,28 +139,28 @@
                   <option>чайная ложка</option>
                   <option>стакан</option>
                 </select>
-                <button class="btn-reset  new-recipe-ingredient__delete" aria-label="Удалить ингредиент">
+                <a class="btn-reset  new-recipe-ingredient__delete" aria-label="Удалить ингредиент">
                   <svg class="icon  icon--16  new-recipe-ingredient__icon" aria-hidden="true" focusable="false">
                     <use href="img/sprite.svg#cross"/>
                   </svg>
-                </button>
+                </a>
               </div>
-              <button class="btn  btn--third  btn--left  new-recipe-section__btn">
+              <a class="btn  btn--third  btn--left  new-recipe-section__btn">
                 Добавить ингредиент
                 <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
                   <use href="img/sprite.svg#circle-plus"/>
                 </svg>
-              </button>
+              </a>
             </fieldset>
             <fieldset class="new-recipe-section  new-recipe-section--photo" id="photo">
               <legend class="section-h2  new-recipe-section__title">Фото блюда</legend>
               <div class="imageuploader">
                 <input type="file" name="photo" class="input  input--photo  imageuploader__input" accept=".jpg, .jpeg, .png" required>
-                <button class="btn  btn--other  imageuploader__btn">
+                <a class="btn  btn--other  imageuploader__btn">
                   <svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
                     <use href="img/sprite.svg#delete"/>
                   </svg>
-                </button>
+                </a>
               </div>
             </fieldset>
             <fieldset class="new-recipe-section  new-recipe-section--steps" id="steps">
@@ -168,35 +168,35 @@
               <div class="new-recipe-step">
                 <div class="new-recipe-step__header">
                   <span class="input__label  new-recipe-step__label">Шаг</span>
-                  <button class="btn-reset  new-recipe-step__delete" aria-label="Удалить шаг">
+                  <a class="btn-reset  new-recipe-step__delete" aria-label="Удалить шаг">
                     <svg class="icon  new-recipe-step__icon" aria-hidden="true" focusable="false">
                       <use href="img/sprite.svg#cross"/>
                     </svg>
-                  </button>
+                  </a>
                 </div>
                 <div class="new-recipe-step__body">
                   <div class="imageuploader  new-recipe-step__imageuploder">
                     <input type="file" name="step-photo" class="input  input--photo  imageuploader__input" accept=".jpg, .jpeg, .png">
-                    <button class="btn  btn--other  imageuploader__btn">
+                    <a class="btn  btn--other  imageuploader__btn">
                       <svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
                         <use href="img/sprite.svg#delete"/>
                       </svg>
-                    </button>
+                    </a>
                   </div>
                   <textarea name="step-description" class="input  input--textarea  new-recipe-field__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
                 </div>
               </div>
-              <button class="btn  btn--third  btn--left  new-recipe-section__btn">
+              <a class="btn  btn--third  btn--left  new-recipe-section__btn">
                 Добавить шаг
                 <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
                   <use href="img/sprite.svg#circle-plus"/>
                 </svg>
-              </button>
+              </a>
             </fieldset>
             <fieldset class="new-recipe-section  new-recipe-section--pub" id="pub">
               <legend class="section-h2  new-recipe-section__title">Публикация</legend>
               <a href="/" class="btn  btn--second">Выйти</a>
-              <button class="btn">Опубликовать</button>
+              <button type="submit" class="btn">Опубликовать</button>
             </fieldset>
           </form>
         </main>
