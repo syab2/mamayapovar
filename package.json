@@ -11,7 +11,9 @@
     "cache": "gulp cache",
     "backend": "gulp backend",
     "zip": "gulp zip",
-    "code": "editorconfig-checker"
+    "code": "editorconfig-checker",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d app"
   },
   "author": "sonniydsgn",
   "license": "ISC",
