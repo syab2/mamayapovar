@@ -1,7 +1,7 @@
 import pymorphy2
 from django.contrib import messages
 from django.contrib.auth import models, logout
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import get_user_model
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
@@ -44,8 +44,11 @@ def index(request):
 
 
 def postindex(request):
-    models.User.objects.create_user(request.POST.get('username', ''), request.POST.get('email', ''),
-                                    request.POST.get('password', '')).save()
+    if not get_user_model().objects.get(email=request.POST.get('email', '')):
+        models.User.objects.create_user(request.POST.get('username', ''), request.POST.get('email', ''),
+                                        request.POST.get('password', '')).save()
+    else:
+        return HttpResponseRedirect('/')
     return HttpResponseRedirect('/')
 
 
