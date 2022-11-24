@@ -12,39 +12,57 @@
           crossorigin>
     <link rel="preload" href="{% static 'recipes/fonts/NunitoSans-SemiBold.woff2' %}" as="font" type="font/woff2"
           crossorigin>
-    <link rel="preload" href="{% static 'recipes/fonts/NunitoSans-Bold.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'recipes/fonts/NunitoSans-Bold.woff2' %}" as="font" type="font/woff2"
+          crossorigin>
     <link rel="stylesheet" href="{% static 'recipes/css/vendor.css' %}">
     <link rel="stylesheet" href="{% static 'recipes/css/main.css' %}">
     <script defer src="{% static 'recipes/js/main.js' %}"></script>
 </head>
 <body class="page__body">
 
+{% if request.get_full_path == '/' %}
 {% block navbar %}
 
 {% include "inc/_nav.html" %}
 
 {% endblock %}
+{% else %}
+{% block navnav %}
+
+{% include "inc2/_nav.html" %}
+
+{% endblock %}
+{% endif %}
 
 <div class="container">
     <div class="site-container">
+        {% if request.get_full_path == '/' %}
         {% block sidebar %}
-
         {% include "inc/_side.html" %}
-
         {% endblock %}
+        {% else %}
+        {% block sideside %}
+        {% include "inc2/_side.html" %}
+        {% endblock %}
+        {% endif %}
+        {% if request.get_full_path == '/' %}
         <main class="feed">
-
             {% block content %}{% endblock %}
-
         </main>
+        {% else %}
+        <main class="new-recipe">
+            {% block concon %}{% endblock %}
+        </main>
+        {% endif %}
 
 
     </div>
 </div>
 
+{% if request.get_full_path == '/' %}
 {% block modal %}
 {% include "inc/_modals.html" %}
 {% endblock %}
-
+{% endif %}
 
 </body>

@@ -70,3 +70,7 @@ def postlogin(request):
 def postlogout(request):
     logout(request)
     return HttpResponseRedirect('/')
+
+
+def new_recipe(request):
+    return render(request, 'recipes/new-recipe.html', {})
