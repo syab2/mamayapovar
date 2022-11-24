@@ -5,5 +5,6 @@ from .views import *
 urlpatterns = [
     path('', index),
     path('postindex/', postindex),
-    path('postlogin/', postlogin)
+    path('postlogin/', postlogin),
+    path('postlogout/', postlogout)
 ]

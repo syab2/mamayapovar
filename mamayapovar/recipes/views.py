@@ -1,6 +1,6 @@
 import pymorphy2
 from django.contrib import messages
-from django.contrib.auth import models
+from django.contrib.auth import models, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
@@ -14,6 +14,9 @@ morph = pymorphy2.MorphAnalyzer()
 def index(request):
     recipes = Recipe.objects.all()
     for recipe in recipes:
+        # user
+        recipe.author_id = models.User.objects.get(id=recipe.author_id)
+
         # ingredients
         ings = len(recipe.ingredients.split(';'))
         recipe.ingredients = f"{ings} {morph.parse('ингредиент')[0].make_agree_with_number(ings).word}"
@@ -32,7 +35,11 @@ def index(request):
         else:
             cook = recipe.cooking_time.split(':')
             recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
-    content = {'recipes': recipes, 'is_auth': request.user.is_authenticated}
+    content = {
+        'recipes': recipes,
+        'is_auth': request.user.is_authenticated,
+        'user': request.user
+    }
     return render(request, 'recipes/index.html', content)
 
 
@@ -50,9 +57,13 @@ def postlogin(request):
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
             if user is not None:
-                print('hahahahhahahahahhahahahahhhahaha')
                 login(request, user)
                 return HttpResponseRedirect('/')
             else:
                 messages.error(request, "Invalid username or password.")
+    return HttpResponseRedirect('/')
+
+
+def postlogout(request):
+    logout(request)
     return HttpResponseRedirect('/')
