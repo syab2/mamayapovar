@@ -21,38 +21,36 @@
 <body class="page__body">
 
 {% if request.get_full_path == '/' %}
-{% block navbar %}
+    {% block navbar %}
 
-{% include "inc/_nav.html" %}
+    {% include "inc/_nav.html" %}
 
-{% endblock %}
+    {% endblock %}
 {% else %}
-{% block navnav %}
+    {% block navnav %}
 
-{% include "inc2/_nav.html" %}
+    {% include "inc2/_nav.html" %}
 
-{% endblock %}
+    {% endblock %}
 {% endif %}
 
 <div class="container">
     <div class="site-container">
         {% if request.get_full_path == '/' %}
-        {% block sidebar %}
-        {% include "inc/_side.html" %}
-        {% endblock %}
+            {% block sidebar %}
+            {% include "inc/_side.html" %}
+            {% endblock %}
         {% else %}
-        {% block sideside %}
-        {% include "inc2/_side.html" %}
-        {% endblock %}
+            {% block sideside %}
+            {% include "inc2/_side.html" %}
+            {% endblock %}
         {% endif %}
         {% if request.get_full_path == '/' %}
-        <main class="feed">
-            {% block content %}{% endblock %}
-        </main>
+            <main class="feed">
+                {% block content %}{% endblock %}
+            </main>
         {% else %}
-        <main class="new-recipe">
             {% block concon %}{% endblock %}
-        </main>
         {% endif %}
 
 
@@ -60,9 +58,9 @@
 </div>
 
 {% if request.get_full_path == '/' %}
-{% block modal %}
-{% include "inc/_modals.html" %}
-{% endblock %}
+    {% block modal %}
+    {% include "inc/_modals.html" %}
+    {% endblock %}
 {% endif %}
 
 </body>
