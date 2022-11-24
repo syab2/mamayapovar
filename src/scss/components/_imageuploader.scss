@@ -1,0 +1,15 @@
+.imageuploader {
+  position: relative;
+  width: 100%;
+  height: 300px;
+
+  &__btn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+
+    &.hidden {
+      display: none;
+    }
+  }
+}

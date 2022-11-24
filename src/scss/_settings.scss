@@ -32,7 +32,8 @@ p {
       position: relative;
       display: grid;
       grid-template-columns: 300px 1fr;
-      margin: 56px 0;
+      padding-top: 56px;
+      padding-bottom: 48px;
       gap: 30px;
     }
   }

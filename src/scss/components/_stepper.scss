@@ -1,0 +1,20 @@
+.stepper {
+  display: flex;
+
+  &__input {
+    border: none;
+    border-radius: 0;
+    width: 56px;
+    text-align: center;
+  }
+
+  &__btn {
+    &--minus {
+      border-radius: 4px 0 0 4px;
+    }
+
+    &--plus {
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}

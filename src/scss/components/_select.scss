@@ -1,0 +1,65 @@
+.select {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  &__icon {
+    position: absolute;
+    right: 20px;
+    fill: var(--color-fields-text-primary);
+  }
+
+  select {
+    appearance: none;
+    outline: none;
+    border: 1px solid var(--color-fields-border-default);
+    border-radius: 8px;
+    padding: 16px 20px;
+    width: 100%;
+    font-size: var(--font-s);
+    line-height: var(--lh-primary);
+    background-color: var(--color-fields-bg);
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      border-color: var(--color-fields-border-focused);
+
+      &:hover {
+        border-color: var(--color-fields-border-focused);
+      }
+    }
+
+    &:hover {
+      border-color: var(--color-fields-border-hover);
+    }
+
+    &:disabled {
+      border: none;
+      color: var(--color-fields-text-disabled);
+      background-color: var(--color-fields-bg-disabled);
+      cursor: not-allowed;
+      pointer-events: none;
+
+      &::placeholder {
+        color: var(--color-fields-text-disabled);
+      }
+    }
+
+    &.invalid {
+      border-color: var(--color-fields-border-error);
+      background-color: var(--color-fields-bg-error);
+
+      &:focus {
+        border-color: var(--color-fields-border-error);
+
+        &:hover {
+          border-color: var(--color-fields-border-error);
+        }
+      }
+
+      &:hover {
+        border-color: var(--color-fields-border-error);
+      }
+    }
+  }
+}

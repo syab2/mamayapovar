@@ -1,0 +1,52 @@
+.ingredient {
+  &__list {
+    display: grid;
+    gap: 16px;
+  }
+
+  &__btn {
+    margin-top: 12px;
+  }
+}
+
+.ingredient-item {
+  display: grid;
+  grid-template-columns: 1fr 64px 200px 48px;
+
+  &__input {
+    &--name {
+      border-radius: 8px 0 0 8px;
+    }
+
+    &--amount {
+      border-radius: 0;
+      text-align: center;
+    }
+  }
+
+  &__select {
+    select {
+      border-radius: 0;
+    }
+  }
+
+  &__icon {
+    fill: var(--color-icons-secondary);
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+  }
+
+  &__delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-fields-border-default);
+    border-radius: 0 8px 8px 0;
+
+    &:hover {
+      .ingredient-item__icon {
+        opacity: 1;
+      }
+    }
+  }
+}

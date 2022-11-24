@@ -28,10 +28,12 @@
     background-color: var(--color-button-primary-bg-click);
   }
 
-  &:disabled {
+  &:disabled,
+  &.disabled {
     color: var(--color-button-primary-text-disabled);
     background-color: var(--color-button-primary-bg-disabled);
     cursor: not-allowed;
+    pointer-events: none;
 
     .btn__icon {
       fill: var(--color-button-primary-text-disabled);
@@ -41,7 +43,7 @@
   &--second {
     border: 1px solid var(--color-button-secondary-border);
     color: var(--color-button-secondary-text);
-    background-color: var(--color-button-secondary-bg-default);
+    background-color: transparent;
 
     .btn__icon {
       fill: var(--color-button-secondary-text);
@@ -57,7 +59,8 @@
       background-color: var(--color-button-secondary-bg-hover);
     }
 
-    &:disabled {
+    &:disabled,
+    &.disabled {
       border-color: var(--color-button-secondary-bg-disabled);
       color: var(--color-button-secondary-text-disabled);
       background-color: var(--color-button-secondary-bg-disabled);
@@ -96,7 +99,8 @@
       }
     }
 
-    &:disabled {
+    &:disabled,
+    &.disabled {
       color: var(--color-button-tertiary-text-disabled);
       background-color: transparent;
 
@@ -126,6 +130,36 @@
     &:active {
       background-color: var(--color-button-other-bg);
       opacity: 0.6;
+    }
+  }
+
+  &--icon {
+    padding: 16px;
+
+    &.btn--second {
+      border: none;
+      background-color: var(--color-button-secondary-bg-default);
+
+      &:hover,
+      &:focus-visible {
+        background-color: var(--color-button-secondary-bg-hover);
+      }
+
+      &:active {
+        border-color: var(--color-button-secondary-bg-hover);
+        background-color: var(--color-button-secondary-bg-hover);
+      }
+
+      &:disabled,
+      &.disabled {
+        border-color: var(--color-button-secondary-bg-disabled);
+        color: var(--color-button-secondary-text-disabled);
+        background-color: var(--color-button-secondary-bg-disabled);
+
+        .btn__icon {
+          fill: var(--color-button-secondary-text-disabled);
+        }
+      }
     }
   }
 
