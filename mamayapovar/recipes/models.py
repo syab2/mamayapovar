@@ -20,15 +20,8 @@ class Recipe(models.Model):
         ordering = ['-time_create']
 
 
-class User(models.Model):
-    username = models.CharField(max_length=105)
-    email = models.EmailField()
-    password = models.TextField()
-
-
 class Category(models.Model):
     name = models.CharField(max_length=100, db_index=True)
 
     def __str__(self):
         return self.name
-

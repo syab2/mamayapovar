@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+AUTHENTICATION_BACKENDS = ['mamayapovar.backends.MyBackend']
+
 ROOT_URLCONF = 'mamayapovar.urls'
 
 TEMPLATES = [

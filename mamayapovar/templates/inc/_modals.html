@@ -37,7 +37,7 @@
             <span class="section-h2  popup__title">Вход в аккаунт</span>
             <form id="auth" action="postlogin/" class="popup__form" method="post">
                 {% csrf_token %}
-                <input type="name" name="username" class="input  popup__input" placeholder="Электронная почта"
+                <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта"
                        autofocus="on"
                        required>
                 <input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4"
