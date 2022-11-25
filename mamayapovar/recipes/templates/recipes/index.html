@@ -11,7 +11,7 @@
         <div class="content-header  feed-item__header">
             <div class="content-info">
                 <a href="#" class="content-info__category">
-                    <img src="{% static 'recipes/img/category/bake-icon.svg' %}" width="24" height="24" alt="" loading="lazy">
+                    <img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
                     <span>{{ recipe.cat }}</span>
                 </a>
                 <a href="#" class="content-info__author">{{ recipe.author_id }}</a>
