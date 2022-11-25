@@ -3,7 +3,6 @@ if (document.querySelector('.imageuploader')) {
 		const main = document.querySelector('main')
 		main.addEventListener('click', (event) => {
 			const target = event.target
-			console.log(target)
 			if (target.classList.contains('imageuploader__input')) {
 				const input = target.querySelector('input[type="file"]')
 				const image = target.parentNode.querySelector('.imageuploader__input')
