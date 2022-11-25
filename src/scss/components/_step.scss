@@ -31,18 +31,20 @@
     justify-content: space-between;
   }
 
-  &__icon {
-    fill: var(--color-icons-secondary);
-    opacity: 0.4;
-    transition: opacity 0.2s ease;
-  }
-
   &__delete {
+    .step-item__icon {
+      fill: var(--color-icons-secondary);
+    }
+
     &:hover,
     &:focus-visible {
       .step-item__icon {
-        opacity: 1;
+        fill: var(--color-text-error);
       }
+    }
+
+    &.disabled {
+      display: none;
     }
   }
 
