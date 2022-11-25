@@ -12,6 +12,7 @@
 
 .step-item {
   display: grid;
+  grid-template-columns: 1fr 1fr;
 
   &__number {
     &::after {
@@ -32,6 +33,8 @@
   }
 
   &__delete {
+    justify-self: end;
+
     .step-item__icon {
       fill: var(--color-icons-secondary);
     }
@@ -50,6 +53,7 @@
 
   &__body {
     display: grid;
+    grid-column: 1 / 3;
     grid-template-columns: 200px 1fr;
     gap: 8px;
   }
