@@ -1,9 +1,10 @@
 .header {
-  position: sticky;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 2;
   border-bottom: 1px solid var(--color-bg-global);
+  width: 100%;
   background-color: var(--color-bg-island);
 
   &__logo {
