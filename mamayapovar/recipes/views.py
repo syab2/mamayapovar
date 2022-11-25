@@ -1,11 +1,18 @@
+import os
+import random
+
 import pymorphy2
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import models, logout
 from django.contrib.auth import get_user_model
+from django.core.files.base import ContentFile
+from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
+from .utilities import save_file_there
 from .models import Recipe
 
 morph = pymorphy2.MorphAnalyzer()
@@ -35,6 +42,12 @@ def index(request):
         else:
             cook = recipe.cooking_time.split(':')
             recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+
+        # photo
+        if recipe.photo:
+            pass
+        else:
+            recipe.photo = None
     content = {
         'recipes': recipes,
         'is_auth': request.user.is_authenticated,
@@ -74,3 +87,63 @@ def postlogout(request):
 
 def new_recipe(request):
     return render(request, 'recipes/new-recipe.html', {})
+
+
+def new_recipe_post(request):
+    categories = {
+        "Выпечка": 1,
+        "Супы": 2,
+        "Салаты": 3,
+        "Горячие блюда": 4
+    }
+    title = request.POST.get('title')
+    description = request.POST.get('description')
+    cat_id = categories[request.POST.get('cat')]
+    persons = request.POST.get('persons')
+    cooking_time = f'{request.POST.get("cooking_time_hours")}:{request.POST.get("cooking_time_minutes")}'
+    ings = []
+    ingredient = ''
+    for elem in request.POST:
+        if 'ingredient-name-' in elem:
+            ingredient += request.POST.get(f'ingredient-name-{elem.split("-")[-1]}') + ':'
+        if 'ingredient-amount-' in elem:
+            ingredient += request.POST.get(f'ingredient-amount-{elem.split("-")[-1]}') + '-'
+        if 'ingredient-measure-' in elem:
+            ingredient += request.POST.get(f'ingredient-measure-{elem.split("-")[-1]}')
+            ings.append(ingredient)
+            ingredient = ''
+    ingredients = ';'.join(ings)
+
+    folder = 'recipes'
+    second_folder = title
+    uploaded_filename = f"{''.join([str(random.randint(0, 9)) for x in range(5)])}_{request.FILES['photo'].name}"
+
+    try:
+        os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
+    except:
+        pass
+
+    os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder), second_folder))
+
+    full_filename = os.path.join(settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
+    fout = open(full_filename, 'wb+')
+
+    file_content = ContentFile(request.FILES['photo'].read())
+
+    for chunk in file_content.chunks():
+        fout.write(chunk)
+    fout.close()
+
+    recipe = Recipe(
+        title=title,
+        description=description,
+        cooking_time=cooking_time,
+        persons=persons,
+        cat_id=cat_id,
+        author_id=request.user.id,
+        ingredients=ingredients,
+        photo=full_filename
+    )
+    recipe.save()
+
+    return HttpResponseRedirect('/')
