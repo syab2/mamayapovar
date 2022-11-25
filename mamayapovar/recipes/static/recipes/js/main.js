@@ -13,10 +13,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
-/* harmony import */ var _components_ingredients_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_ingredients.js */ "./src/js/components/_ingredients.js");
-/* harmony import */ var _components_ingredients_js__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_components_ingredients_js__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _components_scroll_active__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_scroll-active */ "./src/js/components/_scroll-active.js");
 /* harmony import */ var _components_smooth_scroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll */ "./src/js/components/_smooth-scroll.js");
-/* harmony import */ var _components_scroll_active__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_scroll-active */ "./src/js/components/_scroll-active.js");
+/* harmony import */ var _components_new_recipe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe */ "./src/js/components/_new-recipe.js");
 
 
 
@@ -172,71 +171,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/components/_ingredients.js":
-/*!*******************************************!*\
-  !*** ./src/js/components/_ingredients.js ***!
-  \*******************************************/
-/***/ (() => {
-
-// function deleteField(a) {
-//  var contDiv = a.parentNode;
-//  // Удаляем этот ДИВ из DOM-дерева
-//  contDiv.parentNode.removeChild(contDiv);
-//  // Уменьшаем значение текущего числа полей
-//  countOfFields--;
-//  // Возвращаем false, чтобы не было перехода по сслыке
-//  return false;
-// }
-
-(function () {
-  let countOfFields = 1;
-  const ingredientSection = document.querySelector('.ingredient');
-  const ingredientList = ingredientSection.querySelector('.ingredient__list');
-  const ingredientAddBtn = document.querySelector('.ingredient__btn');
-  const ingredientDelBtn = document.querySelectorAll('.ingredient-item__delete');
-  ingredientAddBtn.addEventListener('click', e => {
-    e.preventDefault();
-    countOfFields++;
-    ingredientList.innerHTML += `
-			<div class="ingredient-item" id="ingredient-${countOfFields}">
-			<input type="text" name="ingredient-name-${countOfFields}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
-			<input type="number" name="ingredient-amount-${countOfFields}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
-			<div class="select  ingredient-item__select">
-				<select name="ingredient-measure-${countOfFields}" aria-label="Единица измерения" required>
-					<option>Ед. измерения</option>
-					<option>шт</option>
-					<option>г</option>
-					<option>кг</option>
-					<option>мл</option>
-					<option>л</option>
-					<option>столовая ложка</option>
-					<option>чайная ложка</option>
-					<option>стакан</option>
-				</select>
-				<svg class="icon  select__icon" aria-hidden="true" focusable="false">
-					<use href="img/sprite.svg#chevron-down"/>
-				</svg>
-			</div>
-			<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
-				<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
-					<use href="img/sprite.svg#cross" />
-				</svg>
-			</a>
-		</div>
-    `;
-  });
-  ingredientDelBtn.forEach(btn => {
-    btn.addEventListener('click', e => {
-      let contDiv = btn.parentNode;
-      contDiv.parentNode.removeChild(contDiv);
-      countOfFields--;
-      return false;
-    });
-  });
-})();
-
-/***/ }),
-
 /***/ "./src/js/components/_menu-profile.js":
 /*!********************************************!*\
   !*** ./src/js/components/_menu-profile.js ***!
@@ -290,6 +224,129 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graph_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graph-modal */ "./node_modules/graph-modal/src/graph-modal.js");
 
 const modal = new graph_modal__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+/***/ }),
+
+/***/ "./src/js/components/_new-recipe.js":
+/*!******************************************!*\
+  !*** ./src/js/components/_new-recipe.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+
+// ИГРЕДИЕНТЫ
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredient')) {
+  (function () {
+    const ingredientSection = document.querySelector('.ingredient');
+    const ingredientList = ingredientSection.querySelector('.ingredient__list');
+    let countOfFields = 2;
+    let fieldIndex = 1;
+    ingredientSection.addEventListener('click', sec => {
+      sec.preventDefault();
+
+      // добавление
+      if (sec.target.classList.contains('ingredient__btn')) {
+        countOfFields++;
+        fieldIndex++;
+        ingredientList.innerHTML += `
+					<div class="ingredient-item" id="ingredient-${fieldIndex}">
+						<input type="text" name="ingredient-name-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
+						<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
+						<div class="select  ingredient-item__select">
+							<select name="ingredient-measure-${fieldIndex}" aria-label="Единица измерения" required>
+								<option value="">Ед. измерения</option>
+								<option>шт</option>
+								<option>г</option>
+								<option>кг</option>
+								<option>мл</option>
+								<option>л</option>
+								<option>столовая ложка</option>
+								<option>чайная ложка</option>
+								<option>стакан</option>
+							</select>
+							<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+								<use href="img/sprite.svg#chevron-down"/>
+							</svg>
+						</div>
+						<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
+							<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
+								<use href="img/sprite.svg#cross" />
+							</svg>
+						</a>
+					</div>
+				`;
+      }
+
+      // удаление
+      if (sec.target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
+        countOfFields--;
+        fieldIndex--;
+        sec.target.parentElement.remove();
+      }
+    });
+  })();
+}
+
+// ИНСТРУКЦИЯ ПРИГОТОВЛЕНИЯ
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step')) {
+  (function () {
+    const stepSection = document.querySelector('.step');
+    const stepList = stepSection.querySelector('.step__list');
+    let countOfFields = 2;
+    let fieldIndex = 1;
+    stepSection.addEventListener('click', sec => {
+      sec.preventDefault();
+
+      // добавление
+      if (sec.target.classList.contains('step__btn')) {
+        countOfFields++;
+        fieldIndex++;
+        stepList.innerHTML += `
+					<div class="step-item" id="step-${fieldIndex}">
+					<div class="step-item__header">
+						<span class="input__label  step-item__number"></span>
+						<a href="#" class="btn-reset  step-item__delete" aria-label="Удалить шаг">
+							<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
+								<use href="img/sprite.svg#cross" />
+							</svg>
+						</a>
+					</div>
+					<div class="step-item__body">
+						<div class="imageuploader  step-item__imageuploader">
+							<label class="input  input--photo  imageuploader__input">
+								<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png" required>
+								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+									<use href="img/sprite.svg#image"/>
+								</svg>
+								Загрузите фото блюда
+							</label>
+							<a class="btn  btn--other  imageuploader__btn  hidden">
+								<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+									<use href="img/sprite.svg#delete" />
+								</svg>
+							</a>
+						</div>
+						<textarea name="step-description-${fieldIndex}" class="input  input--textarea  step-item__input"
+							placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..."
+							autocomplete="off" maxlength="5000" required></textarea>
+					</div>
+				</div>
+				`;
+      }
+
+      // удаление
+      if (sec.target.classList.contains('step-item__delete') && countOfFields > 1) {
+        countOfFields--;
+        fieldIndex--;
+        sec.target.parentElement.parentElement.remove();
+      }
+    });
+  })();
+}
 
 /***/ }),
 
