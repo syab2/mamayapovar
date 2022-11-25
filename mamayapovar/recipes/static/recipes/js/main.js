@@ -13,9 +13,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
-/* harmony import */ var _components_scroll_active__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_scroll-active */ "./src/js/components/_scroll-active.js");
-/* harmony import */ var _components_smooth_scroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll */ "./src/js/components/_smooth-scroll.js");
-/* harmony import */ var _components_new_recipe__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe */ "./src/js/components/_new-recipe.js");
+/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
+/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
+/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
+/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
+/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__);
+
 
 
 
@@ -171,6 +174,47 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/components/_imageuploader.js":
+/*!*********************************************!*\
+  !*** ./src/js/components/_imageuploader.js ***!
+  \*********************************************/
+/***/ (() => {
+
+if (document.querySelector('.imageuploader')) {
+  (function () {
+    const main = document.querySelector('main');
+    main.addEventListener('click', event => {
+      const target = event.target;
+      console.log(target);
+      if (target.classList.contains('imageuploader__input')) {
+        const input = target.querySelector('input[type="file"]');
+        const image = target.parentNode.querySelector('.imageuploader__input');
+        const delBtn = target.parentNode.querySelector('.imageuploader__btn');
+        const placeholder = target.querySelector('.imageuploader__placeholder');
+        let uploadedImage = "";
+        input.addEventListener('change', () => {
+          const reader = new FileReader();
+          reader.addEventListener('load', () => {
+            uploadedImage = reader.result;
+            image.style.backgroundImage = `url(${uploadedImage})`;
+            placeholder.classList.add('hidden');
+            delBtn.classList.remove('hidden');
+          });
+          reader.readAsDataURL(input.files[0]);
+        });
+        delBtn.addEventListener('click', () => {
+          uploadedImage = "";
+          image.style.backgroundImage = 'none';
+          placeholder.classList.remove('hidden');
+          delBtn.classList.add('hidden');
+        });
+      }
+    });
+  })();
+}
+
+/***/ }),
+
 /***/ "./src/js/components/_menu-profile.js":
 /*!********************************************!*\
   !*** ./src/js/components/_menu-profile.js ***!
@@ -253,12 +297,24 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
       if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
         countOfFields--;
         target.parentNode.remove();
+        if (countOfFields == 1) {
+          const item = ingredientList.querySelector('.ingredient-item');
+          const del = item.querySelector('.ingredient-item__delete');
+          del.classList.add('disabled');
+        }
       }
     });
     ingredientAdd.addEventListener('click', e => {
       e.preventDefault();
       const fieldIndex = randomID();
       countOfFields++;
+      if (countOfFields > 1) {
+        const items = ingredientList.querySelectorAll('.ingredient-item');
+        items.forEach(e => {
+          const del = e.querySelector('.ingredient-item__delete');
+          del.classList.remove('disabled');
+        });
+      }
       let ingredientItem = document.createElement("div");
       ingredientItem.classList.add('ingredient-item');
       ingredientItem.setAttribute('id', `ingredient-${fieldIndex}`);
@@ -308,11 +364,23 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
         countOfFields--;
         target.parentNode.remove();
       }
+      if (countOfFields == 1) {
+        const item = stepList.querySelector('.step-item');
+        const del = item.querySelector('.step-item__delete');
+        del.classList.add('disabled');
+      }
     });
     stepAdd.addEventListener('click', e => {
       e.preventDefault();
       countOfFields++;
       const fieldIndex = randomID();
+      if (countOfFields > 1) {
+        const items = stepList.querySelectorAll('.step-item');
+        items.forEach(e => {
+          const del = e.querySelector('.step-item__delete');
+          del.classList.remove('disabled');
+        });
+      }
       let stepItem = document.createElement("div");
       stepItem.classList.add('step-item');
       stepItem.setAttribute('id', `step-${fieldIndex}`);
@@ -324,13 +392,15 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 					</svg>
 				</a>
 				<div class="step-item__body">
-					<div class="imageuploader  step-item__imageuploader">
+					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
 						<label class="input  input--photo  imageuploader__input">
 							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png" required>
-							<svg class="icon  input__icon" aria-hidden="true" focusable="false">
-								<use href="img/sprite.svg#image"/>
-							</svg>
-							Загрузите фото блюда
+							<div class="imageuploader__placeholder">
+								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+									<use href="img/sprite.svg#image"/>
+								</svg>
+								Загрузите фото блюда
+							</div>
 						</label>
 						<a class="btn  btn--other  imageuploader__btn  hidden">
 							<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
