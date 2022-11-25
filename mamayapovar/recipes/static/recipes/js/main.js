@@ -257,35 +257,37 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
     });
     ingredientAdd.addEventListener('click', e => {
       e.preventDefault();
-      countOfFields++;
       const fieldIndex = randomID();
-      ingredientList.innerHTML += `
-				<div class="ingredient-item" id="ingredient-${fieldIndex}">
-					<input type="text" name="ingredient-name-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
-					<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
-					<div class="select  ingredient-item__select">
-						<select name="ingredient-measure-${fieldIndex}" aria-label="Единица измерения" required>
-							<option value="">Ед. измерения</option>
-							<option>шт</option>
-							<option>г</option>
-							<option>кг</option>
-							<option>мл</option>
-							<option>л</option>
-							<option>столовая ложка</option>
-							<option>чайная ложка</option>
-							<option>стакан</option>
-						</select>
-						<svg class="icon  select__icon" aria-hidden="true" focusable="false">
-							<use href="img/sprite.svg#chevron-down"/>
-						</svg>
-					</div>
-					<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
-						<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
-							<use href="img/sprite.svg#cross" />
-						</svg>
-					</a>
+      countOfFields++;
+      let ingredientItem = document.createElement("div");
+      ingredientItem.classList.add('ingredient-item');
+      ingredientItem.setAttribute('id', `ingredient-${fieldIndex}`);
+      ingredientItem.innerHTML += `
+				<input type="text" name="ingredient-name-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
+				<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
+				<div class="select  ingredient-item__select">
+					<select name="ingredient-measure-${fieldIndex}" aria-label="Единица измерения" required>
+						<option value="">Ед. измерения</option>
+						<option>шт</option>
+						<option>г</option>
+						<option>кг</option>
+						<option>мл</option>
+						<option>л</option>
+						<option>столовая ложка</option>
+						<option>чайная ложка</option>
+						<option>стакан</option>
+					</select>
+					<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+						<use href="img/sprite.svg#chevron-down"/>
+					</svg>
 				</div>
+				<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
+					<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
+						<use href="img/sprite.svg#cross" />
+					</svg>
+				</a>
 			`;
+      ingredientList.append(ingredientItem);
     });
   })();
 }
@@ -311,8 +313,10 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
       e.preventDefault();
       countOfFields++;
       const fieldIndex = randomID();
-      stepList.innerHTML += `
-				<div class="step-item" id="step-${fieldIndex}">
+      let stepItem = document.createElement("div");
+      stepItem.classList.add('step-item');
+      stepItem.setAttribute('id', `step-${fieldIndex}`);
+      stepItem.innerHTML += `
 				<span class="input__label  step-item__number"></span>
 				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
 					<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
@@ -338,8 +342,8 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 						placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..."
 						autocomplete="off" maxlength="5000" required></textarea>
 				</div>
-			</div>
 			`;
+      stepList.append(stepItem);
     });
   })();
 }
