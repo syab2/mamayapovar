@@ -135,7 +135,7 @@ p {
   display: grid;
   -ms-grid-columns: 300px 1fr;
   grid-template-columns: 300px 1fr;
-  padding-top: 56px;
+  padding-top: calc(var(--header-height) + 56px);
   padding-bottom: 48px;
   gap: 30px;
 }
@@ -693,11 +693,12 @@ a {
 }
 
 .header {
-  position: sticky;
+  position: fixed;
   left: 0;
   top: 0;
   z-index: 2;
   border-bottom: 1px solid var(--color-bg-global);
+  width: 100%;
   background-color: var(--color-bg-island);
 }
 .header__logo {
@@ -862,7 +863,7 @@ a {
 .sidebar {
   position: sticky;
   left: 0;
-  top: 146px;
+  top: 147px;
   overflow-x: hidden;
   height: calc(100vh - 90px - 112px + 6px);
 }
@@ -1171,14 +1172,15 @@ a {
   margin-bottom: 32px;
 }
 .feed-item__img {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   margin-bottom: 40px;
-
-  img {
-    border-radius: 8px;
-    width: 100%;
-    height: 350px;
-  }
+}
+.feed-item__img img {
+  border-radius: 8px;
+  width: 100%;
+  height: 350px;
 }
 
 .new-recipe__form {
@@ -1313,13 +1315,6 @@ a {
 .ingredient-item__select select {
   border-radius: 0;
 }
-.ingredient-item__icon {
-  fill: var(--color-icons-secondary);
-  opacity: 0.4;
-  -webkit-transition: opacity 0.2s ease;
-  -o-transition: opacity 0.2s ease;
-  transition: opacity 0.2s ease;
-}
 .ingredient-item__delete {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1332,9 +1327,24 @@ a {
   justify-content: center;
   border: 1px solid var(--color-fields-border-default);
   border-radius: 0 8px 8px 0;
+  background-color: var(--color-fields-bg);
+  -webkit-transition: background-color 0.2s ease;
+  -o-transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease;
+}
+.ingredient-item__delete .ingredient-item__icon {
+  fill: var(--color-fields-text-secondary);
 }
 .ingredient-item__delete:hover .ingredient-item__icon {
-  opacity: 1;
+  fill: var(--color-text-error);
+}
+.ingredient-item__delete.disabled {
+  background-color: var(--color-fields-bg-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.ingredient-item__delete.disabled .ingredient-item__icon {
+  fill: var(--color-fields-text-disabled);
 }
 
 .step__list {
@@ -1371,15 +1381,14 @@ a {
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
-.step-item__icon {
+.step-item__delete .step-item__icon {
   fill: var(--color-icons-secondary);
-  opacity: 0.4;
-  -webkit-transition: opacity 0.2s ease;
-  -o-transition: opacity 0.2s ease;
-  transition: opacity 0.2s ease;
 }
 .step-item__delete:hover .step-item__icon, .step-item__delete:focus-visible .step-item__icon {
-  opacity: 1;
+  fill: var(--color-text-error);
+}
+.step-item__delete.disabled {
+  display: none;
 }
 .step-item__body {
   display: -ms-grid;
