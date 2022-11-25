@@ -124,13 +124,15 @@ if (vars.bodyEl.querySelector('.step')) {
 					</svg>
 				</a>
 				<div class="step-item__body">
-					<div class="imageuploader  step-item__imageuploader">
+					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
 						<label class="input  input--photo  imageuploader__input">
 							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png" required>
-							<svg class="icon  input__icon" aria-hidden="true" focusable="false">
-								<use href="img/sprite.svg#image"/>
-							</svg>
-							Загрузите фото блюда
+							<div class="imageuploader__placeholder">
+								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+									<use href="img/sprite.svg#image"/>
+								</svg>
+								Загрузите фото блюда
+							</div>
 						</label>
 						<a class="btn  btn--other  imageuploader__btn  hidden">
 							<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">

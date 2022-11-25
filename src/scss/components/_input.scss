@@ -72,9 +72,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
     border-style: dashed;
+    padding: 0;
     width: 100%;
     height: 100%;
+    line-height: var(--lh-s);
     text-align: center;
     cursor: pointer;
 
