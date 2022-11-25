@@ -34,6 +34,7 @@
 
   &__delete {
     justify-self: end;
+    transition: opacity 0.2s ease;
 
     .step-item__icon {
       fill: var(--color-icons-secondary);
@@ -47,7 +48,8 @@
     }
 
     &.disabled {
-      display: none;
+      opacity: 0;
+      visibility: hidden;
     }
   }
 

@@ -18,6 +18,12 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 			if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
 				countOfFields--;
 				target.parentNode.remove()
+
+				if (countOfFields == 1) {
+					const item = ingredientList.querySelector('.ingredient-item')
+					const del = item.querySelector('.ingredient-item__delete')
+					del.classList.add('disabled')
+				}
 			}
 		})
 
@@ -25,6 +31,14 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 			e.preventDefault()
 			const fieldIndex = randomID()
 			countOfFields++;
+
+			if (countOfFields > 1) {
+				const items = ingredientList.querySelectorAll('.ingredient-item')
+				items.forEach(e => {
+					const del = e.querySelector('.ingredient-item__delete')
+					del.classList.remove('disabled')
+				})
+			}
 
 			let ingredientItem = document.createElement("div")
 			ingredientItem.classList.add('ingredient-item')
@@ -78,12 +92,26 @@ if (vars.bodyEl.querySelector('.step')) {
 				countOfFields--;
 				target.parentNode.remove()
 			}
+
+			if (countOfFields == 1) {
+				const item = stepList.querySelector('.step-item')
+				const del = item.querySelector('.step-item__delete')
+				del.classList.add('disabled')
+			}
 		})
 
 		stepAdd.addEventListener('click', e => {
 			e.preventDefault()
 			countOfFields++;
 			const fieldIndex = randomID()
+
+			if (countOfFields > 1) {
+				const items = stepList.querySelectorAll('.step-item')
+				items.forEach(e => {
+					const del = e.querySelector('.step-item__delete')
+					del.classList.remove('disabled')
+				})
+			}
 
 			let stepItem = document.createElement("div")
 			stepItem.classList.add('step-item')
