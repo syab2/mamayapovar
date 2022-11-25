@@ -165,6 +165,7 @@ a {
   -webkit-transition: fill 0.2s ease;
   -o-transition: fill 0.2s ease;
   transition: fill 0.2s ease;
+  pointer-events: none;
 }
 .icon--16 {
   width: 16px;
