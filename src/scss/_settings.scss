@@ -61,6 +61,7 @@ a {
   height: 24px;
   fill: var(--color-icons-primary);
   transition: fill 0.2s ease;
+  pointer-events: none;
 
   &--16 {
     width: 16px;
