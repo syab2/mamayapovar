@@ -388,6 +388,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
     const ingredientList = ingredientSection.querySelector('.ingredient__list');
     const ingredientAdd = ingredientSection.querySelector('.ingredient__btn');
     let countOfFields = 2;
+    let maxOfFields = 50;
     function randomID() {
       return Math.floor(Math.random() * Date.now());
     }
@@ -408,6 +409,8 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
     function round10(value, exp) {
       return decimalAdjust('round', value, exp);
     }
+
+    // проверка кол-ва ингредиентов
     _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', () => {
       let ingredientAmounts = ingredientSection.querySelectorAll('.ingredient-item__input--amount');
       ingredientAmounts.forEach(input => {
@@ -424,6 +427,8 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
         });
       });
     });
+
+    // удаление ингредиента
     ingredientList.addEventListener('click', e => {
       let target = e.target;
       if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
@@ -434,12 +439,20 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
           const del = item.querySelector('.ingredient-item__delete');
           del.classList.add('disabled');
         }
+        if (countOfFields < maxOfFields) {
+          ingredientAdd.classList.remove('disabled');
+        }
       }
     });
+
+    // добавление ингредиента
     ingredientAdd.addEventListener('click', e => {
       e.preventDefault();
-      const fieldIndex = randomID();
       countOfFields++;
+      const fieldIndex = randomID();
+      if (countOfFields == maxOfFields) {
+        ingredientAdd.classList.add('disabled');
+      }
       if (countOfFields > 1) {
         const items = ingredientList.querySelectorAll('.ingredient-item');
         items.forEach(e => {
@@ -487,14 +500,20 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
     const stepList = stepSection.querySelector('.step__list');
     const stepAdd = stepSection.querySelector('.step__btn');
     let countOfFields = 2;
+    let maxOfFields = 30;
     function randomID() {
       return Math.floor(Math.random() * Date.now());
     }
+
+    // удаление шага
     stepList.addEventListener('click', e => {
       let target = e.target;
       if (target.classList.contains('step-item__delete') && countOfFields > 1) {
         countOfFields--;
         target.parentNode.remove();
+      }
+      if (countOfFields < maxOfFields) {
+        stepAdd.classList.remove('disabled');
       }
       if (countOfFields == 1) {
         const item = stepList.querySelector('.step-item');
@@ -502,10 +521,15 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
         del.classList.add('disabled');
       }
     });
+
+    // добавление шага
     stepAdd.addEventListener('click', e => {
       e.preventDefault();
       countOfFields++;
       const fieldIndex = randomID();
+      if (countOfFields == maxOfFields) {
+        stepAdd.classList.add('disabled');
+      }
       if (countOfFields > 1) {
         const items = stepList.querySelectorAll('.step-item');
         items.forEach(e => {
