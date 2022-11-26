@@ -7,6 +7,7 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 		const ingredientList = ingredientSection.querySelector('.ingredient__list')
 		const ingredientAdd = ingredientSection.querySelector('.ingredient__btn')
 		let countOfFields = 2;
+		let maxOfFields = 5;
 
 		function randomID() {
 			return Math.floor(Math.random() * Date.now())
@@ -31,6 +32,7 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 			return decimalAdjust('round', value, exp);
 		}
 
+		// проверка кол-ва ингредиентов
 		vars.bodyEl.addEventListener('click', () => {
 			let ingredientAmounts = ingredientSection.querySelectorAll('.ingredient-item__input--amount')
 
@@ -51,6 +53,7 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 			})
 		})
 
+		// удаление ингредиента
 		ingredientList.addEventListener('click', (e) => {
 			let target = e.target
 			if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
@@ -62,13 +65,22 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 					const del = item.querySelector('.ingredient-item__delete')
 					del.classList.add('disabled')
 				}
+
+				if (countOfFields < maxOfFields) {
+					ingredientAdd.classList.remove('disabled')
+				}
 			}
 		})
 
+		// добавление ингредиента
 		ingredientAdd.addEventListener('click', e => {
 			e.preventDefault()
-			const fieldIndex = randomID()
 			countOfFields++;
+			const fieldIndex = randomID()
+
+			if (countOfFields == maxOfFields) {
+				ingredientAdd.classList.add('disabled')
+			}
 
 			if (countOfFields > 1) {
 				const items = ingredientList.querySelectorAll('.ingredient-item')
@@ -118,16 +130,22 @@ if (vars.bodyEl.querySelector('.step')) {
 		const stepList = stepSection.querySelector('.step__list')
 		const stepAdd = stepSection.querySelector('.step__btn')
 		let countOfFields = 2;
+		let maxOfFields = 3;
 
 		function randomID() {
 			return Math.floor(Math.random() * Date.now())
 		}
 
+		// удаление шага
 		stepList.addEventListener('click', (e) => {
 			let target = e.target
 			if (target.classList.contains('step-item__delete') && countOfFields > 1) {
 				countOfFields--;
 				target.parentNode.remove()
+			}
+
+			if (countOfFields < maxOfFields) {
+				stepAdd.classList.remove('disabled')
 			}
 
 			if (countOfFields == 1) {
@@ -137,10 +155,15 @@ if (vars.bodyEl.querySelector('.step')) {
 			}
 		})
 
+		// добавление шага
 		stepAdd.addEventListener('click', e => {
 			e.preventDefault()
 			countOfFields++;
 			const fieldIndex = randomID()
+
+			if (countOfFields == maxOfFields) {
+				stepAdd.classList.add('disabled')
+			}
 
 			if (countOfFields > 1) {
 				const items = stepList.querySelectorAll('.step-item')
