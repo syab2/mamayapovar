@@ -75,6 +75,7 @@
     padding: 0 !important;
     color: var(--color-button-tertiary-text-default);
     background-color: transparent;
+    transition: color 0.2s ease;
 
     .btn__icon {
       fill: var(--color-button-tertiary-text-default);
