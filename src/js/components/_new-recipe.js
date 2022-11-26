@@ -7,7 +7,7 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 		const ingredientList = ingredientSection.querySelector('.ingredient__list')
 		const ingredientAdd = ingredientSection.querySelector('.ingredient__btn')
 		let countOfFields = 2;
-		let maxOfFields = 5;
+		let maxOfFields = 50;
 
 		function randomID() {
 			return Math.floor(Math.random() * Date.now())
@@ -130,7 +130,7 @@ if (vars.bodyEl.querySelector('.step')) {
 		const stepList = stepSection.querySelector('.step__list')
 		const stepAdd = stepSection.querySelector('.step__btn')
 		let countOfFields = 2;
-		let maxOfFields = 3;
+		let maxOfFields = 30;
 
 		function randomID() {
 			return Math.floor(Math.random() * Date.now())
