@@ -10,19 +10,19 @@ if (vars.sidebarTab) {
         const fieldsetHeight = current.offsetHeight + 40
         const fieldsetTop = current.offsetTop - vars.headerHeight - 205;
         const fieldsetId = current.getAttribute('id')
-				const fieldsetIdFirst = fieldsets[0].getAttribute('id')
-				const fieldsetIdPreLast = fieldsets[fieldsets.length - 2].getAttribute('id')
 				const fieldsetIdLast = fieldsets[fieldsets.length - 1].getAttribute('id')
+				const fieldsetItems = document.querySelectorAll('.sidebar-tree__list li')
 
 				if (window.scrollY + 1 >= document.documentElement.scrollHeight-document.documentElement.clientHeight) {
-					document.querySelector('.sidebar a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active')
-					document.querySelector('.sidebar a[href*=' + fieldsetIdPreLast + ']').parentElement.classList.remove('active')
-					document.querySelector('.sidebar a[href*=' + fieldsetIdFirst + ']').parentElement.classList.remove('active')
+					fieldsetItems.forEach(e => {
+						e.classList.remove('active')
+					})
+					document.querySelector('.sidebar-tree__list a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active')
 				} else {
 					if (scrollY > fieldsetTop && scrollY <= fieldsetTop + fieldsetHeight){
-            document.querySelector('.sidebar a[href*=' + fieldsetId + ']').parentElement.classList.add('active')
+            document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.add('active')
 					} else {
-							document.querySelector('.sidebar a[href*=' + fieldsetId + ']').parentElement.classList.remove('active')
+							document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.remove('active')
 					}
 				}
     })
