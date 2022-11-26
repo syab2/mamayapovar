@@ -6,12 +6,50 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 		const ingredientSection = document.querySelector('.ingredient');
 		const ingredientList = ingredientSection.querySelector('.ingredient__list')
 		const ingredientAdd = ingredientSection.querySelector('.ingredient__btn')
-
 		let countOfFields = 2;
 
 		function randomID() {
 			return Math.floor(Math.random() * Date.now())
 		}
+
+		function decimalAdjust(type, value, exp) {
+			if (typeof exp === 'undefined' || +exp === 0) {
+				return Math[type](value);
+			}
+			value = +value;
+			exp = +exp;
+			if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+				return NaN;
+			}
+			value = value.toString().split('e');
+			value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
+			value = value.toString().split('e');
+			return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
+		}
+
+		function round10(value, exp) {
+			return decimalAdjust('round', value, exp);
+		}
+
+		vars.bodyEl.addEventListener('click', () => {
+			let ingredientAmounts = ingredientSection.querySelectorAll('.ingredient-item__input--amount')
+
+			ingredientAmounts.forEach((input) => {
+				const max = input.getAttribute('max')
+
+				input.addEventListener('change', () => {
+					let currentValue = String(input.value)
+
+					if (input.value > max - 1) {
+						input.value = max
+					} else if (input.value > 0.1 && currentValue.length > 3) {
+						input.value = round10(input.value, -1)
+					} else if (input.value <= 0.1) {
+						input.value = 0.1
+					}
+				})
+			})
+		})
 
 		ingredientList.addEventListener('click', (e) => {
 			let target = e.target
@@ -45,7 +83,7 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 			ingredientItem.setAttribute('id', `ingredient-${fieldIndex}`)
 			ingredientItem.innerHTML += `
 				<input type="text" name="ingredient-name-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
-				<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
+				<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="0.1" max="999" step="0.1" autocomplete="off" required>
 				<div class="select  ingredient-item__select">
 					<select name="ingredient-measure-${fieldIndex}" aria-label="Единица измерения" required>
 						<option value="">Ед. измерения</option>
@@ -79,7 +117,6 @@ if (vars.bodyEl.querySelector('.step')) {
 		const stepSection = document.querySelector('.step');
 		const stepList = stepSection.querySelector('.step__list')
 		const stepAdd = stepSection.querySelector('.step__btn')
-
 		let countOfFields = 2;
 
 		function randomID() {
@@ -126,7 +163,7 @@ if (vars.bodyEl.querySelector('.step')) {
 				<div class="step-item__body">
 					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
 						<label class="input  input--photo  imageuploader__input">
-							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png" required>
+							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png">
 							<div class="imageuploader__placeholder">
 								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
 									<use href="img/sprite.svg#image"/>
