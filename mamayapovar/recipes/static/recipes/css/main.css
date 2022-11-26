@@ -334,6 +334,9 @@ a {
   padding: 0 !important;
   color: var(--color-button-tertiary-text-default);
   background-color: transparent;
+  -webkit-transition: color 0.2s ease;
+  -o-transition: color 0.2s ease;
+  transition: color 0.2s ease;
 }
 .btn--third .btn__icon {
   fill: var(--color-button-tertiary-text-default);
