@@ -139,6 +139,7 @@
     &.btn--second {
       border: none;
       background-color: var(--color-button-secondary-bg-default);
+      transition: fill, opacity 0.2s ease;
 
       &:hover,
       &:focus-visible {
@@ -148,6 +149,10 @@
       &:active {
         border-color: var(--color-button-secondary-bg-hover);
         background-color: var(--color-button-secondary-bg-hover);
+
+        .btn__icon {
+          opacity: 0.6;
+        }
       }
 
       &:disabled,

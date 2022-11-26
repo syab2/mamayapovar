@@ -1,9 +1,10 @@
-.stepper {
+.counter {
   display: flex;
 
   &__input {
     border: none;
     border-radius: 0;
+    padding: 8px;
     width: 56px;
     text-align: center;
   }
