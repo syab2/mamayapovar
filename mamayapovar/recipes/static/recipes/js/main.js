@@ -17,7 +17,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
 /* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
 /* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
-/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__);
+
+
 
 
 
@@ -160,6 +165,63 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/components/_counter.js":
+/*!***************************************!*\
+  !*** ./src/js/components/_counter.js ***!
+  \***************************************/
+/***/ (() => {
+
+if (document.querySelector('.counter__input')) {
+  (function () {
+    const counterInput = document.querySelector('.counter__input');
+    const counterPlus = document.querySelector('.counter__btn--plus');
+    const counterMinus = document.querySelector('.counter__btn--minus');
+    const counterMax = counterInput.getAttribute('max');
+    counterInput.addEventListener('change', () => {
+      if (counterInput.value > counterMax - 1) {
+        counterInput.value = counterMax;
+        counterPlus.classList.add('disabled');
+      } else {
+        counterPlus.classList.remove('disabled');
+      }
+      if (counterInput.value <= 1) {
+        counterInput.value = 1;
+        counterMinus.classList.add('disabled');
+      } else {
+        counterMinus.classList.remove('disabled');
+      }
+    });
+    counterPlus.addEventListener('click', e => {
+      e.preventDefault();
+      let currentValue = parseInt(counterInput.value);
+      currentValue++;
+      counterInput.value = currentValue;
+      counterMinus.classList.remove('disabled');
+      if (counterInput.value > counterMax - 1) {
+        counterInput.value = counterMax;
+        counterPlus.classList.add('disabled');
+      } else {
+        counterPlus.classList.remove('disabled');
+      }
+    });
+    counterMinus.addEventListener('click', e => {
+      e.preventDefault();
+      let currentValue = parseInt(counterInput.value);
+      currentValue--;
+      counterInput.value = currentValue;
+      counterPlus.classList.remove('disabled');
+      if (counterInput.value <= 1) {
+        counterInput.value = 1;
+        counterMinus.classList.add('disabled');
+      } else {
+        counterMinus.classList.remove('disabled');
+      }
+    });
+  })();
+}
+
+/***/ }),
+
 /***/ "./src/js/components/_header-height.js":
 /*!*********************************************!*\
   !*** ./src/js/components/_header-height.js ***!
@@ -178,14 +240,16 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./src/js/components/_imageuploader.js ***!
   \*********************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-if (document.querySelector('.imageuploader')) {
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.imageuploader')) {
   (function () {
-    const main = document.querySelector('main');
-    main.addEventListener('click', event => {
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', event => {
       const target = event.target;
-      console.log(target);
       if (target.classList.contains('imageuploader__input')) {
         const input = target.querySelector('input[type="file"]');
         const image = target.parentNode.querySelector('.imageuploader__input');
@@ -193,21 +257,56 @@ if (document.querySelector('.imageuploader')) {
         const placeholder = target.querySelector('.imageuploader__placeholder');
         let uploadedImage = "";
         input.addEventListener('change', () => {
-          const reader = new FileReader();
-          reader.addEventListener('load', () => {
-            uploadedImage = reader.result;
-            image.style.backgroundImage = `url(${uploadedImage})`;
-            placeholder.classList.add('hidden');
-            delBtn.classList.remove('hidden');
-          });
-          reader.readAsDataURL(input.files[0]);
+          if (!input.value == "") {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+              uploadedImage = reader.result;
+              image.style.backgroundImage = `url(${uploadedImage})`;
+              placeholder.classList.add('hidden');
+              delBtn.classList.remove('hidden');
+            });
+            reader.readAsDataURL(input.files[0]);
+          }
         });
         delBtn.addEventListener('click', () => {
+          input.value = "";
           uploadedImage = "";
           image.style.backgroundImage = 'none';
           placeholder.classList.remove('hidden');
           delBtn.classList.add('hidden');
         });
+      }
+    });
+  })();
+}
+
+/***/ }),
+
+/***/ "./src/js/components/_input-validate.js":
+/*!**********************************************!*\
+  !*** ./src/js/components/_input-validate.js ***!
+  \**********************************************/
+/***/ (() => {
+
+if (document.querySelector('.new-recipe-field--time')) {
+  (function () {
+    const field = document.querySelector('.new-recipe-field--time');
+    const inputMinutes = field.querySelector('.new-recipe-field--minutes input');
+    const inputHours = field.querySelector('.new-recipe-field--hours input');
+    const maxMinutes = inputMinutes.getAttribute('max');
+    const maxHours = inputHours.getAttribute('max');
+    inputMinutes.addEventListener('change', () => {
+      if (inputMinutes.value > maxMinutes - 1) {
+        inputMinutes.value = maxMinutes;
+      } else if (inputMinutes.value <= 0) {
+        inputMinutes.value = 0;
+      }
+    });
+    inputHours.addEventListener('change', () => {
+      if (inputHours.value > maxHours - 1) {
+        inputHours.value = maxHours;
+      } else if (inputHours.value <= 0) {
+        inputHours.value = 0;
       }
     });
   })();
@@ -292,6 +391,39 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
     function randomID() {
       return Math.floor(Math.random() * Date.now());
     }
+    function decimalAdjust(type, value, exp) {
+      if (typeof exp === 'undefined' || +exp === 0) {
+        return Math[type](value);
+      }
+      value = +value;
+      exp = +exp;
+      if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+        return NaN;
+      }
+      value = value.toString().split('e');
+      value = Math[type](+(value[0] + 'e' + (value[1] ? +value[1] - exp : -exp)));
+      value = value.toString().split('e');
+      return +(value[0] + 'e' + (value[1] ? +value[1] + exp : exp));
+    }
+    function round10(value, exp) {
+      return decimalAdjust('round', value, exp);
+    }
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', () => {
+      let ingredientAmounts = ingredientSection.querySelectorAll('.ingredient-item__input--amount');
+      ingredientAmounts.forEach(input => {
+        const max = input.getAttribute('max');
+        input.addEventListener('change', () => {
+          let currentValue = String(input.value);
+          if (input.value > max - 1) {
+            input.value = max;
+          } else if (input.value > 0.1 && currentValue.length > 3) {
+            input.value = round10(input.value, -1);
+          } else if (input.value <= 0.1) {
+            input.value = 0.1;
+          }
+        });
+      });
+    });
     ingredientList.addEventListener('click', e => {
       let target = e.target;
       if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
@@ -320,7 +452,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
       ingredientItem.setAttribute('id', `ingredient-${fieldIndex}`);
       ingredientItem.innerHTML += `
 				<input type="text" name="ingredient-name-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
-				<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
+				<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="0.1" max="999" step="0.1" autocomplete="off" required>
 				<div class="select  ingredient-item__select">
 					<select name="ingredient-measure-${fieldIndex}" aria-label="Единица измерения" required>
 						<option value="">Ед. измерения</option>
@@ -394,7 +526,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 				<div class="step-item__body">
 					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
 						<label class="input  input--photo  imageuploader__input">
-							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png" required>
+							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png">
 							<div class="imageuploader__placeholder">
 								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
 									<use href="img/sprite.svg#image"/>
@@ -438,18 +570,18 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].sidebarTab) {
       const fieldsetHeight = current.offsetHeight + 40;
       const fieldsetTop = current.offsetTop - _vars__WEBPACK_IMPORTED_MODULE_0__["default"].headerHeight - 205;
       const fieldsetId = current.getAttribute('id');
-      const fieldsetIdFirst = fieldsets[0].getAttribute('id');
-      const fieldsetIdPreLast = fieldsets[fieldsets.length - 2].getAttribute('id');
       const fieldsetIdLast = fieldsets[fieldsets.length - 1].getAttribute('id');
+      const fieldsetItems = document.querySelectorAll('.sidebar-tree__list li');
       if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
-        document.querySelector('.sidebar a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active');
-        document.querySelector('.sidebar a[href*=' + fieldsetIdPreLast + ']').parentElement.classList.remove('active');
-        document.querySelector('.sidebar a[href*=' + fieldsetIdFirst + ']').parentElement.classList.remove('active');
+        fieldsetItems.forEach(e => {
+          e.classList.remove('active');
+        });
+        document.querySelector('.sidebar-tree__list a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active');
       } else {
         if (scrollY > fieldsetTop && scrollY <= fieldsetTop + fieldsetHeight) {
-          document.querySelector('.sidebar a[href*=' + fieldsetId + ']').parentElement.classList.add('active');
+          document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.add('active');
         } else {
-          document.querySelector('.sidebar a[href*=' + fieldsetId + ']').parentElement.classList.remove('active');
+          document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.remove('active');
         }
       }
     });
