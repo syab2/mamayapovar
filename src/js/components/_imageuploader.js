@@ -1,7 +1,8 @@
-if (document.querySelector('.imageuploader')) {
+import vars from "../_vars";
+
+if (vars.bodyEl.querySelector('.imageuploader')) {
 	(function(){
-		const main = document.querySelector('main')
-		main.addEventListener('click', (event) => {
+		vars.bodyEl.addEventListener('click', (event) => {
 			const target = event.target
 			if (target.classList.contains('imageuploader__input')) {
 				const input = target.querySelector('input[type="file"]')
@@ -11,17 +12,20 @@ if (document.querySelector('.imageuploader')) {
 				let uploadedImage = ""
 
 				input.addEventListener('change', () => {
-					const reader = new FileReader()
-					reader.addEventListener('load', () => {
-						uploadedImage = reader.result
-						image.style.backgroundImage = `url(${uploadedImage})`
-						placeholder.classList.add('hidden')
-						delBtn.classList.remove('hidden')
-					})
-					reader.readAsDataURL(input.files[0])
+					if (!input.value == "") {
+						const reader = new FileReader()
+						reader.addEventListener('load', () => {
+							uploadedImage = reader.result
+							image.style.backgroundImage = `url(${uploadedImage})`
+							placeholder.classList.add('hidden')
+							delBtn.classList.remove('hidden')
+						})
+						reader.readAsDataURL(input.files[0])
+					}
 				})
 
 				delBtn.addEventListener('click', () => {
+					input.value = "";
 					uploadedImage = ""
 					image.style.backgroundImage = 'none'
 					placeholder.classList.remove('hidden')
