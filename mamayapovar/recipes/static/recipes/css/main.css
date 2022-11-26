@@ -385,6 +385,9 @@ a {
 .btn--icon.btn--second {
   border: none;
   background-color: var(--color-button-secondary-bg-default);
+  -webkit-transition: fill, opacity 0.2s ease;
+  -o-transition: fill, opacity 0.2s ease;
+  transition: fill, opacity 0.2s ease;
 }
 .btn--icon.btn--second:hover, .btn--icon.btn--second:focus-visible {
   background-color: var(--color-button-secondary-bg-hover);
@@ -392,6 +395,9 @@ a {
 .btn--icon.btn--second:active {
   border-color: var(--color-button-secondary-bg-hover);
   background-color: var(--color-button-secondary-bg-hover);
+}
+.btn--icon.btn--second:active .btn__icon {
+  opacity: 0.6;
 }
 .btn--icon.btn--second:disabled, .btn--icon.btn--second.disabled {
   border-color: var(--color-button-secondary-bg-disabled);
@@ -545,21 +551,22 @@ a {
   display: none;
 }
 
-.stepper {
+.counter {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
-.stepper__input {
+.counter__input {
   border: none;
   border-radius: 0;
+  padding: 8px;
   width: 56px;
   text-align: center;
 }
-.stepper__btn--minus {
+.counter__btn--minus {
   border-radius: 4px 0 0 4px;
 }
-.stepper__btn--plus {
+.counter__btn--plus {
   border-radius: 0 4px 4px 0;
 }
 
@@ -1344,6 +1351,7 @@ a {
 }
 .ingredient-item__input--amount {
   border-radius: 0;
+  padding: 8px;
   text-align: center;
 }
 .ingredient-item__select select {
