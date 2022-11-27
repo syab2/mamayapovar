@@ -17,6 +17,10 @@ p {
   margin: 0;
 }
 
+figure {
+  margin: 0;
+}
+
 .page {
   height: 100%;
   font-family: var(--font-family, sans-serif);
@@ -26,16 +30,13 @@ p {
   color: var(--color-text-primary);
   background-color: var(--color-bg-global);
 
-  &--feed,
-  &--new-recipe {
-    .site-container {
-      position: relative;
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      padding-top: calc(var(--header-height) + 56px);
-      padding-bottom: 48px;
-      gap: 30px;
-    }
+  .site-container {
+    position: relative;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    padding-top: calc(var(--header-height) + 56px);
+    padding-bottom: 48px;
+    gap: 30px;
   }
 }
 

@@ -12,7 +12,7 @@
   text-align: center;
   color: var(--color-button-primary-text);
   background-color: var(--color-button-primary-bg-default);
-  transition: color, border-color, background-color 0.2s ease;
+  transition: all 0.2s ease;
   cursor: pointer;
 
   &__icon {
@@ -38,6 +38,10 @@
     .btn__icon {
       fill: var(--color-button-primary-text-disabled);
     }
+  }
+
+  &--small {
+    padding: 12px 24px;
   }
 
   &--second {
@@ -75,7 +79,6 @@
     padding: 0 !important;
     color: var(--color-button-tertiary-text-default);
     background-color: transparent;
-    transition: color 0.2s ease;
 
     .btn__icon {
       fill: var(--color-button-tertiary-text-default);
@@ -116,7 +119,6 @@
     width: 40px;
     height: 40px;
     background-color: var(--color-button-other-bg);
-    transition: opacity 0.2s ease;
 
     .btn__icon {
       fill: var(--color-icons-primary-inverse);
@@ -140,7 +142,6 @@
     &.btn--second {
       border: none;
       background-color: var(--color-button-secondary-bg-default);
-      transition: fill, opacity 0.2s ease;
 
       &:hover,
       &:focus-visible {
