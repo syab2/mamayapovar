@@ -756,10 +756,7 @@ a {
   transition: opacity 0.2s ease;
 }
 .header__logo:hover, .header__logo:focus-visible {
-  opacity: 0.6;
-}
-.header__logo:active {
-  opacity: 0.4;
+  opacity: 0.8;
 }
 .header__inner {
   position: relative;
@@ -831,12 +828,19 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-transition: opacity 0.2s ease;
-  -o-transition: opacity 0.2s ease;
-  transition: opacity 0.2s ease;
+  -webkit-transition: opacity, -webkit-transform 0.2s ease;
+  transition: opacity, -webkit-transform 0.2s ease;
+  -o-transition: opacity, transform 0.2s ease;
+  transition: opacity, transform 0.2s ease;
+  transition: opacity, transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 .header-profile__toggle:hover, .header-profile__toggle:focus-visible {
   opacity: 0.8;
+}
+.header-profile__toggle.active {
+  -webkit-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotate(180deg);
 }
 .header-profile__icon {
   fill: var(--color-icons-secondary);
@@ -1634,6 +1638,12 @@ a {
   border-radius: 100%;
   width: 56px;
   height: 56px;
+  -webkit-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.content-author__avatar:hover, .content-author__avatar:focus-visible {
+  opacity: 0.8;
 }
 .content-author__name {
   -ms-grid-row-align: end;
@@ -1648,6 +1658,12 @@ a {
   font-size: var(--font-s);
   line-height: var(--lh-s);
   color: var(--color-text-primary);
+  -webkit-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.content-author__name:hover, .content-author__name:focus-visible {
+  opacity: 0.8;
 }
 .content-author__desc {
   -ms-grid-row-align: start;
@@ -1726,6 +1742,12 @@ a {
   border-radius: 100%;
   width: 40px;
   height: 40px;
+  -webkit-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.comments-item__avatar:hover, .comments-item__avatar:focus-visible {
+  opacity: 0.8;
 }
 .comments-item__author {
   -ms-grid-row-align: end;
@@ -1740,6 +1762,12 @@ a {
   font-size: var(--font-s);
   line-height: var(--lh-s);
   color: var(--color-text-primary);
+  -webkit-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
+}
+.comments-item__author:hover, .comments-item__author:focus-visible {
+  opacity: 0.8;
 }
 .comments-item__date {
   -ms-grid-row-align: start;
