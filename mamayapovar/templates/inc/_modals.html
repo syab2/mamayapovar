@@ -10,7 +10,7 @@
             </svg>
         </button>
         <div class="graph-modal__content  popup__content">
-            <span class="section-h2  popup__title">Регистрация</span>
+            <span class="section-h1  popup__title">Регистрация</span>
             <form id="register-form" action="postindex/" class="popup__form" method="post">
                 {% csrf_token %}
                 <input type="name" name="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2"
@@ -34,7 +34,7 @@
             </svg>
         </button>
         <div class="graph-modal__content  popup__content">
-            <span class="section-h2  popup__title">Вход в аккаунт</span>
+            <span class="section-h1  popup__title">Вход в аккаунт</span>
             <form id="auth-form" action="postlogin/" class="popup__form" method="post">
                 {% csrf_token %}
                 <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта"
