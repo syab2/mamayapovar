@@ -7,12 +7,10 @@ from django.contrib import messages
 from django.contrib.auth import models, logout
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
-from django.core.files.storage import FileSystemStorage
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
-from .utilities import save_file_there
 from .models import Recipe
 
 morph = pymorphy2.MorphAnalyzer()
@@ -68,7 +66,7 @@ def postindex(request):
 def postlogin(request):
     if request.method == "POST":
         #form = AuthenticationForm(request, data=request.POST)
-        #if form.is_valid():
+        # if form.is_valid():
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
@@ -105,15 +103,19 @@ def new_recipe_post(request):
     ingredient = ''
     for elem in request.POST:
         if 'ingredient-name-' in elem:
-            ingredient += request.POST.get(f'ingredient-name-{elem.split("-")[-1]}') + ':'
+            ingredient += request.POST.get(
+                f'ingredient-name-{elem.split("-")[-1]}') + ':'
         if 'ingredient-amount-' in elem:
-            ingredient += request.POST.get(f'ingredient-amount-{elem.split("-")[-1]}') + '-'
+            ingredient += request.POST.get(
+                f'ingredient-amount-{elem.split("-")[-1]}') + '-'
         if 'ingredient-measure-' in elem:
-            ingredient += request.POST.get(f'ingredient-measure-{elem.split("-")[-1]}')
+            ingredient += request.POST.get(
+                f'ingredient-measure-{elem.split("-")[-1]}')
             ings.append(ingredient)
             ingredient = ''
     ingredients = ';'.join(ings)
 
+    # photo
     folder = 'recipes'
     second_folder = title
     uploaded_filename = f"{''.join([str(random.randint(0, 9)) for x in range(5)])}_{request.FILES['photo'].name}"
@@ -123,9 +125,11 @@ def new_recipe_post(request):
     except:
         pass
 
-    os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder), second_folder))
+    os.mkdir(os.path.join(os.path.join(
+        settings.MEDIA_ROOT, folder), second_folder))
 
-    full_filename = os.path.join(settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
+    full_filename = os.path.join(
+        settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
     fout = open(full_filename, 'wb+')
 
     file_content = ContentFile(request.FILES['photo'].read())
@@ -133,6 +137,48 @@ def new_recipe_post(request):
     for chunk in file_content.chunks():
         fout.write(chunk)
     fout.close()
+
+    # photos of steps and text
+
+    i = 0
+    filenames = []
+    step_descs = []
+    for elem in request.FILES:
+        if 'step-photo-' in elem:
+            i += 1
+
+            folder = 'recipes'
+            second_folder = title
+            uploaded_filename = str(i) + '.' + request.FILES[elem].name.split('.')[1]
+
+            try:
+                os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
+            except:
+                pass
+
+            ful_fil = os.path.join(
+                settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
+
+            try:
+                filenames.append(ful_fil)
+                fout2 = open(ful_fil, 'wb+')
+
+                file_content2 = ContentFile(request.FILES[elem].read())
+
+                for chunk in file_content2.chunks():
+                    fout2.write(chunk)
+                fout2.close()
+            except Exception:
+                del filenames[-1]
+
+    j = 0
+    for elem in request.POST:
+        if 'step-description-' in elem:
+            j += 1
+            step_descs.append(f'{j}:{request.POST.get(elem)}')
+
+    pos = ';'.join(filenames)
+    sss = ';'.join(step_descs)
 
     recipe = Recipe(
         title=title,
@@ -142,7 +188,9 @@ def new_recipe_post(request):
         cat_id=cat_id,
         author_id=request.user.id,
         ingredients=ingredients,
-        photo=full_filename
+        photo=full_filename,
+        photos_of_steps=pos,
+        steps=sss
     )
     recipe.save()
 

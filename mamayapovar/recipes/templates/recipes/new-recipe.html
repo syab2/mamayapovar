@@ -4,7 +4,8 @@
 {% block concon %}
 <main class="new-recipe">
     <h1 class="visually-hidden">Создание рецепта</h1>
-    <form id="new-recipe-form" action="new-recipe/new-recipe-post/" method="POST" class="new-recipe__form" enctype="multipart/form-data">
+    <form id="new-recipe-form" action="new-recipe-post/" method="POST" class="new-recipe__form" enctype="multipart/form-data">
+        {% csrf_token %}
         <fieldset class="new-recipe-section  new-recipe-section--main" id="new-recipe-main">
             <legend class="section-h1  new-recipe-section__title">Основное</legend>
             <label class="new-recipe-field  new-recipe-field--title">
@@ -226,7 +227,7 @@
         <fieldset class="new-recipe-section  new-recipe-section--pub" id="new-recipe-pub">
             <legend class="section-h1  new-recipe-section__title">Публикация</legend>
             <div class="new-recipe-section__group">
-                <a href="index.html" class="btn  btn--second">Выйти</a>
+                <a href="/" class="btn  btn--second">Выйти</a>
                 <button type="submit" class="btn">Опубликовать</button>
             </div>
         </fieldset>
