@@ -328,8 +328,9 @@ if (document.querySelector('.new-recipe-field--time')) {
   const menuProfile = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.querySelector('[data-menu-profile]');
   const menuProfileLinks = (_document3 = document) === null || _document3 === void 0 ? void 0 : _document3.querySelectorAll('[data-menu-profile-link]');
   if (menuProfileToggle) {
-    menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.addEventListener('click', e => {
-      menuProfile === null || menuProfile === void 0 ? void 0 : menuProfile.classList.toggle('active');
+    menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.addEventListener('click', () => {
+      menuProfile === null || menuProfile === void 0 ? void 0 : menuProfile.classList.add('active');
+      menuProfileToggle.classList.add('active');
       if (menuProfile !== null && menuProfile !== void 0 && menuProfile.classList.contains('active')) {
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'true');
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Закрыть меню');
@@ -344,6 +345,7 @@ if (document.querySelector('.new-recipe-field--time')) {
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
+        menuProfileToggle.classList.remove('active');
       }
     });
     menuProfileLinks === null || menuProfileLinks === void 0 ? void 0 : menuProfileLinks.forEach(el => {
@@ -351,6 +353,7 @@ if (document.querySelector('.new-recipe-field--time')) {
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
+        menuProfileToggle.classList.remove('active');
       });
     });
   }
