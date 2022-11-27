@@ -47,6 +47,12 @@
     border-radius: 100%;
     width: 40px;
     height: 40px;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
   }
 
   &__author {
@@ -57,6 +63,12 @@
     font-size: var(--font-s);
     line-height: var(--lh-s);
     color: var(--color-text-primary);
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
   }
 
   &__date {

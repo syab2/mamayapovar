@@ -22,6 +22,12 @@
     border-radius: 100%;
     width: 56px;
     height: 56px;
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
   }
 
   &__name {
@@ -32,6 +38,12 @@
     font-size: var(--font-s);
     line-height: var(--lh-s);
     color: var(--color-text-primary);
+    transition: opacity 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      opacity: 0.8;
+    }
   }
 
   &__desc {

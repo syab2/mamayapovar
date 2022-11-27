@@ -14,11 +14,7 @@
 
     &:hover,
     &:focus-visible {
-      opacity: 0.6;
-    }
-
-    &:active {
-      opacity: 0.4;
+      opacity: 0.8;
     }
   }
 
@@ -79,11 +75,15 @@
 
   &__toggle {
     display: flex;
-    transition: opacity 0.2s ease;
+    transition: opacity, transform 0.2s ease;
 
     &:hover,
     &:focus-visible {
       opacity: 0.8;
+    }
+
+    &.active {
+      transform: rotate(180deg);
     }
   }
 

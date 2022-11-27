@@ -4,8 +4,9 @@
   const menuProfileLinks = document?.querySelectorAll('[data-menu-profile-link]');
 
   if (menuProfileToggle) {
-    menuProfileToggle?.addEventListener('click', (e) => {
-      menuProfile?.classList.toggle('active');
+    menuProfileToggle?.addEventListener('click', () => {
+      menuProfile?.classList.add('active');
+			menuProfileToggle.classList.add('active')
 
       if (menuProfile?.classList.contains('active')) {
         menuProfileToggle?.setAttribute('aria-expanded', 'true');
@@ -22,6 +23,7 @@
         menuProfileToggle?.setAttribute('aria-expanded', 'false');
         menuProfileToggle?.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
+				menuProfileToggle.classList.remove('active')
       }
     });
 
@@ -30,6 +32,7 @@
         menuProfileToggle?.setAttribute('aria-expanded', 'false');
         menuProfileToggle?.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
+				menuProfileToggle.classList.remove('active')
       });
     });
   }
