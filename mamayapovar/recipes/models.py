@@ -13,6 +13,7 @@ class Recipe(models.Model):
     ingredients = models.TextField(blank=True)
     steps = models.TextField(blank=True)
     photos_of_steps = models.TextField(blank=True)
+    folder_id = models.CharField(max_length=7, blank=True)
 
     def __str__(self):
         return self.title

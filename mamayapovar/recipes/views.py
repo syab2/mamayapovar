@@ -88,6 +88,7 @@ def new_recipe(request):
 
 
 def new_recipe_post(request):
+    folder_id = ''.join([str(random.randint(0, 9)) for x in range(7)])
     categories = {
         "Выпечка": 1,
         "Супы": 2,
@@ -117,8 +118,8 @@ def new_recipe_post(request):
 
     # photo
     folder = 'recipes'
-    second_folder = title
-    uploaded_filename = f"{''.join([str(random.randint(0, 9)) for x in range(5)])}_{request.FILES['photo'].name}"
+    second_folder = folder_id
+    uploaded_filename = f"{request.FILES['photo'].name}"
 
     try:
         os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
@@ -139,7 +140,6 @@ def new_recipe_post(request):
     fout.close()
 
     # photos of steps and text
-
     i = 0
     filenames = []
     step_descs = []
@@ -148,7 +148,7 @@ def new_recipe_post(request):
             i += 1
 
             folder = 'recipes'
-            second_folder = title
+            second_folder = folder_id
             uploaded_filename = str(i) + '.' + request.FILES[elem].name.split('.')[1]
 
             try:
@@ -190,7 +190,8 @@ def new_recipe_post(request):
         ingredients=ingredients,
         photo=full_filename,
         photos_of_steps=pos,
-        steps=sss
+        steps=sss,
+        folder_id=folder_id
     )
     recipe.save()
 
