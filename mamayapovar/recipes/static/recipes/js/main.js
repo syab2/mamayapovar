@@ -21,6 +21,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
 /* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
+
 
 
 
@@ -631,6 +633,27 @@ const scroll = new (smooth_scroll__WEBPACK_IMPORTED_MODULE_0___default())('a[hre
   updateURL: false,
   offset: 150
 });
+
+/***/ }),
+
+/***/ "./src/js/components/_textarea-resize.js":
+/*!***********************************************!*\
+  !*** ./src/js/components/_textarea-resize.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.comments__input')) {
+  const textArea = _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.comments__input');
+  textArea.setAttribute('style', 'height:' + textArea.scrollHeight + 'px');
+  textArea.addEventListener("input", () => {
+    textArea.style.height = 'auto';
+    textArea.style.height = textArea.scrollHeight + 'px';
+  });
+}
 
 /***/ }),
 
