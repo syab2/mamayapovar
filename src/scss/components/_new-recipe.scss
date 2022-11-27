@@ -38,6 +38,12 @@
   display: flex;
   flex-direction: column;
 
+  &--desc {
+    .new-recipe-field__input {
+      height: 168px;
+    }
+  }
+
   &--persons {
     margin-right: 80px;
   }

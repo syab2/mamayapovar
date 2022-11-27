@@ -1,0 +1,27 @@
+.entry-steps {
+  &__title {
+    margin-bottom: 24px;
+  }
+
+  &__list {
+    display: grid;
+    gap: 56px;
+  }
+}
+
+.entry-steps-item {
+  &__number {
+    margin-bottom: 12px;
+  }
+
+  &__desc {
+    display: grid;
+    gap: 8px;
+  }
+
+  &__img {
+    margin-top: 24px;
+    border-radius: 8px;
+    height: 350px;
+  }
+}

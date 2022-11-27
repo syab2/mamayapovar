@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru" class="page page--post">
+<html lang="ru" class="page">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,8 +22,9 @@
       <div class="site-container">
         @include('partials/sidebar.html')
 
-        <main class="post">
-					<section class="entry  post__entry" id="entry-123">
+        <main class="post" id="post-123">
+					<section class="entry  post__entry" id="entry">
+						<!-- Шапка рецепта -->
 						<div class="entry__container">
 							<div class="content-header  entry__header">
 								<div class="content-info">
@@ -54,33 +55,38 @@
 								</div>
 							</div>
 						</div>
-						<figure class="entry__img">
-							<img src="img/placeholder-image.jpg" alt="" width="740" height="350">
+						<!-- Фото блюда -->
+						<figure>
+							<img src="img/placeholder-image.jpg" alt="" class="entry__img" width="740" height="350">
 						</figure>
+						<!-- Тело рецепта -->
 						<div class="entry__container">
 							<div class="entry__body">
 								<section class="entry-ingredients">
 									<h2 class="section-h2  entry-ingredients__title">Ингредиенты</h2>
-									<ul class="list-reset  entry-ingredients__list">
-										<li class="entry-ingredients-item">
-											<span class="entry-ingredients-item__name">Яйцо куриное</span>
-											<span class="entry-ingredients-item__amount">1</span>
-											<span class="entry-ingredients-item__measure">шт</span>
-										</li>
-										<li class="entry-ingredients-item">
-											<span class="entry-ingredients-item__name">Кефир 2,5%</span>
-											<span class="entry-ingredients-item__amount">300</span>
-											<span class="entry-ingredients-item__measure">мл</span>
-										</li>
-										<li class="entry-ingredients-item">
-											<span class="entry-ingredients-item__name">Сахар</span>
-											<span class="entry-ingredients-item__amount">2</span>
-											<span class="entry-ingredients-item__measure">столовые ложки</span>
-										</li>
-									</ul>
+									<div class="entry-ingredients__list">
+										<dl class="entry-ingredients-item">
+											<dt class="entry-ingredients-item__name">
+												<span>Яйцо куриное</span>
+											</dt>
+											<dd class="entry-ingredients-item__info">1 шт</dd>
+										</dl>
+										<dl class="entry-ingredients-item">
+											<dt class="entry-ingredients-item__name">
+												<span>Кефир 2,5%</span>
+											</dt>
+											<dd class="entry-ingredients-item__info">300 мл</dd>
+										</dl>
+										<dl class="entry-ingredients-item">
+											<dt class="entry-ingredients-item__name">
+												<span>Сахар</span>
+											</dt>
+											<dd class="entry-ingredients-item__info">2 столовые ложки</dd>
+										</dl>
+									</div>
 									<div class="entry-ingredients-cost">
 										<span class="entry-ingredients-cost__label">Стоимость блюда</span>
-										<span class="entry-ingredients-cost__price">≈ 400 руб</span>
+										<span class="section-h3  entry-ingredients-cost__price">≈ 400 руб</span>
 									</div>
 								</section>
 								<section class="entry-steps">
@@ -88,25 +94,30 @@
 									<ul class="list-reset entry-steps__list">
 										<li class="entry-steps-item">
 											<h3 class="section-h3  entry-steps-item__number">Шаг 1</h3>
-											<p class="entry-steps-item__desc">Кефир прогреть в микроволновке до комнатной температуры, добавить в кефир яйцо, сахар, взбить венчиком.
-												Муку просеять, добавить к кефиру и хорошо вымешать венчиком, масса должна быть густой. Добавить соду и еще раз вымешать.
-												Готовое тесто не течет, а падает с ложки. Оставить миску на 15-20 минут.</p>
-											<figure class="entry-steps-item__img">
-												<img src="img/placeholder-image.jpg" alt="" width="676" height="350">
+											<div class="entry-steps-item__desc">
+												<p>Кефир прогреть в микроволновке до комнатной температуры, добавить в кефир яйцо, сахар, взбить венчиком.</p>
+												<p>Муку просеять, добавить к кефиру и хорошо вымешать венчиком, масса должна быть густой. Добавить соду и еще раз вымешать.</p>
+												<p>Готовое тесто не течет, а падает с ложки. Оставить миску на 15-20 минут.</p>
+											</div>
+											<figure>
+												<img src="img/placeholder-image.jpg" alt="" class="entry-steps-item__img" width="676" height="350">
 											</figure>
 										</li>
 										<li class="entry-steps-item">
 											<h3 class="section-h3  entry-steps-item__number">Шаг 2</h3>
-											<p class="entry-steps-item__desc">Жарить на огне ниже среднего до румяной корочки.
-												Я выкладываю со сковороды на бумажные полотенца, чтобы лишний жир впитался.</p>
-											<figure class="entry-steps-item__img">
-												<img src="img/placeholder-image.jpg" alt="" width="676" height="350">
+											<div class="entry-steps-item__desc">
+												<p>Жарить на огне ниже среднего до румяной корочки.</p>
+												<p>Я выкладываю со сковороды на бумажные полотенца, чтобы лишний жир впитался.</p>
+											</div>
+											<figure>
+												<img src="img/placeholder-image.jpg" alt="" class="entry-steps-item__img" width="676" height="350">
 											</figure>
 										</li>
 									</ul>
 								</section>
 							</div>
 						</div>
+						<!-- Подвал рецепта -->
 						<div class="entry__container">
 							<div class="content-footer  entry__footer">
 								<div class="content-footer__left">
@@ -116,12 +127,12 @@
 										</svg>
 										<span>842</span>
 									</button>
-									<button class="btn-reset  content-footer__btn  content-footer__btn--comment">
+									<a href="#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment">
 										<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#circle"/>
 										</svg>
 										<span>11</span>
-									</button>
+									</a>
 								</div>
 								<button class="btn-reset  content-footer__btn  content-footer__btn--bookmark">
 									<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
@@ -137,7 +148,7 @@
 									<a href="#" class="content-author__name">Екатерина Георгадзе</a>
 									<span class="content-author__desc">Готовлю самые вкусные и пышные оладушки</span>
 								</div>
-								<button class="btn  btn--second  btn--small  btn--left">
+								<button class="btn  btn--second  btn--small  btn--left  content-author__btn">
 									Подписаться
 									<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
 										<use href="img/sprite.svg#user-plus"/>
@@ -145,14 +156,14 @@
 								</button>
 							</div>
 						</div>
-					</sectin>
-					<section class="comments  post__comments" id="comments-123">
+					</section>
+					<section class="comments  post__comments" id="comments">
 						<h2 class="section-h2  comments__title">3 комментария</h2>
 						<form id="comments-form" action="https://echo.htmlacademy.ru" method="POST" class="comments__form">
-							<textarea name="comments-text" class="input  input--textarea  comments__input" placeholder="Написать комментарий..." minlength="1" maxlength="3000"></textarea>
-							<button type="submit" class="btn  btn--small">Отправить</button>
+							<textarea name="comments-text" class="input  input--textarea  comments__input" placeholder="Написать комментарий..." minlength="1" maxlength="1000" autocomplete="off" required></textarea>
+							<button type="submit" class="btn  btn--small  comments__btn">Отправить</button>
 						</form>
-						<ul class="comments__list">
+						<div class="comments__list">
 							<article class="comments-item">
 								<div class="comments-item__info">
 									<a href="#" class="comments-item__avatar">
@@ -162,7 +173,8 @@
 									<time class="comments-item__date" datetime="2022-12-02 16:28">28 минут</time>
 								</div>
 								<p class="comments-item__text">Сразу же, как увидел рецепт, решил оценить его на практике.
-									И, о чудо! Оладьи получаются невероятно пышными :)</p>
+									И, о чудо! Оладьи получаются невероятно пышными :)
+								</p>
 							</article>
 							<article class="comments-item">
 								<div class="comments-item__info">
@@ -174,7 +186,7 @@
 								</div>
 								<p class="comments-item__text">Кайфарик</p>
 							</article>
-						</ul>
+						</div>
 					</section>
         </main>
       </div>

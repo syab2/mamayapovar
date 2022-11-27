@@ -7,3 +7,4 @@ import './components/_new-recipe.js';
 import './components/_imageuploader.js';
 import './components/_counter.js'
 import './components/_input-validate.js';
+import './components/_textarea-resize.js';

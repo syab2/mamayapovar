@@ -1,0 +1,39 @@
+.entry {
+  border-radius: 16px;
+  padding: 40px 0;
+  background-color: var(--color-bg-island);
+
+  &__container {
+    padding: 0 32px;
+  }
+
+  &__header {
+    margin-bottom: 40px;
+
+    .content-short__list {
+      padding-left: 0;
+
+      &::after {
+        display: none;
+      }
+    }
+  }
+
+  &__img {
+    height: 350px;
+  }
+
+  &__body {
+    display: grid;
+    margin-top: 64px;
+    gap: 64px;
+  }
+
+  &__footer {
+    margin-top: 64px;
+  }
+
+  &__author {
+    margin-top: 32px;
+  }
+}
