@@ -5,8 +5,8 @@
 
   if (menuProfileToggle) {
     menuProfileToggle?.addEventListener('click', () => {
-      menuProfile?.classList.add('active');
-			menuProfileToggle.classList.add('active')
+      menuProfile?.classList.toggle('active');
+			menuProfileToggle.classList.toggle('active')
 
       if (menuProfile?.classList.contains('active')) {
         menuProfileToggle?.setAttribute('aria-expanded', 'true');
