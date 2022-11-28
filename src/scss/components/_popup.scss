@@ -3,6 +3,13 @@
     position: relative;
     padding: 64px 32px;
     max-width: 400px;
+
+    &--auth {
+      .popup__bottom {
+        display: grid;
+        gap: 16px;
+      }
+    }
   }
 
   &__content {
@@ -20,19 +27,15 @@
   }
 
   &__bottom {
-    display: grid;
+    display: flex;
     margin-top: 16px;
-    gap: 16px;
   }
 
   &__text {
+    margin-right: 8px;
     font-size: var(--font-s);
     line-height: var(--lh-s);
     color: var(--color-text-primary);
-  }
-
-  &__link {
-    margin-left: 8px;
   }
 }
 

@@ -20,6 +20,7 @@
 }
 
 .section-link {
+  display: inline-flex;
   font-weight: 400;
   font-size: var(--font-s);
   line-height: var(--lh-s);
@@ -28,6 +29,7 @@
 
   &:hover,
   &:focus-visible {
+    outline: none;
     text-decoration: underline;
   }
 
