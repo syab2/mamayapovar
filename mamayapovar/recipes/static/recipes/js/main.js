@@ -9,20 +9,18 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_header_height_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/_header-height.js */ "./src/js/components/_header-height.js");
-/* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
-/* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
-/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
-/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
-/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
-/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
-/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
-/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
-/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
-
+/* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
+/* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
+/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
+/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
+/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
+/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
 
 
 
@@ -224,20 +222,6 @@ if (document.querySelector('.counter__input')) {
 
 /***/ }),
 
-/***/ "./src/js/components/_header-height.js":
-/*!*********************************************!*\
-  !*** ./src/js/components/_header-height.js ***!
-  \*********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _functions_header_height__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../functions/header-height */ "./src/js/functions/header-height.js");
-
-(0,_functions_header_height__WEBPACK_IMPORTED_MODULE_0__.getHeaderHeight)();
-
-/***/ }),
-
 /***/ "./src/js/components/_imageuploader.js":
 /*!*********************************************!*\
   !*** ./src/js/components/_imageuploader.js ***!
@@ -329,8 +313,8 @@ if (document.querySelector('.new-recipe-field--time')) {
   const menuProfileLinks = (_document3 = document) === null || _document3 === void 0 ? void 0 : _document3.querySelectorAll('[data-menu-profile-link]');
   if (menuProfileToggle) {
     menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.addEventListener('click', () => {
-      menuProfile === null || menuProfile === void 0 ? void 0 : menuProfile.classList.add('active');
-      menuProfileToggle.classList.add('active');
+      menuProfile === null || menuProfile === void 0 ? void 0 : menuProfile.classList.toggle('active');
+      menuProfileToggle.classList.toggle('active');
       if (menuProfile !== null && menuProfile !== void 0 && menuProfile.classList.contains('active')) {
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'true');
         menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Закрыть меню');
@@ -632,7 +616,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var smooth_scroll__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(smooth_scroll__WEBPACK_IMPORTED_MODULE_0__);
 
 const scroll = new (smooth_scroll__WEBPACK_IMPORTED_MODULE_0___default())('a[href*="#"]', {
-  header: '.header',
   updateURL: false,
   offset: 150
 });
@@ -657,25 +640,6 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.comment
     textArea.style.height = textArea.scrollHeight + 'px';
   });
 }
-
-/***/ }),
-
-/***/ "./src/js/functions/header-height.js":
-/*!*******************************************!*\
-  !*** ./src/js/functions/header-height.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "getHeaderHeight": () => (/* binding */ getHeaderHeight)
-/* harmony export */ });
-/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
-
-const getHeaderHeight = () => {
-  document.querySelector(':root').style.setProperty('--header-height', `${_vars__WEBPACK_IMPORTED_MODULE_0__["default"].headerHeight}px`);
-};
 
 /***/ }),
 
@@ -1062,7 +1026,7 @@ class GraphModal {
     if (selector) {
       this.modalContainer = document.querySelector(`[data-graph-target="${selector}"]`);
     }
-    
+
     this.modalContainer.scrollTo(0, 0)
 
     this.modal.style.setProperty('--transition-time', `${this.speed / 1000}s`);

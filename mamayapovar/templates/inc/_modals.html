@@ -2,7 +2,7 @@
 
 {% block modal %}
 <div class="graph-modal  popup">
-    <div class="graph-modal__container  popup__container" role="dialog" aria-modal="true" data-graph-target="register">
+    <div class="graph-modal__container  popup__container  popup__container--register" role="dialog" aria-modal="true" data-graph-target="register">
         <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other"
                 aria-label="Закрыть модальное окно">
             <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
@@ -10,7 +10,7 @@
             </svg>
         </button>
         <div class="graph-modal__content  popup__content">
-            <span class="section-h1  popup__title">Регистрация</span>
+            <h2 class="section-h1  popup__title">Регистрация</h2>
             <form id="register-form" action="postindex/" class="popup__form" method="post">
                 {% csrf_token %}
                 <input type="name" name="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2"
@@ -21,8 +21,8 @@
                 <button type="submit" class="btn  popup__btn">Зарегистрироваться</button>
             </form>
             <div class="popup__bottom">
-          <span class="popup__text">Есть аккаунт? <a class="section-link  popup__link" data-graph-path="auth"
-                                                     data-graph-speed="0">Войти</a></span>
+                <span class="popup__text">Есть аккаунт?</span>
+                <button class="btn-reset  section-link  popup__link" data-graph-path="auth" data-graph-speed="0">Войти</button>
             </div>
         </div>
     </div>
@@ -33,8 +33,8 @@
                 <use href="{% static 'recipes/img/sprite.svg' %}#cross"/>
             </svg>
         </button>
-        <div class="graph-modal__content  popup__content">
-            <span class="section-h1  popup__title">Вход в аккаунт</span>
+        <div class="graph-modal__content  popup__content  popup__container--auth">
+            <h2 class="section-h1  popup__title">Вход в аккаунт</h2>
             <form id="auth-form" action="postlogin/" class="popup__form" method="post">
                 {% csrf_token %}
                 <input type="email" name="email" class="input  popup__input" placeholder="Электронная почта"
@@ -46,7 +46,7 @@
             </form>
             <div class="popup__bottom">
                 <a href="#" class="section-link  popup__link">Забыли пароль?</a>
-                <a class="section-link  popup__link" data-graph-path="register" data-graph-speed="0">Регистрация</a>
+                <button class="btn-reset  section-link  popup__link" data-graph-path="register" data-graph-speed="0">Регистрация</button>
             </div>
         </div>
     </div>
