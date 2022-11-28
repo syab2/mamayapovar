@@ -10,8 +10,9 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
+from django.forms import modelformset_factory
 
-from .models import Recipe
+from .models import Recipe, StepImages
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -140,9 +141,32 @@ def new_recipe_post(request):
     fout.close()
 
     # photos of steps and text
-    i = 0
-    filenames = []
+
+    j = 0
     step_descs = []
+    for elem in request.POST:
+        if 'step-description-' in elem:
+            j += 1
+            step_descs.append(f'{j}:{request.POST.get(elem)}')
+
+    sss = ';'.join(step_descs)
+
+    recipe = Recipe(
+        title=title,
+        description=description,
+        cooking_time=cooking_time,
+        persons=persons,
+        cat_id=cat_id,
+        author_id=request.user.id,
+        ingredients=ingredients,
+        photo=full_filename,
+        steps=sss,
+        folder_id=folder_id
+    )
+    recipe.save()
+
+    i = 0
+
     for elem in request.FILES:
         if 'step-photo-' in elem:
             i += 1
@@ -160,7 +184,6 @@ def new_recipe_post(request):
                 settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
 
             try:
-                filenames.append(ful_fil)
                 fout2 = open(ful_fil, 'wb+')
 
                 file_content2 = ContentFile(request.FILES[elem].read())
@@ -168,31 +191,39 @@ def new_recipe_post(request):
                 for chunk in file_content2.chunks():
                     fout2.write(chunk)
                 fout2.close()
+
+                imgs = StepImages(image=ful_fil, recipe=recipe)
+                imgs.save()
             except Exception:
-                del filenames[-1]
-
-    j = 0
-    for elem in request.POST:
-        if 'step-description-' in elem:
-            j += 1
-            step_descs.append(f'{j}:{request.POST.get(elem)}')
-
-    pos = ';'.join(filenames)
-    sss = ';'.join(step_descs)
-
-    recipe = Recipe(
-        title=title,
-        description=description,
-        cooking_time=cooking_time,
-        persons=persons,
-        cat_id=cat_id,
-        author_id=request.user.id,
-        ingredients=ingredients,
-        photo=full_filename,
-        photos_of_steps=pos,
-        steps=sss,
-        folder_id=folder_id
-    )
-    recipe.save()
+                pass
 
     return HttpResponseRedirect('/')
+
+
+def recipe(request, recipe_id):
+    recipe = Recipe.objects.get(id=recipe_id)
+    recipe.author_id = models.User.objects.get(id=recipe.author_id)
+    if recipe.cooking_time.split(':')[0] == '24':
+        recipe.cooking_time = f'1 день'
+    elif recipe.cooking_time.split(':')[0] != '0':
+        cook = recipe.cooking_time.split(':')
+        recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
+                              f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+    else:
+        cook = recipe.cooking_time.split(':')
+        recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+
+    pers = int(recipe.persons)
+    recipe.persons = f"{pers} {morph.parse('порция')[0].make_agree_with_number(pers).word}"
+
+    recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in recipe.ingredients.split(';')]
+    recipe.steps = [[x.split(':')[0], x.split(':')[1].split('\n')] for x in recipe.steps.split(';')]
+
+    step_photos = StepImages.objects.filter(recipe_id=recipe_id)
+
+    for i in range(len(recipe.steps)):
+        if step_photos[i].image.name.split('.')[0][-1] == recipe.steps[i][0]:
+            recipe.steps[i].append(step_photos[i].image)
+    print(recipe.steps)
+
+    return render(request, 'recipes/post.html', {'recipe': recipe})

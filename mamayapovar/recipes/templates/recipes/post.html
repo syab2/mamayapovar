@@ -1,197 +1,162 @@
-<!DOCTYPE html>
-<html lang="ru" class="page">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="theme-color" content="#111111">
-    <title>Пышные оладьи на кефире — Мама, я повар!</title>
-    <link rel="preload" href="fonts/NunitoSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/NunitoSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="fonts/NunitoSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="css/vendor.css">
-    <link rel="stylesheet" href="css/main.css">
-    <script defer src="js/main.js"></script>
-  </head>
+{% extends "base.html" %}
 
-  <body class="page__body">
-    @include('partials/header-auth.html')
-
-    <div class="container">
-      <div class="site-container">
-        @include('partials/sidebar.html')
-
-        <main class="post" id="post-123">
-					<section class="entry  post__entry" id="entry">
-						<!-- Шапка рецепта -->
-						<div class="entry__container">
-							<div class="content-header  entry__header">
-								<div class="content-info">
-									<a href="#" class="content-info__category">
-										<img src="img/category/bake-icon.svg" width="24" height="24" alt="" loading="lazy">
-										<span>Выпечка</span>
-									</a>
-									<a href="#" class="content-info__author">Екатерина Георгадзе</a>
-									<time class="content-info__date" datetime="2022-12-02 16:00">3 часа</time>
-								</div>
-								<h1 class="section-h1  content-header__title">Пышные оладьи на кефире</h1>
-								<p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете покорить оладьи? Попробуйте этот рецепт, и все получится!</p>
-								<div class="content-short">
-									<ul class="list-reset content-short__list">
-										<li class="content-short__item">
-											<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-												<use href="img/sprite.svg#users"/>
-											</svg>
-											4 порции
-										</li>
-										<li class="content-short__item">
-											<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-												<use href="img/sprite.svg#stopwatch"/>
-											</svg>
-											30 минут
-										</li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<!-- Фото блюда -->
-						<figure>
-							<img src="img/placeholder-image.jpg" alt="" class="entry__img" width="740" height="350">
-						</figure>
-						<!-- Тело рецепта -->
-						<div class="entry__container">
-							<div class="entry__body">
-								<section class="entry-ingredients">
-									<h2 class="section-h2  entry-ingredients__title">Ингредиенты</h2>
-									<div class="entry-ingredients__list">
-										<dl class="entry-ingredients-item">
-											<dt class="entry-ingredients-item__name">
-												<span>Яйцо куриное</span>
-											</dt>
-											<dd class="entry-ingredients-item__info">1 шт</dd>
-										</dl>
-										<dl class="entry-ingredients-item">
-											<dt class="entry-ingredients-item__name">
-												<span>Кефир 2,5%</span>
-											</dt>
-											<dd class="entry-ingredients-item__info">300 мл</dd>
-										</dl>
-										<dl class="entry-ingredients-item">
-											<dt class="entry-ingredients-item__name">
-												<span>Сахар</span>
-											</dt>
-											<dd class="entry-ingredients-item__info">2 столовые ложки</dd>
-										</dl>
-									</div>
-									<div class="entry-ingredients-cost">
-										<span class="entry-ingredients-cost__label">Стоимость блюда</span>
-										<span class="section-h3  entry-ingredients-cost__price">≈ 400 руб</span>
-									</div>
-								</section>
-								<section class="entry-steps">
-									<h2 class="section-h2  entry-steps__title">Инструкция приготовления</h2>
-									<ul class="list-reset entry-steps__list">
-										<li class="entry-steps-item">
-											<h3 class="section-h3  entry-steps-item__number">Шаг 1</h3>
-											<div class="entry-steps-item__desc">
-												<p>Кефир прогреть в микроволновке до комнатной температуры, добавить в кефир яйцо, сахар, взбить венчиком.</p>
-												<p>Муку просеять, добавить к кефиру и хорошо вымешать венчиком, масса должна быть густой. Добавить соду и еще раз вымешать.</p>
-												<p>Готовое тесто не течет, а падает с ложки. Оставить миску на 15-20 минут.</p>
-											</div>
-											<figure>
-												<img src="img/placeholder-image.jpg" alt="" class="entry-steps-item__img" width="676" height="350">
-											</figure>
-										</li>
-										<li class="entry-steps-item">
-											<h3 class="section-h3  entry-steps-item__number">Шаг 2</h3>
-											<div class="entry-steps-item__desc">
-												<p>Жарить на огне ниже среднего до румяной корочки.</p>
-												<p>Я выкладываю со сковороды на бумажные полотенца, чтобы лишний жир впитался.</p>
-											</div>
-											<figure>
-												<img src="img/placeholder-image.jpg" alt="" class="entry-steps-item__img" width="676" height="350">
-											</figure>
-										</li>
-									</ul>
-								</section>
-							</div>
-						</div>
-						<!-- Подвал рецепта -->
-						<div class="entry__container">
-							<div class="content-footer  entry__footer">
-								<div class="content-footer__left">
-									<button class="btn-reset  content-footer__btn  content-footer__btn--heart">
-										<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
-											<use href="img/sprite.svg#heart"/>
-										</svg>
-										<span>842</span>
-									</button>
-									<a href="#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment">
-										<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
-											<use href="img/sprite.svg#circle"/>
-										</svg>
-										<span>11</span>
-									</a>
-								</div>
-								<button class="btn-reset  content-footer__btn  content-footer__btn--bookmark">
-									<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
-										<use href="img/sprite.svg#bookmark"/>
-									</svg>
-								</button>
-							</div>
-							<div class="content-author  entry__author">
-								<div class="content-author__info">
-									<a href="#" class="content-author__avatar">
-										<img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="56" height="56">
-									</a>
-									<a href="#" class="content-author__name">Екатерина Георгадзе</a>
-									<span class="content-author__desc">Готовлю самые вкусные и пышные оладушки</span>
-								</div>
-								<button class="btn  btn--second  btn--small  btn--left  content-author__btn">
-									Подписаться
-									<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
-										<use href="img/sprite.svg#user-plus"/>
-									</svg>
-								</button>
-							</div>
-						</div>
-					</section>
-					<section class="comments  post__comments" id="comments">
-						<h2 class="section-h2  comments__title">3 комментария</h2>
-						<form id="comments-form" action="https://echo.htmlacademy.ru" method="POST" class="comments__form">
-							<textarea name="comments-text" class="input  input--textarea  comments__input" placeholder="Написать комментарий..." minlength="1" maxlength="1000" autocomplete="off" required></textarea>
-							<button type="submit" class="btn  btn--small  comments__btn">Отправить</button>
-						</form>
-						<div class="comments__list">
-							<article class="comments-item">
-								<div class="comments-item__info">
-									<a href="#" class="comments-item__avatar">
-										<img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40">
-									</a>
-									<a href="#" class="comments-item__author">Алексей Калинин</a>
-									<time class="comments-item__date" datetime="2022-12-02 16:28">28 минут</time>
-								</div>
-								<p class="comments-item__text">Сразу же, как увидел рецепт, решил оценить его на практике.
-									И, о чудо! Оладьи получаются невероятно пышными :)
-								</p>
-							</article>
-							<article class="comments-item">
-								<div class="comments-item__info">
-									<a href="#" class="comments-item__avatar">
-										<img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40">
-									</a>
-									<a href="#" class="comments-item__author">Николай Крылов</a>
-									<time class="comments-item__date" datetime="2022-12-02 17:00">1 час</time>
-								</div>
-								<p class="comments-item__text">Кайфарик</p>
-							</article>
-						</div>
-					</section>
-        </main>
-      </div>
-    </div>
-    @include('partials/modals.html')
-  </body>
-
-</html>
+{% load static %}
+{% block post %}
+<main class="post" id="post-123">
+    <section class="entry  post__entry" id="entry">
+        <!-- Шапка рецепта -->
+        <div class="entry__container">
+            <div class="content-header  entry__header">
+                <div class="content-info">
+                    <a href="#" class="content-info__category">
+                        <img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
+                        <span>{{ recipe.cat }}</span>
+                    </a>
+                    <a href="#" class="content-info__author">{{ recipe.author_id }}</a>
+                    <time class="content-info__date" datetime="2022-12-02 16:00">{{ recipe.time_create }}</time>
+                </div>
+                <h1 class="section-h1  content-header__title">Пышные оладьи на кефире</h1>
+                <p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете
+                    покорить оладьи? Попробуйте этот рецепт, и все получится!</p>
+                <div class="content-short">
+                    <ul class="list-reset content-short__list">
+                        <li class="content-short__item">
+                            <svg class="icon  icon--16  content-short__icon" aria-hidden="true"
+                                 focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#users"/>
+                            </svg>
+                            {{ recipe.persons }}
+                        </li>
+                        <li class="content-short__item">
+                            <svg class="icon  icon--16  content-short__icon" aria-hidden="true"
+                                 focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#stopwatch"/>
+                            </svg>
+                            {{ recipe.cooking_time }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Фото блюда -->
+        <figure>
+            <img src="{{ recipe.photo.url }}" alt="" class="entry__img" width="740" height="350">
+        </figure>
+        <!-- Тело рецепта -->
+        <div class="entry__container">
+            <div class="entry__body">
+                <section class="entry-ingredients">
+                    <h2 class="section-h2  entry-ingredients__title">Ингредиенты</h2>
+                    <div class="entry-ingredients__list">
+                        {% for text, nums in recipe.ingredients %}
+                            <dl class="entry-ingredients-item">
+                                <dt class="entry-ingredients-item__name">
+                                    <span>{{ text }}</span>
+                                </dt>
+                                <dd class="entry-ingredients-item__info">{{ nums }}</dd>
+                            </dl>
+                        {% endfor %}
+                    </div>
+                    <!--<div class="entry-ingredients-cost">
+                        <span class="entry-ingredients-cost__label">Стоимость блюда</span>
+                        <span class="section-h3  entry-ingredients-cost__price">≈ 400 руб</span>
+                    </div>-->
+                </section>
+                <section class="entry-steps">
+                    <h2 class="section-h2  entry-steps__title">Инструкция приготовления</h2>
+                    <ul class="list-reset entry-steps__list">
+                        {% for num, text, photo in recipe.steps %}
+                            <li class="entry-steps-item">
+                                <h3 class="section-h3  entry-steps-item__number">Шаг {{ num }}</h3>
+                                <div class="entry-steps-item__desc">
+                                    {% for p in text %}
+                                        <p>{{ p }}</p>
+                                    {% endfor %}
+                                </div>
+                                <figure>
+                                    <img src="{{ photo.url }}" alt="" class="entry-steps-item__img"
+                                         width="676" height="350">
+                                </figure>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <!-- Подвал рецепта -->
+        <div class="entry__container">
+            <div class="content-footer  entry__footer">
+                <div class="content-footer__left">
+                    <button class="btn-reset  content-footer__btn  content-footer__btn--heart">
+                        <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+                            <use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
+                        </svg>
+                        <span>842</span>
+                    </button>
+                    <a href="#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment">
+                        <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+                            <use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
+                        </svg>
+                        <span>11</span>
+                    </a>
+                </div>
+                <button class="btn-reset  content-footer__btn  content-footer__btn--bookmark">
+                    <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+                        <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="content-author  entry__author">
+                <div class="content-author__info">
+                    <a href="#" class="content-author__avatar">
+                        <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" alt="Фото профиля" width="56" height="56">
+                    </a>
+                    <a href="#" class="content-author__name">{{ recipe.author_id }}</a>
+                    <span class="content-author__desc">Готовлю самые вкусные и пышные оладушки</span>
+                </div>
+                <button class="btn  btn--second  btn--small  btn--left  content-author__btn">
+                    Подписаться
+                    <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                        <use href="{% static 'recipes/img/sprite.svg' %}#user-plus"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+    <!--
+    <section class="comments  post__comments" id="comments">
+        <h2 class="section-h2  comments__title">3 комментария</h2>
+        <form id="comments-form" action="https://echo.htmlacademy.ru" method="POST" class="comments__form">
+            <textarea name="comments-text" class="input  input--textarea  comments__input"
+                      placeholder="Написать комментарий..." minlength="1" maxlength="1000" autocomplete="off"
+                      required></textarea>
+            <button type="submit" class="btn  btn--small  comments__btn">Отправить</button>
+        </form>
+        <div class="comments__list">
+            <article class="comments-item">
+                <div class="comments-item__info">
+                    <a href="#" class="comments-item__avatar">
+                        <img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40">
+                    </a>
+                    <a href="#" class="comments-item__author">Алексей Калинин</a>
+                    <time class="comments-item__date" datetime="2022-12-02 16:28">28 минут</time>
+                </div>
+                <p class="comments-item__text">Сразу же, как увидел рецепт, решил оценить его на практике.
+                    И, о чудо! Оладьи получаются невероятно пышными :)
+                </p>
+            </article>
+            <article class="comments-item">
+                <div class="comments-item__info">
+                    <a href="#" class="comments-item__avatar">
+                        <img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40">
+                    </a>
+                    <a href="#" class="comments-item__author">Николай Крылов</a>
+                    <time class="comments-item__date" datetime="2022-12-02 17:00">1 час</time>
+                </div>
+                <p class="comments-item__text">Кайфарик</p>
+            </article>
+        </div>
+    </section>
+    -->
+</main>
+{% endblock %}

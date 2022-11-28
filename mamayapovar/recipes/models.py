@@ -12,7 +12,6 @@ class Recipe(models.Model):
     author_id = models.IntegerField(null=True)
     ingredients = models.TextField(blank=True)
     steps = models.TextField(blank=True)
-    photos_of_steps = models.TextField(blank=True)
     folder_id = models.CharField(max_length=7, blank=True)
 
     def __str__(self):
@@ -20,6 +19,11 @@ class Recipe(models.Model):
 
     class Meta:
         ordering = ['-time_create']
+
+
+class StepImages(models.Model):
+    recipe = models.ForeignKey('Recipe', default=None, on_delete=models.PROTECT)
+    image = models.ImageField(null=True, blank=True, verbose_name='Image')
 
 
 class Category(models.Model):
