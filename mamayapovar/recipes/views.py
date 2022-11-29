@@ -10,7 +10,6 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
-from django.forms import modelformset_factory
 
 from .models import Recipe, StepImages
 
@@ -24,8 +23,8 @@ def index(request):
         recipe.author_id = models.User.objects.get(id=recipe.author_id)
 
         # ingredients
-        ings = len(recipe.ingredients.split(';'))
-        recipe.ingredients = f"{ings} {morph.parse('ингредиент')[0].make_agree_with_number(ings).word}"
+        recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in
+                              recipe.ingredients.split(';')]
 
         # persons
         pers = int(recipe.persons)
@@ -222,8 +221,10 @@ def recipe(request, recipe_id):
     step_photos = StepImages.objects.filter(recipe_id=recipe_id)
 
     for i in range(len(recipe.steps)):
-        if step_photos[i].image.name.split('.')[0][-1] == recipe.steps[i][0]:
-            recipe.steps[i].append(step_photos[i].image)
-    print(recipe.steps)
+        try:
+            if step_photos[i].image.name.split('.')[0][-1] == recipe.steps[i][0]:
+                recipe.steps[i].append(step_photos[i].image)
+        except Exception:
+            recipe.steps[i].append(None)
 
     return render(request, 'recipes/post.html', {'recipe': recipe})

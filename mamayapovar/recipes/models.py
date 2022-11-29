@@ -1,4 +1,7 @@
+import pymorphy2
 from django.db import models
+
+morph = pymorphy2.MorphAnalyzer()
 
 
 class Recipe(models.Model):
@@ -13,6 +16,10 @@ class Recipe(models.Model):
     ingredients = models.TextField(blank=True)
     steps = models.TextField(blank=True)
     folder_id = models.CharField(max_length=7, blank=True)
+
+    def get_beautiful_ingredients(self):
+        ings = len(self.ingredients)
+        return f"{ings} {morph.parse('ингредиент')[0].make_agree_with_number(ings).word}"
 
     def __str__(self):
         return self.title

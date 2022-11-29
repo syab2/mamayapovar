@@ -40,7 +40,11 @@
         </div>
         <!-- Фото блюда -->
         <figure>
-            <img src="{{ recipe.photo.url }}" alt="{{ recipe.title }}" class="entry__img" width="740" height="350" loading="lazy">
+            {% if recipe.photo %}
+                <img src="{{ recipe.photo.url }}" alt="{{ recipe.title }}" class="entry__img" width="740" height="350" loading="lazy">
+            {% else %}
+                <img src="{% static 'recipes/img/placeholder-image.jpg' %}" width="676" height="350" alt="{{ recipe.title }}" loading="lazy">
+            {% endif %}
         </figure>
         <!-- Тело рецепта -->
         <div class="entry__container">
@@ -74,8 +78,13 @@
                                     {% endfor %}
                                 </div>
                                 <figure>
-                                    <img src="{{ photo.url }}" alt="" class="entry-steps-item__img"
-                                         width="676" height="350" loading="lazy">
+                                    {% if photo %}
+                                        <img src="{{ photo.url }}" alt="" class="entry-steps-item__img"
+                                             width="676" height="350" loading="lazy">
+                                    {% else %}
+                                        <img src="{% static 'recipes/img/placeholder-image.jpg' %}" width="676" height="350"
+                                             alt="{{ recipe.title }}" loading="lazy">
+                                    {% endif %}
                                 </figure>
                             </li>
                         {% endfor %}
