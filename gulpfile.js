@@ -101,7 +101,6 @@ const styles = () => {
     .pipe(mainSass())
     .pipe(autoprefixer({
       cascade: false,
-      grid: true,
       overrideBrowserslist: ["last 5 versions"]
     }))
     .pipe(gulpif(isProd, cleanCSS({
@@ -123,7 +122,6 @@ const stylesBackend = () => {
     .pipe(mainSass())
     .pipe(autoprefixer({
       cascade: false,
-      grid: true,
       overrideBrowserslist: ["last 5 versions"]
     }))
     .pipe(dest(paths.buildCssFolder))

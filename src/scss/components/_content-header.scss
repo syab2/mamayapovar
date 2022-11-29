@@ -140,10 +140,12 @@
     opacity: 0;
     transform: translateY(-10px);
     transition: opacity 0.15s ease, transform 0.2s ease;
+    pointer-events: none;
 
     &.active {
       opacity: 1;
       transform: translateY(0);
+      pointer-events: inherit;
     }
   }
 }

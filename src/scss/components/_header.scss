@@ -20,19 +20,17 @@
 
   &__inner {
     position: relative;
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: space-between;
+    grid-template-columns: auto auto;
     padding: 16px 0;
-  }
-
-  &__search {
-    width: 100%;
-    max-width: 400px;
+    gap: 20px;
   }
 
   &__input {
-    width: 400px;
+    width: 100%;
+    min-width: 140px;
   }
 
   &__text {
@@ -44,11 +42,18 @@
     color: var(--color-text-secondary);
   }
 
+  &__left {
+    grid-template-columns: auto minmax(auto, 400px);
+  }
+
+  &__right {
+    grid-template-columns: auto auto;
+  }
+
   &__left,
   &__right {
     display: grid;
     align-items: center;
-    grid-auto-flow: column;
     gap: 32px;
   }
 }
@@ -56,7 +61,7 @@
 .header-profile {
   display: grid;
   align-items: center;
-  grid-auto-flow: column;
+  grid-template-columns: auto auto;
   gap: 4px;
 
   &__avatar {
@@ -106,6 +111,7 @@
   opacity: 0;
   transform: translateY(-10px);
   transition: opacity 0.15s ease, transform 0.2s ease;
+  pointer-events: none;
   gap: 8px;
 
   &__item {
@@ -154,5 +160,6 @@
   &.active {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: inherit;
   }
 }
