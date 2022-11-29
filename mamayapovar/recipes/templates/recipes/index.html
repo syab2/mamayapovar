@@ -59,10 +59,10 @@
         <a href="#" class="feed-item__img">
             {% if recipe.photo %}
                 <img src="{{ recipe.photo.url }}" width="676" height="350"
-                     alt="Пышные оладьи на кефире" loading="lazy">
+                     alt="{{ recipe.title }}" loading="lazy">
             {% else %}
                 <img src="{% static 'recipes/img/placeholder-image.jpg' %}" width="676" height="350"
-                     alt="Пышные оладьи на кефире" loading="lazy">
+                     alt="{{ recipe.title }}" loading="lazy">
             {% endif %}
         </a>
         <div class="content-footer  feed-item__footer">

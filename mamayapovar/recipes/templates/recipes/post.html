@@ -40,7 +40,7 @@
         </div>
         <!-- Фото блюда -->
         <figure>
-            <img src="{{ recipe.photo.url }}" alt="" class="entry__img" width="740" height="350">
+            <img src="{{ recipe.photo.url }}" alt="{{ recipe.title }}" class="entry__img" width="740" height="350" loading="lazy">
         </figure>
         <!-- Тело рецепта -->
         <div class="entry__container">
@@ -75,7 +75,7 @@
                                 </div>
                                 <figure>
                                     <img src="{{ photo.url }}" alt="" class="entry-steps-item__img"
-                                         width="676" height="350">
+                                         width="676" height="350" loading="lazy">
                                 </figure>
                             </li>
                         {% endfor %}
@@ -109,7 +109,7 @@
             <div class="content-author  entry__author">
                 <div class="content-author__info">
                     <a href="#" class="content-author__avatar">
-                        <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" alt="Фото профиля" width="56" height="56">
+                        <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" alt="Фото профиля" width="56" height="56" loading="lazy">
                     </a>
                     <a href="#" class="content-author__name">{{ recipe.author_id }}</a>
                     <span class="content-author__desc">Готовлю самые вкусные и пышные оладушки</span>
@@ -136,7 +136,7 @@
             <article class="comments-item">
                 <div class="comments-item__info">
                     <a href="#" class="comments-item__avatar">
-                        <img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40">
+                        <img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40" loading="lazy">
                     </a>
                     <a href="#" class="comments-item__author">Алексей Калинин</a>
                     <time class="comments-item__date" datetime="2022-12-02 16:28">28 минут</time>
@@ -148,7 +148,7 @@
             <article class="comments-item">
                 <div class="comments-item__info">
                     <a href="#" class="comments-item__avatar">
-                        <img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40">
+                        <img src="img/placeholder-avatar.jpg" alt="Фото профиля" width="40" height="40" loading="lazy">
                     </a>
                     <a href="#" class="comments-item__author">Николай Крылов</a>
                     <time class="comments-item__date" datetime="2022-12-02 17:00">1 час</time>
