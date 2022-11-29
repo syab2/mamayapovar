@@ -55,11 +55,15 @@ def index(request):
 
 
 def postindex(request):
-    if not get_user_model().objects.get(email=request.POST.get('email', '')):
+    try:
+        if not models.User.objects.get(email=request.POST.get('email', '')):
+            models.User.objects.create_user(request.POST.get('username', ''), request.POST.get('email', ''),
+                                            request.POST.get('password', '')).save()
+        else:
+            return HttpResponseRedirect('/')
+    except Exception:
         models.User.objects.create_user(request.POST.get('username', ''), request.POST.get('email', ''),
                                         request.POST.get('password', '')).save()
-    else:
-        return HttpResponseRedirect('/')
     return HttpResponseRedirect('/')
 
 
