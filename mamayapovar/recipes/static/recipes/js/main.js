@@ -11,16 +11,18 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
-/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
-/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
-/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
-/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
-/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
-/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
-/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
+/* harmony import */ var _components_short_ingredients__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_short-ingredients */ "./src/js/components/_short-ingredients.js");
+/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
+/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
+/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
+/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
+/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
+
 
 
 
@@ -307,35 +309,34 @@ if (document.querySelector('.new-recipe-field--time')) {
 /***/ (() => {
 
 (function () {
-  var _document, _document2, _document3;
-  const menuProfileToggle = (_document = document) === null || _document === void 0 ? void 0 : _document.querySelector('[data-menu-profile-toggle]');
-  const menuProfile = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.querySelector('[data-menu-profile]');
-  const menuProfileLinks = (_document3 = document) === null || _document3 === void 0 ? void 0 : _document3.querySelectorAll('[data-menu-profile-link]');
+  const menuProfileToggle = document.querySelector('[data-menu-profile-toggle]');
+  const menuProfile = document.querySelector('[data-menu-profile]');
+  const menuProfileLinks = document.querySelectorAll('[data-menu-profile-link]');
   if (menuProfileToggle) {
-    menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.addEventListener('click', () => {
-      menuProfile === null || menuProfile === void 0 ? void 0 : menuProfile.classList.toggle('active');
+    menuProfileToggle.addEventListener('click', () => {
+      menuProfile.classList.toggle('active');
       menuProfileToggle.classList.toggle('active');
-      if (menuProfile !== null && menuProfile !== void 0 && menuProfile.classList.contains('active')) {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'true');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Закрыть меню');
+      if (menuProfile.classList.contains('active')) {
+        menuProfileToggle.setAttribute('aria-expanded', 'true');
+        menuProfileToggle.setAttribute('aria-label', 'Закрыть меню');
       } else {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
+        menuProfileToggle.setAttribute('aria-expanded', 'false');
+        menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
       }
     });
     window.addEventListener('click', e => {
       const target = e.target;
       if (!target.closest('[data-menu-profile-toggle]') && !target.closest('[data-menu-profile]')) {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
+        menuProfileToggle.setAttribute('aria-expanded', 'false');
+        menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
         menuProfileToggle.classList.remove('active');
       }
     });
-    menuProfileLinks === null || menuProfileLinks === void 0 ? void 0 : menuProfileLinks.forEach(el => {
+    menuProfileLinks.forEach(el => {
       el.addEventListener('click', () => {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
+        menuProfileToggle.setAttribute('aria-expanded', 'false');
+        menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
         menuProfileToggle.classList.remove('active');
       });
@@ -575,32 +576,82 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
 
-if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].sidebarTab) {
-  const fieldsets = document.querySelectorAll('fieldset[id]');
-  function scrollActive() {
-    const scrollY = window.pageYOffset;
-    fieldsets.forEach(current => {
-      const fieldsetHeight = current.offsetHeight + 40;
-      const fieldsetTop = current.offsetTop - _vars__WEBPACK_IMPORTED_MODULE_0__["default"].headerHeight - 205;
-      const fieldsetId = current.getAttribute('id');
-      const fieldsetIdLast = fieldsets[fieldsets.length - 1].getAttribute('id');
-      const fieldsetItems = document.querySelectorAll('.sidebar-tree__list li');
-      if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
-        fieldsetItems.forEach(e => {
-          e.classList.remove('active');
-        });
-        document.querySelector('.sidebar-tree__list a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active');
-      } else {
-        if (scrollY > fieldsetTop && scrollY <= fieldsetTop + fieldsetHeight) {
-          document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.add('active');
+(function () {
+  if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].sidebarTab) {
+    const fieldsets = document.querySelectorAll('fieldset[id]');
+    function scrollActive() {
+      const scrollY = window.pageYOffset;
+      fieldsets.forEach(current => {
+        const fieldsetHeight = current.offsetHeight + 40;
+        const fieldsetTop = current.offsetTop - _vars__WEBPACK_IMPORTED_MODULE_0__["default"].headerHeight - 205;
+        const fieldsetId = current.getAttribute('id');
+        const fieldsetIdLast = fieldsets[fieldsets.length - 1].getAttribute('id');
+        const fieldsetItems = document.querySelectorAll('.sidebar-tree__list li');
+        if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+          fieldsetItems.forEach(e => {
+            e.classList.remove('active');
+          });
+          document.querySelector('.sidebar-tree__list a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active');
         } else {
-          document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.remove('active');
+          if (scrollY > fieldsetTop && scrollY <= fieldsetTop + fieldsetHeight) {
+            document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.add('active');
+          } else {
+            document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.remove('active');
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', scrollActive);
+  }
+})();
+
+/***/ }),
+
+/***/ "./src/js/components/_short-ingredients.js":
+/*!*************************************************!*\
+  !*** ./src/js/components/_short-ingredients.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+(function () {
+  if (document.querySelector('[data-short-ingredients]')) {
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (target.closest('[data-short-ingredients-toggle]')) {
+        const shortIngredientsToggle = target;
+        const shortIngredients = target.nextElementSibling;
+        shortIngredientsToggle.classList.toggle('active');
+        shortIngredients.classList.toggle('active');
+        if (shortIngredients !== null && shortIngredients !== void 0 && shortIngredients.classList.contains('active')) {
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'true');
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Закрыть меню');
+        } else {
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'false');
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Открыть меню');
         }
       }
     });
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (!target.closest('[data-short-ingredients-toggle]') && !target.closest('[data-short-ingredients]')) {
+        const shortIngredientsToggle = document.querySelectorAll('[data-short-ingredients-toggle]');
+        const shortIngredients = document.querySelectorAll('[data-short-ingredients]');
+        shortIngredientsToggle.forEach(e => {
+          e.setAttribute('aria-expanded', 'false');
+          e.setAttribute('aria-label', 'Открыть меню');
+          e.classList.remove('active');
+        });
+        shortIngredients.forEach(e => {
+          e.classList.remove('active');
+        });
+      }
+    });
   }
-  window.addEventListener('scroll', scrollActive);
-}
+})();
 
 /***/ }),
 

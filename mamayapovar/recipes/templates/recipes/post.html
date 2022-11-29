@@ -2,7 +2,7 @@
 
 {% load static %}
 {% block post %}
-<main class="post" id="post-123">
+<main class="post" id="post-{{ recipe.id }}">
     <section class="entry  post__entry" id="entry">
         <!-- Шапка рецепта -->
         <div class="entry__container">
@@ -47,13 +47,13 @@
             <div class="entry__body">
                 <section class="entry-ingredients">
                     <h2 class="section-h2  entry-ingredients__title">Ингредиенты</h2>
-                    <div class="entry-ingredients__list">
+                    <div class="short-ingredients  entry-ingredients__list">
                         {% for text, nums in recipe.ingredients %}
-                            <dl class="entry-ingredients-item">
-                                <dt class="entry-ingredients-item__name">
+                            <dl class="short-ingredients__item">
+                                <dt class="short-ingredients__name">
                                     <span>{{ text }}</span>
                                 </dt>
-                                <dd class="entry-ingredients-item__info">{{ nums }}</dd>
+                                <dd class="short-ingredients__details">{{ nums }}</dd>
                             </dl>
                         {% endfor %}
                     </div>

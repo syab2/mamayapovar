@@ -22,12 +22,24 @@
                 <p class="content-header__desc">{{ recipe.description }}</p>
             </a>
             <div class="content-short">
-                <button class="btn-reset content-short__toggle">
-                    {{ recipe.ingredients }}
-                    <svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-                        <use href="{% static 'recipes/img/sprite.svg' %}#chevron-down"/>
-                    </svg>
-                </button>
+                <div class="content-short-dropdown">
+                    <button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-short-ingredients-toggle>
+                        {{ recipe.ingredients }}
+                        <svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+                            <use href="{% static 'recipes/img/sprite.svg' %}#chevron-down"/>
+                        </svg>
+                    </button>
+                    <div class="content-short-dropdown__menu  short-ingredients"  data-short-ingredients>
+                        {% for text, nums in recipe.ingredients %}
+                            <dl class="short-ingredients__item">
+                                <dt class="short-ingredients__name">
+                                    <span>{{ text }}</span>
+                                </dt>
+                                <dd class="short-ingredients__details">{{ nums }}</dd>
+                            </dl>
+                        {% endfor %}
+                    </div>
+                </div>
                 <ul class="list-reset content-short__list">
                     <li class="content-short__item">
                         <svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
