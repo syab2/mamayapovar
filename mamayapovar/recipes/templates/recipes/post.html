@@ -15,9 +15,8 @@
                     <a href="#" class="content-info__author">{{ recipe.author_id }}</a>
                     <time class="content-info__date" datetime="2022-12-02 16:00">{{ recipe.time_create }}</time>
                 </div>
-                <h1 class="section-h1  content-header__title">Пышные оладьи на кефире</h1>
-                <p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете
-                    покорить оладьи? Попробуйте этот рецепт, и все получится!</p>
+                <h1 class="section-h1  content-header__title">{{ recipe.title }}</h1>
+                <p class="content-header__desc">{{ recipe.description }}</p>
                 <div class="content-short">
                     <ul class="list-reset content-short__list">
                         <li class="content-short__item">
@@ -42,8 +41,6 @@
         <figure>
             {% if recipe.photo %}
                 <img src="{{ recipe.photo.url }}" alt="{{ recipe.title }}" class="entry__img" width="740" height="350" loading="lazy">
-            {% else %}
-                <img src="{% static 'recipes/img/placeholder-image.jpg' %}" width="676" height="350" alt="{{ recipe.title }}" loading="lazy">
             {% endif %}
         </figure>
         <!-- Тело рецепта -->
@@ -81,9 +78,6 @@
                                     {% if photo %}
                                         <img src="{{ photo.url }}" alt="" class="entry-steps-item__img"
                                              width="676" height="350" loading="lazy">
-                                    {% else %}
-                                        <img src="{% static 'recipes/img/placeholder-image.jpg' %}" width="676" height="350"
-                                             alt="{{ recipe.title }}" loading="lazy">
                                     {% endif %}
                                 </figure>
                             </li>

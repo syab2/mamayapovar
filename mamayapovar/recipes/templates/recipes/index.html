@@ -56,7 +56,7 @@
                 </ul>
             </div>
         </div>
-        <a href="#" class="feed-item__img">
+        <a href="recipe/{{ recipe.id }}" class="feed-item__img">
             {% if recipe.photo %}
                 <img src="{{ recipe.photo.url }}" width="676" height="350"
                      alt="{{ recipe.title }}" loading="lazy">
@@ -73,7 +73,7 @@
                     </svg>
                     <span>842</span>
                 </button>
-                <a href="post.html#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment">
+                <a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment">
                     <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
                         <use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
                     </svg>
