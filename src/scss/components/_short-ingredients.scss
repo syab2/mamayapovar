@@ -1,0 +1,39 @@
+.short-ingredients {
+  display: grid;
+  gap: 16px;
+
+  &__item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    font-size: var(--font-s);
+    line-height: var(--lh-s);
+    color: var(--color-text-primary);
+  }
+
+  &__name {
+    position: relative;
+    display: inline-block;
+    font-weight: 600;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      display: block;
+      border-bottom: 1px dotted var(--color-bg-border);
+      width: 100%;
+    }
+
+    span {
+      position: relative;
+      padding-right: 8px;
+      background-color: var(--color-bg-island);
+    }
+  }
+
+  &__details {
+    padding-left: 8px;
+    text-align: right;
+  }
+}

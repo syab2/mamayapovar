@@ -13,12 +13,34 @@
       <p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете покорить оладьи? Попробуйте этот рецепт, и все получится!</p>
     </a>
     <div class="content-short">
-      <button class="btn-reset content-short__toggle">
-        6 ингредиентов
-        <svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-          <use href="img/sprite.svg#chevron-down"/>
-        </svg>
-      </button>
+			<div class="content-short-dropdown">
+				<button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-short-ingredients-toggle>
+					6 ингредиентов
+					<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+						<use href="img/sprite.svg#chevron-down"/>
+					</svg>
+				</button>
+				<div class="content-short-dropdown__menu  short-ingredients"  data-short-ingredients>
+					<dl class="short-ingredients__item">
+						<dt class="short-ingredients__name">
+							<span>Яйцо куриное</span>
+						</dt>
+						<dd class="short-ingredients__details">1 шт</dd>
+					</dl>
+					<dl class="short-ingredients__item">
+						<dt class="short-ingredients__name">
+							<span>Кефир 2,5%</span>
+						</dt>
+						<dd class="short-ingredients__details">300 мл</dd>
+					</dl>
+					<dl class="short-ingredients__item">
+						<dt class="short-ingredients__name">
+							<span>Сахар</span>
+						</dt>
+						<dd class="short-ingredients__details">2 столовые ложки</dd>
+					</dl>
+				</div>
+			</div>
       <ul class="list-reset content-short__list">
         <li class="content-short__item">
           <svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
