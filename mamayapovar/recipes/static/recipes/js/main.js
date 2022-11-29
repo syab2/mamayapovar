@@ -469,12 +469,12 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
 						<option>стакан</option>
 					</select>
 					<svg class="icon  select__icon" aria-hidden="true" focusable="false">
-						<use href="{% static 'recipes/img/sprite.svg' %}#chevron-down"/>
+						<use href="${svgChevron}"/>
 					</svg>
 				</div>
 				<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
 					<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
-						<use href="{% static 'recipes/img/sprite.svg' %}#cross" />
+						<use href="${svgCross}" />
 					</svg>
 				</a>
 			`;
@@ -534,7 +534,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 				<span class="input__label  step-item__number"></span>
 				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
 					<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
-						<use href="{% static 'recipes/img/sprite.svg' %}#cross" />
+						<use href="${svgCross}" />
 					</svg>
 				</a>
 				<div class="step-item__body">
@@ -543,14 +543,14 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png">
 							<div class="imageuploader__placeholder">
 								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
-									<use href="{% static 'recipes/img/sprite.svg' %}#image"/>
+									<use href="${svgImage}"/>
 								</svg>
 								Загрузите фото блюда
 							</div>
 						</label>
 						<a class="btn  btn--other  imageuploader__btn  hidden">
 							<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#delete" />
+								<use href="${svgDelete}" />
 							</svg>
 						</a>
 					</div>
