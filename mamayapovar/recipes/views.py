@@ -130,8 +130,7 @@ def new_recipe_post(request):
     except:
         pass
 
-    os.mkdir(os.path.join(os.path.join(
-        settings.MEDIA_ROOT, folder), second_folder))
+    os.mkdir(os.path.join(settings.MEDIA_ROOT, folder, second_folder))
 
     full_filename = os.path.join(
         settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
