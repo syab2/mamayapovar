@@ -80,6 +80,13 @@
     text-align: center;
     cursor: pointer;
 
+    input[type="number"],
+    input[type="number"]:hover,
+    input[type="number"]:focus {
+      -moz-appearance: textfield;
+      appearance: none;
+    }
+
     input[type="file"] {
       position: absolute;
       z-index: -1;
