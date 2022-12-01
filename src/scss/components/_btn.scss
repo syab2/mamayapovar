@@ -19,8 +19,7 @@
     fill: var(--color-button-primary-text);
   }
 
-  &:hover,
-  &:focus-visible {
+  &:hover {
     background-color: var(--color-button-primary-bg-hover);
   }
 
@@ -53,8 +52,7 @@
       fill: var(--color-button-secondary-text);
     }
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       background-color: var(--color-button-secondary-bg-hover);
     }
 
@@ -84,8 +82,7 @@
       fill: var(--color-button-tertiary-text-default);
     }
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       color: var(--color-button-tertiary-text-hover);
       background-color: transparent;
 
@@ -124,8 +121,7 @@
       fill: var(--color-icons-primary-inverse);
     }
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       background-color: var(--color-button-other-bg);
       opacity: 0.8;
     }
@@ -143,8 +139,7 @@
       border: none;
       background-color: var(--color-button-secondary-bg-default);
 
-      &:hover,
-      &:focus-visible {
+      &:hover {
         background-color: var(--color-button-secondary-bg-hover);
       }
 

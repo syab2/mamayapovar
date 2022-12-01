@@ -31,8 +31,7 @@
       fill: var(--color-icons-secondary);
     }
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       background-color: var(--color-bg-island-hover);
     }
 
@@ -109,8 +108,7 @@
     color: var(--color-text-secondary);
     transition: opacity 0.2s ease;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       opacity: 0.8;
     }
 

@@ -27,8 +27,7 @@
   color: var(--color-text-accent);
   cursor: pointer;
 
-  &:hover,
-  &:focus-visible {
+  &:hover {
     outline: none;
     text-decoration: underline;
   }
@@ -37,8 +36,7 @@
     color: var(--color-text-disabled);
     cursor: not-allowed;
 
-    &:hover,
-    &:focus-visible {
+    &:hover {
       text-decoration: none;
     }
   }
