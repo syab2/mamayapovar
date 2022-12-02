@@ -68,7 +68,7 @@
 
 		<div class="container">
 			<div class="site-container">
-				<aside class="sidebar">
+				<aside class="sidebar  sidebar--second">
 					<div class="sidebar__inner">
 						<div class="sidebar-tree">
 							<ul class="list-reset sidebar-tree__list">
@@ -92,15 +92,11 @@
 										<span>Инструкция</span>
 									</a>
 								</li>
-								<li class="sidebar-tree__item  sidebar-tree__item--tab">
-									<a href="#new-recipe-pub" class="sidebar-tree__link">
-										<span>Публикация</span>
-									</a>
-								</li>
 							</ul>
 						</div>
 						<div class="sidebar-footer">
-							<a href="https://sonniy.notion.site/72491004fa1044d8b0dccf9cdeb44053" target="_blank" class="sidebar-footer__link">О проекте</a>
+							<button type="submit" class="btn" form="new-recipe-form">Опубликовать</button>
+							<a href="index.html" class="btn  btn--second">Выйти</a>
 						</div>
 					</div>
 				</aside>
@@ -110,19 +106,28 @@
 					<form id="new-recipe-form" action="https://echo.htmlacademy.ru" method="POST" class="new-recipe__form">
 						<fieldset class="new-recipe-section  new-recipe-section--main" id="new-recipe-main">
 							<legend class="section-h1  new-recipe-section__title">Основное</legend>
-							<label class="new-recipe-field  new-recipe-field--title">
-								<span class="input__label">Название рецепта</span>
-								<input type="text" name="title" class="input new-recipe-field__input" placeholder="Шарлотка с яблоками" autofocus="on" autocomplete="off"
-									maxlength="100" required>
-							</label>
-							<label class="new-recipe-field  new-recipe-field--desc">
-								<span class="input__label">Описание рецепта</span>
-								<textarea name="description" class="input  input--textarea  new-recipe-field__input"
-									placeholder="Старый, испытанный временем, но всегда желанный рецепт классической ароматной шарлотки. Уютный запах корицы и чашечка горячего чая с мелиссой..."
-									autocomplete="off" maxlength="200"></textarea>
-							</label>
-							<label class="new-recipe-field  new-recipe-field--cat">
-								<span class="input__label">Категория блюда</span>
+							<div class="form-field  new-recipe-field  new-recipe-field--title">
+								<label class="form-field__label" for="title">Название рецепта</label>
+								<input type="text" name="title" id="title" class="input" placeholder="Шарлотка с яблоками" autofocus="on" autocomplete="off" maxlength="100" required>
+								<label class="form-field__error  hidden" for="title">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+										<use href="img/sprite.svg#circle-cross"/>
+									</svg>
+									<span class="form-field__text">Здесь будет текст ошибки</span>
+								</label>
+							</div>
+							<div class="form-field  new-recipe-field  new-recipe-field--desc">
+								<label class="form-field__label" for="description">Описание рецепта</label>
+								<textarea name="description" id="description" class="input  input--textarea  new-recipe-field__input" placeholder="Старый, испытанный временем, но всегда желанный рецепт классической ароматной шарлотки. Уютный запах корицы и чашечка горячего чая с мелиссой..." autocomplete="off" maxlength="200"></textarea>
+								<label class="form-field__error  hidden" for="description">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+										<use href="img/sprite.svg#circle-cross"/>
+									</svg>
+									<span class="form-field__text">Здесь будет текст ошибки</span>
+								</label>
+							</div>
+							<div class="form-field  new-recipe-field  new-recipe-field--cat">
+								<label class="form-field__label">Категория блюда</label>
 								<div class="select  new-recipe-field__select">
 									<select name="cat" required>
 										<option value="">——</option>
@@ -135,34 +140,45 @@
 										<use href="img/sprite.svg#chevron-down"/>
 									</svg>
 								</div>
-							</label>
+								<label class="form-field__error  hidden">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+										<use href="img/sprite.svg#circle-cross"/>
+									</svg>
+									<span class="form-field__text">Здесь будет текст ошибки</span>
+								</label>
+							</div>
 							<div class="new-recipe-section__group">
-								<label class="new-recipe-field  new-recipe-field--persons">
-									<span class="input__label">Кол-во порций</span>
+								<div class="form-field  new-recipe-field  new-recipe-field--persons">
+									<label class="form-field__label" for="persons">Кол-во порций</label>
 									<div class="counter  new-recipe-field__counter">
 										<a href="#" class="btn  btn--second  btn--icon  counter__btn  counter__btn--minus  disabled" aria-label="Убрать порцию">
 											<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
 												<use href="img/sprite.svg#minus" />
 											</svg>
 										</a>
-										<input type="number" name="persons" value="1" class="input  counter__input" min="1" max="20"
-											autocomplete="off" required>
+										<input type="number" name="persons" id="persons" value="1" class="input  counter__input" min="1" max="20" autocomplete="off" required>
 										<a href="#" class="btn  btn--second  btn--icon  counter__btn  counter__btn--plus" aria-label="Добавить порцию">
 											<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
 												<use href="img/sprite.svg#plus" />
 											</svg>
 										</a>
 									</div>
-								</label>
-								<label class="new-recipe-field  new-recipe-field--time">
-									<span class="input__label">Время приготовления</span>
-									<div class="new-recipe-field--hours">
-										<input type="number" name="cooking_time_hours" placeholder="0" class="input new-recipe-field__input" autocomplete="off" max="12">
+								</div>
+								<div class="form-field  new-recipe-field  new-recipe-field--time">
+									<label class="form-field__label" for="minutes">Время приготовления</label>
+									<div class="form-field  new-recipe-field  new-recipe-field--hours">
+										<input type="number" name="cooking_time_hours" id="hours" placeholder="0" class="input new-recipe-field__input" autocomplete="off" max="12">
 									</div>
-									<div class="new-recipe-field--minutes">
-										<input type="number" name="cooking_time_minutes" placeholder="0" class="input  new-recipe-field__input" min="1" max="59" autocomplete="off" required>
+									<div class="form-field  new-recipe-field  new-recipe-field--minutes">
+										<input type="number" name="cooking_time_minutes" id="minutes" placeholder="0" class="input  new-recipe-field__input" min="1" max="59" autocomplete="off" required>
 									</div>
-								</label>
+									<label class="form-field__error  hidden" for="minutes">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
+								</div>
 							</div>
 						</fieldset>
 						<fieldset class="new-recipe-section  new-recipe-section--ingredient  ingredient" id="new-recipe-ingredient">
@@ -192,6 +208,12 @@
 											<use href="img/sprite.svg#cross" />
 										</svg>
 									</a>
+									<label class="form-field__error  hidden">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
 								</div>
 								<div class="ingredient-item" id="ingredient-4771836458">
 									<input type="text" name="ingredient-name-4771836458" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
@@ -217,6 +239,12 @@
 											<use href="img/sprite.svg#cross" />
 										</svg>
 									</a>
+									<label class="form-field__error  hidden">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
 								</div>
 							</div>
 							<a href="#" class="btn  btn--third  btn--left  ingredient__btn">
@@ -243,13 +271,19 @@
 										<use href="img/sprite.svg#delete" />
 									</svg>
 								</a>
+								<label class="form-field__error  hidden">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+										<use href="img/sprite.svg#circle-cross"/>
+									</svg>
+									<span class="form-field__text">Здесь будет текст ошибки</span>
+								</label>
 							</div>
 						</fieldset>
 						<fieldset class="new-recipe-section  new-recipe-section--step  step" id="new-recipe-step">
 							<legend class="section-h1  new-recipe-section__title">Инструкция приготовления</legend>
 							<div class="step__list">
 								<div class="step-item" id="step-5329123723">
-									<span class="input__label  step-item__number"></span>
+									<label class="form-field__label  step-item__number" for="step-description-5329123723"></label>
 									<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
 										<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#cross" />
@@ -272,13 +306,17 @@
 												</svg>
 											</a>
 										</div>
-										<textarea name="step-description-5329123723" class="input  input--textarea  step-item__input"
-											placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..."
-											autocomplete="off" maxlength="5000" required></textarea>
+										<textarea name="step-description-5329123723" id="step-description-5329123723" class="input  input--textarea  step-item__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
+										<label class="form-field__error  hidden" for="step-description-5329123723">
+											<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+												<use href="img/sprite.svg#circle-cross"/>
+											</svg>
+											<span class="form-field__text">Здесь будет текст ошибки</span>
+										</label>
 									</div>
 								</div>
 								<div class="step-item" id="step-82391238">
-									<span class="input__label  step-item__number"></span>
+									<label class="form-field__label  step-item__number" for="step-description-82391238"></label>
 									<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
 										<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#cross" />
@@ -301,9 +339,13 @@
 												</svg>
 											</a>
 										</div>
-										<textarea name="step-description-82391238" class="input  input--textarea  step-item__input"
-											placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..."
-											autocomplete="off" maxlength="5000" required></textarea>
+										<textarea name="step-description-82391238" id="step-description-82391238" class="input  input--textarea  step-item__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
+										<label class="form-field__error  hidden" for="step-description-82391238">
+											<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+												<use href="img/sprite.svg#circle-cross"/>
+											</svg>
+											<span class="form-field__text">Здесь будет текст ошибки</span>
+										</label>
 									</div>
 								</div>
 							</div>
@@ -314,22 +356,16 @@
 								</svg>
 							</a>
 						</fieldset>
-						<fieldset class="new-recipe-section  new-recipe-section--pub" id="new-recipe-pub">
-							<legend class="section-h1  new-recipe-section__title">Публикация</legend>
-							<div class="new-recipe-section__group">
-								<a href="index.html" class="btn  btn--second">Выйти</a>
-								<button type="submit" class="btn">Опубликовать</button>
-							</div>
-						</fieldset>
 					</form>
 				</main>
 			</div>
 		</div>
 	</body>
 	<script>
-    const svgChevron = 'img/sprite.svg#chevron-down';
-    const svgCross = 'img/sprite.svg#cross';
-    const svgImage = 'img/sprite.svg#image';
-    const svgDelete = 'img/sprite.svg#delete';
+    const svgChevron = `img/sprite.svg#chevron-down`;
+    const svgCross = `img/sprite.svg#cross`;
+    const svgImage = `img/sprite.svg#image`;
+    const svgDelete = `img/sprite.svg#delete`;
+		const svgCircleCross = `img/sprite.svg#circle-cross`;
 	</script>
 </html>

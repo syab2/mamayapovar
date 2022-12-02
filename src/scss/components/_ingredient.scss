@@ -12,6 +12,8 @@
 .ingredient-item {
   display: grid;
   grid-template-columns: 1fr 64px 200px 48px;
+  grid-template-rows: auto auto;
+  row-gap: 8px;
 
   &__input {
     &--name {

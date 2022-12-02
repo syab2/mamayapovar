@@ -44,8 +44,10 @@
         color: var(--color-fields-text-disabled);
       }
     }
+  }
 
-    &.invalid {
+  &.invalid {
+    select {
       border-color: var(--color-fields-border-error);
       background-color: var(--color-fields-bg-error);
 

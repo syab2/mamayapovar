@@ -1,0 +1,28 @@
+.form-field {
+  display: grid;
+  gap: 8px;
+
+  &__label {
+    font-size: var(--font-s);
+    line-height: var(--lh-primary);
+    color: var(--color-text-primary);
+  }
+
+  &__error {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-xs);
+    line-height: var(--lh-xs);
+    color: var(--color-text-error);
+
+    .icon {
+      margin-right: 8px;
+      margin-bottom: 2px;
+      fill: var(--color-text-error);
+    }
+
+    &.hidden {
+      display: none;
+    }
+  }
+}

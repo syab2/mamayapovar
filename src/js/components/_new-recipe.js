@@ -117,6 +117,12 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 						<use href="${svgCross}" />
 					</svg>
 				</a>
+				<label class="form-field__error  hidden">
+					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+						<use href="${svgCircleCross}"/>
+					</svg>
+					<span class="form-field__text">Здесь будет текст ошибки</span>
+				</label>
 			`;
 			ingredientList.append(ingredientItem)
 		})
@@ -177,7 +183,7 @@ if (vars.bodyEl.querySelector('.step')) {
 			stepItem.classList.add('step-item')
 			stepItem.setAttribute('id', `step-${fieldIndex}`)
 			stepItem.innerHTML += `
-				<span class="input__label  step-item__number"></span>
+				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
 				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
 					<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
@@ -200,9 +206,13 @@ if (vars.bodyEl.querySelector('.step')) {
 							</svg>
 						</a>
 					</div>
-					<textarea name="step-description-${fieldIndex}" class="input  input--textarea  step-item__input"
-						placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..."
-						autocomplete="off" maxlength="5000" required></textarea>
+					<textarea name="step-description-${fieldIndex}" id="step-description-${fieldIndex}" class="input  input--textarea  step-item__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
+					<label class="form-field__error  hidden" for="step-description-${fieldIndex}">
+						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+							<use href="${svgCircleCross}"/>
+						</svg>
+						<span class="form-field__text">Здесь будет текст ошибки</span>
+					</label>
 				</div>
 			`;
 			stepList.append(stepItem)
