@@ -500,6 +500,9 @@ a {
 .input:disabled::placeholder {
   color: var(--color-fields-text-disabled);
 }
+.input[type=number], .input[type=number]:hover, .input[type=number]:focus {
+  -moz-appearance: textfield;
+}
 .input.invalid {
   border-color: var(--color-fields-border-error);
   background-color: var(--color-fields-bg-error);
@@ -538,13 +541,6 @@ a {
   line-height: var(--lh-s);
   text-align: center;
   cursor: pointer;
-}
-.input--photo input[type=number],
-.input--photo input[type=number]:hover,
-.input--photo input[type=number]:focus {
-  -moz-appearance: textfield;
-  -webkit-appearance: none;
-  appearance: none;
 }
 .input--photo input[type=file] {
   position: absolute;
@@ -1189,15 +1185,18 @@ a {
   align-items: center;
   font-size: var(--font-s);
   line-height: var(--lh-primary);
+  -webkit-transition: opacity 0.2s ease;
+  -o-transition: opacity 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 .content-short-dropdown__toggle .content-short__icon {
   margin-right: 0;
   margin-left: 8px;
-  -webkit-transition: opacity, -webkit-transform 0.2s ease;
-  transition: opacity, -webkit-transform 0.2s ease;
-  -o-transition: opacity, transform 0.2s ease;
-  transition: opacity, transform 0.2s ease;
-  transition: opacity, transform 0.2s ease, -webkit-transform 0.2s ease;
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 .content-short-dropdown__toggle:hover {
   opacity: 0.8;
@@ -1425,7 +1424,6 @@ a {
 .ingredient-item {
   display: grid;
   grid-template-columns: 1fr 64px 200px 48px;
-  grid-template-rows: auto auto;
   row-gap: 8px;
 }
 .ingredient-item__input--name {
