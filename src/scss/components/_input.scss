@@ -45,6 +45,12 @@
     }
   }
 
+  &[type="number"],
+  &[type="number"]:hover,
+  &[type="number"]:focus {
+    -moz-appearance: textfield;
+  }
+
   &.invalid {
     border-color: var(--color-fields-border-error);
     background-color: var(--color-fields-bg-error);
@@ -79,13 +85,6 @@
     line-height: var(--lh-s);
     text-align: center;
     cursor: pointer;
-
-    input[type="number"],
-    input[type="number"]:hover,
-    input[type="number"]:focus {
-      -moz-appearance: textfield;
-      appearance: none;
-    }
 
     input[type="file"] {
       position: absolute;
