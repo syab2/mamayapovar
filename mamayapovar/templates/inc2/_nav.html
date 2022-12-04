@@ -29,7 +29,7 @@
                                 <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" class="header-profile-menu__avatar" width="48"
                                      height="48 "
                                      alt="Фото профиля">
-                                <span>Алексей Калинин</span>
+                                <span>{{ request.user.username }}</span>
                             </a>
                         </li>
                         <li class="header-profile-menu__item">

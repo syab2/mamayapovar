@@ -19,39 +19,30 @@
     <script defer src="{% static 'recipes/js/main.js' %}"></script>
 </head>
 <body class="page__body">
+{% if request.get_full_path == '/new-recipe/' %}
+    {% block navnav %}
 
-{% if request.get_full_path == '/' %}
-{% block navbar %}
+    {% include "inc2/_nav.html" %}
 
-{% include "inc/_nav.html" %}
-
-{% endblock %}
-{% elif request.get_full_path == '/new-recipe/' %}
-{% block navnav %}
-
-{% include "inc2/_nav.html" %}
-
-{% endblock %}
+    {% endblock %}
 {% else %}
-{% block nav3 %}
-{% include "inc3/_nav.html" %}
-{% endblock %}
+    {% block navbar %}
+
+    {% include "inc/_nav.html" %}
+
+    {% endblock %}
 {% endif %}
 
 <div class="container">
     <div class="site-container">
-        {% if request.get_full_path == '/' %}
-        {% block sidebar %}
-        {% include "inc/_side.html" %}
-        {% endblock %}
-        {% elif request.get_full_path == '/new-recipe/' %}
-        {% block sideside %}
-        {% include "inc2/_side.html" %}
-        {% endblock %}
+        {% if request.get_full_path == '/new-recipe/' %}
+            {% block sideside %}
+            {% include "inc2/_side.html" %}
+            {% endblock %}
         {% else %}
-        {% block side3 %}
-        {% include "inc3/_side.html" %}
-        {% endblock %}
+            {% block sidebar %}
+            {% include "inc/_side.html" %}
+            {% endblock %}
         {% endif %}
         {% if request.get_full_path == '/' %}
         <main class="feed">

@@ -11,7 +11,8 @@ urlpatterns = [
     path('postlogout/', postlogout, name='logout'),
     path('new-recipe/', new_recipe, name='new_recipe'),
     path('new-recipe/new-recipe-post/', new_recipe_post, name='new_recipe_post'),
-    path('recipe/<int:recipe_id>/', recipe, name='recipe')
+    path('recipe/<int:recipe_id>/', recipe, name='recipe'),
+    path('bookmarks/', bookmarks, name='bookmarks')
 ]
 
 

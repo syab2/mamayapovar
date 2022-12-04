@@ -230,4 +230,8 @@ def recipe(request, recipe_id):
         except Exception:
             recipe.steps[i].append(None)
 
-    return render(request, 'recipes/post.html', {'recipe': recipe})
+    return render(request, 'recipes/post.html', {'recipe': recipe, 'is_auth': request.user.is_authenticated})
+
+
+def bookmarks(request):
+    return render(request, 'recipes/bookmarks.html', {})
