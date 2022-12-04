@@ -20,9 +20,10 @@
       line-height: var(--lh-primary);
       color: var(--color-text-secondary);
       transition: color 0.2s ease;
+      pointer-events: none;
     }
 
-    .content-footer__icon {
+    .icon {
       fill: var(--color-icons-secondary);
     }
 
@@ -31,7 +32,17 @@
         color: var(--color-text-accent);
       }
 
-      .content-footer__icon {
+      .icon {
+        fill: var(--color-icons-primary);
+      }
+    }
+
+    &.active {
+      span {
+        color: var(--color-text-accent);
+      }
+
+      .icon {
         fill: var(--color-icons-primary);
       }
     }

@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#111111">
-    <title>Мама, я повар! — платформа для кулинаров</title>
+    <title>Закладки — Мама, я повар!</title>
     <link rel="preload" href="fonts/NunitoSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/NunitoSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/NunitoSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -24,7 +24,7 @@
 					<div class="sidebar__inner">
 						<div class="sidebar-tree">
 							<ul class="list-reset sidebar-tree__list">
-								<li class="sidebar-tree__item  active">
+								<li class="sidebar-tree__item">
 									<a href="index.html" class="sidebar-tree__link">
 										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#clock"/>
@@ -32,7 +32,7 @@
 										<span>Свежее</span>
 									</a>
 								</li>
-								<li class="sidebar-tree__item">
+								<li class="sidebar-tree__item  active">
 									<a href="bookmarks.html" class="sidebar-tree__link">
 										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#bookmark"/>
@@ -68,11 +68,16 @@
 					</div>
 				</nav>
 
-        <main class="feed">
-          <h1 class="visually-hidden">Свежие рецепты</h1>
-          @include('partials/feed-item.html')
-          @include('partials/feed-item.html')
-          @include('partials/feed-item.html')
+        <main class="bookmark">
+          <h1 class="visually-hidden">Закладки</h1>
+					<!-- Пустые закладки -->
+					<div class="bookmark-info">
+						<span class="bookmark-info__text">Вы ничего не добавляли в закладки</span>
+					</div>
+					<!-- Есть закладки -->
+					<div class="feed  bookmark-feed">
+						@include('partials/feed-item.html')
+					</div>
         </main>
       </div>
     </div>

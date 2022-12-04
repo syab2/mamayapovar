@@ -16,7 +16,7 @@
 	</head>
 
 	<body class="page__body">
-		<header class="header">
+		<header class="header  header--second">
 			<div class="container">
 				<div class="header__inner">
 					<div class="header__left">
@@ -27,7 +27,7 @@
 					</div>
 					<div class="header__right">
 						<div class="header-profile">
-							<a href="#" class="header-profile__avatar">
+							<a href="user.html" class="header-profile__avatar">
 								<img src="img/placeholder-avatar.jpg" width="56" height="56" alt="Фото профиля">
 							</a>
 							<button class="btn-reset  header-profile__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-menu-profile-toggle>
@@ -38,13 +38,13 @@
 							<ul class="list-reset  header-profile-menu" data-menu-profile>
 								<li class="header-profile-menu__item">
 									<span class="header-profile-menu__label">Мой профиль</span>
-									<a href="#" class="header-profile-menu__link" data-menu-profile-link>
+									<a href="user.html" class="header-profile-menu__link" data-menu-profile-link>
 										<img src="img/placeholder-avatar.jpg" class="header-profile-menu__avatar" width="48" height="48" alt="Фото профиля">
 										<span>Алексей Калинин</span>
 									</a>
 								</li>
 								<li class="header-profile-menu__item">
-									<a href="#" class="header-profile-menu__link" data-menu-profile-link>
+									<a href="settings.html" class="header-profile-menu__link" data-menu-profile-link>
 										<svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#settings"/>
 										</svg>
@@ -52,7 +52,7 @@
 									</a>
 								</li>
 								<li class="header-profile-menu__item">
-									<a href="#" class="header-profile-menu__link" data-menu-profile-link>
+									<a href="index.html" class="header-profile-menu__link" data-menu-profile-link>
 										<svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#log-out"/>
 										</svg>
@@ -104,8 +104,8 @@
 				<main class="new-recipe">
 					<h1 class="visually-hidden">Создание рецепта</h1>
 					<form id="new-recipe-form" action="https://echo.htmlacademy.ru" method="POST" class="new-recipe__form">
-						<fieldset class="new-recipe-section  new-recipe-section--main" id="new-recipe-main">
-							<legend class="section-h1  new-recipe-section__title">Основное</legend>
+						<fieldset class="form-section  new-recipe-section  new-recipe-section--main" id="new-recipe-main">
+							<legend class="section-h1  form-section__title">Основное</legend>
 							<div class="form-field  new-recipe-field  new-recipe-field--title">
 								<label class="form-field__label" for="title">Название рецепта</label>
 								<input type="text" name="title" id="title" class="input" placeholder="Шарлотка с яблоками" autofocus="on" autocomplete="off" maxlength="100" required>
@@ -151,14 +151,14 @@
 								<div class="form-field  new-recipe-field  new-recipe-field--persons">
 									<label class="form-field__label" for="persons">Кол-во порций</label>
 									<div class="counter  new-recipe-field__counter">
-										<a href="#" class="btn  btn--second  btn--icon  counter__btn  counter__btn--minus  disabled" aria-label="Убрать порцию">
-											<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+										<a href="#" class="btn  counter__btn  counter__btn--minus  disabled" aria-label="Убрать порцию">
+											<svg class="icon" aria-hidden="true" focusable="false">
 												<use href="img/sprite.svg#minus" />
 											</svg>
 										</a>
 										<input type="number" name="persons" id="persons" value="1" class="input  counter__input" min="1" max="20" autocomplete="off" required>
-										<a href="#" class="btn  btn--second  btn--icon  counter__btn  counter__btn--plus" aria-label="Добавить порцию">
-											<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+										<a href="#" class="btn  counter__btn  counter__btn--plus" aria-label="Добавить порцию">
+											<svg class="icon" aria-hidden="true" focusable="false">
 												<use href="img/sprite.svg#plus" />
 											</svg>
 										</a>
@@ -181,8 +181,8 @@
 								</div>
 							</div>
 						</fieldset>
-						<fieldset class="new-recipe-section  new-recipe-section--ingredient  ingredient" id="new-recipe-ingredient">
-							<legend class="section-h1  new-recipe-section__title">Ингредиенты</legend>
+						<fieldset class="form-section  new-recipe-section  new-recipe-section--ingredient  ingredient" id="new-recipe-ingredient">
+							<legend class="section-h1  form-section__title">Ингредиенты</legend>
 							<div class="ingredient__list">
 								<div class="ingredient-item" id="ingredient-901237836">
 									<input type="text" name="ingredient-name-901237836" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
@@ -254,8 +254,8 @@
 								</svg>
 							</a>
 						</fieldset>
-						<fieldset class="new-recipe-section  new-recipe-section--photo  photo" id="new-recipe-photo">
-							<legend class="section-h1  new-recipe-section__title">Фото блюда</legend>
+						<fieldset class="form-section  new-recipe-section  new-recipe-section--photo  photo" id="new-recipe-photo">
+							<legend class="section-h1  form-section__title">Фото блюда</legend>
 							<div class="imageuploader">
 								<label class="input  input--photo  imageuploader__input">
 									<input type="file" name="photo" accept=".jpg, .jpeg, .png" required>
@@ -279,8 +279,8 @@
 								</label>
 							</div>
 						</fieldset>
-						<fieldset class="new-recipe-section  new-recipe-section--step  step" id="new-recipe-step">
-							<legend class="section-h1  new-recipe-section__title">Инструкция приготовления</legend>
+						<fieldset class="form-section  new-recipe-section  new-recipe-section--step  step" id="new-recipe-step">
+							<legend class="section-h1  form-section__title">Инструкция приготовления</legend>
 							<div class="step__list">
 								<div class="step-item" id="step-5329123723">
 									<label class="form-field__label  step-item__number" for="step-description-5329123723"></label>
@@ -361,11 +361,5 @@
 			</div>
 		</div>
 	</body>
-	<script>
-    const svgChevron = `img/sprite.svg#chevron-down`;
-    const svgCross = `img/sprite.svg#cross`;
-    const svgImage = `img/sprite.svg#image`;
-    const svgDelete = `img/sprite.svg#delete`;
-		const svgCircleCross = `img/sprite.svg#circle-cross`;
-	</script>
+	@include('partials/svg-scripts.html')
 </html>

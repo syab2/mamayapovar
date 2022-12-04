@@ -1,0 +1,13 @@
+.form-section {
+  display: grid;
+  border: none;
+  border-radius: 16px;
+  padding: 56px 32px;
+  width: 100%;
+  background-color: var(--color-bg-island);
+  gap: 24px;
+
+  &__title {
+    display: contents;
+  }
+}

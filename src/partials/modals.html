@@ -9,8 +9,8 @@
       <h2 class="section-h1  popup__title">Регистрация</h2>
       <form id="register-form" action="https://echo.htmlacademy.ru" method="POST" class="popup__form">
 				<div class="form-field">
-					<input type="name" name="username" id="username" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" autofocus="on" required>
-					<label class="form-field__error  hidden" for="username">
+					<input type="name" name="username" id="username-register" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" autofocus="on" required>
+					<label class="form-field__error  hidden" for="username-register">
 						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 							<use href="img/sprite.svg#circle-cross"/>
 						</svg>
@@ -18,8 +18,8 @@
 					</label>
 				</div>
 				<div class="form-field">
-					<input type="email" name="email" id="email" class="input  popup__input" placeholder="Электронная почта" required>
-					<label class="form-field__error  hidden" for="email">
+					<input type="email" name="email" id="email-register" class="input  popup__input" placeholder="Электронная почта" required>
+					<label class="form-field__error  hidden" for="email-register">
 						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 							<use href="img/sprite.svg#circle-cross"/>
 						</svg>
@@ -27,8 +27,8 @@
 					</label>
 				</div>
 				<div class="form-field">
-					<input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4" required>
-					<label class="form-field__error  hidden" for="email">
+					<input type="password" name="password" id="password-register" class="input  popup__input" placeholder="Пароль" minlength="4" required>
+					<label class="form-field__error  hidden" for="password-register">
 						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 							<use href="img/sprite.svg#circle-cross"/>
 						</svg>
@@ -53,8 +53,8 @@
       <h2 class="section-h1  popup__title">Вход в аккаунт</h2>
       <form id="auth-form" action="https://echo.htmlacademy.ru" method="POST" class="popup__form">
 				<div class="form-field">
-					<input type="email" name="email" id="email" class="input  popup__input" placeholder="Электронная почта" required>
-					<label class="form-field__error  hidden" for="email">
+					<input type="email" name="email" id="email-auth" class="input  popup__input" placeholder="Электронная почта" required>
+					<label class="form-field__error  hidden" for="email-auth">
 						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 							<use href="img/sprite.svg#circle-cross"/>
 						</svg>
@@ -62,8 +62,8 @@
 					</label>
 				</div>
 				<div class="form-field">
-					<input type="password" name="password" class="input  popup__input" placeholder="Пароль" minlength="4" required>
-					<label class="form-field__error  hidden" for="email">
+					<input type="password" name="password" id="password-auth" class="input  popup__input" placeholder="Пароль" minlength="4" required>
+					<label class="form-field__error  hidden" for="password-auth">
 						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 							<use href="img/sprite.svg#circle-cross"/>
 						</svg>

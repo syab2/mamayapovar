@@ -1,0 +1,45 @@
+.content-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+
+  &__category {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: var(--font-s);
+    line-height: var(--lh-xs);
+    color: var(--color-text-primary);
+    transition: opacity 0.2s ease;
+
+    span {
+      margin-left: 8px;
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__author {
+    font-size: var(--font-s);
+    line-height: var(--lh-xs);
+    color: var(--color-text-primary);
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  &__date {
+    font-size: var(--font-s);
+    line-height: var(--lh-xs);
+    color: var(--color-text-secondary);
+  }
+
+  &__category,
+  &__author {
+    margin-right: 32px;
+  }
+}

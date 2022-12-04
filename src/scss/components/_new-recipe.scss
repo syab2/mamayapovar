@@ -6,18 +6,6 @@
 }
 
 .new-recipe-section {
-  display: grid;
-  border: none;
-  border-radius: 16px;
-  padding: 56px 32px;
-  width: 100%;
-  background-color: var(--color-bg-island);
-  gap: 24px;
-
-  &__title {
-    display: contents;
-  }
-
   &__group {
     display: flex;
     align-items: flex-start;
@@ -28,12 +16,6 @@
 .new-recipe-field {
   display: flex;
   flex-direction: column;
-
-  &--desc {
-    .new-recipe-field__input {
-      height: 168px;
-    }
-  }
 
   &--persons {
     align-items: start;

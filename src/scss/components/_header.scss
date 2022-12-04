@@ -43,10 +43,17 @@
 
   &__left {
     grid-template-columns: auto minmax(auto, 400px);
+    gap: 32px;
   }
 
   &__right {
     grid-template-columns: auto auto;
+  }
+
+  &--second {
+    .header__right {
+      grid-template-columns: auto;
+    }
   }
 
   &__left,
