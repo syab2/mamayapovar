@@ -5,22 +5,58 @@
     <div class="sidebar__inner">
         <div class="sidebar-tree">
             <ul class="list-reset sidebar-tree__list">
-                <li class="sidebar-tree__item  active">
-                    <a href="/" class="sidebar-tree__link">
-                        <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
-                            <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
-                        </svg>
-                        <span>Свежее</span>
-                    </a>
-                </li>
-                <li class="sidebar-tree__item">
-                    <a href="bookmarks/" class="sidebar-tree__link">
-                        <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
-                            <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
-                        </svg>
-                        <span>Закладки</span>
-                    </a>
-                </li>
+                {% if request.get_full_path == '/' %}
+                    <li class="sidebar-tree__item  active">
+                        <a href="/" class="sidebar-tree__link">
+                            <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
+                            </svg>
+                            <span>Свежее</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-tree__item">
+                        <a href="bookmarks/" class="sidebar-tree__link">
+                            <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+                            </svg>
+                            <span>Закладки</span>
+                        </a>
+                    </li>
+                {% elif request.get_full_path == '/bookmarks/' %}
+                    <li class="sidebar-tree__item">
+                        <a href="/" class="sidebar-tree__link">
+                            <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
+                            </svg>
+                            <span>Свежее</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-tree__item  active">
+                        <a href="bookmarks/" class="sidebar-tree__link">
+                            <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+                            </svg>
+                            <span>Закладки</span>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="sidebar-tree__item">
+                        <a href="/" class="sidebar-tree__link">
+                            <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
+                            </svg>
+                            <span>Свежее</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-tree__item">
+                        <a href="bookmarks/" class="sidebar-tree__link">
+                            <svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+                            </svg>
+                            <span>Закладки</span>
+                        </a>
+                    </li>
+                {% endif %}
             </ul>
             <ul class="list-reset sidebar-tree__list">
                 <li class="sidebar-tree__item">

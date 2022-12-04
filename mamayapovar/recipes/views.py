@@ -234,4 +234,4 @@ def recipe(request, recipe_id):
 
 
 def bookmarks(request):
-    return render(request, 'recipes/bookmarks.html', {})
+    return render(request, 'recipes/bookmarks.html', {'is_auth': request.user.is_authenticated})
