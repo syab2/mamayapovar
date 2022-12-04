@@ -6,8 +6,8 @@
     <h1 class="visually-hidden">Создание рецепта</h1>
     <form id="new-recipe-form" action="new-recipe-post/" method="POST" class="new-recipe__form" enctype="multipart/form-data">
         {% csrf_token %}
-        <fieldset class="new-recipe-section  new-recipe-section--main" id="new-recipe-main">
-            <legend class="section-h1  new-recipe-section__title">Основное</legend>
+        <fieldset class="form-section  new-recipe-section  new-recipe-section--main" id="new-recipe-main">
+            <legend class="section-h1  form-section__title">Основное</legend>
             <div class="form-field  new-recipe-field  new-recipe-field--title">
                 <label class="form-field__label" for="title">Название рецепта</label>
                 <input type="text" name="title" id="title" class="input" placeholder="Шарлотка с яблоками" autofocus="on" autocomplete="off" maxlength="100" required>
@@ -53,14 +53,14 @@
                 <div class="form-field  new-recipe-field  new-recipe-field--persons">
                     <label class="form-field__label" for="persons">Кол-во порций</label>
                     <div class="counter  new-recipe-field__counter">
-                        <a href="#" class="btn  btn--second  btn--icon  counter__btn  counter__btn--minus  disabled" aria-label="Убрать порцию">
-                            <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                        <a href="#" class="btn  counter__btn  counter__btn--minus  disabled" aria-label="Убрать порцию">
+                            <svg class="icon" aria-hidden="true" focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#minus" />
                             </svg>
                         </a>
                         <input type="number" name="persons" id="persons" value="1" class="input  counter__input" min="1" max="20" autocomplete="off" required>
-                        <a href="#" class="btn  btn--second  btn--icon  counter__btn  counter__btn--plus" aria-label="Добавить порцию">
-                            <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                        <a href="#" class="btn  counter__btn  counter__btn--plus" aria-label="Добавить порцию">
+                            <svg class="icon" aria-hidden="true" focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#plus" />
                             </svg>
                         </a>
@@ -83,8 +83,8 @@
                 </div>
             </div>
         </fieldset>
-        <fieldset class="new-recipe-section  new-recipe-section--ingredient  ingredient" id="new-recipe-ingredient">
-            <legend class="section-h1  new-recipe-section__title">Ингредиенты</legend>
+        <fieldset class="form-section  new-recipe-section  new-recipe-section--ingredient  ingredient" id="new-recipe-ingredient">
+            <legend class="section-h1  form-section__title">Ингредиенты</legend>
             <div class="ingredient__list">
                 <div class="ingredient-item" id="ingredient-901237836">
                     <input type="text" name="ingredient-name-901237836"
@@ -159,13 +159,13 @@
             </div>
             <a href="#" class="btn  btn--third  btn--left  ingredient__btn">
                 Добавить ингредиент
-                <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                <svg class="icon" aria-hidden="true" focusable="false">
                     <use href="{% static 'recipes/img/sprite.svg' %}#circle-plus" />
                 </svg>
             </a>
         </fieldset>
-        <fieldset class="new-recipe-section  new-recipe-section--photo  photo" id="new-recipe-photo">
-            <legend class="section-h1  new-recipe-section__title">Фото блюда</legend>
+        <fieldset class="form-section  new-recipe-section  new-recipe-section--photo  photo" id="new-recipe-photo">
+            <legend class="section-h1  form-section__title">Фото блюда</legend>
             <div class="imageuploader">
                 <label class="input  input--photo  imageuploader__input">
                     <input type="file" name="photo" accept=".jpg, .jpeg, .png" required>
@@ -189,8 +189,8 @@
                 </label>
             </div>
         </fieldset>
-        <fieldset class="new-recipe-section  new-recipe-section--step  step" id="new-recipe-step">
-            <legend class="section-h1  new-recipe-section__title">Инструкция приготовления</legend>
+        <fieldset class="form-section  new-recipe-section  new-recipe-section--step  step" id="new-recipe-step">
+            <legend class="section-h1  form-section__title">Инструкция приготовления</legend>
             <div class="step__list">
                 <div class="step-item" id="step-5329123723">
                     <label class="form-field__label  step-item__number" for="step-description-5329123723"></label>
@@ -261,18 +261,11 @@
             </div>
             <a href="#" class="btn  btn--third  btn--left  step__btn">
                 Добавить шаг
-                <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                <svg class="icon" aria-hidden="true" focusable="false">
                     <use href="{% static 'recipes/img/sprite.svg' %}#circle-plus" />
                 </svg>
             </a>
         </fieldset>
     </form>
 </main>
-<script>
-    const svgChevron = `{% static 'recipes/img/sprite.svg' %}#chevron-down`;
-    const svgCross = `{% static 'recipes/img/sprite.svg' %}#cross`;
-    const svgImage = `{% static 'recipes/img/sprite.svg' %}#image`;
-    const svgDelete = `{% static 'recipes/img/sprite.svg' %}#delete`;
-    const svgCircleCross = `{% static 'recipes/img/sprite.svg' %}#circle-cross`;
-</script>
 {% endblock %}

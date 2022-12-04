@@ -15,14 +15,14 @@
           </form>
         </div>
         <div class="header__right">
-          <a href="new-recipe/" class="btn  btn--left">
+          <a href="new-recipe/" class="btn  btn--left" aria-label="Создать новый рецепт">
             Создать
             <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
               <use href="{% static 'recipes/img/sprite.svg' %}#plus" />
             </svg>
           </a>
           <div class="header-profile">
-            <a href="#" class="header-profile__avatar">
+            <a href="user.html" class="header-profile__avatar"  aria-label="Перейти в профиль">
               <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" width="56" height="56" alt="Фото профиля">
             </a>
             <button class="btn-reset  header-profile__toggle" aria-label="Открыть меню профиля" aria-expanded="false"
@@ -34,14 +34,14 @@
             <ul class="list-reset  header-profile-menu" data-menu-profile>
               <li class="header-profile-menu__item">
                 <span class="header-profile-menu__label">Мой профиль</span>
-                <a href="#" class="header-profile-menu__link" data-menu-profile-link>
+                <a href="user.html" class="header-profile-menu__link" data-menu-profile-link>
                   <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" class="header-profile-menu__avatar" width="48" height="48 "
                     alt="Фото профиля">
                   <span>{{ user.username }}</span>
                 </a>
               </li>
               <li class="header-profile-menu__item">
-                <a href="#" class="header-profile-menu__link" data-menu-profile-link>
+                <a href="settings-profile.html" class="header-profile-menu__link" data-menu-profile-link>
                   <svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
                     <use href="{% static 'recipes/img/sprite.svg' %}#settings" />
                   </svg>
@@ -76,13 +76,13 @@
                 </form>
             </div>
             <div class="header__right">
-                <button class="btn  btn--left" data-graph-path="register" data-graph-speed="0">
+                <button class="btn  btn--left" data-graph-path="register" data-graph-speed="0" aria-label="Создать новый рецепт">
                     Создать
                     <svg class="icon btn__icon" aria-hidden="true" focusable="false">
                         <use href="{% static 'recipes/img/sprite.svg' %}#plus"/>
                     </svg>
                 </button>
-                <button class="btn  btn--third  btn--left" data-graph-path="register" data-graph-speed="0">
+                <button class="btn  btn--third  btn--left" data-graph-path="register" data-graph-speed="0" aria-label="Войти или зарегестрироваться">
                     Войти
                     <svg class="icon btn__icon" aria-hidden="true" focusable="false">
                         <use href="{% static 'recipes/img/sprite.svg' %}#user"/>
