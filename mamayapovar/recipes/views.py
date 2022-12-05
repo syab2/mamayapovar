@@ -1,17 +1,18 @@
+import json
 import os
 import random
 
 import pymorphy2
 from django.conf import settings
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth import models, logout
 from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
-from .models import Recipe, StepImages
+from .models import Recipe, StepImages, Bookmark
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -233,5 +234,60 @@ def recipe(request, recipe_id):
     return render(request, 'recipes/post.html', {'recipe': recipe, 'is_auth': request.user.is_authenticated})
 
 
+def bookmark_post(request, pk):
+    user = auth.get_user(request)
+    bm = Bookmark.objects.filter(book_post_id=pk, book_user_id=user.id)
+    if bm:
+        bm.delete()
+    else:
+        bookmark = Bookmark(book_post_id=pk, book_user_id=user.id)
+        bookmark.save()
+
+    return HttpResponse(
+        json.dumps({
+            "result": True if bm else False
+        }),
+        content_type="application/json"
+    )
+
+
 def bookmarks(request):
-    return render(request, 'recipes/bookmarks.html', {'is_auth': request.user.is_authenticated})
+    bookmarks = Bookmark.objects.filter(book_user_id=request.user.id)
+    recipes = []
+    for elem in bookmarks:
+        recipes.append(Recipe.objects.get(id=elem.book_post_id))
+
+    for recipe in recipes:
+        # user
+        recipe.author_id = models.User.objects.get(id=recipe.author_id)
+
+        # ingredients
+        recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in
+                              recipe.ingredients.split(';')]
+
+        # persons
+        pers = int(recipe.persons)
+        recipe.persons = f"{pers} {morph.parse('порция')[0].make_agree_with_number(pers).word}"
+
+        # cooking_time
+        if recipe.cooking_time.split(':')[0] == '24':
+            recipe.cooking_time = f'1 день'
+        elif recipe.cooking_time.split(':')[0] != '0':
+            cook = recipe.cooking_time.split(':')
+            recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
+                                  f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+        else:
+            cook = recipe.cooking_time.split(':')
+            recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+
+        # photo
+        if recipe.photo:
+            pass
+        else:
+            recipe.photo = None
+    content = {
+        'bookmarks': recipes,
+        'is_auth': request.user.is_authenticated,
+        'user': request.user
+    }
+    return render(request, 'recipes/bookmarks.html', content)

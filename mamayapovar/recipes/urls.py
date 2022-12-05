@@ -1,5 +1,4 @@
-from django.urls import path
-from django.conf import settings
+from django.urls import path, re_path
 from django.conf.urls.static import static
 
 from .views import *
@@ -12,6 +11,7 @@ urlpatterns = [
     path('new-recipe/', new_recipe, name='new_recipe'),
     path('new-recipe/new-recipe-post/', new_recipe_post, name='new_recipe_post'),
     path('recipe/<int:recipe_id>/', recipe, name='recipe'),
+    re_path(r'^recipe/(?P<pk>\d+)/bookmark/$', bookmark_post, name='bookmark_post'),
     path('bookmarks/', bookmarks, name='bookmarks')
 ]
 

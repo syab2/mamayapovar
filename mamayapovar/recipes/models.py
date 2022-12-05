@@ -1,4 +1,5 @@
 import pymorphy2
+from django.contrib.auth.models import User
 from django.db import models
 
 morph = pymorphy2.MorphAnalyzer()
@@ -38,3 +39,13 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Bookmark(models.Model):
+    class Meta:
+        db_table = 'bookmarks'
+        ordering = ['-time_created']
+
+    book_post = models.ForeignKey('Recipe', on_delete=models.DO_NOTHING)
+    book_user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    time_created = models.DateTimeField(auto_now_add=True, null=True)
