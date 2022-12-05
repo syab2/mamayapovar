@@ -12,7 +12,7 @@
                         <img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
                         <span>{{ recipe.cat }}</span>
                     </a>
-                    <a href="user.html" class="content-info__author">{{ recipe.author_id }}</a>
+                    <a href="{% url 'user_profile' recipe.author_id.id %}" class="content-info__author">{{ recipe.author_id }}</a>
                     <time class="content-info__date" datetime="2022-12-02 16:00">{{ recipe.time_create }}</time>
                 </div>
                 <h1 class="section-h1  content-header__title">{{ recipe.title }}</h1>

@@ -56,7 +56,8 @@ def index(request):
     content = {
         'recipes': new_recipes,
         'is_auth': request.user.is_authenticated,
-        'user': request.user
+        'user': request.user,
+        'title': 'Мама, я повар! — платформа для кулинаров'
     }
     return render(request, 'recipes/index.html', content)
 
@@ -95,7 +96,7 @@ def postlogout(request):
 
 
 def new_recipe(request):
-    return render(request, 'recipes/new-recipe.html', {})
+    return render(request, 'recipes/new-recipe.html', {'title': 'Создание рецепта — Мама, я повар!'})
 
 
 def new_recipe_post(request):
@@ -237,7 +238,11 @@ def recipe(request, recipe_id):
         except Exception:
             recipe.steps[i].append(None)
 
-    return render(request, 'recipes/post.html', {'recipe': recipe, 'is_auth': request.user.is_authenticated})
+    return render(request, 'recipes/post.html', {
+        'recipe': recipe,
+        'is_auth': request.user.is_authenticated,
+        'title': f'{recipe.title} — Мама, я повар!'
+    })
 
 
 def bookmark_post(request, pk):
@@ -267,7 +272,8 @@ def bookmarks(request):
     content = {
         'bookmarks': new_recipes,
         'is_auth': request.user.is_authenticated,
-        'user': request.user
+        'user': request.user,
+        'title': 'Закладки — Мама, я повар!'
     }
     return render(request, 'recipes/bookmarks.html', content)
 
@@ -282,6 +288,7 @@ def user_profile(request, id):
         'recipes': new_recipes,
         'user': user,
         'is_auth': request.user.is_authenticated,
-        'posts': len(new_recipes)
+        'posts': len(new_recipes),
+        'title': f'{user.username} — Мама, я повар!'
     }
     return render(request, 'recipes/user.html', content)
