@@ -17,8 +17,7 @@ from .models import Recipe, StepImages, Bookmark
 morph = pymorphy2.MorphAnalyzer()
 
 
-def index(request):
-    recipes = Recipe.objects.all()
+def get_formatted_recipes(recipes):
     for recipe in recipes:
         # user
         recipe.author_id = models.User.objects.get(id=recipe.author_id)
@@ -47,8 +46,15 @@ def index(request):
             pass
         else:
             recipe.photo = None
+    return recipes
+
+
+def index(request):
+    recipes = Recipe.objects.all()
+
+    new_recipes = get_formatted_recipes(recipes)
     content = {
-        'recipes': recipes,
+        'recipes': new_recipes,
         'is_auth': request.user.is_authenticated,
         'user': request.user
     }
@@ -257,37 +263,25 @@ def bookmarks(request):
     for elem in bookmarks:
         recipes.append(Recipe.objects.get(id=elem.book_post_id))
 
-    for recipe in recipes:
-        # user
-        recipe.author_id = models.User.objects.get(id=recipe.author_id)
-
-        # ingredients
-        recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in
-                              recipe.ingredients.split(';')]
-
-        # persons
-        pers = int(recipe.persons)
-        recipe.persons = f"{pers} {morph.parse('порция')[0].make_agree_with_number(pers).word}"
-
-        # cooking_time
-        if recipe.cooking_time.split(':')[0] == '24':
-            recipe.cooking_time = f'1 день'
-        elif recipe.cooking_time.split(':')[0] != '0':
-            cook = recipe.cooking_time.split(':')
-            recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
-                                  f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
-        else:
-            cook = recipe.cooking_time.split(':')
-            recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
-
-        # photo
-        if recipe.photo:
-            pass
-        else:
-            recipe.photo = None
+    new_recipes = get_formatted_recipes(recipes)
     content = {
-        'bookmarks': recipes,
+        'bookmarks': new_recipes,
         'is_auth': request.user.is_authenticated,
         'user': request.user
     }
     return render(request, 'recipes/bookmarks.html', content)
+
+
+def user_profile(request, id):
+    objs = Recipe.objects.filter(author_id=id)
+    new_recipes = get_formatted_recipes(objs)
+
+    user = models.User.objects.get(id=id)
+
+    content = {
+        'recipes': new_recipes,
+        'user': user,
+        'is_auth': request.user.is_authenticated,
+        'posts': len(new_recipes)
+    }
+    return render(request, 'recipes/user.html', content)

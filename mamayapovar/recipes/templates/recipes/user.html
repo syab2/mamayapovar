@@ -73,10 +73,15 @@
 	<!-- Авторизованный -->
 	<div class="user-info">
 		<div class="user-info__inner">
-			<img src="img/placeholder-avatar.jpg" class="user-avatar  user-info__avatar" width="120" height="120"
-				alt="Фото профиля">
-			<h1 class="section-h1  user-info__name">Екатерина Георгадзе</h1>
-			<p class="user-info__desc">Готовлю самые вкусные и пышные оладушки</p>
+			{% if user.avatar.url  %}
+				<img src="{{ user.avatar.url }}" class="user-avatar  user-info__avatar" width="120" height="120"
+					alt="Фото профиля">
+			{% else %}
+				<img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" class="user-avatar  user-info__avatar" width="120" height="120"
+					alt="Фото профиля">
+			{% endif %}
+			<h1 class="section-h1  user-info__name">{{ user.username }}</h1>
+			<p class="user-info__desc">{{ user.description }}</p>
 		</div>
 		<div class="user-info-stats  user-info__stats">
 			<dl class="user-info-stats__item">
@@ -85,7 +90,7 @@
 			</dl>
 			<dl class="user-info-stats__item">
 				<dt class="user-info-stats__name">Постов</dt>
-				<dd class="user-info-stats__amount">3</dd>
+				<dd class="user-info-stats__amount">{{ posts }}</dd>
 			</dl>
 			<dl class="user-info-stats__item">
 				<dt class="user-info-stats__name">Лайков</dt>
@@ -101,276 +106,90 @@
 		</button>
 	</div>
 	<div class="feed  user-feed">
-		<article class="feed-item">
-			<div class="content-header  feed-item__header">
-				<div class="content-info">
-					<a href="#" class="content-info__category">
-						<img src="img/category/bake-icon.svg" width="24" height="24" alt="" loading="lazy">
-						<span>Выпечка</span>
-					</a>
-					<a href="user.html" class="content-info__author">Екатерина Георгадзе</a>
-					<time class="content-info__date" datetime="2022-12-02 16:00">3 часа</time>
-				</div>
-				<a href="post.html">
-					<h2 class="section-h1  content-header__title">Пышные оладьи на кефире</h2>
-					<p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете покорить
-						оладьи? Попробуйте этот рецепт, и все получится!</p>
-				</a>
-				<div class="content-short">
-					<div class="content-short-dropdown">
-						<button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля"
-							aria-expanded="false" data-short-ingredients-toggle>
-							6 ингредиентов
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#chevron-down" />
-							</svg>
-						</button>
-						<div class="content-short-dropdown__menu  short-ingredients" data-short-ingredients>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Яйцо куриное</span>
-								</dt>
-								<dd class="short-ingredients__details">1 шт</dd>
-							</dl>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Кефир 2,5%</span>
-								</dt>
-								<dd class="short-ingredients__details">300 мл</dd>
-							</dl>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Сахар</span>
-								</dt>
-								<dd class="short-ingredients__details">2 столовые ложки</dd>
-							</dl>
-						</div>
+		{% for recipe in recipes %}
+			<article class="feed-item">
+				<div class="content-header  feed-item__header">
+					<div class="content-info">
+						<a href="#" class="content-info__category">
+							<img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
+							<span>{{ recipe.cat }}</span>
+						</a>
+						<a href="user/{{ recipe.author_id.id }}/" class="content-info__author">{{ recipe.author_id }}</a>
+						<time class="content-info__date" datetime="2022-12-02 16:00">{{ recipe.time_create }}</time>
 					</div>
-					<ul class="list-reset content-short__list">
-						<li class="content-short__item">
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#users" />
-							</svg>
-							4 порции
-						</li>
-						<li class="content-short__item">
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#stopwatch" />
-							</svg>
-							30 минут
-						</li>
-					</ul>
-				</div>
-			</div>
-			<a href="post.html" class="feed-item__img">
-				<img src="img/placeholder-image.jpg" width="676" height="350" alt="Пышные оладьи на кефире"
-					loading="lazy">
-			</a>
-			<div class="content-footer  feed-item__footer">
-				<div class="content-footer__left">
-					<button class="btn-reset  content-footer__btn  content-footer__btn--like"
-						aria-label="Поставить отметку 'Нравится'" data-button-like>
-						<svg class="icon" aria-hidden="true" focusable="false">
-							<use href="{% static 'recipes/img/sprite.svg' %}#heart" />
-						</svg>
-						<span>842</span>
-					</button>
-					<a href="post.html#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment"
-						aria-label="Перейти к комментариям">
-						<svg class="icon" aria-hidden="true" focusable="false">
-							<use href="{% static 'recipes/img/sprite.svg' %}#circle" />
-						</svg>
-						<span>11</span>
+					<a href="recipe/{{ recipe.id }}">
+						<h2 class="section-h1  content-header__title">{{ recipe.title }}</h2>
+						<p class="content-header__desc">{{ recipe.description }}</p>
 					</a>
-				</div>
-				<button class="btn-reset  content-footer__btn  content-footer__btn--bookmark"
-					aria-label="Добавить в закладки" data-button-bookmark>
-					<svg class="icon" aria-hidden="true" focusable="false">
-						<use href="{% static 'recipes/img/sprite.svg' %}#bookmark" />
-					</svg>
-				</button>
-			</div>
-		</article>
-		<article class="feed-item">
-			<div class="content-header  feed-item__header">
-				<div class="content-info">
-					<a href="#" class="content-info__category">
-						<img src="img/category/bake-icon.svg" width="24" height="24" alt="" loading="lazy">
-						<span>Выпечка</span>
-					</a>
-					<a href="user.html" class="content-info__author">Екатерина Георгадзе</a>
-					<time class="content-info__date" datetime="2022-12-02 16:00">3 часа</time>
-				</div>
-				<a href="post.html">
-					<h2 class="section-h1  content-header__title">Пышные оладьи на кефире</h2>
-					<p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете покорить
-						оладьи? Попробуйте этот рецепт, и все получится!</p>
-				</a>
-				<div class="content-short">
-					<div class="content-short-dropdown">
-						<button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля"
-							aria-expanded="false" data-short-ingredients-toggle>
-							6 ингредиентов
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#chevron-down" />
-							</svg>
-						</button>
-						<div class="content-short-dropdown__menu  short-ingredients" data-short-ingredients>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Яйцо куриное</span>
-								</dt>
-								<dd class="short-ingredients__details">1 шт</dd>
-							</dl>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Кефир 2,5%</span>
-								</dt>
-								<dd class="short-ingredients__details">300 мл</dd>
-							</dl>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Сахар</span>
-								</dt>
-								<dd class="short-ingredients__details">2 столовые ложки</dd>
-							</dl>
+					<div class="content-short">
+						<div class="content-short-dropdown">
+							<button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-short-ingredients-toggle>
+								{{ recipe.get_beautiful_ingredients }}
+								<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+									<use href="{% static 'recipes/img/sprite.svg' %}#chevron-down"/>
+								</svg>
+							</button>
+							<div class="content-short-dropdown__menu  short-ingredients"  data-short-ingredients>
+								{% for text, nums in recipe.ingredients %}
+									<dl class="short-ingredients__item">
+										<dt class="short-ingredients__name">
+											<span>{{ text }}</span>
+										</dt>
+										<dd class="short-ingredients__details">{{ nums }}</dd>
+									</dl>
+								{% endfor %}
+							</div>
 						</div>
+						<ul class="list-reset content-short__list">
+							<li class="content-short__item">
+								<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+									<use href="{% static 'recipes/img/sprite.svg' %}#users"/>
+								</svg>
+								{{ recipe.persons }}
+							</li>
+							<li class="content-short__item">
+								<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+									<use href="{% static 'recipes/img/sprite.svg' %}#stopwatch"/>
+								</svg>
+								{{ recipe.cooking_time }}
+							</li>
+						</ul>
 					</div>
-					<ul class="list-reset content-short__list">
-						<li class="content-short__item">
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#users" />
-							</svg>
-							4 порции
-						</li>
-						<li class="content-short__item">
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#stopwatch" />
-							</svg>
-							30 минут
-						</li>
-					</ul>
 				</div>
-			</div>
-			<a href="post.html" class="feed-item__img">
-				<img src="img/placeholder-image.jpg" width="676" height="350" alt="Пышные оладьи на кефире"
-					loading="lazy">
-			</a>
-			<div class="content-footer  feed-item__footer">
-				<div class="content-footer__left">
-					<button class="btn-reset  content-footer__btn  content-footer__btn--like"
-						aria-label="Поставить отметку 'Нравится'" data-button-like>
-						<svg class="icon" aria-hidden="true" focusable="false">
-							<use href="{% static 'recipes/img/sprite.svg' %}#heart" />
-						</svg>
-						<span>842</span>
-					</button>
-					<a href="post.html#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment"
-						aria-label="Перейти к комментариям">
-						<svg class="icon" aria-hidden="true" focusable="false">
-							<use href="{% static 'recipes/img/sprite.svg' %}#circle" />
-						</svg>
-						<span>11</span>
-					</a>
-				</div>
-				<button class="btn-reset  content-footer__btn  content-footer__btn--bookmark"
-					aria-label="Добавить в закладки" data-button-bookmark>
-					<svg class="icon" aria-hidden="true" focusable="false">
-						<use href="{% static 'recipes/img/sprite.svg' %}#bookmark" />
-					</svg>
-				</button>
-			</div>
-		</article>
-		<article class="feed-item">
-			<div class="content-header  feed-item__header">
-				<div class="content-info">
-					<a href="#" class="content-info__category">
-						<img src="img/category/bake-icon.svg" width="24" height="24" alt="" loading="lazy">
-						<span>Выпечка</span>
-					</a>
-					<a href="user.html" class="content-info__author">Екатерина Георгадзе</a>
-					<time class="content-info__date" datetime="2022-12-02 16:00">3 часа</time>
-				</div>
-				<a href="post.html">
-					<h2 class="section-h1  content-header__title">Пышные оладьи на кефире</h2>
-					<p class="content-header__desc">Нежные, мягкие, воздушные «пухляши» — это любовь. Не можете покорить
-						оладьи? Попробуйте этот рецепт, и все получится!</p>
+				<a href="recipe/{{ recipe.id }}" class="feed-item__img">
+					{% if recipe.photo %}
+						<img src="{{ recipe.photo.url }}" width="676" height="350"
+							 alt="{{ recipe.title }}" loading="lazy">
+					{% else %}
+						<img src="{% static 'recipes/img/placeholder-image.jpg' %}" width="676" height="350"
+							 alt="{{ recipe.title }}" loading="lazy">
+					{% endif %}
 				</a>
-				<div class="content-short">
-					<div class="content-short-dropdown">
-						<button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля"
-							aria-expanded="false" data-short-ingredients-toggle>
-							6 ингредиентов
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#chevron-down" />
+				<div class="content-footer  feed-item__footer">
+					<div class="content-footer__left">
+						<button class="btn-reset  content-footer__btn  content-footer__btn--like" aria-label="Поставить отметку 'Нравится'" data-button-like>
+							<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+								<use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
 							</svg>
+							<span>842</span>
 						</button>
-						<div class="content-short-dropdown__menu  short-ingredients" data-short-ingredients>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Яйцо куриное</span>
-								</dt>
-								<dd class="short-ingredients__details">1 шт</dd>
-							</dl>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Кефир 2,5%</span>
-								</dt>
-								<dd class="short-ingredients__details">300 мл</dd>
-							</dl>
-							<dl class="short-ingredients__item">
-								<dt class="short-ingredients__name">
-									<span>Сахар</span>
-								</dt>
-								<dd class="short-ingredients__details">2 столовые ложки</dd>
-							</dl>
-						</div>
+						<a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment" aria-label="Перейти к комментариям">
+							<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+								<use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
+							</svg>
+							<span>11</span>
+						</a>
 					</div>
-					<ul class="list-reset content-short__list">
-						<li class="content-short__item">
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#users" />
-							</svg>
-							4 порции
-						</li>
-						<li class="content-short__item">
-							<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
-								<use href="{% static 'recipes/img/sprite.svg' %}#stopwatch" />
-							</svg>
-							30 минут
-						</li>
-					</ul>
-				</div>
-			</div>
-			<a href="post.html" class="feed-item__img">
-				<img src="img/placeholder-image.jpg" width="676" height="350" alt="Пышные оладьи на кефире"
-					loading="lazy">
-			</a>
-			<div class="content-footer  feed-item__footer">
-				<div class="content-footer__left">
-					<button class="btn-reset  content-footer__btn  content-footer__btn--like"
-						aria-label="Поставить отметку 'Нравится'" data-button-like>
-						<svg class="icon" aria-hidden="true" focusable="false">
-							<use href="{% static 'recipes/img/sprite.svg' %}#heart" />
+					<div class="btn-reset  content-footer__btn content-footer__btn--bookmark"
+						data-id="{{ recipe.id }}" data-type="recipe" data-action="bookmark" data-url_root="{% url 'bookmark_post' recipe.id %}"
+						aria-label="Добавить в закладки" data-button-bookmark>
+						<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+							<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
 						</svg>
-						<span>842</span>
-					</button>
-					<a href="post.html#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment"
-						aria-label="Перейти к комментариям">
-						<svg class="icon" aria-hidden="true" focusable="false">
-							<use href="{% static 'recipes/img/sprite.svg' %}#circle" />
-						</svg>
-						<span>11</span>
-					</a>
+					</div>
 				</div>
-				<button class="btn-reset  content-footer__btn  content-footer__btn--bookmark"
-					aria-label="Добавить в закладки" data-button-bookmark>
-					<svg class="icon" aria-hidden="true" focusable="false">
-						<use href="{% static 'recipes/img/sprite.svg' %}#bookmark" />
-					</svg>
-				</button>
-			</div>
-		</article>
+			</article>
+		{% endfor %}
 	</div>
 </main>
 {% endblock %}

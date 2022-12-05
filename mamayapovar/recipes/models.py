@@ -49,3 +49,13 @@ class Bookmark(models.Model):
     book_post = models.ForeignKey('Recipe', on_delete=models.DO_NOTHING)
     book_user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     time_created = models.DateTimeField(auto_now_add=True, null=True)
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    description = models.TextField(blank=True)
+    posts = models.IntegerField()
+    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+
+    def __unicode__(self):
+        return self.user

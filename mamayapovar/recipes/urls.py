@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
-    path('', index),
+    path('', index, name='index'),
     path('postindex/', postindex, name='registration'),
     path('postlogin/', postlogin, name='login'),
     path('postlogout/', postlogout, name='logout'),
@@ -12,7 +12,8 @@ urlpatterns = [
     path('new-recipe/new-recipe-post/', new_recipe_post, name='new_recipe_post'),
     path('recipe/<int:recipe_id>/', recipe, name='recipe'),
     re_path(r'^recipe/(?P<pk>\d+)/bookmark/$', bookmark_post, name='bookmark_post'),
-    path('bookmarks/', bookmarks, name='bookmarks')
+    path('bookmarks/', bookmarks, name='bookmarks'),
+    path('user/<int:id>/', user_profile, name='user_profile')
 ]
 
 

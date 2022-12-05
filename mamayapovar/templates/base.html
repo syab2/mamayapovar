@@ -103,9 +103,10 @@ $(function () {
     var type = current.data('type');
     var pk = current.data('id');
     var action = current.data('action');
+    var url_root = current.data('url_root');
 
     $.ajax({
-        url : type + "/" + pk + "/" + action + "/",
+        url : url_root,
         type : 'POST',
         data : { 'obj' : pk },
 
