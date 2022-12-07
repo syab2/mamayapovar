@@ -175,37 +175,52 @@ def new_recipe_post(request):
     )
     recipe.save()
 
-    i = 0
+    descs = []
+    for elem in request.POST:
+        if 'step-description-' in elem:
+            descs.append(elem)
 
+    files = []
     for elem in request.FILES:
         if 'step-photo-' in elem:
-            i += 1
+            files.append(elem)
 
-            folder = 'recipes'
-            second_folder = folder_id
-            uploaded_filename = str(i) + '.' + request.FILES[elem].name.split('.')[1]
+    itog = []
+    for elem in files:
+        for el in descs:
+            if elem.split('-')[-1] == el.split('-')[-1]:
+                itog.append([descs.index(el), elem])
 
-            try:
-                os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
-            except:
-                pass
+    for elem in itog:
 
-            ful_fil = os.path.join(
-                settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
+        folder = 'recipes'
+        second_folder = folder_id
+        if elem:
+            uploaded_filename = str(elem[0] + 1) + '.' + request.FILES[elem[1]].name.split('.')[-1]
+        else:
+            continue
 
-            try:
-                fout2 = open(ful_fil, 'wb+')
+        try:
+            os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
+        except:
+            pass
 
-                file_content2 = ContentFile(request.FILES[elem].read())
+        ful_fil = os.path.join(
+            settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
 
-                for chunk in file_content2.chunks():
-                    fout2.write(chunk)
-                fout2.close()
+        try:
+            fout2 = open(ful_fil, 'wb+')
 
-                imgs = StepImages(image=ful_fil, recipe=recipe)
-                imgs.save()
-            except Exception:
-                pass
+            file_content2 = ContentFile(request.FILES[elem[1]].read())
+
+            for chunk in file_content2.chunks():
+                fout2.write(chunk)
+            fout2.close()
+
+            imgs = StepImages(image=ful_fil, recipe=recipe)
+            imgs.save()
+        except Exception:
+            pass
 
     return HttpResponseRedirect('/')
 
@@ -231,12 +246,14 @@ def recipe(request, recipe_id):
 
     step_photos = StepImages.objects.filter(recipe_id=recipe_id)
 
-    for i in range(len(recipe.steps)):
-        try:
-            if step_photos[i].image.name.split('.')[0][-1] == recipe.steps[i][0]:
-                recipe.steps[i].append(step_photos[i].image)
-        except Exception:
-            recipe.steps[i].append(None)
+    for elem in step_photos:
+        for el in recipe.steps:
+            if len(el) == 2:
+                if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
+                    el.append(elem.image)
+                    break
+                else:
+                    el.append(None)
 
     return render(request, 'recipes/post.html', {
         'recipe': recipe,
