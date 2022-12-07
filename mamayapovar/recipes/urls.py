@@ -13,7 +13,8 @@ urlpatterns = [
     path('recipe/<int:recipe_id>/', recipe, name='recipe'),
     re_path(r'^recipe/(?P<pk>\d+)/bookmark/$', bookmark_post, name='bookmark_post'),
     path('bookmarks/', bookmarks, name='bookmarks'),
-    path('user/<int:id>/', user_profile, name='user_profile')
+    path('user/<int:id>/', user_profile, name='user_profile'),
+    path('user/change_profile_picture', change_profile_picture, name='change_profile_picture')
 ]
 
 

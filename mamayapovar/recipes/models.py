@@ -12,7 +12,7 @@ class Recipe(models.Model):
     cooking_time = models.CharField(max_length=20)
     persons = models.CharField(max_length=20)
     photo = models.ImageField(upload_to='', null=True, blank=True, verbose_name='Изображение')
-    cat = models.ForeignKey('Category', on_delete=models.PROTECT)
+    cat = models.ForeignKey('Category', on_delete=models.DO_NOTHING)
     author_id = models.IntegerField(null=True)
     ingredients = models.TextField(blank=True)
     steps = models.TextField(blank=True)
@@ -30,7 +30,7 @@ class Recipe(models.Model):
 
 
 class StepImages(models.Model):
-    recipe = models.ForeignKey('Recipe', default=None, on_delete=models.PROTECT)
+    recipe = models.ForeignKey('Recipe', default=None, on_delete=models.DO_NOTHING)
     image = models.ImageField(null=True, blank=True, verbose_name='Image')
 
 
@@ -52,7 +52,7 @@ class Bookmark(models.Model):
 
 
 class UserProfile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.PROTECT)
+    user = models.OneToOneField(User, on_delete=models.DO_NOTHING)
     description = models.TextField(blank=True)
     posts = models.IntegerField()
     avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)

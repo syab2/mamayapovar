@@ -1,18 +1,20 @@
 import json
 import os
 import random
+from pathlib import Path
 
 import pymorphy2
 from django.conf import settings
 from django.contrib import messages, auth
 from django.contrib.auth import models, logout
-from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from mamayapovar.settings import MEDIA_ROOT
 
-from .models import Recipe, StepImages, Bookmark
+from .models import Recipe, StepImages, Bookmark, UserProfile
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -175,37 +177,52 @@ def new_recipe_post(request):
     )
     recipe.save()
 
-    i = 0
+    descs = []
+    for elem in request.POST:
+        if 'step-description-' in elem:
+            descs.append(elem)
 
+    files = []
     for elem in request.FILES:
         if 'step-photo-' in elem:
-            i += 1
+            files.append(elem)
 
-            folder = 'recipes'
-            second_folder = folder_id
-            uploaded_filename = str(i) + '.' + request.FILES[elem].name.split('.')[1]
+    itog = []
+    for elem in files:
+        for el in descs:
+            if elem.split('-')[-1] == el.split('-')[-1]:
+                itog.append([descs.index(el), elem])
 
-            try:
-                os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
-            except:
-                pass
+    for elem in itog:
 
-            ful_fil = os.path.join(
-                settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
+        folder = 'recipes'
+        second_folder = folder_id
+        if elem:
+            uploaded_filename = str(elem[0] + 1) + '.' + request.FILES[elem[1]].name.split('.')[-1]
+        else:
+            continue
 
-            try:
-                fout2 = open(ful_fil, 'wb+')
+        try:
+            os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
+        except:
+            pass
 
-                file_content2 = ContentFile(request.FILES[elem].read())
+        ful_fil = os.path.join(
+            settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
 
-                for chunk in file_content2.chunks():
-                    fout2.write(chunk)
-                fout2.close()
+        try:
+            fout2 = open(ful_fil, 'wb+')
 
-                imgs = StepImages(image=ful_fil, recipe=recipe)
-                imgs.save()
-            except Exception:
-                pass
+            file_content2 = ContentFile(request.FILES[elem[1]].read())
+
+            for chunk in file_content2.chunks():
+                fout2.write(chunk)
+            fout2.close()
+
+            imgs = StepImages(image=ful_fil, recipe=recipe)
+            imgs.save()
+        except Exception:
+            pass
 
     return HttpResponseRedirect('/')
 
@@ -231,12 +248,14 @@ def recipe(request, recipe_id):
 
     step_photos = StepImages.objects.filter(recipe_id=recipe_id)
 
-    for i in range(len(recipe.steps)):
-        try:
-            if step_photos[i].image.name.split('.')[0][-1] == recipe.steps[i][0]:
-                recipe.steps[i].append(step_photos[i].image)
-        except Exception:
-            recipe.steps[i].append(None)
+    for elem in step_photos:
+        for el in recipe.steps:
+            if len(el) == 2:
+                if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
+                    el.append(elem.image)
+                    break
+                else:
+                    el.append(None)
 
     return render(request, 'recipes/post.html', {
         'recipe': recipe,
@@ -279,6 +298,10 @@ def bookmarks(request):
 
 
 def user_profile(request, id):
+    try:
+        profile_data = UserProfile.objects.get(user=request.user.id)
+    except:
+        profile_data = None
     objs = Recipe.objects.filter(author_id=id)
     new_recipes = get_formatted_recipes(objs)
 
@@ -289,6 +312,20 @@ def user_profile(request, id):
         'user': user,
         'is_auth': request.user.is_authenticated,
         'posts': len(new_recipes),
-        'title': f'{user.username} — Мама, я повар!'
+        'title': f'{user.username} — Мама, я повар!',
+        'profile_data': profile_data
     }
     return render(request, 'recipes/user.html', content)
+
+
+def change_profile_picture(request):
+    if UserProfile.objects.filter(user=request.user):
+        user = UserProfile.objects.get(user=request.user)
+        user.avatar = request.FILES['file']
+        user.save()
+    else:
+        recipes = Recipe.objects.filter(author_id=request.user.id)
+        new_photo = UserProfile(user=request.user, avatar=request.FILES['file'], posts=len(recipes))
+        new_photo.save()
+    return HttpResponseRedirect(f'user/{str(request.user.id)}/')
+

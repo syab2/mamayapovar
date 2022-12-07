@@ -1,4 +1,4 @@
-{% load static %}
+{% load static recipes_extra %}
 
 {% block navbar %}
 
@@ -22,9 +22,16 @@
             </svg>
           </a>
           <div class="header-profile">
-            <a href="user.html" class="header-profile__avatar"  aria-label="Перейти в профиль">
-              <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" width="56" height="56" alt="Фото профиля">
-            </a>
+              {% is_avatar request.user.id as has %}
+              {% if has %}
+                <a href="{% url 'user_profile' request.user.id %}" class="header-profile__avatar"  aria-label="Перейти в профиль">
+                  <img src="{% get_avatar_url request.user.id %}" width="56" height="56" alt="Фото профиля">
+                </a>
+              {% else %}
+                <a href="{% url 'user_profile' request.user.id %}" class="header-profile__avatar"  aria-label="Перейти в профиль">
+                  <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" width="56" height="56" alt="Фото профиля">
+                </a>
+              {% endif %}
             <button class="btn-reset  header-profile__toggle" aria-label="Открыть меню профиля" aria-expanded="false"
               data-menu-profile-toggle>
               <svg class="icon  header-profile__icon" aria-hidden="true" focusable="false">
@@ -34,10 +41,10 @@
             <ul class="list-reset  header-profile-menu" data-menu-profile>
               <li class="header-profile-menu__item">
                 <span class="header-profile-menu__label">Мой профиль</span>
-                <a href="user.html" class="header-profile-menu__link" data-menu-profile-link>
+                <a href="{% url 'user_profile' request.user.id %}" class="header-profile-menu__link" data-menu-profile-link>
                   <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" class="header-profile-menu__avatar" width="48" height="48 "
                     alt="Фото профиля">
-                  <span>{{ user.username }}</span>
+                  <span>{{ request.user.username }}</span>
                 </a>
               </li>
               <li class="header-profile-menu__item">
@@ -49,7 +56,7 @@
                 </a>
               </li>
               <li class="header-profile-menu__item">
-                <a href="/postlogout/" class="header-profile-menu__link" data-menu-profile-link>
+                <a href="{% url 'logout' %}" class="header-profile-menu__link" data-menu-profile-link>
                   <svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
                     <use href="{% static 'recipes/img/sprite.svg' %}#log-out" />
                   </svg>

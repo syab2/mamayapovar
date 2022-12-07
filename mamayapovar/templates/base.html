@@ -118,8 +118,33 @@ $(function () {
     return false;
 }
 
+function change_profile_picture() {
+    var current = $(this);
+    var url_root = current.data('url_root');
+    var formData = new FormData();
+	formData.append('file', $("#user_photo")[0].files[0]);
+
+    $.ajax({
+        url : url_root,
+        type : 'POST',
+        contentType: false,
+		processData: false,
+        data: formData,
+
+
+        success : function () {
+            return true
+        }
+    });
+}
+
 $(function() {
-    $('[data-action="bookmark"]').click(to_bookmarks);
+    $('[data-button-bookmark]').click(to_bookmarks);
 });
+
+$(function() {
+    $('[data-button-photo]').change(change_profile_picture);
+});
+
 </script>
 </html>

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static recipes_extra %}
 
 {% block navnav %}
 <header class="header  header--second">
@@ -12,9 +12,16 @@
             </div>
             <div class="header__right">
                 <div class="header-profile">
-                    <a href="user.html" class="header-profile__avatar">
-                        <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" width="56" height="56" alt="Фото профиля">
-                    </a>
+                    {% is_avatar request.user.id as has %}
+                    {% if has %}
+                        <a href="{% url 'user_profile' request.user.id %}" class="header-profile__avatar"  aria-label="Перейти в профиль">
+                            <img src="{% get_avatar_url request.user.id %}" width="56" height="56" alt="Фото профиля">
+                        </a>
+                    {% else %}
+                        <a href="{% url 'user_profile' request.user.id %}" class="header-profile__avatar"  aria-label="Перейти в профиль">
+                            <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" width="56" height="56" alt="Фото профиля">
+                        </a>
+                    {% endif %}
                     <button class="btn-reset  header-profile__toggle" aria-label="Открыть меню профиля"
                             aria-expanded="false"
                             data-menu-profile-toggle>
