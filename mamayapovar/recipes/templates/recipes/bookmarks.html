@@ -29,7 +29,7 @@
 							<div class="content-short-dropdown">
 								<button class="btn-reset  content-short-dropdown__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-short-ingredients-toggle>
 									{{ recipe.get_beautiful_ingredients }}
-									<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#chevron-down"/>
 									</svg>
 								</button>
@@ -46,13 +46,13 @@
 							</div>
 							<ul class="list-reset content-short__list">
 								<li class="content-short__item">
-									<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#users"/>
 									</svg>
 									{{ recipe.persons }}
 								</li>
 								<li class="content-short__item">
-									<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#stopwatch"/>
 									</svg>
 									{{ recipe.cooking_time }}
@@ -75,7 +75,7 @@
 							{% if not like_status %}
 								<div class="btn-reset  content-footer__btn  content-footer__btn--like"
 									 aria-label="Поставить отметку 'Нравится'" data-button-like data-url_root="{% url 'like_post' recipe.id %}">
-									<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+									<svg class="icon" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
 									</svg>
 									<span data-count="like">{% get_likes_count recipe.id %}</span>
@@ -83,14 +83,14 @@
 							{% else %}
 								<div class="btn-reset  content-footer__btn  content-footer__btn--like active"
 									 aria-label="Поставить отметку 'Нравится'" data-button-like data-url_root="{% url 'like_post' recipe.id %}">
-									<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+									<svg class="icon" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#heart-filled"/>
 									</svg>
 									<span data-count="like">{% get_likes_count recipe.id %}</span>
 								</div>
 							{% endif %}
-							<a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment" aria-label="Перейти к комментариям">
-								<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+							<a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment disabled" aria-label="Перейти к комментариям">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
 								</svg>
 								<span>11</span>
@@ -101,7 +101,7 @@
 							<div class="btn-reset  content-footer__btn content-footer__btn--bookmark"
 									data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
 									aria-label="Добавить в закладки" data-button-bookmark>
-								<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
 								</svg>
 							</div>
@@ -109,7 +109,7 @@
 							<div class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
 									data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
 									aria-label="Добавить в закладки" data-button-bookmark>
-								<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
 								</svg>
 							</div>

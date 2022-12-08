@@ -20,14 +20,14 @@
                 <div class="content-short">
                     <ul class="list-reset content-short__list">
                         <li class="content-short__item">
-                            <svg class="icon  icon--16  content-short__icon" aria-hidden="true"
+                            <svg class="icon  icon--16" aria-hidden="true"
                                  focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#users"/>
                             </svg>
                             {{ recipe.persons }}
                         </li>
                         <li class="content-short__item">
-                            <svg class="icon  icon--16  content-short__icon" aria-hidden="true"
+                            <svg class="icon  icon--16" aria-hidden="true"
                                  focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#stopwatch"/>
                             </svg>
@@ -94,7 +94,7 @@
                     {% if not like_status %}
                         <div class="btn-reset  content-footer__btn  content-footer__btn--like"
                              aria-label="Поставить отметку 'Нравится'" data-button-like data-url_root="{% url 'like_post' recipe.id %}">
-                            <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+                            <svg class="icon" aria-hidden="true" focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
                             </svg>
                             <span data-count="like">{% get_likes_count recipe.id %}</span>
@@ -102,14 +102,14 @@
                     {% else %}
                         <div class="btn-reset  content-footer__btn  content-footer__btn--like active"
                              aria-label="Поставить отметку 'Нравится'" data-button-like data-url_root="{% url 'like_post' recipe.id %}">
-                            <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+                            <svg class="icon" aria-hidden="true" focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#heart-filled"/>
                             </svg>
                             <span data-count="like">{% get_likes_count recipe.id %}</span>
                         </div>
                     {% endif %}
-                    <a href="post.html#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment" aria-label="Перейти к комментариям">
-                        <svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+                    <a href="post.html#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment disabled" aria-label="Перейти к комментариям">
+                        <svg class="icon" aria-hidden="true" focusable="false">
                             <use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
                         </svg>
                         <span>11</span>
@@ -120,7 +120,7 @@
 						<div class="btn-reset  content-footer__btn content-footer__btn--bookmark"
 								data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
 								aria-label="Добавить в закладки" data-button-bookmark>
-							<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+							<svg class="icon" aria-hidden="true" focusable="false">
 								<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
 							</svg>
 						</div>
@@ -128,7 +128,7 @@
 						<div class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
 								data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
 								aria-label="Добавить в закладки" data-button-bookmark>
-							<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+							<svg class="icon" aria-hidden="true" focusable="false">
 								<use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
 							</svg>
 						</div>
@@ -136,15 +136,15 @@
             </div>
             <div class="content-author  entry__author">
                 <div class="content-author__info">
-                    <a href="user.html" class="content-author__avatar">
+                    <a href="{% url 'user_profile' recipe.author_id.id %}" class="content-author__avatar">
                         <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" alt="Фото профиля" width="56" height="56" loading="lazy">
                     </a>
-                    <a href="user.html" class="content-author__name">{{ recipe.author_id }}</a>
+                    <a href="{% url 'user_profile' recipe.author_id.id %}" class="content-author__name">{{ recipe.author_id }}</a>
                     <span class="content-author__desc">Готовлю самые вкусные и пышные оладушки</span>
                 </div>
                 <button class="btn  btn--second  btn--small  btn--left  btn--subscribe  content-author__btn" aria-label="Оформить подписку" data-button-subscribe>
                     <span data-text-subscribe>Подписаться</span>
-                    <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+                    <svg class="icon" aria-hidden="true" focusable="false">
                         <use href="{% static 'recipes/img/sprite.svg' %}#user-plus"/>
                     </svg>
                 </button>

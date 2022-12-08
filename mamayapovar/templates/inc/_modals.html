@@ -5,7 +5,7 @@
     <div class="graph-modal__container  popup__container  popup__container--register" role="dialog" aria-modal="true" data-graph-target="register">
         <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other"
                 aria-label="Закрыть модальное окно">
-            <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+            <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="{% static 'recipes/img/sprite.svg' %}#cross"/>
             </svg>
         </button>
@@ -14,7 +14,7 @@
             <form id="register-form" action="postindex/" class="popup__form" method="post">
                 {% csrf_token %}
                 <div class="form-field">
-									<input type="name" name="username" id="username-register" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" autofocus="on" required>
+									<input type="text" name="username" id="username-register" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" required>
 									<label class="form-field__error  hidden" for="username-register">
 										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 											<use href="{% static 'recipes/img/sprite.svg' %}#circle-cross"/>
@@ -51,7 +51,7 @@
     <div class="graph-modal__container  popup__container" role="dialog" aria-modal="true" data-graph-target="auth">
         <button class="btn-reset js-modal-close graph-modal__close  btn  btn--other"
                 aria-label="Закрыть модальное окно">
-            <svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+            <svg class="icon" aria-hidden="true" focusable="false">
                 <use href="{% static 'recipes/img/sprite.svg' %}#cross"/>
             </svg>
         </button>
