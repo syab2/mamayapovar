@@ -56,11 +56,9 @@
     </div>
 </div>
 
-{% if request.get_full_path == '/' %}
 {% block modal %}
 {% include "inc/_modals.html" %}
 {% endblock %}
-{% endif %}
 </body>
 <script>
     const svgHeart = `{% static 'recipes/img/sprite.svg' %}#heart`;
@@ -97,8 +95,21 @@ $(function () {
 });
 </script>
 <script>
-    function to_bookmarks()
+    function to_bookmarks(e)
 {
+    const target = e.target;
+      if (target.classList.contains('content-footer__btn--bookmark')) {
+        const buttonIcon = target.querySelector('use');
+        target.classList.toggle('active');
+        if (target.classList.contains('active')) {
+          target.setAttribute('aria-label', 'Убрать из закладок');
+          buttonIcon.setAttribute('href', `${svgBookmarkFilled}`);
+        } else {
+          target.setAttribute('aria-label', 'Добавить в закладки');
+          buttonIcon.setAttribute('href', `${svgBookmark}`);
+        }
+      }
+
     var current = $(this);
     var type = current.data('type');
     var pk = current.data('id');
@@ -118,8 +129,89 @@ $(function () {
     return false;
 }
 
+function like_recipe(e) {
+    const target = e.target;
+        if (target.classList.contains('content-footer__btn--like')) {
+            const buttonIcon = target.querySelector('use');
+            target.classList.toggle('active');
+            if (target.classList.contains('active')) {
+                target.setAttribute('aria-label', 'Убрать отметку "Нравится"');
+                buttonIcon.setAttribute('href', `${svgHeartFilled}`);
+            } else {
+              target.setAttribute('aria-label', 'Поставить отметку "Нравится"');
+              buttonIcon.setAttribute('href', `${svgHeart}`);
+            }
+        }
+
+
+    var current = $(this);
+    var url_root = current.data('url_root');
+
+    $.ajax({
+        url : url_root,
+        type : 'POST',
+
+        success : function (json) {
+            current.find("[data-count='like']").text(json.count);
+        }
+    });
+
+    return false;
+}
+
+function subscribe(e) {
+    var current = $(this);
+    var url_root = current.data('url_root');
+
+    $.ajax({
+        url : url_root,
+        type : 'POST',
+
+
+        success : function () {
+            return true
+        }
+    });
+}
+
+function change_profile_picture() {
+    var current = $(this);
+    var url_root = current.data('url_root');
+    var formData = new FormData();
+	formData.append('file', $("#user_photo")[0].files[0]);
+
+    $.ajax({
+        url : url_root,
+        type : 'POST',
+        contentType: false,
+		processData: false,
+        data: formData,
+
+
+        success : function () {
+            return true
+        }
+    });
+}
+
+
+
 $(function() {
-    $('[data-action="bookmark"]').click(to_bookmarks);
+    $('[data-button-bookmark]').click(to_bookmarks);
 });
+
+
+$(function() {
+    $('[data-button-photo]').change(change_profile_picture);
+});
+
+$(function() {
+    $('[data-button-like]').click(like_recipe);
+});
+
+$(function() {
+    $('[data-button-subscribe]').click(subscribe);
+});
+
 </script>
 </html>
