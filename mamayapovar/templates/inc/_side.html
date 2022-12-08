@@ -1,10 +1,10 @@
-{% load static %}
+{% load static recipes_extra %}
 
 {% block sidebar %}
 <nav class="sidebar">
     <div class="sidebar__inner">
         <div class="sidebar-tree">
-            <ul class="list-reset sidebar-tree__list">
+            <ul class="list-reset sidebar-tree__list" id="sidebar-tabs">
                 {% if request.get_full_path == '/' %}
                     <li class="sidebar-tree__item  active">
                         <a href="/" class="sidebar-tree__link">
@@ -58,25 +58,53 @@
                     </li>
                 {% endif %}
             </ul>
-            <ul class="list-reset sidebar-tree__list">
-                <li class="sidebar-tree__item">
-                    <a href="user.html" class="sidebar-tree__link">
-                        <img src="{% static 'recipes/img/placeholder-avatar-dark.jpg' %}" class="sidebar-tree__avatar" loading="lazy">
-                        <span>Алексей Калинин</span>
-                    </a>
-                </li>
-                <li class="sidebar-tree__item">
-                    <a href="user.html" class="sidebar-tree__link">
-                        <img src="{% static 'recipes/img/placeholder-avatar-dark.jpg' %}" class="sidebar-tree__avatar" loading="lazy">
-                        <span>Николай Крылов</span>
-                    </a>
-                </li>
-                <li class="sidebar-tree__item">
-                    <a href="user.html" class="sidebar-tree__link">
-                        <img src="{% static 'recipes/img/placeholder-avatar-dark.jpg' %}" class="sidebar-tree__avatar" loading="lazy">
-                        <span>Екатерина Георгадзе</span>
-                    </a>
-                </li>
+            {% get_all_subscribers request.user.id as subs %}
+            <ul class="list-reset sidebar-tree__list" id="sidebar-links">
+                {% if 'user' in request.get_full_path %}
+                    {% if user not in subs %}
+                        {% get_correct_path user.id as papath %}
+                            <li class="sidebar-tree__item active">
+                                <a href="{% url 'user_profile' user.id %}" class="sidebar-tree__link">
+                                    {% get_avatar_url user.id as avatar %}
+                                    {% if avatar %}
+                                        <img src="{% get_avatar_url user.id %}" class="sidebar-tree__avatar" loading="lazy">
+                                        <span>{{ user.username }}</span>
+                                    {% else %}
+                                        <img src="{% static 'recipes/img/placeholder-avatar-dark.jpg' %}" class="sidebar-tree__avatar" loading="lazy">
+                                        <span>{{ user.username }}</span>
+                                    {% endif %}
+                                </a>
+                            </li>
+                    {% endif %}
+                {% endif %}
+                {% for sub in subs %}
+                    {% get_correct_path sub.id as papath %}
+                    {% if papath in request.get_full_path %}
+                        <li class="sidebar-tree__item active">
+                            <a href="{% url 'user_profile' sub.id %}" class="sidebar-tree__link">
+                                {% get_avatar_url sub.id as avatar %}
+                                {% if avatar %}
+                                    <img src="{% get_avatar_url sub.id %}" class="sidebar-tree__avatar" loading="lazy">
+                                {% else %}
+                                    <img src="{% static 'recipes/img/placeholder-avatar-dark.jpg' %}" class="sidebar-tree__avatar" loading="lazy">
+                                {% endif %}
+                                <span>{{ sub.username }}</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="sidebar-tree__item">
+                            <a href="{% url 'user_profile' sub.id %}" class="sidebar-tree__link">
+                                {% get_avatar_url sub.id as avatar %}
+                                {% if avatar %}
+                                    <img src="{% get_avatar_url sub.id %}" class="sidebar-tree__avatar" loading="lazy">
+                                {% else %}
+                                    <img src="{% static 'recipes/img/placeholder-avatar-dark.jpg' %}" class="sidebar-tree__avatar" loading="lazy">
+                                {% endif %}
+                                <span>{{ sub.username }}</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
             </ul>
         </div>
         <div class="sidebar-footer">
