@@ -15,7 +15,7 @@
           </form>
         </div>
         <div class="header__right">
-          <a href="new-recipe/" class="btn  btn--left" aria-label="Создать новый рецепт">
+          <a href="{% url 'new_recipe' %}" class="btn  btn--left" aria-label="Создать новый рецепт">
             Создать
             <svg class="icon " aria-hidden="true" focusable="false">
               <use href="{% static 'recipes/img/sprite.svg' %}#plus" />

@@ -96,7 +96,9 @@ def postlogout(request):
 
 
 def new_recipe(request):
-    return render(request, 'recipes/new-recipe.html', {'title': 'Создание рецепта — Мама, я повар!'})
+    if request.user.is_authenticated:
+        return render(request, 'recipes/new-recipe.html', {'title': 'Создание рецепта — Мама, я повар!'})
+    return HttpResponseRedirect('/')
 
 
 def new_recipe_post(request):
@@ -286,19 +288,21 @@ def bookmark_post(request, pk):
 
 
 def bookmarks(request):
-    bookmarks = Bookmark.objects.filter(book_user_id=request.user.id)
-    recipes = []
-    for elem in bookmarks:
-        recipes.append(Recipe.objects.get(id=elem.book_post_id))
+    if request.user.is_authenticated:
+        bookmarks = Bookmark.objects.filter(book_user_id=request.user.id)
+        recipes = []
+        for elem in bookmarks:
+            recipes.append(Recipe.objects.get(id=elem.book_post_id))
 
-    new_recipes = get_formatted_recipes(recipes)
-    content = {
-        'bookmarks': new_recipes,
-        'is_auth': request.user.is_authenticated,
-        'user': request.user,
-        'title': 'Закладки — Мама, я повар!'
-    }
-    return render(request, 'recipes/bookmarks.html', content)
+        new_recipes = get_formatted_recipes(recipes)
+        content = {
+            'bookmarks': new_recipes,
+            'is_auth': request.user.is_authenticated,
+            'user': request.user,
+            'title': 'Закладки — Мама, я повар!'
+        }
+        return render(request, 'recipes/bookmarks.html', content)
+    return HttpResponseRedirect('/')
 
 
 def user_profile(request, id):
