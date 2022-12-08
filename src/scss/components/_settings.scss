@@ -1,0 +1,35 @@
+.settings {
+  &__form {
+    display: grid;
+    gap: 40px;
+  }
+
+  &__btn {
+    justify-self: start;
+  }
+}
+
+.settings-section {
+  &__group {
+    display: grid;
+    grid-column: 1 / 2;
+    gap: 24px;
+  }
+
+  &--main {
+    column-gap: 40px;
+    grid-template-columns: 1fr 144px;
+    grid-template-rows: repeat(2, auto);
+  }
+}
+
+.settings-field {
+  &--avatar {
+    grid-column: 2 / 2;
+    width: 100%;
+
+    .user-avatar__input {
+      height: 144px;
+    }
+  }
+}
