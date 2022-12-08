@@ -96,24 +96,45 @@
 								<span>11</span>
 							</a>
 						</div>
-						{% get_bookmark_status recipe.id as check %}
+						{% if is_auth %}
+						{% get_bookmark_status recipe.id request.user.id as check %}
 						{% if not check %}
-							<div class="btn-reset  content-footer__btn content-footer__btn--bookmark"
+							<button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
 									data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
-									aria-label="Добавить в закладки" data-button-bookmark>
+									aria-label="Добавить в закладки" data-button-bookmark id="bookmark">
 								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
 								</svg>
-							</div>
+							</button>
 						{% else %}
-							<div class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
+							<button class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
 									data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
-									aria-label="Добавить в закладки" data-button-bookmark>
+									aria-label="Добавить в закладки" data-button-bookmark id="bookmark">
 								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
 								</svg>
-							</div>
+							</button>
 						{% endif %}
+					{% else %}
+						{% get_bookmark_status recipe.id request.user.id as check %}
+						{% if not check %}
+							<button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
+									data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
+									aria-label="Добавить в закладки" data-graph-path="register" data-graph-speed="0">
+								<svg class="icon" aria-hidden="true" focusable="false">
+									<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+								</svg>
+							</button>
+						{% else %}
+							<button class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
+									data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
+									aria-label="Добавить в закладки" data-graph-path="register" data-graph-speed="0">
+								<svg class="icon" aria-hidden="true" focusable="false">
+									<use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
+								</svg>
+							</button>
+						{% endif %}
+					{% endif %}
 					</div>
 				</article>
 			{% endfor %}
