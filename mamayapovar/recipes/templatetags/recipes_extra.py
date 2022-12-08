@@ -6,9 +6,9 @@ register = template.Library()
 
 
 @register.simple_tag
-def get_bookmark_status(id_):
+def get_bookmark_status(id_, user_id):
     try:
-        return True if Bookmark.objects.get(book_post_id=id_) else False
+        return True if Bookmark.objects.get(book_post_id=id_, book_user_id=user_id) else False
     except:
         return False
 

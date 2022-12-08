@@ -116,7 +116,7 @@
                     </a>
                 </div>
                 {% if is_auth %}
-                    {% get_bookmark_status recipe.id as check %}
+                    {% get_bookmark_status recipe.id request.user.id as check %}
                     {% if not check %}
                         <button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
                                 data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
@@ -135,7 +135,7 @@
                         </button>
                     {% endif %}
                 {% else %}
-                    {% get_bookmark_status recipe.id as check %}
+                    {% get_bookmark_status recipe.id request.user.id as check %}
                     {% if not check %}
                         <button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
                                 data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
