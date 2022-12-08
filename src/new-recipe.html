@@ -31,7 +31,7 @@
 								<img src="img/placeholder-avatar.jpg" width="56" height="56" alt="Фото профиля">
 							</a>
 							<button class="btn-reset  header-profile__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-menu-profile-toggle>
-								<svg class="icon  header-profile__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="img/sprite.svg#chevron-down"/>
 								</svg>
 							</button>
@@ -43,17 +43,17 @@
 										<span>Алексей Калинин</span>
 									</a>
 								</li>
-								<li class="header-profile-menu__item">
+								<!-- <li class="header-profile-menu__item">
 									<a href="settings.html" class="header-profile-menu__link" data-menu-profile-link>
-										<svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#settings"/>
 										</svg>
 										<span>Настройки</span>
 									</a>
-								</li>
+								</li> -->
 								<li class="header-profile-menu__item">
 									<a href="index.html" class="header-profile-menu__link" data-menu-profile-link>
-										<svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#log-out"/>
 										</svg>
 										<span>Выход</span>
@@ -108,7 +108,7 @@
 							<legend class="section-h1  form-section__title">Основное</legend>
 							<div class="form-field  new-recipe-field  new-recipe-field--title">
 								<label class="form-field__label" for="title">Название рецепта</label>
-								<input type="text" name="title" id="title" class="input" placeholder="Шарлотка с яблоками" autofocus="on" autocomplete="off" maxlength="100" required>
+								<input type="text" name="title" id="title" class="input" placeholder="Шарлотка с яблоками" autofocus autocomplete="off" maxlength="100" required>
 								<label class="form-field__error  hidden" for="title">
 									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 										<use href="img/sprite.svg#circle-cross"/>
@@ -136,7 +136,7 @@
 										<option>Салаты</option>
 										<option>Горячие блюда</option>
 									</select>
-									<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+									<svg class="icon" aria-hidden="true" focusable="false">
 										<use href="img/sprite.svg#chevron-down"/>
 									</svg>
 								</div>
@@ -199,12 +199,12 @@
 											<option>чайная ложка</option>
 											<option>стакан</option>
 										</select>
-										<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#chevron-down"/>
 										</svg>
 									</div>
 									<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент" role="button">
-										<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#cross" />
 										</svg>
 									</a>
@@ -230,12 +230,12 @@
 											<option>чайная ложка</option>
 											<option>стакан</option>
 										</select>
-										<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#chevron-down"/>
 										</svg>
 									</div>
 									<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент" role="button">
-										<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#cross" />
 										</svg>
 									</a>
@@ -249,7 +249,7 @@
 							</div>
 							<a href="#" class="btn  btn--third  btn--left  ingredient__btn">
 								Добавить ингредиент
-								<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="img/sprite.svg#circle-plus" />
 								</svg>
 							</a>
@@ -260,14 +260,14 @@
 								<label class="input  input--photo  imageuploader__input">
 									<input type="file" name="photo" accept=".jpg, .jpeg, .png" required>
 									<div class="imageuploader__placeholder">
-										<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#image"/>
 										</svg>
 										Загрузите фото блюда
 									</div>
 								</label>
 								<a class="btn  btn--other  imageuploader__btn  hidden">
-									<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 										<use href="img/sprite.svg#delete" />
 									</svg>
 								</a>
@@ -285,7 +285,7 @@
 								<div class="step-item" id="step-5329123723">
 									<label class="form-field__label  step-item__number" for="step-description-5329123723"></label>
 									<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
-										<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#cross" />
 										</svg>
 									</a>
@@ -294,14 +294,14 @@
 											<label class="input  input--photo  imageuploader__input">
 												<input type="file" name="step-photo-5329123723" accept=".jpg, .jpeg, .png">
 												<div class="imageuploader__placeholder">
-													<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+													<svg class="icon" aria-hidden="true" focusable="false">
 														<use href="img/sprite.svg#image"/>
 													</svg>
-													Загрузите фото блюда
+													Загрузите фото шага
 												</div>
 											</label>
 											<a class="btn  btn--other  imageuploader__btn  hidden">
-												<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+												<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 													<use href="img/sprite.svg#delete" />
 												</svg>
 											</a>
@@ -318,7 +318,7 @@
 								<div class="step-item" id="step-82391238">
 									<label class="form-field__label  step-item__number" for="step-description-82391238"></label>
 									<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
-										<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#cross" />
 										</svg>
 									</a>
@@ -327,14 +327,14 @@
 											<label class="input  input--photo  imageuploader__input">
 												<input type="file" name="step-photo-82391238" accept=".jpg, .jpeg, .png">
 												<div class="imageuploader__placeholder">
-													<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+													<svg class="icon" aria-hidden="true" focusable="false">
 														<use href="img/sprite.svg#image"/>
 													</svg>
-													Загрузите фото блюда
+													Загрузите фото шага
 												</div>
 											</label>
 											<a class="btn  btn--other  imageuploader__btn  hidden">
-												<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+												<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 													<use href="img/sprite.svg#delete" />
 												</svg>
 											</a>
@@ -351,7 +351,7 @@
 							</div>
 							<a href="#" class="btn  btn--third  btn--left  step__btn">
 								Добавить шаг
-								<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="img/sprite.svg#circle-plus" />
 								</svg>
 							</a>
@@ -360,6 +360,6 @@
 				</main>
 			</div>
 		</div>
+		@include('partials/svg-scripts.html')
 	</body>
-	@include('partials/svg-scripts.html')
 </html>

@@ -6,7 +6,7 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="theme-color" content="#111111">
-    <title>Закладки — Мама, я повар!</title>
+    <title>Выпечка — Мама, я повар!</title>
     <link rel="preload" href="fonts/NunitoSans-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/NunitoSans-SemiBold.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fonts/NunitoSans-Bold.woff2" as="font" type="font/woff2" crossorigin>
@@ -16,7 +16,7 @@
   </head>
 
   <body class="page__body">
-    @include('partials/header.html')
+    @include('partials/header-auth.html')
 
     <div class="container">
       <div class="site-container">
@@ -32,7 +32,7 @@
 										<span>Свежее</span>
 									</a>
 								</li>
-								<li class="sidebar-tree__item  active">
+								<li class="sidebar-tree__item">
 									<a href="bookmarks.html" class="sidebar-tree__link">
 										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#bookmark"/>
@@ -42,6 +42,18 @@
 								</li>
 							</ul>
 							<ul class="list-reset sidebar-tree__list" id="sidebar-links">
+								<li class="sidebar-tree__item  active">
+									<a href="category.html" class="sidebar-tree__link">
+										<img src="img/category/bake-icon.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Выпечка</span>
+									</a>
+								</li>
+								<li class="sidebar-tree__item">
+									<a href="user.html" class="sidebar-tree__link">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Екатерина Георгадзе</span>
+									</a>
+								</li>
 								<li class="sidebar-tree__item">
 									<a href="user.html" class="sidebar-tree__link">
 										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
@@ -54,12 +66,6 @@
 										<span>Николай Крылов</span>
 									</a>
 								</li>
-								<li class="sidebar-tree__item">
-									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
-										<span>Екатерина Георгадзе</span>
-									</a>
-								</li>
 							</ul>
 						</div>
 						<div class="sidebar-footer">
@@ -68,10 +74,18 @@
 					</div>
 				</nav>
 
-        <main class="bookmark">
-          <h1 class="visually-hidden">Закладки</h1>
-					<div class="bookmark-info">
-						<span class="bookmark-info__text">Вы ничего не добавляли в закладки</span>
+        <main class="user">
+					<div class="info  category-info">
+						<div class="info__inner">
+							<img src="img/category/bake-icon.svg" class="info-avatar" width="120" height="120" alt="Изображениие категории">
+							<h1 class="section-h1  info__name">Выпечка</h1>
+							<p class="info__desc">Пышные булочки, пироги, оладьи и не только</p>
+						</div>
+					</div>
+					<div class="feed  category-feed">
+						@include('partials/feed-item-category.html')
+						@include('partials/feed-item-category.html')
+						@include('partials/feed-item-category.html')
 					</div>
         </main>
       </div>

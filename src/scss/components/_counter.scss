@@ -16,6 +16,7 @@
     transition: background-color 0.2s ease;
 
     .icon {
+      fill: var(--color-icons-primary);
       transition: fill, opacity 0.2s ease;
     }
 

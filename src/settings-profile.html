@@ -31,7 +31,7 @@
 								<img src="img/placeholder-avatar.jpg" width="56" height="56" alt="Фото профиля">
 							</a>
 							<button class="btn-reset  header-profile__toggle" aria-label="Открыть меню профиля" aria-expanded="false" data-menu-profile-toggle>
-								<svg class="icon  header-profile__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="img/sprite.svg#chevron-down"/>
 								</svg>
 							</button>
@@ -45,7 +45,7 @@
 								</li>
 								<li class="header-profile-menu__item">
 									<a href="#" class="header-profile-menu__link" data-menu-profile-link>
-										<svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#settings"/>
 										</svg>
 										<span>Настройки</span>
@@ -53,7 +53,7 @@
 								</li>
 								<li class="header-profile-menu__item">
 									<a href="index.html" class="header-profile-menu__link" data-menu-profile-link>
-										<svg class="icon  header-profile-menu__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#log-out"/>
 										</svg>
 										<span>Выход</span>
@@ -74,7 +74,7 @@
 							<ul class="list-reset sidebar-tree__list">
 								<li class="sidebar-tree__item  active">
 									<a href="settings-profile.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#user"/>
 										</svg>
 										<span>Профиль</span>
@@ -82,7 +82,7 @@
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="settings-account.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#settings"/>
 										</svg>
 										<span>Аккаунт</span>
@@ -104,7 +104,7 @@
 							<div class="settings-section__group">
 								<div class="form-field  settings-field  settings-field--username">
 									<label class="form-field__label" for="username">Отображаемое имя</label>
-									<input type="text" name="username" id="username" class="input" placeholder="Имя и фамилия" value="Алексей Калинин" autofocus="on" autocomplete="off" maxlength="100" required>
+									<input type="text" name="username" id="username" class="input" placeholder="Имя и фамилия" value="Алексей Калинин" autocomplete="off" maxlength="100" required>
 									<label class="form-field__error  hidden" for="username">
 										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#circle-cross"/>
@@ -124,12 +124,12 @@
 								</div>
 								<button class="btn  settings__btn">Обновить информацию</button>
 							</div>
-							<div class="form-field  settings-field  user-avatar  user-avatar--change  settings-field--avatar">
+							<div class="form-field  settings-field  info-avatar  info-avatar--change  settings-field--avatar">
 								<label class="form-field__label" for="photo">Фото профиля</label>
-								<label style="background-image: url('img/placeholder-avatar.jpg');" class="input  input--photo  user-avatar__input" title="Изменить фото профиля">
+								<label style="background-image: url('img/placeholder-avatar.jpg');" class="input  input--photo  info-avatar__input" title="Изменить фото профиля">
 									<input type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png">
-									<div class="user-avatar__placeholder">
-										<svg class="icon  user-avatar__icon" aria-hidden="true" focusable="false">
+									<div class="info-avatar__placeholder">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#image"/>
 										</svg>
 									</div>

@@ -23,41 +23,47 @@
         <nav class="sidebar">
 					<div class="sidebar__inner">
 						<div class="sidebar-tree">
-							<ul class="list-reset sidebar-tree__list">
+							<ul class="list-reset sidebar-tree__list" id="sidebar-tabs">
 								<li class="sidebar-tree__item  active">
 									<a href="index.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#clock"/>
 										</svg>
 										<span>Свежее</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
-									<a href="bookmarks.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+									<button class="btn-reset  sidebar-tree__link" data-graph-path="register" data-graph-speed="0">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#bookmark"/>
 										</svg>
 										<span>Закладки</span>
-									</a>
+									</button>
 								</li>
 							</ul>
-							<ul class="list-reset sidebar-tree__list">
+							<ul class="list-reset sidebar-tree__list" id="sidebar-links">
 								<li class="sidebar-tree__item">
-									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
-										<span>Алексей Калинин</span>
+									<a href="category.html" class="sidebar-tree__link">
+										<img src="img/category/bake-icon.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Выпечка</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
-									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
-										<span>Николай Крылов</span>
+									<a href="category.html" class="sidebar-tree__link">
+										<img src="img/category/soup-icon.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Супы</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
-									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
-										<span>Екатерина Георгадзе</span>
+									<a href="category.html" class="sidebar-tree__link">
+										<img src="img/category/salad-icon.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Салаты</span>
+									</a>
+								</li>
+								<li class="sidebar-tree__item">
+									<a href="category.html" class="sidebar-tree__link">
+										<img src="img/category/hot-icon.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Горячие блюда</span>
 									</a>
 								</li>
 							</ul>
@@ -77,6 +83,6 @@
       </div>
     </div>
     @include('partials/modals.html')
+		@include('partials/svg-scripts.html')
   </body>
-	@include('partials/svg-scripts.html')
 </html>

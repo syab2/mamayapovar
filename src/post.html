@@ -23,10 +23,10 @@
         <nav class="sidebar">
 					<div class="sidebar__inner">
 						<div class="sidebar-tree">
-							<ul class="list-reset sidebar-tree__list">
+							<ul class="list-reset sidebar-tree__list" id="sidebar-tabs">
 								<li class="sidebar-tree__item">
 									<a href="index.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#clock"/>
 										</svg>
 										<span>Свежее</span>
@@ -34,29 +34,35 @@
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="bookmarks.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#bookmark"/>
 										</svg>
 										<span>Закладки</span>
 									</a>
 								</li>
 							</ul>
-							<ul class="list-reset sidebar-tree__list">
+							<ul class="list-reset sidebar-tree__list" id="sidebar-links">
+								<li class="sidebar-tree__item  active">
+									<a href="category.html" class="sidebar-tree__link">
+										<img src="img/category/bake-icon.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+										<span>Выпечка</span>
+									</a>
+								</li>
 								<li class="sidebar-tree__item">
 									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
 										<span>Алексей Калинин</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
 										<span>Николай Крылов</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
 										<span>Екатерина Георгадзе</span>
 									</a>
 								</li>
@@ -74,7 +80,7 @@
 						<div class="entry__container">
 							<div class="content-header  entry__header">
 								<div class="content-info">
-									<a href="#" class="content-info__category">
+									<a href="category.html" class="content-info__category">
 										<img src="img/category/bake-icon.svg" width="24" height="24" alt="" loading="lazy">
 										<span>Выпечка</span>
 									</a>
@@ -86,13 +92,13 @@
 								<div class="content-short">
 									<ul class="list-reset content-short__list">
 										<li class="content-short__item">
-											<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+											<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 												<use href="img/sprite.svg#users"/>
 											</svg>
 											4 порции
 										</li>
 										<li class="content-short__item">
-											<svg class="icon  icon--16  content-short__icon" aria-hidden="true" focusable="false">
+											<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 												<use href="img/sprite.svg#stopwatch"/>
 											</svg>
 											30 минут
@@ -196,7 +202,7 @@
 								</div>
 								<button class="btn  btn--second  btn--small  btn--left  btn--subscribe  content-author__btn" aria-label="Оформить подписку" data-button-subscribe>
 									<span data-text-subscribe>Подписаться</span>
-									<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+									<svg class="icon" aria-hidden="true" focusable="false">
 										<use href="img/sprite.svg#user-plus"/>
 									</svg>
 								</button>
@@ -238,6 +244,6 @@
       </div>
     </div>
     @include('partials/modals.html')
+		@include('partials/svg-scripts.html')
   </body>
-	@include('partials/svg-scripts.html')
 </html>

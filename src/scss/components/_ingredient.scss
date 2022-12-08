@@ -41,12 +41,12 @@
     background-color: var(--color-fields-bg);
     transition: background-color 0.2s ease;
 
-    .ingredient-item__icon {
+    .icon {
       fill: var(--color-fields-text-secondary);
     }
 
     &:hover {
-      .ingredient-item__icon {
+      .icon {
         fill: var(--color-text-error);
       }
     }
@@ -56,7 +56,7 @@
       cursor: not-allowed;
       pointer-events: none;
 
-      .ingredient-item__icon {
+      .icon {
         fill: var(--color-fields-text-disabled);
       }
     }

@@ -23,10 +23,10 @@
         <nav class="sidebar">
 					<div class="sidebar__inner">
 						<div class="sidebar-tree">
-							<ul class="list-reset sidebar-tree__list">
+							<ul class="list-reset sidebar-tree__list" id="sidebar-tabs">
 								<li class="sidebar-tree__item">
 									<a href="index.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#clock"/>
 										</svg>
 										<span>Свежее</span>
@@ -34,29 +34,29 @@
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="bookmarks.html" class="sidebar-tree__link">
-										<svg class="icon sidebar-tree__icon" aria-hidden="true" focusable="false">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#bookmark"/>
 										</svg>
 										<span>Закладки</span>
 									</a>
 								</li>
 							</ul>
-							<ul class="list-reset sidebar-tree__list">
+							<ul class="list-reset sidebar-tree__list" id="sidebar-links">
 								<li class="sidebar-tree__item  active">
 									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
 										<span>Екатерина Георгадзе</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
 										<span>Алексей Калинин</span>
 									</a>
 								</li>
 								<li class="sidebar-tree__item">
 									<a href="user.html" class="sidebar-tree__link">
-										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy">
+										<img src="img/placeholder-avatar-dark.jpg" class="sidebar-tree__avatar" loading="lazy" alt="">
 										<span>Николай Крылов</span>
 									</a>
 								</li>
@@ -70,37 +70,37 @@
 
         <main class="user">
 					<!-- Профиль самого участника -->
-					<!-- <div class="user-info">
-						<div class="user-info__inner">
-							<div class="user-avatar  user-avatar--change  user-info__avatar">
-								<label style="background-image: url('img/placeholder-avatar.jpg');" class="input  input--photo  user-avatar__input" title="Изменить фото профиля">
+					<!-- <div class="info  user-info">
+						<div class="info__inner">
+							<div class="info-avatar  info-avatar--change">
+								<label style="background-image: url('img/placeholder-avatar.jpg');" class="input  input--photo  info-avatar__input" title="Изменить фото профиля">
 									<input type="file" name="photo" accept=".jpg, .jpeg, .png" required>
-									<div class="user-avatar__placeholder">
-										<svg class="icon  user-avatar__icon" aria-hidden="true" focusable="false">
+									<div class="info-avatar__placeholder">
+										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#image"/>
 										</svg>
 									</div>
 								</label>
 							</div>
-							<h1 class="section-h1  user-info__name">Екатерина Георгадзе</h1>
-							<p class="user-info__desc">Готовлю самые вкусные и пышные оладушки</p>
-							<a href="settings-profile.html" class="section-link  user-info__link">Изменить описание</a>
+							<h1 class="section-h1  info__name">Екатерина Георгадзе</h1>
+							<p class="info__desc">Готовлю самые вкусные и пышные оладушки</p>
+							<a href="settings-profile.html" class="section-link  info__link">Изменить описание</a>
 						</div>
-						<div class="user-info-stats  user-info__stats">
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Подписчиков</dt>
-								<dd class="user-info-stats__amount">32</dd>
+						<div class="info-stats">
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Подписчиков</dt>
+								<dd class="info-stats__amount">32</dd>
 							</dl>
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Постов</dt>
-								<dd class="user-info-stats__amount">3</dd>
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Постов</dt>
+								<dd class="info-stats__amount">3</dd>
 							</dl>
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Лайков</dt>
-								<dd class="user-info-stats__amount">5341</dd>
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Лайков</dt>
+								<dd class="info-stats__amount">5341</dd>
 							</dl>
 						</div>
-						<a href="settings-profile.html" class="btn  btn--second  btn--icon  btn--small user-info__btn" aria-label="Перейти в настройки">
+						<a href="settings-profile.html" class="btn  btn--second  btn--icon  btn--small info__btn" aria-label="Перейти в настройки">
 							<svg class="icon" aria-hidden="true" focusable="false">
 								<use href="img/sprite.svg#settings"/>
 							</svg>
@@ -108,71 +108,71 @@
 					</div> -->
 
 					<!-- Гость -->
-					<!-- <div class="user-info">
-						<div class="user-info__inner">
-							<img src="img/placeholder-avatar.jpg" class="user-avatar  user-info__avatar" width="120" height="120" alt="Фото профиля">
-							<h1 class="section-h1  user-info__name">Екатерина Георгадзе</h1>
-							<p class="user-info__desc">Готовлю самые вкусные и пышные оладушки</p>
+					<!-- <div class="info  user-info">
+						<div class="info__inner">
+							<img src="img/placeholder-avatar.jpg" class="info-avatar" width="120" height="120" alt="Фото профиля">
+							<h1 class="section-h1  info__name">Екатерина Георгадзе</h1>
+							<p class="info__desc">Готовлю самые вкусные и пышные оладушки</p>
 						</div>
-						<div class="user-info-stats  user-info__stats">
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Подписчиков</dt>
-								<dd class="user-info-stats__amount">32</dd>
+						<div class="info-stats  info__stats">
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Подписчиков</dt>
+								<dd class="info-stats__amount">32</dd>
 							</dl>
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Постов</dt>
-								<dd class="user-info-stats__amount">3</dd>
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Постов</dt>
+								<dd class="info-stats__amount">3</dd>
 							</dl>
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Лайков</dt>
-								<dd class="user-info-stats__amount">5341</dd>
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Лайков</dt>
+								<dd class="info-stats__amount">5341</dd>
 							</dl>
 						</div>
-						<button class="btn  btn--second  btn--small  btn--left  user-info__btn" data-graph-path="register" data-graph-speed="0">
+						<button class="btn  btn--second  btn--small  btn--left  info__btn" data-graph-path="register" data-graph-speed="0">
 							Подписаться
-							<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+							<svg class="icon" aria-hidden="true" focusable="false">
 								<use href="img/sprite.svg#user-plus"/>
 							</svg>
 						</button>
 					</div> -->
 
 					<!-- Авторизованный -->
-					<div class="user-info">
-						<div class="user-info__inner">
-							<img src="img/placeholder-avatar.jpg" class="user-avatar  user-info__avatar" width="120" height="120" alt="Фото профиля">
-							<h1 class="section-h1  user-info__name">Екатерина Георгадзе</h1>
-							<p class="user-info__desc">Готовлю самые вкусные и пышные оладушки</p>
+					<div class="info  user-info">
+						<div class="info__inner">
+							<img src="img/placeholder-avatar.jpg" class="info-avatar" width="120" height="120" alt="Фото профиля">
+							<h1 class="section-h1  info__name">Екатерина Георгадзе</h1>
+							<p class="info__desc">Готовлю самые вкусные и пышные оладушки</p>
 						</div>
-						<div class="user-info-stats  user-info__stats">
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Подписчиков</dt>
-								<dd class="user-info-stats__amount">32</dd>
+						<div class="info-stats  info__stats">
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Подписчиков</dt>
+								<dd class="info-stats__amount">32</dd>
 							</dl>
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Постов</dt>
-								<dd class="user-info-stats__amount">3</dd>
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Постов</dt>
+								<dd class="info-stats__amount">3</dd>
 							</dl>
-							<dl class="user-info-stats__item">
-								<dt class="user-info-stats__name">Лайков</dt>
-								<dd class="user-info-stats__amount">5341</dd>
+							<dl class="info-stats__item">
+								<dt class="info-stats__name">Лайков</dt>
+								<dd class="info-stats__amount">5341</dd>
 							</dl>
 						</div>
-						<button class="btn  btn--second  btn--small  btn--left btn--subscribe  user-info__btn" aria-label="Оформить подписку" data-button-subscribe>
+						<button class="btn  btn--second  btn--small  btn--left  btn--subscribe  info__btn" aria-label="Оформить подписку" data-button-subscribe>
 							<span data-text-subscribe>Подписаться</span>
-							<svg class="icon  btn__icon" aria-hidden="true" focusable="false">
+							<svg class="icon" aria-hidden="true" focusable="false">
 								<use href="img/sprite.svg#user-plus"/>
 							</svg>
 						</button>
 					</div>
 					<div class="feed  user-feed">
-						@include('partials/feed-item.html')
-						@include('partials/feed-item.html')
-						@include('partials/feed-item.html')
+						@include('partials/feed-item-user.html')
+						@include('partials/feed-item-user.html')
+						@include('partials/feed-item-user.html')
 					</div>
         </main>
       </div>
     </div>
     @include('partials/modals.html')
+		@include('partials/svg-scripts.html')
   </body>
-	@include('partials/svg-scripts.html')
 </html>

@@ -32,10 +32,11 @@
   }
 
   &__item {
+    overflow: hidden;
     border-radius: 8px;
     transition: background-color 0.2s ease;
 
-    .sidebar-tree__icon {
+    .icon {
       fill: var(--color-icons-secondary);
     }
 
@@ -46,7 +47,7 @@
     &.active {
       background-color: var(--color-bg-island);
 
-      .sidebar-tree__icon {
+      .icon {
         fill: var(--color-icons-primary);
       }
     }
@@ -87,10 +88,14 @@
     display: flex;
     align-items: center;
     padding: 16px;
+    width: 100%;
     color: var(--color-text-primary);
 
     span {
+      overflow: hidden;
       margin-left: 12px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
   }
 

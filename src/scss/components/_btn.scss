@@ -15,7 +15,7 @@
   transition: all 0.2s ease;
   cursor: pointer;
 
-  &__icon {
+  .icon {
     fill: var(--color-button-primary-text);
   }
 
@@ -34,7 +34,7 @@
     cursor: not-allowed;
     pointer-events: none;
 
-    .btn__icon {
+    .icon {
       fill: var(--color-button-primary-text-disabled);
     }
   }
@@ -48,7 +48,7 @@
     color: var(--color-button-secondary-text);
     background-color: transparent;
 
-    .btn__icon {
+    .icon {
       fill: var(--color-button-secondary-text);
     }
 
@@ -67,7 +67,7 @@
       color: var(--color-button-secondary-text-disabled);
       background-color: var(--color-button-secondary-bg-disabled);
 
-      .btn__icon {
+      .icon {
         fill: var(--color-button-secondary-text-disabled);
       }
     }
@@ -78,7 +78,7 @@
     color: var(--color-button-tertiary-text-default);
     background-color: transparent;
 
-    .btn__icon {
+    .icon {
       fill: var(--color-button-tertiary-text-default);
     }
 
@@ -86,7 +86,7 @@
       color: var(--color-button-tertiary-text-hover);
       background-color: transparent;
 
-      .btn__icon {
+      .icon {
         fill: var(--color-button-tertiary-text-hover);
       }
     }
@@ -95,7 +95,7 @@
       color: var(--color-button-tertiary-text-click);
       background-color: transparent;
 
-      .btn__icon {
+      .icon {
         fill: var(--color-button-tertiary-text-click);
       }
     }
@@ -105,7 +105,7 @@
       color: var(--color-button-tertiary-text-disabled);
       background-color: transparent;
 
-      .btn__icon {
+      .icon {
         fill: var(--color-button-tertiary-text-disabled);
       }
     }
@@ -117,7 +117,7 @@
     height: 40px;
     background-color: var(--color-button-other-bg);
 
-    .btn__icon {
+    .icon {
       fill: var(--color-icons-primary-inverse);
     }
 
@@ -139,7 +139,7 @@
   &--right {
     padding-right: 24px;
 
-    .btn__icon {
+    .icon {
       margin-left: 8px;
     }
   }
@@ -147,7 +147,7 @@
   &--left {
     padding-left: 24px;
 
-    .btn__icon {
+    .icon {
       order: -1;
       margin-right: 8px;
     }

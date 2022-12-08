@@ -108,12 +108,12 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 						<option>чайная ложка</option>
 						<option>стакан</option>
 					</select>
-					<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgChevron}"/>
 					</svg>
 				</div>
 				<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
-					<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
+					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
 				</a>
@@ -185,7 +185,7 @@ if (vars.bodyEl.querySelector('.step')) {
 			stepItem.innerHTML += `
 				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
 				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
-					<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
+					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
 				</a>
@@ -194,14 +194,14 @@ if (vars.bodyEl.querySelector('.step')) {
 						<label class="input  input--photo  imageuploader__input">
 							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png">
 							<div class="imageuploader__placeholder">
-								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="${svgImage}"/>
 								</svg>
-								Загрузите фото блюда
+								Загрузите фото шага
 							</div>
 						</label>
 						<a class="btn  btn--other  imageuploader__btn  hidden">
-							<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+							<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 								<use href="${svgDelete}" />
 							</svg>
 						</a>

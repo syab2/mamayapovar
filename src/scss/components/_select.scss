@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
 
-  &__icon {
+  .icon {
     position: absolute;
     right: 20px;
     fill: var(--color-fields-text-primary);

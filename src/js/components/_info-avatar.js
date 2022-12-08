@@ -1,11 +1,11 @@
 import vars from "../_vars";
 
 (function(){
-	const userAvatar = vars.bodyEl.querySelector('.user-avatar--change')
+	const infoAvatar = vars.bodyEl.querySelector('.info-avatar--change')
 
-	if (userAvatar) {
-		const image = userAvatar.querySelector('.user-avatar__input')
-		const input = userAvatar.querySelector('input[type="file"]')
+	if (infoAvatar) {
+		const image = infoAvatar.querySelector('.info-avatar__input')
+		const input = infoAvatar.querySelector('input[type="file"]')
 		let uploadedImage = ""
 
 		input.addEventListener('change', () => {

@@ -36,12 +36,12 @@
     justify-self: end;
     transition: opacity 0.2s ease;
 
-    .step-item__icon {
+    .icon {
       fill: var(--color-icons-secondary);
     }
 
     &:hover {
-      .step-item__icon {
+      .icon {
         fill: var(--color-text-error);
       }
     }
