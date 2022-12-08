@@ -299,7 +299,7 @@ def bookmarks(request):
 
 def user_profile(request, id):
     try:
-        profile_data = UserProfile.objects.get(user=request.user.id)
+        profile_data = UserProfile.objects.get(user=id)
     except:
         profile_data = None
     objs = Recipe.objects.filter(author_id=id)

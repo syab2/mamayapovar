@@ -22,14 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
 /* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
-/* harmony import */ var _components_subscribe_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/_subscribe.js */ "./src/js/components/_subscribe.js");
-/* harmony import */ var _components_subscribe_js__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(_components_subscribe_js__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _components_user_avatar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/_user-avatar.js */ "./src/js/components/_user-avatar.js");
-/* harmony import */ var _components_like_js__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/_like.js */ "./src/js/components/_like.js");
-/* harmony import */ var _components_bookmark_js__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./components/_bookmark.js */ "./src/js/components/_bookmark.js");
-
-
-
+/* harmony import */ var _components_info_avatar_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/_info-avatar.js */ "./src/js/components/_info-avatar.js");
 
 
 
@@ -176,57 +169,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/components/_bookmark.js":
-/*!****************************************!*\
-  !*** ./src/js/components/_bookmark.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
-
-(function () {
-  const buttonBookmark = document.querySelector('[data-button-bookmark]');
-  if (buttonBookmark) {
-    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
-      const target = e.target;
-      if (target.classList.contains('content-footer__btn--bookmark')) {
-        const buttonIcon = target.querySelector('use');
-        target.classList.toggle('active');
-        if (target.classList.contains('active')) {
-          target.setAttribute('aria-label', 'Убрать из закладок');
-          buttonIcon.setAttribute('href', `${svgBookmarkFilled}`);
-        } else {
-          target.setAttribute('aria-label', 'Добавить в закладки');
-          buttonIcon.setAttribute('href', `${svgBookmark}`);
-        }
-      }
-    });
-  }
-
-  // if (buttonBookmark) {
-  // 	vars.bodyEl.addEventListener('click', (e) => {
-  // 		const target = e.target
-
-  // 		if (target.classList.contains('content-footer__btn--bookmark')) {
-  // 			const buttonIcon = target.querySelector('use')
-  // 			target.classList.toggle('active');
-
-  // 			if (target.classList.contains('active')) {
-  // 				target.setAttribute('aria-label', 'Убрать из закладок');
-  // 				buttonIcon.setAttribute('href', `${svgBookmarkFilled}`)
-  // 			} else {
-  // 				target.setAttribute('aria-label', 'Добавить в закладки');
-  // 				buttonIcon.setAttribute('href', `${svgBookmark}`)
-  // 			}
-  // 		}
-  // 	})
-  // }
-})();
-
-/***/ }),
-
 /***/ "./src/js/components/_counter.js":
 /*!***************************************!*\
   !*** ./src/js/components/_counter.js ***!
@@ -330,6 +272,37 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.imageup
 
 /***/ }),
 
+/***/ "./src/js/components/_info-avatar.js":
+/*!*******************************************!*\
+  !*** ./src/js/components/_info-avatar.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+(function () {
+  const infoAvatar = _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.info-avatar--change');
+  if (infoAvatar) {
+    const image = infoAvatar.querySelector('.info-avatar__input');
+    const input = infoAvatar.querySelector('input[type="file"]');
+    let uploadedImage = "";
+    input.addEventListener('change', () => {
+      if (!input.value == "") {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          uploadedImage = reader.result;
+          image.style.backgroundImage = `url(${uploadedImage})`;
+        });
+        reader.readAsDataURL(input.files[0]);
+      }
+    });
+  }
+})();
+
+/***/ }),
+
 /***/ "./src/js/components/_input-validate.js":
 /*!**********************************************!*\
   !*** ./src/js/components/_input-validate.js ***!
@@ -359,38 +332,6 @@ if (document.querySelector('.new-recipe-field--time')) {
     });
   })();
 }
-
-/***/ }),
-
-/***/ "./src/js/components/_like.js":
-/*!************************************!*\
-  !*** ./src/js/components/_like.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
-
-(function () {
-  const buttonLike = document.querySelector('[data-button-like]');
-  if (buttonLike) {
-    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
-      const target = e.target;
-      if (target.classList.contains('content-footer__btn--like')) {
-        const buttonIcon = target.querySelector('use');
-        target.classList.toggle('active');
-        if (target.classList.contains('active')) {
-          target.setAttribute('aria-label', 'Убрать отметку "Нравится"');
-          buttonIcon.setAttribute('href', `${svgHeartFilled}`);
-        } else {
-          target.setAttribute('aria-label', 'Поставить отметку "Нравится"');
-          buttonIcon.setAttribute('href', `${svgHeart}`);
-        }
-      }
-    });
-  }
-})();
 
 /***/ }),
 
@@ -560,12 +501,12 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
 						<option>чайная ложка</option>
 						<option>стакан</option>
 					</select>
-					<svg class="icon  select__icon" aria-hidden="true" focusable="false">
+					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgChevron}"/>
 					</svg>
 				</div>
 				<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
-					<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
+					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
 				</a>
@@ -631,7 +572,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
       stepItem.innerHTML += `
 				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
 				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
-					<svg class="icon  step-item__icon" aria-hidden="true" focusable="false">
+					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
 				</a>
@@ -640,14 +581,14 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 						<label class="input  input--photo  imageuploader__input">
 							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png">
 							<div class="imageuploader__placeholder">
-								<svg class="icon  input__icon" aria-hidden="true" focusable="false">
+								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="${svgImage}"/>
 								</svg>
-								Загрузите фото блюда
+								Загрузите фото шага
 							</div>
 						</label>
 						<a class="btn  btn--other  imageuploader__btn  hidden">
-							<svg class="icon  icon--16  btn__icon" aria-hidden="true" focusable="false">
+							<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 								<use href="${svgDelete}" />
 							</svg>
 						</a>
@@ -775,31 +716,6 @@ const scroll = new (smooth_scroll__WEBPACK_IMPORTED_MODULE_0___default())('a[hre
 
 /***/ }),
 
-/***/ "./src/js/components/_subscribe.js":
-/*!*****************************************!*\
-  !*** ./src/js/components/_subscribe.js ***!
-  \*****************************************/
-/***/ (() => {
-
-(function () {
-  const buttonSubcribe = document.querySelector('[data-button-subscribe]');
-  const buttonText = document.querySelector('[data-text-subscribe]');
-  if (buttonSubcribe) {
-    buttonSubcribe.addEventListener('click', () => {
-      buttonSubcribe.classList.toggle('active');
-      if (buttonSubcribe.classList.contains('active')) {
-        buttonSubcribe.setAttribute('aria-label', 'Отменить подписку');
-        buttonText.textContent = 'Вы подписаны';
-      } else {
-        buttonSubcribe.setAttribute('aria-label', 'Оформить подписку');
-        buttonText.textContent = 'Подписаться';
-      }
-    });
-  }
-})();
-
-/***/ }),
-
 /***/ "./src/js/components/_textarea-resize.js":
 /*!***********************************************!*\
   !*** ./src/js/components/_textarea-resize.js ***!
@@ -818,37 +734,6 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.comment
     textArea.style.height = textArea.scrollHeight + 'px';
   });
 }
-
-/***/ }),
-
-/***/ "./src/js/components/_user-avatar.js":
-/*!*******************************************!*\
-  !*** ./src/js/components/_user-avatar.js ***!
-  \*******************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
-
-(function () {
-  const userAvatar = _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.user-avatar--change');
-  if (userAvatar) {
-    const image = userAvatar.querySelector('.user-avatar__input');
-    const input = userAvatar.querySelector('input[type="file"]');
-    let uploadedImage = "";
-    input.addEventListener('change', () => {
-      if (!input.value == "") {
-        const reader = new FileReader();
-        reader.addEventListener('load', () => {
-          uploadedImage = reader.result;
-          image.style.backgroundImage = `url(${uploadedImage})`;
-        });
-        reader.readAsDataURL(input.files[0]);
-      }
-    });
-  }
-})();
 
 /***/ }),
 
