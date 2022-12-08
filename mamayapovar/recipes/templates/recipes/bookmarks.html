@@ -60,7 +60,7 @@
 							</ul>
 						</div>
 					</div>
-					<a href="recipe/{{ recipe.id }}" class="feed-item__img">
+					<a href="{% url 'recipe' recipe.id %}" class="feed-item__img">
 						{% if recipe.photo %}
 							<img src="{{ recipe.photo.url }}" width="676" height="350"
 								 alt="{{ recipe.title }}" loading="lazy">
@@ -71,12 +71,24 @@
 					</a>
 					<div class="content-footer  feed-item__footer">
 						<div class="content-footer__left">
-							<button class="btn-reset  content-footer__btn  content-footer__btn--like" aria-label="Поставить отметку 'Нравится'" data-button-like>
-								<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
-									<use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
-								</svg>
-								<span>842</span>
-							</button>
+							{% get_likes_status recipe.id request.user.id as like_status %}
+							{% if not like_status %}
+								<div class="btn-reset  content-footer__btn  content-footer__btn--like"
+									 aria-label="Поставить отметку 'Нравится'" data-button-like data-url_root="{% url 'like_post' recipe.id %}">
+									<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+										<use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
+									</svg>
+									<span data-count="like">{% get_likes_count recipe.id %}</span>
+								</div>
+							{% else %}
+								<div class="btn-reset  content-footer__btn  content-footer__btn--like active"
+									 aria-label="Поставить отметку 'Нравится'" data-button-like data-url_root="{% url 'like_post' recipe.id %}">
+									<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
+										<use href="{% static 'recipes/img/sprite.svg' %}#heart-filled"/>
+									</svg>
+									<span data-count="like">{% get_likes_count recipe.id %}</span>
+								</div>
+							{% endif %}
 							<a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment" aria-label="Перейти к комментариям">
 								<svg class="icon  content-footer__icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
