@@ -1,18 +1,18 @@
 import json
 import os
 import random
+from pathlib import Path
 
 import pymorphy2
 from django.conf import settings
 from django.contrib import messages, auth
 from django.contrib.auth import models, logout
-from django.contrib.auth import get_user_model
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
-from .models import Recipe, StepImages, Bookmark
+from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -175,6 +175,9 @@ def new_recipe_post(request):
     )
     recipe.save()
 
+    like = Like(like_post=recipe, like_user=request.user)
+    like.save()
+
     descs = []
     for elem in request.POST:
         if 'step-description-' in elem:
@@ -245,15 +248,18 @@ def recipe(request, recipe_id):
     recipe.steps = [[x.split(':')[0], x.split(':')[1].split('\n')] for x in recipe.steps.split(';')]
 
     step_photos = StepImages.objects.filter(recipe_id=recipe_id)
-
-    for elem in step_photos:
-        for el in recipe.steps:
-            if len(el) == 2:
-                if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
-                    el.append(elem.image)
-                    break
-                else:
-                    el.append(None)
+    if step_photos:
+        for elem in step_photos:
+            for el in recipe.steps:
+                if len(el) == 2:
+                    if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
+                        el.append(elem.image)
+                        break
+                    else:
+                        el.append(None)
+    else:
+        for elem in recipe.steps:
+            elem.append(None)
 
     return render(request, 'recipes/post.html', {
         'recipe': recipe,
@@ -296,6 +302,10 @@ def bookmarks(request):
 
 
 def user_profile(request, id):
+    try:
+        profile_data = UserProfile.objects.get(user=id)
+    except:
+        profile_data = None
     objs = Recipe.objects.filter(author_id=id)
     new_recipes = get_formatted_recipes(objs)
 
@@ -306,6 +316,62 @@ def user_profile(request, id):
         'user': user,
         'is_auth': request.user.is_authenticated,
         'posts': len(new_recipes),
-        'title': f'{user.username} — Мама, я повар!'
+        'title': f'{user.username} — Мама, я повар!',
+        'profile_data': profile_data
     }
     return render(request, 'recipes/user.html', content)
+
+
+def change_profile_picture(request):
+    if UserProfile.objects.filter(user=request.user):
+        user = UserProfile.objects.get(user=request.user)
+        os.remove(user.avatar.path)
+        user.avatar = request.FILES['file']
+        user.save()
+    else:
+        recipes = Recipe.objects.filter(author_id=request.user.id)
+        new_photo = UserProfile(user=request.user, avatar=request.FILES['file'], posts=len(recipes))
+        new_photo.save()
+    return HttpResponseRedirect(f'user/{str(request.user.id)}/')
+
+
+def like_post(request, pk):
+    recipe = Recipe.objects.get(id=pk)
+    obj = Like.objects.filter(like_post=recipe, like_user=request.user)
+    if obj:
+        new_obj = Like.objects.get(like_post_id=pk, like_user=request.user)
+        if new_obj.status is False and request.user == new_obj.like_user:
+            f = Like.objects.get(like_post_id=pk, like_user=request.user)
+            f.likes = f.likes + 1
+            f.status = True
+            f.save()
+        elif new_obj.status is True and request.user == new_obj.like_user:
+            f = Like.objects.get(like_post_id=pk, like_user=request.user)
+            f.likes = f.likes - 1
+            f.status = False
+            f.save()
+    else:
+        like = Like(like_post=recipe, like_user=request.user, likes=1, status=True)
+        like.save()
+    return HttpResponse(
+        json.dumps({
+            "result": True if recipe else False,
+            'count': sum([x.likes for x in Like.objects.filter(like_post_id=pk)])
+        }),
+        content_type="application/json"
+    )
+
+
+def subscribe_post(request, pk):
+    if Subscribe.objects.filter(subscribe_to_id=pk, subscribe_from_id=request.user.id):
+        Subscribe.objects.get(subscribe_to_id=pk, subscribe_from_id=request.user.id).delete()
+    else:
+        sub = Subscribe(subscribe_to_id=pk, subscribe_from_id=request.user.id)
+        sub.save()
+    return HttpResponse(
+        json.dumps({
+            "result": True if recipe else False
+        }),
+        content_type="application/json"
+    )
+
