@@ -59,3 +59,24 @@ class UserProfile(models.Model):
 
     def __unicode__(self):
         return self.user
+
+
+class Like(models.Model):
+    class Meta:
+        db_table = 'likes'
+
+    likes = models.IntegerField(default=0)
+    like_post = models.ForeignKey('Recipe', on_delete=models.DO_NOTHING)
+    like_user = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    status = models.BooleanField(default=False)
+
+
+class Subscribe(models.Model):
+    class Meta:
+        db_table = 'subscribe'
+        ordering = ['-time_created']
+
+    subscribe_from = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='subscribe_from')
+    subscribe_to = models.ForeignKey(User, on_delete=models.DO_NOTHING, related_name='subscribe_to')
+    time_created = models.DateTimeField(auto_now_add=True)
+
