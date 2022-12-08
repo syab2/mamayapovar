@@ -271,6 +271,7 @@ a {
 .section-link.disabled {
   color: var(--color-text-disabled);
   cursor: not-allowed;
+  pointer-events: none;
 }
 .section-link.disabled:hover {
   text-decoration: none;
@@ -1405,6 +1406,9 @@ a {
 
 .feed {
   display: grid;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
   gap: 40px;
 }
 
@@ -2011,6 +2015,9 @@ a {
 
 .user {
   display: grid;
+  -webkit-box-align: start;
+  -ms-flex-align: start;
+  align-items: start;
   grid-template-rows: auto auto;
   gap: 48px;
 }

@@ -46,7 +46,7 @@
             {% endblock %}
         {% endif %}
         {% if request.get_full_path == '/' %}
-        <main class="feed">
+        <main class="index">
             {% block content %}{% endblock %}
         </main>
         {% elif request.get_full_path == '/new-recipe/' %}
