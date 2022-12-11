@@ -78,3 +78,8 @@ def get_count_of_subscribers(id_):
 @register.simple_tag
 def get_correct_path(id_):
     return f'user/{id_}'
+
+
+@register.simple_tag
+def get_server_media_url(url):
+    return '/'.join(url.split('/')[1:])

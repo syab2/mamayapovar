@@ -77,7 +77,7 @@ def postindex(request):
 
 def postlogin(request):
     if request.method == "POST":
-        #form = AuthenticationForm(request, data=request.POST)
+        # form = AuthenticationForm(request, data=request.POST)
         # if form.is_valid():
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -96,138 +96,137 @@ def postlogout(request):
 
 
 def new_recipe(request):
-    if request.user.is_authenticated:
-        return render(request, 'recipes/new-recipe.html', {'title': 'Создание рецепта — Мама, я повар!'})
-    return HttpResponseRedirect('/')
+    if request.method == 'GET':
+        if request.user.is_authenticated:
+            return render(request, 'recipes/new-recipe.html', {'title': 'Создание рецепта — Мама, я повар!'})
+        return HttpResponseRedirect('/')
+    else:
+        folder_id = ''.join([str(random.randint(0, 9)) for x in range(7)])
+        categories = {
+            "Выпечка": 1,
+            "Супы": 2,
+            "Салаты": 3,
+            "Горячие блюда": 4
+        }
+        title = request.POST.get('title')
+        description = request.POST.get('description')
+        cat_id = categories[request.POST.get('cat')]
+        persons = request.POST.get('persons')
+        cooking_time = f'{request.POST.get("cooking_time_hours")}:{request.POST.get("cooking_time_minutes")}'
+        ings = []
+        ingredient = ''
+        for elem in request.POST:
+            if 'ingredient-name-' in elem:
+                ingredient += request.POST.get(
+                    f'ingredient-name-{elem.split("-")[-1]}') + ':'
+            if 'ingredient-amount-' in elem:
+                ingredient += request.POST.get(
+                    f'ingredient-amount-{elem.split("-")[-1]}') + '-'
+            if 'ingredient-measure-' in elem:
+                ingredient += request.POST.get(
+                    f'ingredient-measure-{elem.split("-")[-1]}')
+                ings.append(ingredient)
+                ingredient = ''
+        ingredients = ';'.join(ings)
 
-
-def new_recipe_post(request):
-    folder_id = ''.join([str(random.randint(0, 9)) for x in range(7)])
-    categories = {
-        "Выпечка": 1,
-        "Супы": 2,
-        "Салаты": 3,
-        "Горячие блюда": 4
-    }
-    title = request.POST.get('title')
-    description = request.POST.get('description')
-    cat_id = categories[request.POST.get('cat')]
-    persons = request.POST.get('persons')
-    cooking_time = f'{request.POST.get("cooking_time_hours")}:{request.POST.get("cooking_time_minutes")}'
-    ings = []
-    ingredient = ''
-    for elem in request.POST:
-        if 'ingredient-name-' in elem:
-            ingredient += request.POST.get(
-                f'ingredient-name-{elem.split("-")[-1]}') + ':'
-        if 'ingredient-amount-' in elem:
-            ingredient += request.POST.get(
-                f'ingredient-amount-{elem.split("-")[-1]}') + '-'
-        if 'ingredient-measure-' in elem:
-            ingredient += request.POST.get(
-                f'ingredient-measure-{elem.split("-")[-1]}')
-            ings.append(ingredient)
-            ingredient = ''
-    ingredients = ';'.join(ings)
-
-    # photo
-    folder = 'recipes'
-    second_folder = folder_id
-    uploaded_filename = f"{request.FILES['photo'].name}"
-
-    try:
-        os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
-    except:
-        pass
-
-    os.mkdir(os.path.join(settings.MEDIA_ROOT, folder, second_folder))
-
-    full_filename = os.path.join(
-        settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
-    fout = open(full_filename, 'wb+')
-
-    file_content = ContentFile(request.FILES['photo'].read())
-
-    for chunk in file_content.chunks():
-        fout.write(chunk)
-    fout.close()
-
-    # photos of steps and text
-
-    j = 0
-    step_descs = []
-    for elem in request.POST:
-        if 'step-description-' in elem:
-            j += 1
-            step_descs.append(f'{j}:{request.POST.get(elem)}')
-
-    sss = ';'.join(step_descs)
-
-    recipe = Recipe(
-        title=title,
-        description=description,
-        cooking_time=cooking_time,
-        persons=persons,
-        cat_id=cat_id,
-        author_id=request.user.id,
-        ingredients=ingredients,
-        photo=full_filename,
-        steps=sss,
-        folder_id=folder_id
-    )
-    recipe.save()
-
-    like = Like(like_post=recipe, like_user=request.user)
-    like.save()
-
-    descs = []
-    for elem in request.POST:
-        if 'step-description-' in elem:
-            descs.append(elem)
-
-    files = []
-    for elem in request.FILES:
-        if 'step-photo-' in elem:
-            files.append(elem)
-
-    itog = []
-    for elem in files:
-        for el in descs:
-            if elem.split('-')[-1] == el.split('-')[-1]:
-                itog.append([descs.index(el), elem])
-
-    for elem in itog:
-
+        # photo
         folder = 'recipes'
         second_folder = folder_id
-        if elem:
-            uploaded_filename = str(elem[0] + 1) + '.' + request.FILES[elem[1]].name.split('.')[-1]
-        else:
-            continue
+        uploaded_filename = f"{request.FILES['photo'].name}"
 
         try:
-            os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
+            os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
         except:
             pass
 
-        ful_fil = os.path.join(
-            settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
+        os.mkdir(os.path.join(settings.MEDIA_ROOT, folder, second_folder))
 
-        try:
-            fout2 = open(ful_fil, 'wb+')
+        full_filename = os.path.join(
+            settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
+        fout = open(full_filename, 'wb+')
 
-            file_content2 = ContentFile(request.FILES[elem[1]].read())
+        file_content = ContentFile(request.FILES['photo'].read())
 
-            for chunk in file_content2.chunks():
-                fout2.write(chunk)
-            fout2.close()
+        for chunk in file_content.chunks():
+            fout.write(chunk)
+        fout.close()
 
-            imgs = StepImages(image=ful_fil, recipe=recipe)
-            imgs.save()
-        except Exception:
-            pass
+        # photos of steps and text
 
-    return HttpResponseRedirect('/')
+        j = 0
+        step_descs = []
+        for elem in request.POST:
+            if 'step-description-' in elem:
+                j += 1
+                step_descs.append(f'{j}:{request.POST.get(elem)}')
+
+        sss = ';'.join(step_descs)
+        filename_for_save = os.path.join(folder, second_folder, uploaded_filename)
+
+        recipe = Recipe(
+            title=title,
+            description=description,
+            cooking_time=cooking_time,
+            persons=persons,
+            cat_id=cat_id,
+            author_id=request.user.id,
+            ingredients=ingredients,
+            photo=filename_for_save,
+            steps=sss,
+            folder_id=folder_id,
+        )
+        recipe.save()
+
+        like = Like(like_post=recipe, like_user=request.user)
+        like.save()
+
+        descs = []
+        for elem in request.POST:
+            if 'step-description-' in elem:
+                descs.append(elem)
+
+        files = []
+        for elem in request.FILES:
+            if 'step-photo-' in elem:
+                files.append(elem)
+
+        itog = []
+        for elem in files:
+            for el in descs:
+                if elem.split('-')[-1] == el.split('-')[-1]:
+                    itog.append([descs.index(el), elem])
+
+        for elem in itog:
+
+            folder = 'recipes'
+            second_folder = folder_id
+            if elem:
+                uploaded_filename = str(elem[0] + 1) + '.' + request.FILES[elem[1]].name.split('.')[-1]
+            else:
+                continue
+
+            try:
+                os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
+            except:
+                pass
+
+            ful_fil = os.path.join(
+                settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
+
+            try:
+                fout2 = open(ful_fil, 'wb+')
+
+                file_content2 = ContentFile(request.FILES[elem[1]].read())
+
+                for chunk in file_content2.chunks():
+                    fout2.write(chunk)
+                fout2.close()
+
+                imgs = StepImages(image=ful_fil, recipe=recipe)
+                imgs.save()
+            except Exception:
+                pass
+        return HttpResponseRedirect('/')
 
 
 def recipe(request, recipe_id):
@@ -246,7 +245,8 @@ def recipe(request, recipe_id):
     pers = int(recipe.persons)
     recipe.persons = f"{pers} {morph.parse('порция')[0].make_agree_with_number(pers).word}"
 
-    recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in recipe.ingredients.split(';')]
+    recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in
+                          recipe.ingredients.split(';')]
     recipe.steps = [[x.split(':')[0], x.split(':')[1].split('\n')] for x in recipe.steps.split(';')]
 
     step_photos = StepImages.objects.filter(recipe_id=recipe_id)

@@ -439,16 +439,16 @@
 							{% get_bookmark_status recipe.id request.user.id as check %}
 							{% if not check %}
 								<button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
-										data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
-										aria-label="Добавить в закладки" data-button-bookmark>
+										data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
+										aria-label="Добавить в закладки">
 									<svg class="icon" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
 									</svg>
 								</button>
 							{% else %}
 								<button class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
-										data-id="{{ recipe.id }}" data-url_root="{% url 'bookmark_post' recipe.id %}"
-										aria-label="Добавить в закладки" data-button-bookmark>
+										data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
+										aria-label="Добавить в закладки">
 									<svg class="icon" aria-hidden="true" focusable="false">
 										<use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
 									</svg>
