@@ -31,12 +31,16 @@ def get_formatted_recipes(recipes):
         recipe.persons = f"{pers} {morph.parse('порция')[0].make_agree_with_number(pers).word}"
 
         # cooking_time
-        if recipe.cooking_time.split(':')[0] == '24':
-            recipe.cooking_time = f'1 день'
-        elif recipe.cooking_time.split(':')[0] != '0':
-            cook = recipe.cooking_time.split(':')
-            recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
-                                  f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+        if len(recipe.cooking_time.split(':')) == 2 and recipe.cooking_time.split(':')[0] != '':
+            if recipe.cooking_time.split(':')[0] == '24':
+                recipe.cooking_time = f'1 день'
+            elif recipe.cooking_time.split(':')[0] != '0':
+                cook = recipe.cooking_time.split(':')
+                recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
+                                      f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+            else:
+                cook = recipe.cooking_time.split(':')
+                recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
         else:
             cook = recipe.cooking_time.split(':')
             recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
@@ -232,12 +236,16 @@ def new_recipe(request):
 def recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     recipe.author_id = models.User.objects.get(id=recipe.author_id)
-    if recipe.cooking_time.split(':')[0] == '24':
-        recipe.cooking_time = f'1 день'
-    elif recipe.cooking_time.split(':')[0] != '0':
-        cook = recipe.cooking_time.split(':')
-        recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
-                              f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+    if len(recipe.cooking_time.split(':')) == 2 and recipe.cooking_time.split(':')[0] != '':
+        if recipe.cooking_time.split(':')[0] == '24':
+            recipe.cooking_time = f'1 день'
+        elif recipe.cooking_time.split(':')[0] != '0':
+            cook = recipe.cooking_time.split(':')
+            recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
+                                  f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
+        else:
+            cook = recipe.cooking_time.split(':')
+            recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
     else:
         cook = recipe.cooking_time.split(':')
         recipe.cooking_time = f"{cook[1]} {morph.parse('минута')[0].make_agree_with_number(int(cook[1])).word}"
