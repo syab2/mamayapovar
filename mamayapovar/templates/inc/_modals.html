@@ -11,7 +11,7 @@
         </button>
         <div class="graph-modal__content  popup__content">
             <h2 class="section-h1  popup__title">Регистрация</h2>
-            <form id="register-form" action="postindex/" class="popup__form" method="post">
+            <form id="register-form" action="{% url 'registration' %}" class="popup__form" method="post">
                 {% csrf_token %}
                 <div class="form-field">
 									<input type="text" name="username" id="username-register" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" required>
@@ -57,7 +57,7 @@
         </button>
         <div class="graph-modal__content  popup__content  popup__container--auth">
             <h2 class="section-h1  popup__title">Вход в аккаунт</h2>
-            <form id="auth-form" action="postlogin/" class="popup__form" method="post">
+            <form id="auth-form" action="{% url 'login' %}" class="popup__form" method="post">
                 {% csrf_token %}
 								<div class="form-field">
 									<input type="email" name="email" id="email-auth" class="input  popup__input" placeholder="Электронная почта" required>
