@@ -1,0 +1,23 @@
+.feed-item {
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  padding: 40px 32px;
+  width: 100%;
+  background-color: var(--color-bg-island);
+
+  &__header {
+    margin-bottom: 32px;
+  }
+
+  &__img {
+    display: flex;
+    margin-bottom: 40px;
+
+    img {
+      border-radius: 8px;
+      width: 100%;
+      height: 350px;
+    }
+  }
+}

@@ -18,8 +18,12 @@ if (document.querySelector('.new-recipe-field--time')) {
 		inputHours.addEventListener('change', () => {
 			if (inputHours.value > maxHours - 1) {
 				inputHours.value = maxHours
+				inputMinutes.removeAttribute('required')
+			} else if (inputHours.value >= 1) {
+				inputMinutes.removeAttribute('required')
 			} else if (inputHours.value <= 0) {
 				inputHours.value = 0
+				inputMinutes.setAttribute('required', '')
 			}
 		})
 	})();
