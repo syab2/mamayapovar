@@ -15,7 +15,8 @@ urlpatterns = [
     path('user/<int:id>/', user_profile, name='user_profile'),
     path('user/change_profile_picture', change_profile_picture, name='change_profile_picture'),
     re_path(r'^recipe/(?P<pk>\d+)/like/$', like_post, name='like_post'),
-    re_path(r'^recipe/(?P<pk>\d+)/subscribe/$', subscribe_post, name='subscribe')
+    re_path(r'^recipe/(?P<pk>\d+)/subscribe/$', subscribe_post, name='subscribe'),
+    path('category/<int:id>/', category, name="category")
 ]
 
 

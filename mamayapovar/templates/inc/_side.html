@@ -62,6 +62,21 @@
             </ul>
             {% get_all_subscribers request.user.id as subs %}
             <ul class="list-reset sidebar-tree__list" id="sidebar-links">
+                {% if '/recipe/' in request.get_full_path %}
+                    <li class="sidebar-tree__item active">
+                      <a href="{% url 'category' recipe.cat.id %}" class="sidebar-tree__link">
+                        <img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+                        <span>{{ recipe.cat.name }}</span>
+                      </a>
+                    </li>
+                {% elif '/category/' in request.get_full_path %}
+                    <li class="sidebar-tree__item active">
+                      <a href="{% url 'category' cat.id %}" class="sidebar-tree__link">
+                        <img src="{% get_static_prefix %}recipes/img/category/{{ cat.id }}.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+                        <span>{{ cat.name }}</span>
+                      </a>
+                    </li>
+                {% endif %}
                 {% if 'user' in request.get_full_path %}
                     {% if user not in subs %}
                         {% get_correct_path user.id as papath %}
@@ -81,7 +96,7 @@
                 {% endif %}
                 {% for sub in subs %}
                     {% get_correct_path sub.id as papath %}
-                    {% if papath in request.get_full_path %}
+                    {% if papath == request.get_full_path %}
                         <li class="sidebar-tree__item active">
                             <a href="{% url 'user_profile' sub.id %}" class="sidebar-tree__link">
                                 {% get_avatar_url sub.id as avatar %}
@@ -120,30 +135,75 @@
     <div class="sidebar__inner">
         <div class="sidebar-tree">
             <ul class="list-reset sidebar-tree__list" id="sidebar-tabs">
-                <li class="sidebar-tree__item  active">
-                    <a href="/" class="sidebar-tree__link">
-                        <svg class="icon" aria-hidden="true" focusable="false">
-                            <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
-                        </svg>
-                        <span>Свежее</span>
-                    </a>
+                {% if request.get_full_path == '/' %}
+                    <li class="sidebar-tree__item  active">
+                        <a href="/" class="sidebar-tree__link">
+                            <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
+                            </svg>
+                            <span>Свежее</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-tree__item">
+                        <button class="btn-reset  sidebar-tree__link" data-graph-path="register" data-graph-speed="0">
+                            <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+                            </svg>
+                            <span>Закладки</span>
+                        </button>
+                    </li>
+                {% else %}
+                    <li class="sidebar-tree__item">
+                        <a href="/" class="sidebar-tree__link">
+                            <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#clock"/>
+                            </svg>
+                            <span>Свежее</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-tree__item">
+                        <button class="btn-reset  sidebar-tree__link" data-graph-path="register" data-graph-speed="0">
+                            <svg class="icon" aria-hidden="true" focusable="false">
+                                <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+                            </svg>
+                            <span>Закладки</span>
+                        </button>
+                    </li>
+                {% endif %}
+            </ul>
+            <ul class="list-reset sidebar-tree__list" id="sidebar-links">
+            {% if request.get_full_path == '/' %}
+                {% for cat in cats %}
+                    <li class="sidebar-tree__item">
+                      <a href="{% url 'category' cat.id %}" class="sidebar-tree__link">
+                        <img src="{% get_static_prefix %}recipes/img/category/{{ cat.id }}.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+                        <span>{{ cat.name }}</span>
+                      </a>
+                    </li>
+                {% endfor %}
+            {% elif '/recipe/' in request.get_full_path %}
+                    <li class="sidebar-tree__item active">
+                      <a href="{% url 'category' recipe.cat.id %}" class="sidebar-tree__link">
+                        <img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+                        <span>{{ recipe.cat.name }}</span>
+                      </a>
+                    </li>
+            {% elif '/category/' in request.get_full_path %}
+                <li class="sidebar-tree__item active">
+                  <a href="{% url 'category' cat.id %}" class="sidebar-tree__link">
+                    <img src="{% get_static_prefix %}recipes/img/category/{{ cat.id }}.svg" class="sidebar-tree__avatar" loading="lazy" alt="">
+                    <span>{{ cat.name }}</span>
+                  </a>
                 </li>
-                <li class="sidebar-tree__item">
-                    <button class="btn-reset  sidebar-tree__link" data-graph-path="register" data-graph-speed="0">
-                        <svg class="icon" aria-hidden="true" focusable="false">
-                            <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
-                        </svg>
-                        <span>Закладки</span>
-                    </button>
-                </li>
+            {% endif %}
             </ul>
         </div>
         <div class="sidebar-footer">
             <a href="https://sonniy.notion.site/72491004fa1044d8b0dccf9cdeb44053" target="_blank" class="sidebar-footer__link">О проекте</a>
         </div>
     </div>
-</nav>
 
+</nav>
 {% endif %}
 
 {% endblock %}

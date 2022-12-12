@@ -77,7 +77,7 @@ def get_count_of_subscribers(id_):
 
 @register.simple_tag
 def get_correct_path(id_):
-    return f'user/{id_}'
+    return f'/user/{id_}/'
 
 
 @register.simple_tag

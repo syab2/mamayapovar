@@ -2,7 +2,7 @@
 
 {% block navbar %}
 
-{% if is_auth %}
+{% if request.user.is_authenticated %}
 <header class="header">
     <div class="container">
       <div class="header__inner">

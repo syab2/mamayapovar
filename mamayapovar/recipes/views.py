@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
-from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe
+from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, Category
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -32,7 +32,10 @@ def get_formatted_recipes(recipes):
 
         # cooking_time
         if len(recipe.cooking_time.split(':')) == 2 and recipe.cooking_time.split(':')[0] != '':
-            if recipe.cooking_time.split(':')[0] == '24':
+            if recipe.cooking_time.split(':')[1] == '0':
+                cook = recipe.cooking_time.split(':')
+                recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word}"
+            elif recipe.cooking_time.split(':')[0] == '24':
                 recipe.cooking_time = f'1 день'
             elif recipe.cooking_time.split(':')[0] != '0':
                 cook = recipe.cooking_time.split(':')
@@ -61,6 +64,7 @@ def index(request):
         'recipes': new_recipes,
         'is_auth': request.user.is_authenticated,
         'user': request.user,
+        'cats': Category.objects.all(),
         'title': 'Мама, я повар! — платформа для кулинаров'
     }
     return render(request, 'recipes/index.html', content)
@@ -157,12 +161,17 @@ def new_recipe(request):
 
         # photos of steps and text
 
-        j = 0
-        step_descs = []
+
+        itog = []
         for elem in request.POST:
             if 'step-description-' in elem:
-                j += 1
-                step_descs.append(f'{j}:{request.POST.get(elem)}')
+                itog.append([x for x in request.POST[elem].replace('\r', '').split('\n') if x != ''])
+
+        j = 0
+        step_descs = []
+        for elem in itog:
+            j += 1
+            step_descs.append('{}:{}'.format(j, "\n".join(elem)))
 
         sss = ';'.join(step_descs)
         filename_for_save = os.path.join(folder, second_folder, uploaded_filename)
@@ -226,7 +235,7 @@ def new_recipe(request):
                     fout2.write(chunk)
                 fout2.close()
 
-                imgs = StepImages(image=ful_fil, recipe=recipe)
+                imgs = StepImages(image=os.path.join(folder, second_folder, 'steps', uploaded_filename), recipe=recipe)
                 imgs.save()
             except Exception:
                 pass
@@ -237,7 +246,10 @@ def recipe(request, recipe_id):
     recipe = Recipe.objects.get(id=recipe_id)
     recipe.author_id = models.User.objects.get(id=recipe.author_id)
     if len(recipe.cooking_time.split(':')) == 2 and recipe.cooking_time.split(':')[0] != '':
-        if recipe.cooking_time.split(':')[0] == '24':
+        if recipe.cooking_time.split(':')[1] == '0':
+            cook = recipe.cooking_time.split(':')
+            recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word}"
+        elif recipe.cooking_time.split(':')[0] == '24':
             recipe.cooking_time = f'1 день'
         elif recipe.cooking_time.split(':')[0] != '0':
             cook = recipe.cooking_time.split(':')
@@ -387,3 +399,11 @@ def subscribe_post(request, pk):
         content_type="application/json"
     )
 
+
+def category(request, id):
+    recipes = Recipe.objects.filter(cat_id=id)
+    return render(request, "recipes/category.html", {
+        'recipes': get_formatted_recipes(recipes),
+        "cat": Category.objects.get(id=id),
+        "is_auth": request.user.is_authenticated
+    })

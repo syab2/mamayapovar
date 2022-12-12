@@ -8,7 +8,7 @@
         <div class="entry__container">
             <div class="content-header  entry__header">
                 <div class="content-info">
-                    <a href="#" class="content-info__category">
+                    <a href="{% url 'category' recipe.cat.id %}" class="content-info__category">
                         <img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
                         <span>{{ recipe.cat }}</span>
                     </a>

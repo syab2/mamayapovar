@@ -58,7 +58,7 @@
 					<article class="feed-item">
 						<div class="content-header  feed-item__header">
 							<div class="content-info">
-								<a href="#" class="content-info__category">
+								<a href="{% url 'category' recipe.cat.id %}" class="content-info__category">
 									<img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
 									<span>{{ recipe.cat }}</span>
 								</a>
@@ -213,7 +213,7 @@
 				<article class="feed-item">
 					<div class="content-header  feed-item__header">
 						<div class="content-info">
-							<a href="#" class="content-info__category">
+							<a href="{% url 'category' recipe.cat.id %}" class="content-info__category">
 								<img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
 								<span>{{ recipe.cat }}</span>
 							</a>
@@ -355,7 +355,7 @@
 					<article class="feed-item">
 						<div class="content-header  feed-item__header">
 							<div class="content-info">
-								<a href="#" class="content-info__category">
+								<a href="{% url 'category' recipe.cat.id %}" class="content-info__category">
 									<img src="{% get_static_prefix %}recipes/img/category/{{ recipe.cat.id }}.svg" width="24" height="24" alt="" loading="lazy">
 									<span>{{ recipe.cat }}</span>
 								</a>
@@ -436,24 +436,26 @@
 									<span>11</span>
 								</a>
 							</div>
-							{% get_bookmark_status recipe.id request.user.id as check %}
-							{% if not check %}
-								<button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
-										data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
-										aria-label="Добавить в закладки">
-									<svg class="icon" aria-hidden="true" focusable="false">
-										<use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
-									</svg>
-								</button>
-							{% else %}
-								<button class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
-										data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
-										aria-label="Добавить в закладки">
-									<svg class="icon" aria-hidden="true" focusable="false">
-										<use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
-									</svg>
-								</button>
-							{% endif %}
+
+{% get_bookmark_status recipe.id request.user.id as check %}
+{% if not check %}
+   <button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
+         data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
+         aria-label="Добавить в закладки">
+      <svg class="icon" aria-hidden="true" focusable="false">
+         <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
+      </svg>
+   </button>
+{% else %}
+   <button class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
+         data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
+         aria-label="Добавить в закладки">
+      <svg class="icon" aria-hidden="true" focusable="false">
+         <use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
+      </svg>
+   </button>
+{% endif %}
+
 						</div>
 					</article>
 				{% endfor %}
