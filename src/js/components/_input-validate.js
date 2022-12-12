@@ -19,11 +19,14 @@ if (document.querySelector('.new-recipe-field--time')) {
 			if (inputHours.value > maxHours - 1) {
 				inputHours.value = maxHours
 				inputMinutes.removeAttribute('required')
+				inputMinutes.setAttribute('min', '')
 			} else if (inputHours.value >= 1) {
 				inputMinutes.removeAttribute('required')
+				inputMinutes.setAttribute('min', '')
 			} else if (inputHours.value <= 0) {
 				inputHours.value = 0
 				inputMinutes.setAttribute('required', '')
+				inputMinutes.setAttribute('min', '1')
 			}
 		})
 	})();
