@@ -13,10 +13,10 @@ import vars from '../_vars';
 
 				if (shortIngredients?.classList.contains('active')) {
 					shortIngredientsToggle?.setAttribute('aria-expanded', 'true');
-					shortIngredientsToggle?.setAttribute('aria-label', 'Закрыть меню');
+					shortIngredientsToggle?.setAttribute('aria-label', 'Закрыть список ингредиентов');
 				} else {
 					shortIngredientsToggle?.setAttribute('aria-expanded', 'false');
-					shortIngredientsToggle?.setAttribute('aria-label', 'Открыть меню');
+					shortIngredientsToggle?.setAttribute('aria-label', 'Открыть список ингредиентов');
 				}
 			}
 		})
@@ -29,7 +29,7 @@ import vars from '../_vars';
 
 				shortIngredientsToggle.forEach((e) => {
 					e.setAttribute('aria-expanded', 'false');
-					e.setAttribute('aria-label', 'Открыть меню');
+					e.setAttribute('aria-label', 'Открыть список ингредиентов');
 					e.classList.remove('active')
 				})
 

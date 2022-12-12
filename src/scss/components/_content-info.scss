@@ -1,7 +1,9 @@
 .content-info {
-  display: flex;
+  display: grid;
   align-items: center;
+  grid-template-columns: repeat(3, auto) 1fr;
   margin-bottom: 24px;
+  gap: 32px;
 
   &__category {
     display: flex;
@@ -36,10 +38,5 @@
     font-size: var(--font-s);
     line-height: var(--lh-xs);
     color: var(--color-text-secondary);
-  }
-
-  &__category,
-  &__author {
-    margin-right: 32px;
   }
 }

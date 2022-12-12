@@ -1,5 +1,6 @@
 import './components/_menu-profile.js';
-import './components/_short-ingredients';
+import './components/_short-ingredients.js';
+import './components/_menu-more.js';
 import './components/_modal.js';
 import './components/_scroll-active.js';
 import './components/_smooth-scroll.js';

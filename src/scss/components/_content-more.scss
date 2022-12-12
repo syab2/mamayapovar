@@ -1,0 +1,70 @@
+.content-more {
+  position: relative;
+  display: flex;
+  justify-self: end;
+  grid-column: 4 / 5;
+
+  &__toggle {
+    display: flex;
+    transition: opacity 0.2s ease;
+
+    .icon {
+      fill: var(--color-icons-secondary);
+    }
+
+    &:hover {
+      opacity: 0.8;
+    }
+
+    &.disabled {
+      fill: var(--color-text-disabled);
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+}
+
+.content-more-menu {
+  position: absolute;
+  right: 0;
+  top: 32px;
+  z-index: 5;
+  display: grid;
+  border: 1px solid var(--color-bg-global);
+  border-radius: 8px;
+  padding: 16px 12px;
+  width: 230px;
+  box-shadow: var(--elevation-1);
+  background-color: var(--color-bg-island);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.15s ease, transform 0.2s ease;
+  pointer-events: none;
+  gap: 4px;
+
+  &__item {
+    display: flex;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    border-radius: 4px;
+    padding: 12px 24px;
+    width: 100%;
+    font-size: var(--font-s);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-island);
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-bg-island-hover);
+    }
+  }
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: inherit;
+  }
+}
