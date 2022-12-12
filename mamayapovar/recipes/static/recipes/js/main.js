@@ -11,18 +11,20 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_short_ingredients__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_short-ingredients */ "./src/js/components/_short-ingredients.js");
-/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
-/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
-/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
-/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
-/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
-/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
-/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
-/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
-/* harmony import */ var _components_info_avatar_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/_info-avatar.js */ "./src/js/components/_info-avatar.js");
+/* harmony import */ var _components_short_ingredients_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_short-ingredients.js */ "./src/js/components/_short-ingredients.js");
+/* harmony import */ var _components_menu_more_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_menu-more.js */ "./src/js/components/_menu-more.js");
+/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
+/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
+/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
+/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
+/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
+/* harmony import */ var _components_info_avatar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/_info-avatar.js */ "./src/js/components/_info-avatar.js");
+
 
 
 
@@ -326,12 +328,64 @@ if (document.querySelector('.new-recipe-field--time')) {
     inputHours.addEventListener('change', () => {
       if (inputHours.value > maxHours - 1) {
         inputHours.value = maxHours;
+        inputMinutes.removeAttribute('required');
+      } else if (inputHours.value >= 1) {
+        inputMinutes.removeAttribute('required');
       } else if (inputHours.value <= 0) {
         inputHours.value = 0;
+        inputMinutes.setAttribute('required', '');
       }
     });
   })();
 }
+
+/***/ }),
+
+/***/ "./src/js/components/_menu-more.js":
+/*!*****************************************!*\
+  !*** ./src/js/components/_menu-more.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+(function () {
+  if (document.querySelector('[data-more-menu]')) {
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (target.closest('[data-more-menu-toggle]')) {
+        const moreToggle = target;
+        const moreMenu = target.nextElementSibling;
+        moreToggle.classList.toggle('active');
+        moreMenu.classList.toggle('active');
+        if (moreMenu.classList.contains('active')) {
+          moreToggle.setAttribute('aria-expanded', 'true');
+          moreToggle === null || moreToggle === void 0 ? void 0 : moreToggle.setAttribute('aria-label', 'Закрыть меню действий');
+        } else {
+          moreToggle.setAttribute('aria-expanded', 'false');
+          moreToggle.setAttribute('aria-label', 'Открыть меню действий');
+        }
+      }
+    });
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (!target.closest('[data-more-menu-toggle]') && !target.closest('[data-more-menu]')) {
+        const moreToggle = document.querySelectorAll('[data-more-menu-toggle]');
+        const moreMenu = document.querySelectorAll('[data-more-menu]');
+        moreToggle.forEach(e => {
+          e.setAttribute('aria-expanded', 'false');
+          e.setAttribute('aria-label', 'Открыть меню действий');
+          e.classList.remove('active');
+        });
+        moreMenu.forEach(e => {
+          e.classList.remove('active');
+        });
+      }
+    });
+  }
+})();
 
 /***/ }),
 
@@ -671,10 +725,10 @@ __webpack_require__.r(__webpack_exports__);
         shortIngredients.classList.toggle('active');
         if (shortIngredients !== null && shortIngredients !== void 0 && shortIngredients.classList.contains('active')) {
           shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'true');
-          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Закрыть меню');
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Закрыть список ингредиентов');
         } else {
           shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'false');
-          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Открыть меню');
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Открыть список ингредиентов');
         }
       }
     });
@@ -685,7 +739,7 @@ __webpack_require__.r(__webpack_exports__);
         const shortIngredients = document.querySelectorAll('[data-short-ingredients]');
         shortIngredientsToggle.forEach(e => {
           e.setAttribute('aria-expanded', 'false');
-          e.setAttribute('aria-label', 'Открыть меню');
+          e.setAttribute('aria-label', 'Открыть список ингредиентов');
           e.classList.remove('active');
         });
         shortIngredients.forEach(e => {

@@ -11,9 +11,28 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/_menu-profile.js */ "./src/js/components/_menu-profile.js");
 /* harmony import */ var _components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_menu_profile_js__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
-/* harmony import */ var _components_ingredients_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_ingredients.js */ "./src/js/components/_ingredients.js");
-/* harmony import */ var _components_ingredients_js__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_ingredients_js__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_short_ingredients_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/_short-ingredients.js */ "./src/js/components/_short-ingredients.js");
+/* harmony import */ var _components_menu_more_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/_menu-more.js */ "./src/js/components/_menu-more.js");
+/* harmony import */ var _components_modal_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/_modal.js */ "./src/js/components/_modal.js");
+/* harmony import */ var _components_scroll_active_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/_scroll-active.js */ "./src/js/components/_scroll-active.js");
+/* harmony import */ var _components_smooth_scroll_js__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_smooth-scroll.js */ "./src/js/components/_smooth-scroll.js");
+/* harmony import */ var _components_new_recipe_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_new-recipe.js */ "./src/js/components/_new-recipe.js");
+/* harmony import */ var _components_imageuploader_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/_imageuploader.js */ "./src/js/components/_imageuploader.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/_counter.js */ "./src/js/components/_counter.js");
+/* harmony import */ var _components_counter_js__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_components_counter_js__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/_input-validate.js */ "./src/js/components/_input-validate.js");
+/* harmony import */ var _components_input_validate_js__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(_components_input_validate_js__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _components_textarea_resize_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/_textarea-resize.js */ "./src/js/components/_textarea-resize.js");
+/* harmony import */ var _components_info_avatar_js__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/_info-avatar.js */ "./src/js/components/_info-avatar.js");
+
+
+
+
+
+
+
+
+
 
 
 
@@ -126,11 +145,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+var _document;
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   windowEl: window,
   documentEl: document,
   htmlEl: document.documentElement,
-  bodyEl: document.body
+  bodyEl: document.body,
+  sidebarTab: document.querySelector('.sidebar-tree__item--tab'),
+  headerHeight: (_document = document) === null || _document === void 0 ? void 0 : _document.querySelector('.header').offsetHeight
 });
 
 /***/ }),
@@ -149,67 +171,220 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/components/_ingredients.js":
-/*!*******************************************!*\
-  !*** ./src/js/components/_ingredients.js ***!
-  \*******************************************/
+/***/ "./src/js/components/_counter.js":
+/*!***************************************!*\
+  !*** ./src/js/components/_counter.js ***!
+  \***************************************/
 /***/ (() => {
 
-// function deleteField(a) {
-//  var contDiv = a.parentNode;
-//  // Удаляем этот ДИВ из DOM-дерева
-//  contDiv.parentNode.removeChild(contDiv);
-//  // Уменьшаем значение текущего числа полей
-//  countOfFields--;
-//  // Возвращаем false, чтобы не было перехода по сслыке
-//  return false;
-// }
+if (document.querySelector('.counter__input')) {
+  (function () {
+    const counterInput = document.querySelector('.counter__input');
+    const counterPlus = document.querySelector('.counter__btn--plus');
+    const counterMinus = document.querySelector('.counter__btn--minus');
+    const counterMax = counterInput.getAttribute('max');
+    counterInput.addEventListener('change', () => {
+      if (counterInput.value > counterMax - 1) {
+        counterInput.value = counterMax;
+        counterPlus.classList.add('disabled');
+      } else {
+        counterPlus.classList.remove('disabled');
+      }
+      if (counterInput.value <= 1) {
+        counterInput.value = 1;
+        counterMinus.classList.add('disabled');
+      } else {
+        counterMinus.classList.remove('disabled');
+      }
+    });
+    counterPlus.addEventListener('click', e => {
+      e.preventDefault();
+      let currentValue = parseInt(counterInput.value);
+      currentValue++;
+      counterInput.value = currentValue;
+      counterMinus.classList.remove('disabled');
+      if (counterInput.value > counterMax - 1) {
+        counterInput.value = counterMax;
+        counterPlus.classList.add('disabled');
+      } else {
+        counterPlus.classList.remove('disabled');
+      }
+    });
+    counterMinus.addEventListener('click', e => {
+      e.preventDefault();
+      let currentValue = parseInt(counterInput.value);
+      currentValue--;
+      counterInput.value = currentValue;
+      counterPlus.classList.remove('disabled');
+      if (counterInput.value <= 1) {
+        counterInput.value = 1;
+        counterMinus.classList.add('disabled');
+      } else {
+        counterMinus.classList.remove('disabled');
+      }
+    });
+  })();
+}
+
+/***/ }),
+
+/***/ "./src/js/components/_imageuploader.js":
+/*!*********************************************!*\
+  !*** ./src/js/components/_imageuploader.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.imageuploader')) {
+  (function () {
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', event => {
+      const target = event.target;
+      if (target.classList.contains('imageuploader__input')) {
+        const input = target.querySelector('input[type="file"]');
+        const image = target.parentNode.querySelector('.imageuploader__input');
+        const delBtn = target.parentNode.querySelector('.imageuploader__btn');
+        const placeholder = target.querySelector('.imageuploader__placeholder');
+        let uploadedImage = "";
+        input.addEventListener('change', () => {
+          if (!input.value == "") {
+            const reader = new FileReader();
+            reader.addEventListener('load', () => {
+              uploadedImage = reader.result;
+              image.style.backgroundImage = `url(${uploadedImage})`;
+              placeholder.classList.add('hidden');
+              delBtn.classList.remove('hidden');
+            });
+            reader.readAsDataURL(input.files[0]);
+          }
+        });
+        delBtn.addEventListener('click', () => {
+          input.value = "";
+          uploadedImage = "";
+          image.style.backgroundImage = 'none';
+          placeholder.classList.remove('hidden');
+          delBtn.classList.add('hidden');
+        });
+      }
+    });
+  })();
+}
+
+/***/ }),
+
+/***/ "./src/js/components/_info-avatar.js":
+/*!*******************************************!*\
+  !*** ./src/js/components/_info-avatar.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
 
 (function () {
-  let countOfFields = 1;
-  const ingredientSection = document.querySelector('.ingredient');
-  const ingredientList = ingredientSection.querySelector('.ingredient__list');
-  const ingredientAddBtn = document.querySelector('.ingredient__btn');
-  const ingredientDelBtn = document.querySelectorAll('.ingredient-item__delete');
-  ingredientAddBtn.addEventListener('click', e => {
-    e.preventDefault();
-    countOfFields++;
-    ingredientList.innerHTML += `
-			<div class="ingredient-item" id="ingredient-${countOfFields}">
-			<input type="text" name="ingredient-name-${countOfFields}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
-			<input type="number" name="ingredient-amount-${countOfFields}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="1" max="5000" autocomplete="off" required>
-			<div class="select  ingredient-item__select">
-				<select name="ingredient-measure-${countOfFields}" aria-label="Единица измерения" required>
-					<option>Ед. измерения</option>
-					<option>шт</option>
-					<option>г</option>
-					<option>кг</option>
-					<option>мл</option>
-					<option>л</option>
-					<option>столовая ложка</option>
-					<option>чайная ложка</option>
-					<option>стакан</option>
-				</select>
-				<svg class="icon  select__icon" aria-hidden="true" focusable="false">
-					<use href="img/sprite.svg#chevron-down"/>
-				</svg>
-			</div>
-			<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
-				<svg class="icon  icon--16  ingredient-item__icon" aria-hidden="true" focusable="false">
-					<use href="img/sprite.svg#cross" />
-				</svg>
-			</a>
-		</div>
-    `;
-  });
-  ingredientDelBtn.forEach(btn => {
-    btn.addEventListener('click', e => {
-      let contDiv = btn.parentNode;
-      contDiv.parentNode.removeChild(contDiv);
-      countOfFields--;
-      return false;
+  const infoAvatar = _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.info-avatar--change');
+  if (infoAvatar) {
+    const image = infoAvatar.querySelector('.info-avatar__input');
+    const input = infoAvatar.querySelector('input[type="file"]');
+    let uploadedImage = "";
+    input.addEventListener('change', () => {
+      if (!input.value == "") {
+        const reader = new FileReader();
+        reader.addEventListener('load', () => {
+          uploadedImage = reader.result;
+          image.style.backgroundImage = `url(${uploadedImage})`;
+        });
+        reader.readAsDataURL(input.files[0]);
+      }
     });
-  });
+  }
+})();
+
+/***/ }),
+
+/***/ "./src/js/components/_input-validate.js":
+/*!**********************************************!*\
+  !*** ./src/js/components/_input-validate.js ***!
+  \**********************************************/
+/***/ (() => {
+
+if (document.querySelector('.new-recipe-field--time')) {
+  (function () {
+    const field = document.querySelector('.new-recipe-field--time');
+    const inputMinutes = field.querySelector('.new-recipe-field--minutes input');
+    const inputHours = field.querySelector('.new-recipe-field--hours input');
+    const maxMinutes = inputMinutes.getAttribute('max');
+    const maxHours = inputHours.getAttribute('max');
+    inputMinutes.addEventListener('change', () => {
+      if (inputMinutes.value > maxMinutes - 1) {
+        inputMinutes.value = maxMinutes;
+      } else if (inputMinutes.value <= 0) {
+        inputMinutes.value = 0;
+      }
+    });
+    inputHours.addEventListener('change', () => {
+      if (inputHours.value > maxHours - 1) {
+        inputHours.value = maxHours;
+        inputMinutes.removeAttribute('required');
+      } else if (inputHours.value >= 1) {
+        inputMinutes.removeAttribute('required');
+      } else if (inputHours.value <= 0) {
+        inputHours.value = 0;
+        inputMinutes.setAttribute('required', '');
+      }
+    });
+  })();
+}
+
+/***/ }),
+
+/***/ "./src/js/components/_menu-more.js":
+/*!*****************************************!*\
+  !*** ./src/js/components/_menu-more.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+(function () {
+  if (document.querySelector('[data-more-menu]')) {
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (target.closest('[data-more-menu-toggle]')) {
+        const moreToggle = target;
+        const moreMenu = target.nextElementSibling;
+        moreToggle.classList.toggle('active');
+        moreMenu.classList.toggle('active');
+        if (moreMenu.classList.contains('active')) {
+          moreToggle.setAttribute('aria-expanded', 'true');
+          moreToggle === null || moreToggle === void 0 ? void 0 : moreToggle.setAttribute('aria-label', 'Закрыть меню действий');
+        } else {
+          moreToggle.setAttribute('aria-expanded', 'false');
+          moreToggle.setAttribute('aria-label', 'Открыть меню действий');
+        }
+      }
+    });
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (!target.closest('[data-more-menu-toggle]') && !target.closest('[data-more-menu]')) {
+        const moreToggle = document.querySelectorAll('[data-more-menu-toggle]');
+        const moreMenu = document.querySelectorAll('[data-more-menu]');
+        moreToggle.forEach(e => {
+          e.setAttribute('aria-expanded', 'false');
+          e.setAttribute('aria-label', 'Открыть меню действий');
+          e.classList.remove('active');
+        });
+        moreMenu.forEach(e => {
+          e.classList.remove('active');
+        });
+      }
+    });
+  }
 })();
 
 /***/ }),
@@ -221,34 +396,36 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (() => {
 
 (function () {
-  var _document, _document2, _document3;
-  const menuProfileToggle = (_document = document) === null || _document === void 0 ? void 0 : _document.querySelector('[data-menu-profile-toggle]');
-  const menuProfile = (_document2 = document) === null || _document2 === void 0 ? void 0 : _document2.querySelector('[data-menu-profile]');
-  const menuProfileLinks = (_document3 = document) === null || _document3 === void 0 ? void 0 : _document3.querySelectorAll('[data-menu-profile-link]');
+  const menuProfileToggle = document.querySelector('[data-menu-profile-toggle]');
+  const menuProfile = document.querySelector('[data-menu-profile]');
+  const menuProfileLinks = document.querySelectorAll('[data-menu-profile-link]');
   if (menuProfileToggle) {
-    menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.addEventListener('click', e => {
-      menuProfile === null || menuProfile === void 0 ? void 0 : menuProfile.classList.toggle('active');
-      if (menuProfile !== null && menuProfile !== void 0 && menuProfile.classList.contains('active')) {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'true');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Закрыть меню');
+    menuProfileToggle.addEventListener('click', () => {
+      menuProfile.classList.toggle('active');
+      menuProfileToggle.classList.toggle('active');
+      if (menuProfile.classList.contains('active')) {
+        menuProfileToggle.setAttribute('aria-expanded', 'true');
+        menuProfileToggle.setAttribute('aria-label', 'Закрыть меню');
       } else {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
+        menuProfileToggle.setAttribute('aria-expanded', 'false');
+        menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
       }
     });
     window.addEventListener('click', e => {
       const target = e.target;
       if (!target.closest('[data-menu-profile-toggle]') && !target.closest('[data-menu-profile]')) {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
+        menuProfileToggle.setAttribute('aria-expanded', 'false');
+        menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
+        menuProfileToggle.classList.remove('active');
       }
     });
-    menuProfileLinks === null || menuProfileLinks === void 0 ? void 0 : menuProfileLinks.forEach(el => {
+    menuProfileLinks.forEach(el => {
       el.addEventListener('click', () => {
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-expanded', 'false');
-        menuProfileToggle === null || menuProfileToggle === void 0 ? void 0 : menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
+        menuProfileToggle.setAttribute('aria-expanded', 'false');
+        menuProfileToggle.setAttribute('aria-label', 'Открыть меню');
         menuProfile.classList.remove('active');
+        menuProfileToggle.classList.remove('active');
       });
     });
   }
@@ -267,6 +444,350 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graph_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graph-modal */ "./node_modules/graph-modal/src/graph-modal.js");
 
 const modal = new graph_modal__WEBPACK_IMPORTED_MODULE_0__["default"]();
+
+/***/ }),
+
+/***/ "./src/js/components/_new-recipe.js":
+/*!******************************************!*\
+  !*** ./src/js/components/_new-recipe.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+
+// ИГРЕДИЕНТЫ
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredient')) {
+  (function () {
+    const ingredientSection = document.querySelector('.ingredient');
+    const ingredientList = ingredientSection.querySelector('.ingredient__list');
+    const ingredientAdd = ingredientSection.querySelector('.ingredient__btn');
+    let countOfFields = 2;
+    let maxOfFields = 50;
+    function randomID() {
+      return Math.floor(Math.random() * Date.now());
+    }
+    function decimalAdjust(type, value, exp) {
+      if (typeof exp === 'undefined' || +exp === 0) {
+        return Math[type](value);
+      }
+      value = +value;
+      exp = +exp;
+      if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
+        return NaN;
+      }
+      value = value.toString().split('e');
+      value = Math[type](+(value[0] + 'e' + (value[1] ? +value[1] - exp : -exp)));
+      value = value.toString().split('e');
+      return +(value[0] + 'e' + (value[1] ? +value[1] + exp : exp));
+    }
+    function round10(value, exp) {
+      return decimalAdjust('round', value, exp);
+    }
+
+    // проверка кол-ва ингредиентов
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', () => {
+      let ingredientAmounts = ingredientSection.querySelectorAll('.ingredient-item__input--amount');
+      ingredientAmounts.forEach(input => {
+        const max = input.getAttribute('max');
+        input.addEventListener('change', () => {
+          let currentValue = String(input.value);
+          if (input.value > max - 1) {
+            input.value = max;
+          } else if (input.value > 0.1 && currentValue.length > 3) {
+            input.value = round10(input.value, -1);
+          } else if (input.value <= 0.1) {
+            input.value = 0.1;
+          }
+        });
+      });
+    });
+
+    // удаление ингредиента
+    ingredientList.addEventListener('click', e => {
+      let target = e.target;
+      if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
+        countOfFields--;
+        target.parentNode.remove();
+        if (countOfFields == 1) {
+          const item = ingredientList.querySelector('.ingredient-item');
+          const del = item.querySelector('.ingredient-item__delete');
+          del.classList.add('disabled');
+        }
+        if (countOfFields < maxOfFields) {
+          ingredientAdd.classList.remove('disabled');
+        }
+      }
+    });
+
+    // добавление ингредиента
+    ingredientAdd.addEventListener('click', e => {
+      e.preventDefault();
+      countOfFields++;
+      const fieldIndex = randomID();
+      if (countOfFields == maxOfFields) {
+        ingredientAdd.classList.add('disabled');
+      }
+      if (countOfFields > 1) {
+        const items = ingredientList.querySelectorAll('.ingredient-item');
+        items.forEach(e => {
+          const del = e.querySelector('.ingredient-item__delete');
+          del.classList.remove('disabled');
+        });
+      }
+      let ingredientItem = document.createElement("div");
+      ingredientItem.classList.add('ingredient-item');
+      ingredientItem.setAttribute('id', `ingredient-${fieldIndex}`);
+      ingredientItem.innerHTML += `
+				<input type="text" name="ingredient-name-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--name" placeholder="Название ингредиента" autocomplete="off" required>
+				<input type="number" name="ingredient-amount-${fieldIndex}" class="input  ingredient-item__input  ingredient-item__input--amount" value="1" min="0.1" max="999" step="0.1" autocomplete="off" required>
+				<div class="select  ingredient-item__select">
+					<select name="ingredient-measure-${fieldIndex}" aria-label="Единица измерения" required>
+						<option value="">Ед. измерения</option>
+						<option>шт</option>
+						<option>г</option>
+						<option>кг</option>
+						<option>мл</option>
+						<option>л</option>
+						<option>столовая ложка</option>
+						<option>чайная ложка</option>
+						<option>стакан</option>
+					</select>
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="${svgChevron}"/>
+					</svg>
+				</div>
+				<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
+					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+						<use href="${svgCross}" />
+					</svg>
+				</a>
+				<label class="form-field__error  hidden">
+					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+						<use href="${svgCircleCross}"/>
+					</svg>
+					<span class="form-field__text">Здесь будет текст ошибки</span>
+				</label>
+			`;
+      ingredientList.append(ingredientItem);
+    });
+  })();
+}
+
+// ИНСТРУКЦИЯ ПРИГОТОВЛЕНИЯ
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step')) {
+  (function () {
+    const stepSection = document.querySelector('.step');
+    const stepList = stepSection.querySelector('.step__list');
+    const stepAdd = stepSection.querySelector('.step__btn');
+    let countOfFields = 2;
+    let maxOfFields = 30;
+    function randomID() {
+      return Math.floor(Math.random() * Date.now());
+    }
+
+    // удаление шага
+    stepList.addEventListener('click', e => {
+      let target = e.target;
+      if (target.classList.contains('step-item__delete') && countOfFields > 1) {
+        countOfFields--;
+        target.parentNode.remove();
+      }
+      if (countOfFields < maxOfFields) {
+        stepAdd.classList.remove('disabled');
+      }
+      if (countOfFields == 1) {
+        const item = stepList.querySelector('.step-item');
+        const del = item.querySelector('.step-item__delete');
+        del.classList.add('disabled');
+      }
+    });
+
+    // добавление шага
+    stepAdd.addEventListener('click', e => {
+      e.preventDefault();
+      countOfFields++;
+      const fieldIndex = randomID();
+      if (countOfFields == maxOfFields) {
+        stepAdd.classList.add('disabled');
+      }
+      if (countOfFields > 1) {
+        const items = stepList.querySelectorAll('.step-item');
+        items.forEach(e => {
+          const del = e.querySelector('.step-item__delete');
+          del.classList.remove('disabled');
+        });
+      }
+      let stepItem = document.createElement("div");
+      stepItem.classList.add('step-item');
+      stepItem.setAttribute('id', `step-${fieldIndex}`);
+      stepItem.innerHTML += `
+				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
+				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
+					<svg class="icon" aria-hidden="true" focusable="false">
+						<use href="${svgCross}" />
+					</svg>
+				</a>
+				<div class="step-item__body">
+					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
+						<label class="input  input--photo  imageuploader__input">
+							<input type="file" name="step-photo-${fieldIndex}" accept=".jpg, .jpeg, .png">
+							<div class="imageuploader__placeholder">
+								<svg class="icon" aria-hidden="true" focusable="false">
+									<use href="${svgImage}"/>
+								</svg>
+								Загрузите фото шага
+							</div>
+						</label>
+						<a class="btn  btn--other  imageuploader__btn  hidden">
+							<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+								<use href="${svgDelete}" />
+							</svg>
+						</a>
+					</div>
+					<textarea name="step-description-${fieldIndex}" id="step-description-${fieldIndex}" class="input  input--textarea  step-item__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
+					<label class="form-field__error  hidden" for="step-description-${fieldIndex}">
+						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+							<use href="${svgCircleCross}"/>
+						</svg>
+						<span class="form-field__text">Здесь будет текст ошибки</span>
+					</label>
+				</div>
+			`;
+      stepList.append(stepItem);
+    });
+  })();
+}
+
+/***/ }),
+
+/***/ "./src/js/components/_scroll-active.js":
+/*!*********************************************!*\
+  !*** ./src/js/components/_scroll-active.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+(function () {
+  if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].sidebarTab) {
+    const fieldsets = document.querySelectorAll('fieldset[id]');
+    function scrollActive() {
+      const scrollY = window.pageYOffset;
+      fieldsets.forEach(current => {
+        const fieldsetHeight = current.offsetHeight + 40;
+        const fieldsetTop = current.offsetTop - _vars__WEBPACK_IMPORTED_MODULE_0__["default"].headerHeight - 205;
+        const fieldsetId = current.getAttribute('id');
+        const fieldsetIdLast = fieldsets[fieldsets.length - 1].getAttribute('id');
+        const fieldsetItems = document.querySelectorAll('.sidebar-tree__list li');
+        if (window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+          fieldsetItems.forEach(e => {
+            e.classList.remove('active');
+          });
+          document.querySelector('.sidebar-tree__list a[href*=' + fieldsetIdLast + ']').parentElement.classList.add('active');
+        } else {
+          if (scrollY > fieldsetTop && scrollY <= fieldsetTop + fieldsetHeight) {
+            document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.add('active');
+          } else {
+            document.querySelector('.sidebar-tree__list a[href*=' + fieldsetId + ']').parentElement.classList.remove('active');
+          }
+        }
+      });
+    }
+    window.addEventListener('scroll', scrollActive);
+  }
+})();
+
+/***/ }),
+
+/***/ "./src/js/components/_short-ingredients.js":
+/*!*************************************************!*\
+  !*** ./src/js/components/_short-ingredients.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+(function () {
+  if (document.querySelector('[data-short-ingredients]')) {
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (target.closest('[data-short-ingredients-toggle]')) {
+        const shortIngredientsToggle = target;
+        const shortIngredients = target.nextElementSibling;
+        shortIngredientsToggle.classList.toggle('active');
+        shortIngredients.classList.toggle('active');
+        if (shortIngredients !== null && shortIngredients !== void 0 && shortIngredients.classList.contains('active')) {
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'true');
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Закрыть список ингредиентов');
+        } else {
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'false');
+          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Открыть список ингредиентов');
+        }
+      }
+    });
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
+      if (!target.closest('[data-short-ingredients-toggle]') && !target.closest('[data-short-ingredients]')) {
+        const shortIngredientsToggle = document.querySelectorAll('[data-short-ingredients-toggle]');
+        const shortIngredients = document.querySelectorAll('[data-short-ingredients]');
+        shortIngredientsToggle.forEach(e => {
+          e.setAttribute('aria-expanded', 'false');
+          e.setAttribute('aria-label', 'Открыть список ингредиентов');
+          e.classList.remove('active');
+        });
+        shortIngredients.forEach(e => {
+          e.classList.remove('active');
+        });
+      }
+    });
+  }
+})();
+
+/***/ }),
+
+/***/ "./src/js/components/_smooth-scroll.js":
+/*!*********************************************!*\
+  !*** ./src/js/components/_smooth-scroll.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var smooth_scroll__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! smooth-scroll */ "./node_modules/smooth-scroll/dist/smooth-scroll.polyfills.min.js");
+/* harmony import */ var smooth_scroll__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(smooth_scroll__WEBPACK_IMPORTED_MODULE_0__);
+
+const scroll = new (smooth_scroll__WEBPACK_IMPORTED_MODULE_0___default())('a[href*="#"]', {
+  updateURL: false,
+  offset: 150
+});
+
+/***/ }),
+
+/***/ "./src/js/components/_textarea-resize.js":
+/*!***********************************************!*\
+  !*** ./src/js/components/_textarea-resize.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vars__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../_vars */ "./src/js/_vars.js");
+
+if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.comments__input')) {
+  const textArea = _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.comments__input');
+  textArea.setAttribute('style', 'height:' + textArea.scrollHeight + 'px');
+  textArea.addEventListener("input", () => {
+    textArea.style.height = 'auto';
+    textArea.style.height = textArea.scrollHeight + 'px';
+  });
+}
 
 /***/ }),
 
@@ -653,7 +1174,7 @@ class GraphModal {
     if (selector) {
       this.modalContainer = document.querySelector(`[data-graph-target="${selector}"]`);
     }
-    
+
     this.modalContainer.scrollTo(0, 0)
 
     this.modal.style.setProperty('--transition-time', `${this.speed / 1000}s`);
@@ -758,6 +1279,18 @@ class GraphModal {
 }
 
 
+/***/ }),
+
+/***/ "./node_modules/smooth-scroll/dist/smooth-scroll.polyfills.min.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/smooth-scroll/dist/smooth-scroll.polyfills.min.js ***!
+  \************************************************************************/
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! smooth-scroll v16.1.3 | (c) 2020 Chris Ferdinandi | MIT License | http://github.com/cferdinandi/smooth-scroll */
+window.Element&&!Element.prototype.closest&&(Element.prototype.closest=function(e){var t,n=(this.document||this.ownerDocument).querySelectorAll(e),o=this;do{for(t=n.length;0<=--t&&n.item(t)!==o;);}while(t<0&&(o=o.parentElement));return o}),(function(){if("function"==typeof window.CustomEvent)return;function e(e,t){t=t||{bubbles:!1,cancelable:!1,detail:void 0};var n=document.createEvent("CustomEvent");return n.initCustomEvent(e,t.bubbles,t.cancelable,t.detail),n}e.prototype=window.Event.prototype,window.CustomEvent=e})(),(function(){for(var r=0,e=["ms","moz","webkit","o"],t=0;t<e.length&&!window.requestAnimationFrame;++t)window.requestAnimationFrame=window[e[t]+"RequestAnimationFrame"],window.cancelAnimationFrame=window[e[t]+"CancelAnimationFrame"]||window[e[t]+"CancelRequestAnimationFrame"];window.requestAnimationFrame||(window.requestAnimationFrame=function(e,t){var n=(new Date).getTime(),o=Math.max(0,16-(n-r)),a=window.setTimeout((function(){e(n+o)}),o);return r=n+o,a}),window.cancelAnimationFrame||(window.cancelAnimationFrame=function(e){clearTimeout(e)})})(),(function(e,t){ true?!(__WEBPACK_AMD_DEFINE_ARRAY__ = [], __WEBPACK_AMD_DEFINE_RESULT__ = (function(){return t(e)}).apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__),
+		__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)):0})("undefined"!=typeof __webpack_require__.g?__webpack_require__.g:"undefined"!=typeof window?window:this,(function(M){"use strict";var q={ignore:"[data-scroll-ignore]",header:null,topOnEmptyHash:!0,speed:500,speedAsDuration:!1,durationMax:null,durationMin:null,clip:!0,offset:0,easing:"easeInOutCubic",customEasing:null,updateURL:!0,popstate:!0,emitEvents:!0},I=function(){var n={};return Array.prototype.forEach.call(arguments,(function(e){for(var t in e){if(!e.hasOwnProperty(t))return;n[t]=e[t]}})),n},r=function(e){"#"===e.charAt(0)&&(e=e.substr(1));for(var t,n=String(e),o=n.length,a=-1,r="",i=n.charCodeAt(0);++a<o;){if(0===(t=n.charCodeAt(a)))throw new InvalidCharacterError("Invalid character: the input contains U+0000.");1<=t&&t<=31||127==t||0===a&&48<=t&&t<=57||1===a&&48<=t&&t<=57&&45===i?r+="\\"+t.toString(16)+" ":r+=128<=t||45===t||95===t||48<=t&&t<=57||65<=t&&t<=90||97<=t&&t<=122?n.charAt(a):"\\"+n.charAt(a)}return"#"+r},F=function(){return Math.max(document.body.scrollHeight,document.documentElement.scrollHeight,document.body.offsetHeight,document.documentElement.offsetHeight,document.body.clientHeight,document.documentElement.clientHeight)},L=function(e){return e?(t=e,parseInt(M.getComputedStyle(t).height,10)+e.offsetTop):0;var t},x=function(e,t,n){0===e&&document.body.focus(),n||(e.focus(),document.activeElement!==e&&(e.setAttribute("tabindex","-1"),e.focus(),e.style.outline="none"),M.scrollTo(0,t))},H=function(e,t,n,o){if(t.emitEvents&&"function"==typeof M.CustomEvent){var a=new CustomEvent(e,{bubbles:!0,detail:{anchor:n,toggle:o}});document.dispatchEvent(a)}};return function(o,e){var b,a,A,O,C={};C.cancelScroll=function(e){cancelAnimationFrame(O),O=null,e||H("scrollCancel",b)},C.animateScroll=function(a,r,e){C.cancelScroll();var i=I(b||q,e||{}),c="[object Number]"===Object.prototype.toString.call(a),t=c||!a.tagName?null:a;if(c||t){var s=M.pageYOffset;i.header&&!A&&(A=document.querySelector(i.header));var n,o,u,l,m,d,f,h,p=L(A),g=c?a:(function(e,t,n,o){var a=0;if(e.offsetParent)for(;a+=e.offsetTop,e=e.offsetParent;);return a=Math.max(a-t-n,0),o&&(a=Math.min(a,F()-M.innerHeight)),a})(t,p,parseInt("function"==typeof i.offset?i.offset(a,r):i.offset,10),i.clip),y=g-s,v=F(),w=0,S=(n=y,u=(o=i).speedAsDuration?o.speed:Math.abs(n/1e3*o.speed),o.durationMax&&u>o.durationMax?o.durationMax:o.durationMin&&u<o.durationMin?o.durationMin:parseInt(u,10)),E=function(e){var t,n,o;l||(l=e),w+=e-l,d=s+y*(n=m=1<(m=0===S?0:w/S)?1:m,"easeInQuad"===(t=i).easing&&(o=n*n),"easeOutQuad"===t.easing&&(o=n*(2-n)),"easeInOutQuad"===t.easing&&(o=n<.5?2*n*n:(4-2*n)*n-1),"easeInCubic"===t.easing&&(o=n*n*n),"easeOutCubic"===t.easing&&(o=--n*n*n+1),"easeInOutCubic"===t.easing&&(o=n<.5?4*n*n*n:(n-1)*(2*n-2)*(2*n-2)+1),"easeInQuart"===t.easing&&(o=n*n*n*n),"easeOutQuart"===t.easing&&(o=1- --n*n*n*n),"easeInOutQuart"===t.easing&&(o=n<.5?8*n*n*n*n:1-8*--n*n*n*n),"easeInQuint"===t.easing&&(o=n*n*n*n*n),"easeOutQuint"===t.easing&&(o=1+--n*n*n*n*n),"easeInOutQuint"===t.easing&&(o=n<.5?16*n*n*n*n*n:1+16*--n*n*n*n*n),t.customEasing&&(o=t.customEasing(n)),o||n),M.scrollTo(0,Math.floor(d)),(function(e,t){var n=M.pageYOffset;if(e==t||n==t||(s<t&&M.innerHeight+n)>=v)return C.cancelScroll(!0),x(a,t,c),H("scrollStop",i,a,r),!(O=l=null)})(d,g)||(O=M.requestAnimationFrame(E),l=e)};0===M.pageYOffset&&M.scrollTo(0,0),f=a,h=i,c||history.pushState&&h.updateURL&&history.pushState({smoothScroll:JSON.stringify(h),anchor:f.id},document.title,f===document.documentElement?"#top":"#"+f.id),"matchMedia"in M&&M.matchMedia("(prefers-reduced-motion)").matches?x(a,Math.floor(g),!1):(H("scrollStart",i,a,r),C.cancelScroll(!0),M.requestAnimationFrame(E))}};var t=function(e){if(!e.defaultPrevented&&!(0!==e.button||e.metaKey||e.ctrlKey||e.shiftKey)&&"closest"in e.target&&(a=e.target.closest(o))&&"a"===a.tagName.toLowerCase()&&!e.target.closest(b.ignore)&&a.hostname===M.location.hostname&&a.pathname===M.location.pathname&&/#/.test(a.href)){var t,n;try{t=r(decodeURIComponent(a.hash))}catch(e){t=r(a.hash)}if("#"===t){if(!b.topOnEmptyHash)return;n=document.documentElement}else n=document.querySelector(t);(n=n||"#top"!==t?n:document.documentElement)&&(e.preventDefault(),(function(e){if(history.replaceState&&e.updateURL&&!history.state){var t=M.location.hash;t=t||"",history.replaceState({smoothScroll:JSON.stringify(e),anchor:t||M.pageYOffset},document.title,t||M.location.href)}})(b),C.animateScroll(n,a))}},n=function(e){if(null!==history.state&&history.state.smoothScroll&&history.state.smoothScroll===JSON.stringify(b)){var t=history.state.anchor;"string"==typeof t&&t&&!(t=document.querySelector(r(history.state.anchor)))||C.animateScroll(t,null,{updateURL:!1})}};C.destroy=function(){b&&(document.removeEventListener("click",t,!1),M.removeEventListener("popstate",n,!1),C.cancelScroll(),O=A=a=b=null)};return (function(){if(!("querySelector"in document&&"addEventListener"in M&&"requestAnimationFrame"in M&&"closest"in M.Element.prototype))throw"Smooth Scroll: This browser does not support the required JavaScript methods and browser APIs.";C.destroy(),b=I(q,e||{}),A=b.header?document.querySelector(b.header):null,document.addEventListener("click",t,!1),b.updateURL&&b.popstate&&M.addEventListener("popstate",n,!1)})(),C}}));
+
 /***/ })
 
 /******/ 	});
@@ -780,7 +1313,7 @@ class GraphModal {
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -809,6 +1342,18 @@ class GraphModal {
 /******/ 				}
 /******/ 			}
 /******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
