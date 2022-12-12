@@ -1293,6 +1293,11 @@ a {
 .content-more__toggle:hover {
   opacity: 0.8;
 }
+.content-more__toggle.disabled {
+  fill: var(--color-text-disabled);
+  opacity: 0.4;
+  pointer-events: none;
+}
 
 .content-more-menu {
   position: absolute;
