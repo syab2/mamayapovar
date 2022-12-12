@@ -1,3 +1,7 @@
+Информацию о проекте:
+
+> https://docs.google.com/document/d/1LBP1-nYCzw-k9UK61bthDDAnJNvioLGTuPeVkO2L7G4/
+
 Наш сайт доступен в интернете по адресу:
 
 > http://kolakrhd.beget.tech/
