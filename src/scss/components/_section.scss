@@ -27,7 +27,8 @@
   color: var(--color-text-accent);
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &.focus-visible {
     outline: none;
     text-decoration: underline;
   }
@@ -37,7 +38,8 @@
     cursor: not-allowed;
     pointer-events: none;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       text-decoration: none;
     }
   }

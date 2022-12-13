@@ -50,7 +50,8 @@
     height: 40px;
     transition: opacity 0.2s ease;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       opacity: 0.8;
     }
   }
@@ -65,7 +66,8 @@
     color: var(--color-text-primary);
     transition: opacity 0.2s ease;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       opacity: 0.8;
     }
   }

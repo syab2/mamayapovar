@@ -97,6 +97,11 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+
+    &.focus-visible {
+      outline: none;
+      background-color: var(--color-bg-island-hover);
+    }
   }
 
   &__avatar {
@@ -121,7 +126,8 @@
     color: var(--color-text-secondary);
     transition: opacity 0.2s ease;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       opacity: 0.8;
     }
 

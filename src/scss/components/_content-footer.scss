@@ -27,7 +27,8 @@
       fill: var(--color-icons-secondary);
     }
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       span {
         color: var(--color-text-accent);
       }

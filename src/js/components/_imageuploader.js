@@ -2,8 +2,8 @@ import vars from "../_vars";
 
 if (vars.bodyEl.querySelector('.imageuploader')) {
 	(function(){
-		vars.bodyEl.addEventListener('click', (event) => {
-			const target = event.target
+		vars.bodyEl.addEventListener('click', (e) => {
+			const target = e.target
 			if (target.classList.contains('imageuploader__input')) {
 				const input = target.querySelector('input[type="file"]')
 				const image = target.parentNode.querySelector('.imageuploader__input')
@@ -24,7 +24,8 @@ if (vars.bodyEl.querySelector('.imageuploader')) {
 					}
 				})
 
-				delBtn.addEventListener('click', () => {
+				delBtn.addEventListener('click', (button) => {
+					button.preventDefault()
 					input.value = "";
 					uploadedImage = ""
 					image.style.backgroundImage = 'none'

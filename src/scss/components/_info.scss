@@ -36,7 +36,8 @@
     border: none;
     border-radius: 100%;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       .info-avatar__placeholder {
         opacity: 1;
       }

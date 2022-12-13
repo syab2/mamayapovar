@@ -20,7 +20,8 @@
       transition: fill, opacity 0.2s ease;
     }
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       background-color: var(--color-button-secondary-bg-hover);
     }
 

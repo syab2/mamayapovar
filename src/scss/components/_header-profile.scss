@@ -12,7 +12,8 @@
     height: 56px;
     transition: opacity 0.2s ease;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       opacity: 0.8;
     }
   }
@@ -21,7 +22,8 @@
     display: flex;
     transition: opacity, transform 0.2s ease;
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       opacity: 0.8;
     }
 
@@ -88,7 +90,8 @@
       fill: var(--color-icons-secondary);
     }
 
-    &:hover {
+    &:hover,
+    &.focus-visible {
       background-color: var(--color-bg-island-hover);
     }
   }
