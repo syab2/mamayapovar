@@ -240,8 +240,8 @@ __webpack_require__.r(__webpack_exports__);
 
 if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.imageuploader')) {
   (function () {
-    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', event => {
-      const target = event.target;
+    _vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.addEventListener('click', e => {
+      const target = e.target;
       if (target.classList.contains('imageuploader__input')) {
         const input = target.querySelector('input[type="file"]');
         const image = target.parentNode.querySelector('.imageuploader__input');
@@ -260,7 +260,8 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.imageup
             reader.readAsDataURL(input.files[0]);
           }
         });
-        delBtn.addEventListener('click', () => {
+        delBtn.addEventListener('click', button => {
+          button.preventDefault();
           input.value = "";
           uploadedImage = "";
           image.style.backgroundImage = 'none';
@@ -510,6 +511,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
 
     // удаление ингредиента
     ingredientList.addEventListener('click', e => {
+      e.preventDefault();
       let target = e.target;
       if (target.classList.contains('ingredient-item__delete') && countOfFields > 1) {
         countOfFields--;
@@ -554,15 +556,17 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
 						<option>кг</option>
 						<option>мл</option>
 						<option>л</option>
-						<option>столовая ложка</option>
-						<option>чайная ложка</option>
 						<option>стакан</option>
+						<option>чайная ложка</option>
+						<option>столовая ложка</option>
+						<option>щепотка</option>
+						<option>зубчик</option>
 					</select>
 					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgChevron}"/>
 					</svg>
 				</div>
-				<a class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент"  role="button">
+				<a href="#" class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
 					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
@@ -595,6 +599,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
     stepList.addEventListener('click', e => {
       let target = e.target;
       if (target.classList.contains('step-item__delete') && countOfFields > 1) {
+        e.preventDefault();
         countOfFields--;
         target.parentNode.remove();
       }
@@ -628,7 +633,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
       stepItem.setAttribute('id', `step-${fieldIndex}`);
       stepItem.innerHTML += `
 				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
-				<a class="btn-reset  step-item__delete" aria-label="Удалить шаг"  role="button">
+				<a href="#" class="btn-reset  step-item__delete" aria-label="Удалить шаг">
 					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
@@ -644,7 +649,7 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 								Загрузите фото шага
 							</div>
 						</label>
-						<a class="btn  btn--other  imageuploader__btn  hidden">
+						<a href="#" class="btn  btn--other  imageuploader__btn  hidden">
 							<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 								<use href="${svgDelete}" />
 							</svg>
