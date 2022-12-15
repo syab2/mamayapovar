@@ -1,8 +1,6 @@
 import pymorphy2
-from datetime import datetime, timezone, timedelta
 from django.contrib.auth.models import User
 from django.db import models
-from math import floor
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -26,6 +24,9 @@ class Recipe(models.Model):
 
     def get_formatted_time(self):
         return f"{self.time_create.strftime('%d.%m.%Y')}"
+
+    def get_formatted_time_full(self):
+        return f"{self.time_create.strftime('%Y-%m-%d %H:%M')}"
 
     def __str__(self):
         return self.title
