@@ -2,6 +2,7 @@ import json
 import os
 import random
 from pathlib import Path
+import transliterate
 
 import pymorphy2
 from django.conf import settings
@@ -116,8 +117,8 @@ def new_recipe(request):
             "Салаты": 3,
             "Горячие блюда": 4
         }
-        title = request.POST.get('title')
-        description = request.POST.get('description')
+        title = request.POST.get('title').capitalize()
+        description = request.POST.get('description').capitalize()
         cat_id = categories[request.POST.get('cat')]
         persons = request.POST.get('persons')
         cooking_time = f'{request.POST.get("cooking_time_hours")}:{request.POST.get("cooking_time_minutes")}'
@@ -126,7 +127,7 @@ def new_recipe(request):
         for elem in request.POST:
             if 'ingredient-name-' in elem:
                 ingredient += request.POST.get(
-                    f'ingredient-name-{elem.split("-")[-1]}') + ':'
+                    f'ingredient-name-{elem.split("-")[-1]}').capitalize() + ':'
             if 'ingredient-amount-' in elem:
                 ingredient += request.POST.get(
                     f'ingredient-amount-{elem.split("-")[-1]}') + '-'
@@ -140,7 +141,10 @@ def new_recipe(request):
         # photo
         folder = 'recipes'
         second_folder = folder_id
-        uploaded_filename = f"{request.FILES['photo'].name}"
+        try:
+            uploaded_filename = transliterate.translit(request.FILES['photo'].name, reversed=True)
+        except transliterate.exceptions.LanguageDetectionError:
+            uploaded_filename = request.FILES['photo'].name
 
         try:
             os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
@@ -161,15 +165,14 @@ def new_recipe(request):
 
         # photos of steps and text
 
-
-        itog = []
+        itog1 = []
         for elem in request.POST:
             if 'step-description-' in elem:
-                itog.append([x for x in request.POST[elem].replace('\r', '').split('\n') if x != ''])
+                itog1.append([x.capitalize() for x in request.POST[elem].replace('\r', '').split('\n') if x != ''])
 
         j = 0
         step_descs = []
-        for elem in itog:
+        for elem in itog1:
             j += 1
             step_descs.append('{}:{}'.format(j, "\n".join(elem)))
 

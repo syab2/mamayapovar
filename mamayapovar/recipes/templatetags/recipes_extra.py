@@ -1,7 +1,11 @@
+# -*- coding: utf-8 -*-
+
 from django import template
 from django.contrib.auth.models import User
 from recipes.models import Bookmark, UserProfile, Like, Subscribe, Recipe
+import pymorphy2
 
+morph = pymorphy2.MorphAnalyzer()
 register = template.Library()
 
 
@@ -77,9 +81,11 @@ def get_count_of_subscribers(id_):
 
 @register.simple_tag
 def get_correct_path(id_):
-    return f'/user/{id_}/'
+    return f"/user/{id_}/"
 
 
 @register.simple_tag
 def get_server_media_url(url):
-    return '/'.join(url.split('/')[1:])
+    return "/".join(url.split("/")[1:])
+
+
