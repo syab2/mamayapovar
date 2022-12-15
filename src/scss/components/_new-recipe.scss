@@ -14,8 +14,7 @@
 }
 
 .new-recipe-field {
-  display: flex;
-  flex-direction: column;
+  display: grid;
 
   &--persons {
     align-items: start;
@@ -23,7 +22,6 @@
   }
 
   &--time {
-    display: grid;
     column-gap: 8px;
     justify-content: start;
     grid-template-columns: 112px 112px;

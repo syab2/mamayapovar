@@ -43,12 +43,13 @@
     align-items: center;
     font-size: var(--font-s);
     line-height: var(--lh-primary);
+    color: var(--color-text-primary);
     transition: opacity 0.2s ease;
 
     .icon {
       margin-right: 0;
       margin-left: 8px;
-      transition: transform 0.2s ease;
+      transition: opacity, transform 0.2s ease;
     }
 
     &:hover,
