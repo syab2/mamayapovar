@@ -11,12 +11,12 @@ import vars from '../_vars';
 				shortIngredientsToggle.classList.toggle('active')
 				shortIngredients.classList.toggle('active')
 
-				if (shortIngredients?.classList.contains('active')) {
-					shortIngredientsToggle?.setAttribute('aria-expanded', 'true');
-					shortIngredientsToggle?.setAttribute('aria-label', 'Закрыть список ингредиентов');
+				if (shortIngredients.classList.contains('active')) {
+					shortIngredientsToggle.setAttribute('aria-expanded', 'true');
+					shortIngredientsToggle.setAttribute('aria-label', 'Закрыть список ингредиентов');
 				} else {
-					shortIngredientsToggle?.setAttribute('aria-expanded', 'false');
-					shortIngredientsToggle?.setAttribute('aria-label', 'Открыть список ингредиентов');
+					shortIngredientsToggle.setAttribute('aria-expanded', 'false');
+					shortIngredientsToggle.setAttribute('aria-label', 'Открыть список ингредиентов');
 				}
 			}
 		})
