@@ -16,7 +16,7 @@
                         <span>{{ recipe.cat }}</span>
                     </a>
                     <a href="{% url 'user_profile' recipe.author_id.id %}" class="content-info__author">{{ recipe.author_id }}</a>
-                    <time class="content-info__date" datetime="2022-12-02 16:00">{{ recipe.time_create|timesince }}</time>
+                    <time class="content-info__date" datetime="2022-12-02 16:00">{{ recipe.get_formatted_time }}</time>
                     <!-- Автор рецепта -->
                     <div class="content-more">
                         <button class="btn-reset  content-more__toggle" aria-label="Открыть меню действий" aria-expanded="false" data-more-menu-toggle>

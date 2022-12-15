@@ -32,12 +32,19 @@
                     <ul class="list-reset  header-profile-menu" data-menu-profile>
                         <li class="header-profile-menu__item">
                             <span class="header-profile-menu__label">Мой профиль</span>
-                            <a href="{% url 'user_profile' request.user.id %}" class="header-profile-menu__link" data-menu-profile-link>
-                                <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" class="header-profile-menu__avatar" width="48"
-                                     height="48"
-                                     alt="Фото профиля">
-                                <span>{{ request.user.username }}</span>
-                            </a>
+                            {% is_avatar request.user.id as has %}
+                            {% if has %}
+                                <a href="{% url 'user_profile' request.user.id %}" class="header-profile-menu__link"  aria-label="Перейти в профиль">
+                                    <img src="{% get_avatar_url request.user.id %}" width="48" height="48" alt="Фото профиля" class="header-profile-menu__avatar">
+                                    <span>{{ request.user.username }}</span>
+                                </a>
+                            {% else %}
+                                <a href="{% url 'user_profile' request.user.id %}" class="header-profile-menu__link"  aria-label="Перейти в профиль">
+                                    <img src="{% static 'recipes/img/placeholder-avatar.jpg' %}" width="48" height="48" alt="Фото профиля" class="header-profile-menu__avatar">
+                                    <span>{{ request.user.username }}</span>
+                                </a>
+                            {% endif %}
+
                         </li>
                         <!-- <li class="header-profile-menu__item">
                             <a href="settings.html" class="header-profile-menu__link" data-menu-profile-link>
