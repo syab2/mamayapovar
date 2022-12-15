@@ -953,6 +953,7 @@ a {
   fill: var(--color-icons-secondary);
 }
 .header-profile-menu__link:hover, .header-profile-menu__link.focus-visible {
+  outline: none;
   background-color: var(--color-bg-island-hover);
 }
 .header-profile-menu__avatar {
@@ -1224,6 +1225,7 @@ a {
   align-items: center;
   font-size: var(--font-s);
   line-height: var(--lh-primary);
+  color: var(--color-text-primary);
   -webkit-transition: opacity 0.2s ease;
   -o-transition: opacity 0.2s ease;
   transition: opacity 0.2s ease;
@@ -1231,11 +1233,11 @@ a {
 .content-short-dropdown__toggle .icon {
   margin-right: 0;
   margin-left: 8px;
-  -webkit-transition: -webkit-transform 0.2s ease;
-  transition: -webkit-transform 0.2s ease;
-  -o-transition: transform 0.2s ease;
-  transition: transform 0.2s ease;
-  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+  -webkit-transition: opacity, -webkit-transform 0.2s ease;
+  transition: opacity, -webkit-transform 0.2s ease;
+  -o-transition: opacity, transform 0.2s ease;
+  transition: opacity, transform 0.2s ease;
+  transition: opacity, transform 0.2s ease, -webkit-transform 0.2s ease;
 }
 .content-short-dropdown__toggle:hover, .content-short-dropdown__toggle.focus-visible {
   opacity: 0.8;
@@ -1601,13 +1603,7 @@ a {
 }
 
 .new-recipe-field {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  display: grid;
 }
 .new-recipe-field--persons {
   -webkit-box-align: start;
@@ -1616,7 +1612,6 @@ a {
   margin-right: 80px;
 }
 .new-recipe-field--time {
-  display: grid;
   -webkit-column-gap: 8px;
   -moz-column-gap: 8px;
   column-gap: 8px;

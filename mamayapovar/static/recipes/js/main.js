@@ -731,12 +731,12 @@ __webpack_require__.r(__webpack_exports__);
         const shortIngredients = target.nextElementSibling;
         shortIngredientsToggle.classList.toggle('active');
         shortIngredients.classList.toggle('active');
-        if (shortIngredients !== null && shortIngredients !== void 0 && shortIngredients.classList.contains('active')) {
-          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'true');
-          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Закрыть список ингредиентов');
+        if (shortIngredients.classList.contains('active')) {
+          shortIngredientsToggle.setAttribute('aria-expanded', 'true');
+          shortIngredientsToggle.setAttribute('aria-label', 'Закрыть список ингредиентов');
         } else {
-          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-expanded', 'false');
-          shortIngredientsToggle === null || shortIngredientsToggle === void 0 ? void 0 : shortIngredientsToggle.setAttribute('aria-label', 'Открыть список ингредиентов');
+          shortIngredientsToggle.setAttribute('aria-expanded', 'false');
+          shortIngredientsToggle.setAttribute('aria-label', 'Открыть список ингредиентов');
         }
       }
     });

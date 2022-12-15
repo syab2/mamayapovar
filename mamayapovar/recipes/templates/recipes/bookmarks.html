@@ -113,7 +113,7 @@
 									<span data-count="like">{% get_likes_count recipe.id %}</span>
 								</div>
 							{% endif %}
-							<a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment disabled" aria-label="Перейти к комментариям">
+							<a href="recipe/{{ recipe.id }}#comments" class="btn-reset  content-footer__btn  content-footer__btn--comment disabled" aria-label="Перейти к комментариям" tabindex="-1">
 								<svg class="icon" aria-hidden="true" focusable="false">
 									<use href="{% static 'recipes/img/sprite.svg' %}#circle"/>
 								</svg>
