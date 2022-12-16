@@ -1,6 +1,8 @@
 import pymorphy2
 from django.contrib.auth.models import User
+from datetime import datetime, timezone, timedelta
 from django.db import models
+from math import floor
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -23,7 +25,21 @@ class Recipe(models.Model):
         return f"{ings} {morph.parse('ингредиент')[0].make_agree_with_number(ings).word}"
 
     def get_formatted_time(self):
-        return f"{self.time_create.strftime('%d.%m.%Y')}"
+        self.time_create: datetime
+        now = datetime.now(timezone.utc)
+        deltatime = now - self.time_create
+        if deltatime < timedelta(minutes=1):
+            return "только что"
+        elif deltatime < timedelta(hours=1):
+            return f"{deltatime.total_seconds() // 60:.0f} {morph.parse('минута')[0].make_agree_with_number(floor(deltatime.total_seconds() // 60)).word}"
+        elif deltatime < timedelta(days=1):
+            return f"{deltatime.total_seconds() // 3600:.0f} {morph.parse('час')[0].make_agree_with_number(floor(deltatime.total_seconds() // 3600)).word}"
+        elif deltatime < timedelta(days=2):
+            return f"вчера"
+        elif deltatime < timedelta(days=365):
+            return f"{self.time_create.strftime('%d %b')}"
+        else:
+            return f"{self.time_create.strftime('%d.%m.%Y')}"
 
     def get_formatted_time_full(self):
         return f"{self.time_create.strftime('%Y-%m-%d %H:%M')}"
