@@ -2,7 +2,14 @@ import pymorphy2
 from django.contrib.auth.models import User
 from datetime import datetime, timezone, timedelta
 from django.db import models
+import sys
+import locale
 from math import floor
+
+if sys.platform == 'win32':
+    locale.setlocale(locale.LC_ALL, 'rus_rus')
+else:
+    locale.setlocale(locale.LC_ALL, 'ru_RU.UTF-8')
 
 morph = pymorphy2.MorphAnalyzer()
 
@@ -35,7 +42,7 @@ class Recipe(models.Model):
         elif deltatime < timedelta(days=1):
             return f"{deltatime.total_seconds() // 3600:.0f} {morph.parse('час')[0].make_agree_with_number(floor(deltatime.total_seconds() // 3600)).word}"
         elif deltatime < timedelta(days=2):
-            return f"вчера"
+            return "вчера"
         elif deltatime < timedelta(days=365):
             return f"{self.time_create.strftime('%d %b')}"
         else:
