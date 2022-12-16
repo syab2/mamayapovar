@@ -206,6 +206,24 @@ function change_profile_picture() {
     });
 }
 
+function delete_recipe(e) {
+    var current = $(this);
+    var url_root = current.data('url_root');
+    const post = e.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+    post.classList.add('visually-hidden');
+
+    $.ajax({
+        url : url_root,
+        type : 'POST',
+
+
+        success : function (json) {
+
+            return true
+        }
+    });
+}
+
 
 
 $(function() {
@@ -224,6 +242,12 @@ $(function() {
 $(function() {
     $('[data-button-subscribe]').click(subscribe);
 });
+
+$(function() {
+    $('[data-post-button-delete]').click(delete_recipe);
+});
+
+
 
 </script>
 </body>

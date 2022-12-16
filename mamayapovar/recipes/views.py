@@ -410,3 +410,32 @@ def category(request, id):
         "cat": Category.objects.get(id=id),
         "is_auth": request.user.is_authenticated
     })
+
+
+def delete_recipe(request, id):
+    recipe = Recipe.objects.get(id=id)
+    if request.user.id == recipe.author_id:
+
+        # likes
+        likes = Like.objects.filter(like_post_id=recipe.id)
+        for elem in likes:
+            elem.delete()
+
+        # images of steps
+        imgs = StepImages.objects.filter(recipe_id=recipe.id)
+        for elem in imgs:
+            elem.delete()
+
+        # bookmarks
+        bms = Bookmark.objects.filter(book_post_id=recipe.id)
+        for elem in bms:
+            elem.delete()
+
+        recipe.delete()
+
+        return HttpResponse(
+            json.dumps({
+                "result": True
+            }),
+            content_type="application/json"
+        )
