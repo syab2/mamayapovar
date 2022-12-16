@@ -14,8 +14,7 @@
                     </a>
                     <a href="{% url 'user_profile' recipe.author_id.id %}" class="content-info__author">{{ recipe.author_id }}</a>
                     <time class="content-info__date" datetime="{{ recipe.get_formatted_time_full }}">{{ recipe.get_formatted_time }}</time>
-                    <!-- Автор рецепта -->
-                     <div class="content-more">
+                    <div class="content-more">
                         {% if request.user.id == recipe.author_id.id %}
                             <button class="btn-reset  content-more__toggle" aria-label="Открыть меню действий" aria-expanded="false" data-more-menu-toggle>
                                 <svg class="icon" aria-hidden="true" focusable="false">
@@ -35,14 +34,6 @@
                             </button>
                         {% endif %}
                     </div>
-                    <!-- Авторизованный -->
-                    <!-- <div class="content-more">
-                        <button class="btn-reset  content-more__toggle  disabled" aria-label="Открыть меню действий" aria-expanded="false" data-more-menu-toggle>
-                            <svg class="icon" aria-hidden="true" focusable="false">
-                                <use href="{% static 'recipes/img/sprite.svg' %}#more-horizontal"/>
-                            </svg>
-                        </button>
-                    </div> -->
                 </div>
                 <h1 class="section-h1  content-header__title">{{ recipe.title }}</h1>
                 <p class="content-header__desc">{{ recipe.description }}</p>
