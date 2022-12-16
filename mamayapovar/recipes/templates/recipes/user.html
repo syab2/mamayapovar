@@ -382,6 +382,13 @@
 									<span>{{ recipe.cat }}</span>
 								</a>
 								<time class="content-info__date" datetime="{{ recipe.get_formatted_time_full }}">{{ recipe.get_formatted_time }}</time>
+								<div class="content-more">
+								<button class="btn-reset  content-more__toggle  disabled" aria-label="Открыть меню действий" aria-expanded="false" data-more-menu-toggle>
+                                    <svg class="icon" aria-hidden="true" focusable="false">
+                                            <use href="{% static 'recipes/img/sprite.svg' %}#more-horizontal"/>
+                                    </svg>
+                            	</button>
+							</div>
 							</div>
 							<a href="{% url 'recipe' recipe.id %}">
 								<h2 class="section-h1  content-header__title">{{ recipe.title }}</h2>
