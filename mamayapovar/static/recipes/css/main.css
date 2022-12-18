@@ -1121,6 +1121,9 @@ a {
   line-height: var(--lh-primary);
   color: var(--color-text-primary);
 }
+.content-header__desc:empty {
+  display: none;
+}
 
 .content-info {
   display: grid;
