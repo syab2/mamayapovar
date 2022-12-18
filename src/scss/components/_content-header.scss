@@ -12,5 +12,9 @@
     font-size: var(--font-primary);
     line-height: var(--lh-primary);
     color: var(--color-text-primary);
+
+    &:empty {
+      display: none;
+    }
   }
 }
