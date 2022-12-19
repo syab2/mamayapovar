@@ -9,7 +9,7 @@
       <h2 class="section-h1  popup__title">Регистрация</h2>
       <form id="register-form" action="https://echo.htmlacademy.ru" method="POST" class="popup__form">
 				<div class="form-field">
-					<input type="text" name="username" id="username-register" class="input  popup__input" placeholder="Имя и фамилия" minlength="2" maxlength="105" required>
+					<input type="text" name="username" id="username-register" class="input  popup__input" placeholder="Имя и фамилия" pattern="[A-Za-zА-Яа-яЁё\s]{0,100}" minlength="0" maxlength="100" required>
 					<label class="form-field__error  hidden" for="username-register">
 						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 							<use href="img/sprite.svg#circle-cross"/>
