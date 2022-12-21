@@ -364,7 +364,7 @@
 						<dd class="info-stats__amount">{% get_likes_count_of_user user.id %}</dd>
 					</dl>
 				</div>
-				<button class="btn  btn--second  btn--small  btn--left  info__btn" data-graph-path="register" data-graph-speed="0">
+				<button class="btn  btn--second  btn--small  btn--left  info__btn" data-graph-path="register" data-graph-speed="100">
 					Подписаться
 					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="{% static 'recipes/img/sprite.svg' %}#user-plus"/>
@@ -442,7 +442,7 @@
 							<div class="content-footer__left">
 								{% get_likes_status recipe.id request.user.id as like_status %}
 								{% if not like_status %}
-									<button class="btn-reset  content-footer__btn  content-footer__btn--like" data-graph-path="register" data-graph-speed="0"
+									<button class="btn-reset  content-footer__btn  content-footer__btn--like" data-graph-path="register" data-graph-speed="100"
 										aria-label="Поставить отметку 'Нравится'">
 										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="{% static 'recipes/img/sprite.svg' %}#heart"/>
@@ -450,7 +450,7 @@
 										<span data-count="like">{% get_likes_count recipe.id %}</span>
 									</button>
 								{% else %}
-									<button class="btn-reset  content-footer__btn  content-footer__btn--like active" data-graph-path="register" data-graph-speed="0"
+									<button class="btn-reset  content-footer__btn  content-footer__btn--like active" data-graph-path="register" data-graph-speed="100"
 										aria-label="Поставить отметку 'Нравится'">
 										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="{% static 'recipes/img/sprite.svg' %}#heart-filled"/>
@@ -469,7 +469,7 @@
 {% get_bookmark_status recipe.id request.user.id as check %}
 {% if not check %}
    <button class="btn-reset  content-footer__btn content-footer__btn--bookmark"
-         data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
+         data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="100"
          aria-label="Добавить в закладки">
       <svg class="icon" aria-hidden="true" focusable="false">
          <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
@@ -477,7 +477,7 @@
    </button>
 {% else %}
    <button class="btn-reset  content-footer__btn content-footer__btn--bookmark active"
-         data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="0"
+         data-id="{{ recipe.id }}" data-graph-path="register" data-graph-speed="100"
          aria-label="Добавить в закладки">
       <svg class="icon" aria-hidden="true" focusable="false">
          <use href="{% static 'recipes/img/sprite.svg' %}#bookmark-filled"/>
