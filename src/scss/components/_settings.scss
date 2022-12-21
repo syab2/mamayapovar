@@ -1,7 +1,22 @@
 .settings {
+  display: flex;
+  flex-direction: column;
+
   &__form {
     display: grid;
     gap: 40px;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    &--profile {
+      .settings-section {
+        column-gap: 40px;
+        grid-template-columns: 1fr 144px;
+        grid-template-rows: repeat(2, auto);
+      }
+    }
   }
 
   &__btn {
@@ -14,12 +29,6 @@
     display: grid;
     grid-column: 1 / 2;
     gap: 24px;
-  }
-
-  &--main {
-    column-gap: 40px;
-    grid-template-columns: 1fr 144px;
-    grid-template-rows: repeat(2, auto);
   }
 }
 

@@ -44,7 +44,7 @@
 									</a>
 								</li>
 								<li class="header-profile-menu__item">
-									<a href="#" class="header-profile-menu__link" data-menu-profile-link>
+									<a href="settings-profile.html" class="header-profile-menu__link" data-menu-profile-link>
 										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#settings"/>
 										</svg>
@@ -96,16 +96,16 @@
 					</div>
 				</aside>
 
-				<main class="new-recipe">
-					<h1 class="visually-hidden">Создание рецепта</h1>
-					<form id="settings-main-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form">
-						<fieldset class="form-section  settings-section  settings-section--main">
-							<legend class="section-h1  form-section__title">Профиль</legend>
+				<main class="settings  settings--profile">
+					<h1 class="visually-hidden">Настройки профиля</h1>
+					<form id="settings-profile-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--profile">
+						<fieldset class="form-section  settings-section">
+							<legend class="section-h2  form-section__title">Профиль</legend>
 							<div class="settings-section__group">
 								<div class="form-field  settings-field  settings-field--username">
-									<label class="form-field__label" for="username">Отображаемое имя</label>
-									<input type="text" name="username" id="username" class="input" placeholder="Имя и фамилия" value="Алексей Калинин" autocomplete="off" maxlength="100" required>
-									<label class="form-field__error  hidden" for="username">
+									<label class="form-field__label" for="settings-username">Отображаемое имя</label>
+									<input type="text" name="username" id="settings-username" class="input" placeholder="Имя и фамилия" value="Алексей Калинин" autocomplete="off" pattern="[A-Za-zА-Яа-яЁё\s]{0,100}" minlength="0" maxlength="100" required>
+									<label class="form-field__error  hidden" for="settings-username">
 										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#circle-cross"/>
 										</svg>

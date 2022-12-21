@@ -44,7 +44,7 @@
 									</a>
 								</li>
 								<li class="header-profile-menu__item">
-									<a href="#" class="header-profile-menu__link" data-menu-profile-link>
+									<a href="settings-profile.html" class="header-profile-menu__link" data-menu-profile-link>
 										<svg class="icon" aria-hidden="true" focusable="false">
 											<use href="img/sprite.svg#settings"/>
 										</svg>
@@ -96,47 +96,66 @@
 					</div>
 				</aside>
 
-				<main class="new-recipe">
-					<h1 class="visually-hidden">Создание рецепта</h1>
-					<!-- <form id="settings-main-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form">
-						<fieldset class="form-section  settings-section  settings-section--main">
-							<legend class="section-h1  form-section__title">Профиль</legend>
-							<div class="settings-section__group">
-								<div class="form-field  settings-field  settings-field--username">
-									<label class="form-field__label" for="username">Отображаемое имя</label>
-									<input type="text" name="username" id="username" class="input" placeholder="Имя и фамилия" value="Алексей Калинин" autofocus="on" autocomplete="off" maxlength="100" required>
-									<label class="form-field__error  hidden" for="username">
-										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
-											<use href="img/sprite.svg#circle-cross"/>
-										</svg>
-										<span class="form-field__text">Здесь будет текст ошибки</span>
-									</label>
-								</div>
-								<div class="form-field  settings-field  settings-field--desc">
-									<label class="form-field__label" for="description">Описание профиля</label>
-									<textarea name="description" id="description" class="input  input--textarea" placeholder="Пара слов о себе" autocomplete="off" maxlength="120"></textarea>
-									<label class="form-field__error  hidden" for="description">
-										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
-											<use href="img/sprite.svg#circle-cross"/>
-										</svg>
-										<span class="form-field__text">Здесь будет текст ошибки</span>
-									</label>
-								</div>
-								<button class="btn  settings__btn">Обновить информацию</button>
-							</div>
-							<div class="form-field  settings-field  user-avatar  user-avatar--change  settings-field--avatar">
-								<label class="form-field__label" for="photo">Фото профиля</label>
-								<label style="background-image: url('img/placeholder-avatar.jpg');" class="input  input--photo  user-avatar__input" title="Изменить фото профиля">
-									<input type="file" name="photo" id="photo" accept=".jpg, .jpeg, .png">
-									<div class="user-avatar__placeholder">
-										<svg class="icon" aria-hidden="true" focusable="false">
-											<use href="img/sprite.svg#image"/>
-										</svg>
-									</div>
+				<main class="settings  settings--account">
+					<h1 class="visually-hidden">Настройки аккаунта</h1>
+					<form id="settings-email-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--email">
+						<fieldset class="form-section  settings-section">
+							<legend class="section-h2  form-section__title">Электронная почта</legend>
+							<div class="form-field  settings-field">
+								<input type="email" name="email" id="settings-email" class="input" placeholder="Электронная почта" value="12345@mail.ru" required>
+								<label class="form-field__error  hidden" for="settings-email">
+									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+										<use href="img/sprite.svg#circle-cross"/>
+									</svg>
+									<span class="form-field__text">Здесь будет текст ошибки</span>
 								</label>
 							</div>
+							<button class="btn">Обновить почту</button>
 						</fieldset>
-					</form> -->
+					</form>
+					<form id="settings-password-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--password">
+						<fieldset class="form-section  settings-section">
+							<legend class="section-h2  form-section__title">Изменение пароля</legend>
+							<div class="settings-section__group">
+								<div class="form-field  settings-field">
+									<input type="password" name="password-old" id="settings-password-old" class="input" placeholder="Старый пароль" required>
+									<label class="form-field__error  hidden" for="settings-password-old">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
+								</div>
+								<div class="form-field  settings-field">
+									<input type="password" name="password-new" id="settings-password-new" class="input" placeholder="Новый пароль" minlength="4" required>
+									<label class="form-field__error  hidden" for="settings-password-new">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
+								</div>
+								<div class="form-field  settings-field">
+									<input type="password" name="password-new-repeat" id="settings-password-new-repeat" class="input" placeholder="Подтвердите новый пароль" required>
+									<label class="form-field__error  hidden" for="settings-password-new-repeat">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
+								</div>
+							</div>
+							<button class="btn">Обновить пароль</button>
+							<button class="btn  btn--third">Восстановить пароль</button>
+						</fieldset>
+					</form>
+					<form id="settings-delete-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--delete">
+						<fieldset class="form-section  settings-section">
+							<legend class="section-h2  form-section__title">Удаление аккаунта</legend>
+							<p class="settings-section__desc">Как только вы удалите свой аккаунт, восстановить его будет не возможно. Пожалуйста, будьте уверены.</p>
+							<button class="btn  btn--second  btn--important">Удалить мой аккаунт</button>
+						</fieldset>
+					</form>
 				</main>
 			</div>
 		</div>
