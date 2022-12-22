@@ -17,7 +17,7 @@ urlpatterns = [
     re_path(r'^recipe/(?P<pk>\d+)/like/$', like_post, name='like_post'),
     re_path(r'^recipe/(?P<pk>\d+)/subscribe/$', subscribe_post, name='subscribe'),
     path('category/<int:id>/', category, name="category"),
-    path('delete_recipe/<int:id>', delete_recipe, name='delete_recipe')
+    path('delete_recipe/<int:id>', delete_recipe, name='delete_recipe'),
 ]
 
 

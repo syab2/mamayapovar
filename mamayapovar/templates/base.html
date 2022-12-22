@@ -224,6 +224,22 @@ function delete_recipe(e) {
     });
 }
 
+function login() {
+    var current = $(this);
+    var url_root = current.data('url_root');
+
+    $.ajax({
+        url : url_root,
+        type : 'POST',
+
+
+        success : function (json) {
+
+            return true
+        }
+    });
+}
+
 
 
 $(function() {
@@ -247,7 +263,9 @@ $(function() {
     $('[data-post-button-delete]').click(delete_recipe);
 });
 
-
+$(function() {
+    $('[data-button-login]').click(login);
+});
 
 </script>
 </body>

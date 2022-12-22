@@ -13,9 +13,11 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
+from .forms import LoginForm
 from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, Category
 
 morph = pymorphy2.MorphAnalyzer()
+status = False
 
 
 def get_formatted_recipes(recipes):
@@ -58,6 +60,7 @@ def get_formatted_recipes(recipes):
 
 
 def index(request):
+    global status
     recipes = Recipe.objects.all()
 
     new_recipes = get_formatted_recipes(recipes)
@@ -66,8 +69,11 @@ def index(request):
         'is_auth': request.user.is_authenticated,
         'user': request.user,
         'cats': Category.objects.all(),
+        'val': status,
+        'form': LoginForm,
         'title': 'Мама, я повар! — платформа для кулинаров'
     }
+    status = False
     return render(request, 'recipes/index.html', content)
 
 
@@ -85,18 +91,18 @@ def postindex(request):
 
 
 def postlogin(request):
+    global status
     if request.method == "POST":
-        # form = AuthenticationForm(request, data=request.POST)
-        # if form.is_valid():
-        email = request.POST.get('email')
-        password = request.POST.get('password')
-        user = authenticate(request, email=email, password=password)
-        if user is not None:
-            login(request, user)
-            return HttpResponseRedirect('/')
-        else:
-            messages.error(request, "Invalid username or password.")
-    return HttpResponseRedirect('/')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(request, email=form.cleaned_data['email'], password=form.cleaned_data['password'])
+            if user is not None:
+                login(request, user)
+                return HttpResponseRedirect('/')
+            else:
+                messages.error(request, "Invalid username or password.")
+                status = True
+                return HttpResponseRedirect('/')
 
 
 def postlogout(request):

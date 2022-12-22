@@ -280,7 +280,7 @@
 							</ul>
 						</div>
 					</div>
-					<a href="recipe/{{ recipe.id }}" class="feed-item__img">
+					<a href="{% url 'recipe' recipe.id %}" class="feed-item__img">
 						{% if recipe.photo %}
 							<img src="{{ recipe.photo.url }}" width="676" height="350"
 								 alt="{{ recipe.title }}" loading="lazy">
@@ -429,7 +429,7 @@
 								</ul>
 							</div>
 						</div>
-						<a href="recipe/{{ recipe.id }}" class="feed-item__img">
+						<a href="{% url 'recipe' recipe.id %}" class="feed-item__img">
 							{% if recipe.photo %}
 								<img src="{{ recipe.photo.url }}" width="676" height="350"
 									alt="{{ recipe.title }}" loading="lazy">
