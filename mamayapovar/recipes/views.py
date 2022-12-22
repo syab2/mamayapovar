@@ -100,7 +100,7 @@ def postlogin(request):
                 login(request, user)
                 return HttpResponseRedirect('/')
             else:
-                messages.error(request, "Invalid username or password.")
+                messages.error(request, "Неправильная почта или пароль")
                 status = True
                 return HttpResponseRedirect('/')
 

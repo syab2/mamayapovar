@@ -94,8 +94,7 @@ $(function () {
 });
 </script>
 <script>
-    function to_bookmarks(e)
-{
+function to_bookmarks(e) {
     const target = e.target;
       if (target.classList.contains('content-footer__btn--bookmark')) {
         const buttonIcon = target.querySelector('use');
@@ -216,9 +215,7 @@ function delete_recipe(e) {
         url : url_root,
         type : 'POST',
 
-
         success : function (json) {
-
             return true
         }
     });
@@ -227,25 +224,26 @@ function delete_recipe(e) {
 function login() {
     var current = $(this);
     var url_root = current.data('url_root');
+    // var serializedData = $(this).serialize();
 
     $.ajax({
         url : url_root,
         type : 'POST',
+        // data: serializedData,
 
-
-        success : function (json) {
-
+        success: function(json){
             return true
-        }
+        },
+
+        // success: function(data){
+        //     $("form-field__text").text(data["errorMessage"]);
+        // },
     });
 }
-
-
 
 $(function() {
     $('[data-button-bookmark]').click(to_bookmarks);
 });
-
 
 $(function() {
     $('[data-button-photo]').change(change_profile_picture);
