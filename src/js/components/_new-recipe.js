@@ -115,11 +115,11 @@ if (vars.bodyEl.querySelector('.ingredient')) {
 						<use href="${svgChevron}"/>
 					</svg>
 				</div>
-				<a href="#" class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
+				<button type="button" class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
 					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
-				</a>
+				</button>
 				<label class="form-field__error  hidden">
 					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCircleCross}"/>
@@ -188,11 +188,11 @@ if (vars.bodyEl.querySelector('.step')) {
 			stepItem.setAttribute('id', `step-${fieldIndex}`)
 			stepItem.innerHTML += `
 				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
-				<a href="#" class="btn-reset  step-item__delete" aria-label="Удалить шаг">
+				<button type="button" class="btn-reset  step-item__delete" aria-label="Удалить шаг">
 					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
-				</a>
+				</button>
 				<div class="step-item__body">
 					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
 						<label class="input  input--photo  imageuploader__input">
@@ -204,11 +204,11 @@ if (vars.bodyEl.querySelector('.step')) {
 								Загрузите фото шага
 							</div>
 						</label>
-						<a href="#" class="btn  btn--other  imageuploader__btn  hidden">
+						<button type="button" class="btn  btn--other  imageuploader__btn  hidden">
 							<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 								<use href="${svgDelete}" />
 							</svg>
-						</a>
+						</button>
 					</div>
 					<textarea name="step-description-${fieldIndex}" id="step-description-${fieldIndex}" class="input  input--textarea  step-item__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
 					<label class="form-field__error  hidden" for="step-description-${fieldIndex}">

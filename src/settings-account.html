@@ -101,23 +101,25 @@
 					<form id="settings-email-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--email">
 						<fieldset class="form-section  settings-section">
 							<legend class="section-h2  form-section__title">Электронная почта</legend>
-							<div class="form-field  settings-field">
-								<input type="email" name="email" id="settings-email" class="input" placeholder="Электронная почта" value="12345@mail.ru" required>
-								<label class="form-field__error  hidden" for="settings-email">
-									<svg class="icon  icon--16" aria-hidden="true" focusable="false">
-										<use href="img/sprite.svg#circle-cross"/>
-									</svg>
-									<span class="form-field__text">Здесь будет текст ошибки</span>
-								</label>
+							<div class="settings-section__group   settings-section__group--row">
+								<div class="form-field  settings-section__field">
+									<input type="email" name="email" id="settings-email" class="input" placeholder="Электронная почта" value="12345@mail.ru" required>
+									<label class="form-field__error  hidden" for="settings-email">
+										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+											<use href="img/sprite.svg#circle-cross"/>
+										</svg>
+										<span class="form-field__text">Здесь будет текст ошибки</span>
+									</label>
+								</div>
+								<button class="btn  settings-section__btn">Обновить почту</button>
 							</div>
-							<button class="btn">Обновить почту</button>
 						</fieldset>
 					</form>
 					<form id="settings-password-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--password">
 						<fieldset class="form-section  settings-section">
 							<legend class="section-h2  form-section__title">Изменение пароля</legend>
 							<div class="settings-section__group">
-								<div class="form-field  settings-field">
+								<div class="form-field  settings-section__field">
 									<input type="password" name="password-old" id="settings-password-old" class="input" placeholder="Старый пароль" required>
 									<label class="form-field__error  hidden" for="settings-password-old">
 										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
@@ -126,7 +128,7 @@
 										<span class="form-field__text">Здесь будет текст ошибки</span>
 									</label>
 								</div>
-								<div class="form-field  settings-field">
+								<div class="form-field  settings-section__field">
 									<input type="password" name="password-new" id="settings-password-new" class="input" placeholder="Новый пароль" minlength="4" required>
 									<label class="form-field__error  hidden" for="settings-password-new">
 										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
@@ -135,7 +137,7 @@
 										<span class="form-field__text">Здесь будет текст ошибки</span>
 									</label>
 								</div>
-								<div class="form-field  settings-field">
+								<div class="form-field  settings-section__field">
 									<input type="password" name="password-new-repeat" id="settings-password-new-repeat" class="input" placeholder="Подтвердите новый пароль" required>
 									<label class="form-field__error  hidden" for="settings-password-new-repeat">
 										<svg class="icon  icon--16" aria-hidden="true" focusable="false">
@@ -145,15 +147,21 @@
 									</label>
 								</div>
 							</div>
-							<button class="btn">Обновить пароль</button>
-							<button class="btn  btn--third">Восстановить пароль</button>
+							<div class="settings-section__bottom">
+								<button class="btn  settings-section__btn">Обновить пароль</button>
+								<button type="button" class="btn  btn--third  settings-section__btn">Восстановить пароль</button>
+							</div>
 						</fieldset>
 					</form>
 					<form id="settings-delete-form" action="https://echo.htmlacademy.ru" method="POST" class="settings__form  settings__form--delete">
 						<fieldset class="form-section  settings-section">
-							<legend class="section-h2  form-section__title">Удаление аккаунта</legend>
-							<p class="settings-section__desc">Как только вы удалите свой аккаунт, восстановить его будет не возможно. Пожалуйста, будьте уверены.</p>
-							<button class="btn  btn--second  btn--important">Удалить мой аккаунт</button>
+							<div class="settings-section__info">
+								<legend class="section-h2  form-section__title">Удаление аккаунта</legend>
+								<p class="settings-section__desc">Как только вы удалите свой аккаунт, восстановить его будет не возможно. Пожалуйста, будьте уверены.</p>
+							</div>
+							<div class="settings-section__bottom">
+								<button class="btn  btn--second  btn--important  settings-section__btn">Удалить мой аккаунт</button>
+							</div>
 						</fieldset>
 					</form>
 				</main>

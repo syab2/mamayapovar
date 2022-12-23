@@ -3,4 +3,12 @@
   align-items: start;
   grid-template-rows: auto auto;
   gap: 48px;
+
+  &__info {
+    .info-avatar {
+      margin-bottom: 24px;
+      width: 120px;
+      height: 120px;
+    }
+  }
 }
