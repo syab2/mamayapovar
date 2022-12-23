@@ -17,7 +17,6 @@ from .forms import LoginForm
 from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, Category
 
 morph = pymorphy2.MorphAnalyzer()
-status = False
 
 
 def get_formatted_recipes(recipes):
@@ -69,11 +68,9 @@ def index(request):
         'is_auth': request.user.is_authenticated,
         'user': request.user,
         'cats': Category.objects.all(),
-        'val': status,
         'form': LoginForm,
         'title': 'Мама, я повар! — платформа для кулинаров'
     }
-    status = False
     return render(request, 'recipes/index.html', content)
 
 
@@ -91,7 +88,6 @@ def postindex(request):
 
 
 def postlogin(request):
-    global status
     if request.method == "POST":
         form = LoginForm(request.POST)
         if form.is_valid():
