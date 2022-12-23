@@ -221,25 +221,29 @@ function delete_recipe(e) {
     });
 }
 
-function login() {
+$('#auth-form').submit(function (e) {
+
+    e.preventDefault()
     var current = $(this);
-    var url_root = current.data('url_root');
-    // var serializedData = $(this).serialize();
 
     $.ajax({
-        url : url_root,
+        url : this.action,
         type : 'POST',
-        // data: serializedData,
-
-        success: function(json){
-            return true
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(res){
+            console.log(res)
         },
-
-        // success: function(data){
-        //     $("form-field__text").text(data["errorMessage"]);
-        // },
+        error: function(res) {
+            $('.form-field__error').removeClass('hidden')
+            if (res.status === 400) {
+                $('.form-field__text').text('Неправильные почта или пароль')
+            } else if (res.status === 401) {
+                $('.form-field__text').text('Данные невалидны')
+            }
+        }
     });
-}
+});
 
 $(function() {
     $('[data-button-bookmark]').click(to_bookmarks);
@@ -259,10 +263,6 @@ $(function() {
 
 $(function() {
     $('[data-post-button-delete]').click(delete_recipe);
-});
-
-$(function() {
-    $('[data-button-login]').click(login);
 });
 
 </script>

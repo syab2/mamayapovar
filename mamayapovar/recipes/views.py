@@ -9,7 +9,7 @@ from django.conf import settings
 from django.contrib import messages, auth
 from django.contrib.auth import models, logout
 from django.core.files.base import ContentFile
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 
@@ -98,11 +98,10 @@ def postlogin(request):
             user = authenticate(request, email=form.cleaned_data['email'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return JsonResponse(data={}, status=201)
             else:
-                messages.error(request, "Неправильная почта или пароль")
-                status = True
-                return HttpResponseRedirect('/')
+                return JsonResponse(data={}, status=400)
+        return JsonResponse(data={}, status=401)
 
 
 def postlogout(request):
