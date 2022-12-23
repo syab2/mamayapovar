@@ -222,25 +222,30 @@ function delete_recipe(e) {
 }
 
 $('#auth-form').submit(function (e) {
-
     e.preventDefault()
-    var current = $(this);
+    $('.form-field--password .form-field__error').addClass('hidden')
+    $('.form-field--email .form-field__error').addClass('hidden')
 
     $.ajax({
-        url : this.action,
         type : 'POST',
+        url : this.action,
         data: $(this).serialize(),
         dataType: 'json',
-        success: function(res){
-            console.log(res)
-        },
-        error: function(res) {
-            $('.form-field__error').removeClass('hidden')
-            if (res.status === 400) {
-                $('.form-field__text').text('Неправильные почта или пароль')
-            } else if (res.status === 401) {
-                $('.form-field__text').text('Данные невалидны')
-            }
+
+        success: function(response){
+            if (response.status === 201) {
+                window.location.reload()
+            } else if (response.status === 400 && response.form_id === 'email-auth') {
+                $('.form-field--email .form-field__error').removeClass('hidden')
+                $('.form-field--email .form-field__text').text(response.error)
+            } else if (response.status === 400 && response.form_id === 'password-auth') {
+                $('.form-field--password .form-field__error').removeClass('hidden')
+                $('.form-field--password .form-field__text').text(response.error)
+            } 
+            else if (response.status === 400 && response.form_id === 'password-auth') {
+                $('.form-field--password .form-field__error').removeClass('hidden')
+                $('.form-field--password .form-field__text').text(response.error)
+            } 
         }
     });
 });

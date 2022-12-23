@@ -66,10 +66,16 @@
             <h2 class="section-h1  popup__title">Вход в аккаунт</h2>
             <form id="auth-form" action="{% url 'login' %}" class="popup__form" method="post">
                 {% csrf_token %}
-                <div class="form-field">
+                <div class="form-field  form-field--email">
                     {{ form.email }}
+                    <label class="form-field__error  hidden" for="email-auth">
+						<svg class="icon  icon--16" aria-hidden="true" focusable="false">
+							<use href="{% static 'recipes/img/sprite.svg' %}#circle-cross"/>
+						</svg>
+						<span class="form-field__text"></span>
+					</label>
                 </div>
-                <div class="form-field form-field--password">
+                <div class="form-field  form-field--password">
                     {{ form.password }}
                     <label class="form-field__error  hidden" for="password-auth">
                         <svg class="icon  icon--16" aria-hidden="true" focusable="false">

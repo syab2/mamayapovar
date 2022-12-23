@@ -90,16 +90,49 @@ def postindex(request):
 def postlogin(request):
     if request.method == "POST":
         form = LoginForm(request.POST)
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
         if form.is_valid():
-            user = authenticate(request, email=form.cleaned_data['email'], password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return JsonResponse(data={}, status=201)
-            else:
-                return JsonResponse(data={}, status=400)
-        return JsonResponse(data={}, status=401)
-
-
+            if email and password:
+                user = authenticate(request, email=form.cleaned_data['email'], password=form.cleaned_data['password'])
+                if user:
+                    login(request, user)
+                    return JsonResponse(data={'status': 201}, status=200)
+                return JsonResponse(
+                    data={
+                    'form_id': 'password-auth',
+                    'status': 400, 
+                    'error': 'Неправильная почта или пароль'
+                    },
+                    status=200
+                )
+            elif password:
+                return JsonResponse(
+                    data={
+                    'form_id': 'email-auth',
+                    'status': 400, 
+                    'error': 'Пожалуйста, введите почту'
+                    },
+                    status=200
+                )
+            elif email:
+                return JsonResponse(
+                    data={
+                    'form_id': 'password-auth',
+                    'status': 400, 
+                    'error': 'Пожалуйста, введите пароль'
+                    },
+                    status=200
+                )
+            return JsonResponse(
+                data={
+                'form_id': 'password-auth',
+                'status': 400, 
+                'error': 'Пожалуйста, введите почту и пароль'
+                },
+                status=200
+            )
 def postlogout(request):
     logout(request)
     return HttpResponseRedirect('/')
