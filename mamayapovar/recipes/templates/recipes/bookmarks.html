@@ -5,11 +5,11 @@
 <main class="bookmark">
 	<h1 class="visually-hidden">Закладки</h1>
 	{% if not bookmarks %}
-	<div class="bookmark-info">
-		<span class="bookmark-info__text">Вы ничего не добавляли в закладки</span>
+	<div class="info  bookmark__info">
+		<span class="info__desc">Вы ничего не добавляли в закладки</span>
 	</div>
 	{% else %}
-		<div class="feed bookmark-feed">
+		<div class="feed bookmark__feed">
 			{% for recipe in bookmarks %}
 				<article class="feed-item">
 					<div class="content-header  feed-item__header">

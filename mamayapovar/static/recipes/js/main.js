@@ -182,7 +182,7 @@ if (document.querySelector('.counter__input')) {
     const counterInput = document.querySelector('.counter__input');
     const counterPlus = document.querySelector('.counter__btn--plus');
     const counterMinus = document.querySelector('.counter__btn--minus');
-    const counterMax = counterInput.getAttribute('max');
+    const counterMax = 20;
     counterInput.addEventListener('change', () => {
       if (counterInput.value > counterMax - 1) {
         counterInput.value = counterMax;
@@ -312,22 +312,22 @@ __webpack_require__.r(__webpack_exports__);
   \**********************************************/
 /***/ (() => {
 
-if (document.querySelector('.new-recipe-field--time')) {
+if (document.querySelector('.new-recipe-section__field--time')) {
   (function () {
-    const field = document.querySelector('.new-recipe-field--time');
-    const inputMinutes = field.querySelector('.new-recipe-field--minutes input');
-    const inputHours = field.querySelector('.new-recipe-field--hours input');
-    const maxMinutes = inputMinutes.getAttribute('max');
-    const maxHours = inputHours.getAttribute('max');
+    const field = document.querySelector('.new-recipe-section__field--time');
+    const inputMinutes = field.querySelector('.new-recipe-section__field--minutes input');
+    const inputHours = field.querySelector('.new-recipe-section__field--hours input');
+    const maxMinutes = 59;
+    const maxHours = 12;
     inputMinutes.addEventListener('change', () => {
-      if (inputMinutes.value > maxMinutes - 1) {
+      if (inputMinutes.value >= maxMinutes) {
         inputMinutes.value = maxMinutes;
       } else if (inputMinutes.value <= 0) {
         inputMinutes.value = 0;
       }
     });
     inputHours.addEventListener('change', () => {
-      if (inputHours.value > maxHours - 1) {
+      if (inputHours.value >= maxHours) {
         inputHours.value = maxHours;
         inputMinutes.removeAttribute('required');
         inputMinutes.setAttribute('min', '');
@@ -338,6 +338,9 @@ if (document.querySelector('.new-recipe-field--time')) {
         inputHours.value = 0;
         inputMinutes.setAttribute('required', '');
         inputMinutes.setAttribute('min', '1');
+      }
+      if (inputMinutes.value <= 0) {
+        inputMinutes.value = 0;
       }
     });
   })();
@@ -447,7 +450,22 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var graph_modal__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! graph-modal */ "./node_modules/graph-modal/src/graph-modal.js");
 
-const modal = new graph_modal__WEBPACK_IMPORTED_MODULE_0__["default"]();
+const modal = new graph_modal__WEBPACK_IMPORTED_MODULE_0__["default"]({
+  isOpen: modal => {
+    const registerName = document.querySelector('#username-register');
+    const authEmail = document.querySelector('#email-auth');
+    if (registerName) {
+      setTimeout(function () {
+        registerName.focus();
+      }, 100);
+    }
+    if (authEmail) {
+      setTimeout(function () {
+        authEmail.focus();
+      }, 100);
+    }
+  }
+});
 
 /***/ }),
 
@@ -566,11 +584,11 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.ingredi
 						<use href="${svgChevron}"/>
 					</svg>
 				</div>
-				<a href="#" class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
+				<button type="button" class="btn-reset  ingredient-item__delete" aria-label="Удалить ингредиент">
 					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
-				</a>
+				</button>
 				<label class="form-field__error  hidden">
 					<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 						<use href="${svgCircleCross}"/>
@@ -633,11 +651,11 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
       stepItem.setAttribute('id', `step-${fieldIndex}`);
       stepItem.innerHTML += `
 				<label class="form-field__label  step-item__number" for="step-description-${fieldIndex}"></label>
-				<a href="#" class="btn-reset  step-item__delete" aria-label="Удалить шаг">
+				<button type="button" class="btn-reset  step-item__delete" aria-label="Удалить шаг">
 					<svg class="icon" aria-hidden="true" focusable="false">
 						<use href="${svgCross}" />
 					</svg>
-				</a>
+				</button>
 				<div class="step-item__body">
 					<div class="imageuploader  imageuploader--small  step-item__imageuploader">
 						<label class="input  input--photo  imageuploader__input">
@@ -649,11 +667,11 @@ if (_vars__WEBPACK_IMPORTED_MODULE_0__["default"].bodyEl.querySelector('.step'))
 								Загрузите фото шага
 							</div>
 						</label>
-						<a href="#" class="btn  btn--other  imageuploader__btn  hidden">
+						<button type="button" class="btn  btn--other  imageuploader__btn  hidden">
 							<svg class="icon  icon--16" aria-hidden="true" focusable="false">
 								<use href="${svgDelete}" />
 							</svg>
-						</a>
+						</button>
 					</div>
 					<textarea name="step-description-${fieldIndex}" id="step-description-${fieldIndex}" class="input  input--textarea  step-item__input" placeholder="Замешиваем тесто для блинов. В 1 литр теплого молока добавляем 4 яйца..." autocomplete="off" maxlength="5000" required></textarea>
 					<label class="form-field__error  hidden" for="step-description-${fieldIndex}">
@@ -1110,6 +1128,7 @@ class GraphModal {
     this.animation = 'fade';
     this._reOpen = false;
     this._nextContainer = false;
+		this._overlayChecker = false;
     this.modalContainer = false;
     this.isOpen = false;
     this.previousActiveElement = false;
@@ -1159,13 +1178,21 @@ class GraphModal {
         }
       }.bind(this));
 
-      document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('graph-modal') && e.target.classList.contains("is-open")) {
+			document.addEventListener('mousedown', function (e) {
+        if (!e.target.classList.contains('graph-modal')) return;
+				this._overlayChecker = true;
+      }.bind(this));
+
+      document.addEventListener('mouseup', function (e) {
+        if (e.target.classList.contains('graph-modal') && this._overlayChecker) {
+					e.preventDefault();
+					this._overlayChecker = !this._overlayChecker;
           this.close();
+					return;
         }
+				this._overlayChecker = false;
       }.bind(this));
     }
-
   }
 
   open(selector) {

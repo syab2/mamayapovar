@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li class="sidebar-tree__item">
-                        <a href="bookmarks/" class="sidebar-tree__link">
+                        <a href="{% url 'bookmarks' %}" class="sidebar-tree__link">
                             <svg class="icon" aria-hidden="true" focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
                             </svg>
@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li class="sidebar-tree__item  active">
-                        <a href="#" class="sidebar-tree__link">
+                        <a href="{% url 'bookmarks' %}" class="sidebar-tree__link">
                             <svg class="icon" aria-hidden="true" focusable="false">
                                 <use href="{% static 'recipes/img/sprite.svg' %}#bookmark"/>
                             </svg>

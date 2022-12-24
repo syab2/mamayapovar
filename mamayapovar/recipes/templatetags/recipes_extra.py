@@ -7,7 +7,6 @@ import pymorphy2
 
 morph = pymorphy2.MorphAnalyzer()
 register = template.Library()
-status = False
 
 
 @register.simple_tag
@@ -88,17 +87,3 @@ def get_correct_path(id_):
 @register.simple_tag
 def get_server_media_url(url):
     return "/".join(url.split("/")[1:])
-
-
-@register.simple_tag
-def set_modals_status(value):
-    global status
-    status = value
-    return status
-
-
-@register.simple_tag
-def get_modals_status():
-    global status
-    return status
-

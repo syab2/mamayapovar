@@ -37,8 +37,6 @@ def get_formatted_recipes(recipes):
             if recipe.cooking_time.split(':')[1] == '0':
                 cook = recipe.cooking_time.split(':')
                 recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word}"
-            elif recipe.cooking_time.split(':')[0] == '24':
-                recipe.cooking_time = f'1 день'
             elif recipe.cooking_time.split(':')[0] != '0':
                 cook = recipe.cooking_time.split(':')
                 recipe.cooking_time = f"{cook[0]} {morph.parse('час')[0].make_agree_with_number(int(cook[0])).word} " \
@@ -59,7 +57,6 @@ def get_formatted_recipes(recipes):
 
 
 def index(request):
-    global status
     recipes = Recipe.objects.all()
 
     new_recipes = get_formatted_recipes(recipes)
