@@ -3,7 +3,7 @@ if (document.querySelector('.counter__input')) {
 		const counterInput = document.querySelector('.counter__input')
 		const counterPlus = document.querySelector('.counter__btn--plus')
 		const counterMinus = document.querySelector('.counter__btn--minus')
-		const counterMax = counterInput.getAttribute('max')
+		const counterMax = 20
 
 		counterInput.addEventListener('change', () => {
 			if (counterInput.value > counterMax - 1) {
