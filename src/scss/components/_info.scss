@@ -1,7 +1,7 @@
 .info {
   position: relative;
   border-radius: 16px;
-  padding: 40px 32px 56px;
+  padding: 40px 32px;
   background-color: var(--color-bg-island);
 
   &__inner {
@@ -20,6 +20,23 @@
     position: absolute;
     right: 32px;
     top: 40px;
+  }
+
+  &__desc {
+    font-weight: 400;
+    font-size: var(--font-primary);
+    line-height: var(--lh-primary);
+    color: var(--color-text-primary);
+  }
+
+  &--avatar {
+    padding-bottom: 56px;
+
+    .info-avatar {
+      margin-bottom: 24px;
+      width: 120px;
+      height: 120px;
+    }
   }
 }
 
