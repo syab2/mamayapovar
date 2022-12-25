@@ -130,6 +130,8 @@ def postlogin(request):
                 },
                 status=200
             )
+
+            
 def postlogout(request):
     logout(request)
     return HttpResponseRedirect('/')

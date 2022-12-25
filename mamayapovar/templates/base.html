@@ -241,11 +241,7 @@ $('#auth-form').submit(function (e) {
             } else if (response.status === 400 && response.form_id === 'password-auth') {
                 $('.form-field--password .form-field__error').removeClass('hidden')
                 $('.form-field--password .form-field__text').text(response.error)
-            } 
-            else if (response.status === 400 && response.form_id === 'password-auth') {
-                $('.form-field--password .form-field__error').removeClass('hidden')
-                $('.form-field--password .form-field__text').text(response.error)
-            } 
+            }
         }
     });
 });
