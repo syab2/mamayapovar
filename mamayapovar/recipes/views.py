@@ -12,6 +12,8 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
+from django.http.response import Http404
+
 
 from .forms import LoginForm
 from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, Category
@@ -98,40 +100,40 @@ def postlogin(request):
                     return JsonResponse(data={'status': 201}, status=200)
                 return JsonResponse(
                     data={
-                    'form_id': 'password-auth',
-                    'status': 400, 
-                    'error': 'Неправильная почта или пароль'
+                        'form_id': 'password-auth',
+                        'status': 400,
+                        'error': 'Неправильная почта или пароль'
                     },
                     status=200
                 )
             elif password:
                 return JsonResponse(
                     data={
-                    'form_id': 'email-auth',
-                    'status': 400, 
-                    'error': 'Пожалуйста, введите почту'
+                        'form_id': 'email-auth',
+                        'status': 400,
+                        'error': 'Пожалуйста, введите почту'
                     },
                     status=200
                 )
             elif email:
                 return JsonResponse(
                     data={
-                    'form_id': 'password-auth',
-                    'status': 400, 
-                    'error': 'Пожалуйста, введите пароль'
+                        'form_id': 'password-auth',
+                        'status': 400,
+                        'error': 'Пожалуйста, введите пароль'
                     },
                     status=200
                 )
             return JsonResponse(
                 data={
-                'form_id': 'password-auth',
-                'status': 400, 
-                'error': 'Пожалуйста, введите почту и пароль'
+                    'form_id': 'password-auth',
+                    'status': 400,
+                    'error': 'Пожалуйста, введите почту и пароль'
                 },
                 status=200
             )
 
-            
+
 def postlogout(request):
     logout(request)
     return HttpResponseRedirect('/')
@@ -174,10 +176,11 @@ def new_recipe(request):
         # photo
         folder = 'recipes'
         second_folder = folder_id
+
         try:
-            uploaded_filename = transliterate.translit(request.FILES['photo'].name, reversed=True)
+            uploaded_filename = '_'.join(transliterate.translit(request.FILES['photo'].name, reversed=True).split())
         except transliterate.exceptions.LanguageDetectionError:
-            uploaded_filename = request.FILES['photo'].name
+            uploaded_filename = '_'.join(request.FILES['photo'].name.split())
 
         try:
             os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
@@ -322,6 +325,7 @@ def recipe(request, recipe_id):
     return render(request, 'recipes/post.html', {
         'recipe': recipe,
         'is_auth': request.user.is_authenticated,
+        'cats': Category.objects.all(),
         'title': f'{recipe.title} — Мама, я повар!'
     })
 
@@ -377,6 +381,7 @@ def user_profile(request, id):
         'is_auth': request.user.is_authenticated,
         'posts': len(new_recipes),
         'title': f'{user.username} — Мама, я повар!',
+        'cats': Category.objects.all(),
         'profile_data': profile_data
     }
     return render(request, 'recipes/user.html', content)
@@ -441,6 +446,7 @@ def category(request, id):
     return render(request, "recipes/category.html", {
         'recipes': get_formatted_recipes(recipes),
         "cat": Category.objects.get(id=id),
+        'cats': Category.objects.all(),
         "is_auth": request.user.is_authenticated
     })
 
@@ -466,9 +472,8 @@ def delete_recipe(request, id):
 
         recipe.delete()
 
-        return HttpResponse(
-            json.dumps({
-                "result": True
-            }),
-            content_type="application/json"
-        )
+        return HttpResponseRedirect('/')
+
+
+def error_404(request, exception):
+    return HttpResponseRedirect('/')
