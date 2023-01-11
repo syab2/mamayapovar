@@ -1,21 +1,21 @@
 import json
 import os
 import random
-from pathlib import Path
 import transliterate
 
 import pymorphy2
 from django.conf import settings
-from django.contrib import messages, auth
+from django.contrib import auth
 from django.contrib.auth import models, logout
+from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 from django.http.response import Http404
+from django.urls import reverse
 
-
-from .forms import LoginForm
+from .forms import *
 from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, Category
 
 morph = pymorphy2.MorphAnalyzer()
@@ -473,6 +473,35 @@ def delete_recipe(request, id):
         recipe.delete()
 
         return HttpResponseRedirect('/')
+
+
+def settings_profile(request):
+    if request.method == 'POST':
+        form = ProfileSettingsForm(request.POST)
+        username = request.POST.get('username')
+        if form.is_valid():
+            if username:
+                profile = UserProfile.objects.get(user_id=request.user.id)
+                profile.description = form.cleaned_data['description']
+                profile.save()
+                if form.cleaned_data['username'] != request.user.username:
+                    user = User.objects.get(id=request.user.id)
+                    user.username = form.cleaned_data['username']
+                    user.save()
+                return render(request, 'recipes/settings/profile.html', {
+                    'user_profile': UserProfile.objects.get(user_id=request.user.id),
+                    'username': User.objects.get(id=request.user.id).username
+                })
+            else:
+                return render(request, 'recipes/settings/profile.html', {
+                    'user_profile': UserProfile.objects.get(user_id=request.user.id),
+                    'username': User.objects.get(id=request.user.id).username,
+                    'error': "Введите имя!"
+                })
+    return render(request, 'recipes/settings/profile.html', {
+        'user_profile': UserProfile.objects.get(user_id=request.user.id),
+        'username': User.objects.get(id=request.user.id).username
+    })
 
 
 def error_404(request, exception):

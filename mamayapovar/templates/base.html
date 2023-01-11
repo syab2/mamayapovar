@@ -25,6 +25,12 @@
     {% include "inc2/_nav.html" %}
 
     {% endblock %}
+{% elif 'settings' in request.get_full_path %}
+    {% block nav %}
+
+    {% include "inc3/_nav.html" %}
+
+    {% endblock %}
 {% else %}
     {% block navbar %}
 
@@ -38,6 +44,10 @@
         {% if request.get_full_path == '/new-recipe/' %}
             {% block sideside %}
             {% include "inc2/_side.html" %}
+            {% endblock %}
+        {% elif 'settings' in request.get_full_path %}
+            {% block side %}
+            {% include "inc3/_side.html" %}
             {% endblock %}
         {% else %}
             {% block sidebar %}

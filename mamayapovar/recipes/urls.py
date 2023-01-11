@@ -18,6 +18,7 @@ urlpatterns = [
     re_path(r'^recipe/(?P<pk>\d+)/subscribe/$', subscribe_post, name='subscribe'),
     path('category/<int:id>/', category, name="category"),
     path('delete_recipe/<int:id>', delete_recipe, name='delete_recipe'),
+    path('settings/profile/', settings_profile, name='settings_profile'),
 ]
 
 if settings.DEBUG:
