@@ -64,4 +64,60 @@ class ProfileSettingsForm(forms.Form):
         description = cleaned_data.get('description')
 
 
+class ChangeEmailForm(forms.Form):
+    email = forms.CharField(
+        required=False,
+        widget=forms.EmailInput(attrs={
+            'class': "input",
+            'name': "email",
+            'id': "settings-email",
+            'placeholder': "Электронная почта"
+        })
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+
+
+class ChangePasswordForm(forms.Form):
+    password_old = forms.CharField(
+        required=False,
+        min_length=4,
+        max_length=32,
+        widget=forms.PasswordInput(attrs={
+            'class': "input",
+            'name': "password-old",
+            'id': "settings-password-old",
+            'placeholder': "Старый пароль"
+        })
+    )
+    password_new = forms.CharField(
+        required=False,
+        min_length=4,
+        max_length=32,
+        widget=forms.PasswordInput(attrs={
+            'class': "input",
+            'name': "password-new",
+            'id': "settings-password-new",
+            'placeholder': "Новый пароль"
+        })
+    )
+    password_new_repeat = forms.CharField(
+        required=False,
+        min_length=4,
+        max_length=32,
+        widget=forms.PasswordInput(attrs={
+            'class': "input",
+            'name': "password-new-repeat",
+            'id': "settings-password-new-repeat",
+            'placeholder': "Подтвердите новый пароль"
+        })
+    )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        password_old = cleaned_data.get('password_old')
+        password_new = cleaned_data.get('password_new')
+        password_new_repeat = cleaned_data.get('password_new_repeat')
 

@@ -7,6 +7,7 @@ import pymorphy2
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth import models, logout
+from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -489,18 +490,98 @@ def settings_profile(request):
                     user.username = form.cleaned_data['username']
                     user.save()
                 return render(request, 'recipes/settings/profile.html', {
-                    'user_profile': UserProfile.objects.get(user_id=request.user.id),
+                    'title': 'Настройки профиля - Мама, я повар!',
                     'username': User.objects.get(id=request.user.id).username
                 })
             else:
                 return render(request, 'recipes/settings/profile.html', {
-                    'user_profile': UserProfile.objects.get(user_id=request.user.id),
+                    'title': 'Настройки профиля - Мама, я повар!',
                     'username': User.objects.get(id=request.user.id).username,
                     'error': "Введите имя!"
                 })
     return render(request, 'recipes/settings/profile.html', {
-        'user_profile': UserProfile.objects.get(user_id=request.user.id),
+        'title': 'Настройки профиля - Мама, я повар!',
         'username': User.objects.get(id=request.user.id).username
+    })
+
+
+def settings_account(request):
+    if request.method == 'POST':
+        if 'email' in request.POST:  # Электронная почта
+            form = ChangeEmailForm(request.POST)
+            if form.is_valid():
+                if request.POST.get("email") and request.POST.get('email') != request.user.email:
+                    user = User.objects.get(id=request.user.id)
+                    user.email = form.cleaned_data['email']
+                    user.save()
+                    return render(request, 'recipes/settings/account.html', {'title': "Настройки аккаунта - Мама, я повар!"})
+                elif not form.cleaned_data['email']:
+                    return render(request, 'recipes/settings/account.html', {
+                        'title': "Настройки аккаунта - Мама, я повар!",
+                        'error': 'Введите почту!'
+                    })
+        elif 'password_old' in request.POST:  # Установка нового пароля
+            form = ChangePasswordForm(request.POST)
+            if form.is_valid():
+                if form.cleaned_data['password_old'] and form.cleaned_data['password_new'] and form.cleaned_data['password_new_repeat']:
+                    if check_password(form.cleaned_data['password_old'], User.objects.get(id=request.user.id).password):
+                        if form.cleaned_data['password_new'] == form.cleaned_data['password_new_repeat']:
+                            user = User.objects.get(id=request.user.id)
+                            user.set_password(form.cleaned_data['password_new'])
+                            user.save()
+                            return render(request, 'recipes/settings/account.html', {
+                                'title': "Настройки аккаунта - Мама, я повар!"
+                            })
+                        elif form.cleaned_data['password_new'] != form.cleaned_data['password_new_repeat']:
+                            return render(request, 'recipes/settings/account.html', {
+                                'title': "Настройки аккаунта - Мама, я повар!",
+                                'error_same': "Пароли не совпадают!",
+                                'old': form.cleaned_data['password_old']
+                            })
+                    else:
+                        return render(request, 'recipes/settings/account.html', {
+                            'title': "Настройки аккаунта - Мама, я повар!",
+                            'error_wrong': "Введен неверный пароль!",
+                            'new': form.cleaned_data['password_new'],
+                            'new_repeat': form.cleaned_data['password_new_repeat']
+                        })
+                else:
+                    return render(request, 'recipes/settings/account.html', {
+                        'title': "Настройки аккаунта - Мама, я повар!",
+                        'error_wrong': "Введите данные!"
+                    })
+        elif len(request.POST) == 1:  # Удаление аккаунта
+            # likes
+            for elem in Like.objects.filter(like_user_id=request.user.id):
+                elem.delete()
+
+            # subs
+            for elem in Subscribe.objects.filter(subscribe_from_id=request.user.id):
+                elem.delete()
+
+            for elem in Subscribe.objects.filter(subscribe_to_id=request.user.id):
+                elem.delete()
+
+            # user profile
+            for elem in UserProfile.objects.filter(user_id=request.user.id):
+                elem.delete()
+
+            # bookmarks
+            for elem in Bookmark.objects.filter(book_user_id=request.user.id):
+                elem.delete()
+
+            # recipes
+            recipes = Recipe.objects.filter(author_id=request.user.id)
+            for elem in recipes:
+                for el in StepImages.objects.filter(recipe_id=elem.id):
+                    el.delete()
+                elem.delete()
+
+            user = User.objects.get(id=request.user.id)
+            user.delete()
+            return HttpResponseRedirect('/')
+    return render(request, 'recipes/settings/account.html', {
+        'title': "Настройки аккаунта - Мама, я повар!"
     })
 
 

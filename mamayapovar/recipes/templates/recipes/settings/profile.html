@@ -2,6 +2,7 @@
 
 {% load static recipes_extra %}
 {% block post %}
+{% get_user_profile request.user.id as user_profile %}
 <main class="settings  settings--profile">
     <h1 class="visually-hidden">Настройки профиля</h1>
     <form id="settings-profile-form" action="{% url 'settings_profile' %}" method="POST" class="settings__form  settings__form--profile" enctype="multipart/form-data">
