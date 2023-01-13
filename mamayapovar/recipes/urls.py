@@ -19,7 +19,8 @@ urlpatterns = [
     path('category/<int:id>/', category, name="category"),
     path('delete_recipe/<int:id>', delete_recipe, name='delete_recipe'),
     path('settings/profile/', settings_profile, name='settings_profile'),
-    path('settings/account/', settings_account, name='settings_account')
+    path('settings/account/', settings_account, name='settings_account'),
+    path('edit_recipe/<int:id>/', edit_recipe, name='edit_recipe')
 ]
 
 if settings.DEBUG:

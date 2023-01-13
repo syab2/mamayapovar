@@ -119,3 +119,8 @@ def get_user_profile(id_):
         profile_data = None
     return profile_data
 
+
+@register.simple_tag
+def get_amount(id_):
+    return 
+

@@ -14,7 +14,6 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate
 from django.shortcuts import render
 from django.http.response import Http404
-from django.urls import reverse
 
 from .forms import *
 from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, Category
@@ -22,7 +21,7 @@ from .models import Like, Recipe, Bookmark, UserProfile, StepImages, Subscribe, 
 morph = pymorphy2.MorphAnalyzer()
 
 
-def get_formatted_recipes(recipes):
+def get_formatted_recipe(recipes):
     for recipe in recipes:
         # user
         recipe.author_id = models.User.objects.get(id=recipe.author_id)
@@ -62,7 +61,7 @@ def get_formatted_recipes(recipes):
 def index(request):
     recipes = Recipe.objects.all()
 
-    new_recipes = get_formatted_recipes(recipes)
+    new_recipes = get_formatted_recipe(recipes)
     content = {
         'recipes': new_recipes,
         'is_auth': request.user.is_authenticated,
@@ -355,7 +354,7 @@ def bookmarks(request):
         for elem in bookmarks:
             recipes.append(Recipe.objects.get(id=elem.book_post_id))
 
-        new_recipes = get_formatted_recipes(recipes)
+        new_recipes = get_formatted_recipe(recipes)
         content = {
             'bookmarks': new_recipes,
             'is_auth': request.user.is_authenticated,
@@ -372,7 +371,7 @@ def user_profile(request, id):
     except:
         profile_data = None
     objs = Recipe.objects.filter(author_id=id)
-    new_recipes = get_formatted_recipes(objs)
+    new_recipes = get_formatted_recipe(objs)
 
     user = models.User.objects.get(id=id)
 
@@ -445,7 +444,7 @@ def subscribe_post(request, pk):
 def category(request, id):
     recipes = Recipe.objects.filter(cat_id=id)
     return render(request, "recipes/category.html", {
-        'recipes': get_formatted_recipes(recipes),
+        'recipes': get_formatted_recipe(recipes),
         "cat": Category.objects.get(id=id),
         'cats': Category.objects.all(),
         "is_auth": request.user.is_authenticated
@@ -510,7 +509,12 @@ def settings_account(request):
         if 'email' in request.POST:  # Электронная почта
             form = ChangeEmailForm(request.POST)
             if form.is_valid():
-                if request.POST.get("email") and request.POST.get('email') != request.user.email:
+                if form.cleaned_data['email'] in [x.email for x in User.objects.all()]:
+                    return render(request, 'recipes/settings/account.html', {
+                        'title': "Настройки аккаунта - Мама, я повар!",
+                        'error': 'Пользователь с такой почтой уже существует!'
+                    })
+                elif request.POST.get("email") and request.POST.get('email') != request.user.email:
                     user = User.objects.get(id=request.user.id)
                     user.email = form.cleaned_data['email']
                     user.save()
@@ -583,6 +587,34 @@ def settings_account(request):
     return render(request, 'recipes/settings/account.html', {
         'title': "Настройки аккаунта - Мама, я повар!"
     })
+
+
+def edit_recipe(request, id):
+    recipe = get_formatted_recipe(Recipe.objects.filter(id=id))[0]
+
+    recipe.ingredients = [[x.split(':')[0], x.split(':')[1].split('-')[0], x.split(':')[1].split('-')[1]] for x in
+                          Recipe.objects.get(id=id).ingredients.split(';')]
+
+    recipe.steps = [[x.split(':')[0], x.split(':')[1]] for x in recipe.steps.split(';')]
+
+    recipe.cooking_time = [Recipe.objects.get(id=id).cooking_time.split(':')]
+
+    recipe.persons = recipe.persons.split()[0]
+
+    step_photos = StepImages.objects.filter(recipe_id=id)
+    if step_photos:
+        for elem in step_photos:
+            for el in recipe.steps:
+                if len(el) == 2:
+                    if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
+                        el.append(elem.image)
+                        break
+                    else:
+                        el.append(None)
+    else:
+        for elem in recipe.steps:
+            elem.append(None)
+    return render(request, 'recipes/edit_recipe.html', {'recipe': recipe})
 
 
 def error_404(request, exception):
