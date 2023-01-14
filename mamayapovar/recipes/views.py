@@ -1,6 +1,7 @@
 import json
 import os
 import random
+from django.urls import reverse
 import transliterate
 
 import pymorphy2
@@ -590,31 +591,85 @@ def settings_account(request):
 
 
 def edit_recipe(request, id):
-    recipe = get_formatted_recipe(Recipe.objects.filter(id=id))[0]
+    if request.method == 'GET':
+        recipe = get_formatted_recipe(Recipe.objects.filter(id=id))[0]
 
-    recipe.ingredients = [[x.split(':')[0], x.split(':')[1].split('-')[0], x.split(':')[1].split('-')[1]] for x in
-                          Recipe.objects.get(id=id).ingredients.split(';')]
+        recipe.ingredients = [[x.split(':')[0], x.split(':')[1].split('-')[0], x.split(':')[1].split('-')[1]] for x in
+                            Recipe.objects.get(id=id).ingredients.split(';')]
 
-    recipe.steps = [[x.split(':')[0], x.split(':')[1]] for x in recipe.steps.split(';')]
+        recipe.steps = [[x.split(':')[0], x.split(':')[1]] for x in recipe.steps.split(';')]
 
-    recipe.cooking_time = [Recipe.objects.get(id=id).cooking_time.split(':')]
+        recipe.cooking_time = [Recipe.objects.get(id=id).cooking_time.split(':')]
 
-    recipe.persons = recipe.persons.split()[0]
+        recipe.persons = recipe.persons.split()[0]
 
-    step_photos = StepImages.objects.filter(recipe_id=id)
-    if step_photos:
-        for elem in step_photos:
-            for el in recipe.steps:
-                if len(el) == 2:
-                    if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
-                        el.append(elem.image)
-                        break
-                    else:
-                        el.append(None)
-    else:
-        for elem in recipe.steps:
-            elem.append(None)
-    return render(request, 'recipes/edit_recipe.html', {'recipe': recipe})
+        step_photos = StepImages.objects.filter(recipe_id=id)
+        if step_photos:
+            for elem in step_photos:
+                for el in recipe.steps:
+                    if len(el) == 2:
+                        if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
+                            el.append(elem.image)
+                            break
+                        else:
+                            el.append(None)
+        else:
+            for elem in recipe.steps:
+                elem.append(None)
+        return render(request, 'recipes/edit_recipe.html', {'recipe': recipe})
+    elif request.method == 'POST':
+        form = RecipeForm(request.POST)
+        if not form.is_valid():
+            
+            recipe = Recipe.objects.get(id=id)
+            categories = {
+                "Выпечка": 1,
+                "Супы": 2,
+                "Салаты": 3,
+                "Горячие блюда": 4
+            }
+            recipe.title = form.cleaned_data['title'].capitalize()
+            recipe.description = form.cleaned_data['description'].capitalize()
+            recipe.cat_id = categories[form.cleaned_data['cat']]
+            recipe.persons = form.cleaned_data['persons']
+            recipe.cooking_time = f'{form.cleaned_data["cooking_time_hours"]}:{form.cleaned_data["cooking_time_minutes"]}'
+
+            ings = []
+            ingredient = ''
+            for elem in request.POST:
+                if 'ingredient-name-' in elem:
+                    ingredient += request.POST.get(
+                        f'ingredient-name-{elem.split("-")[-1]}').capitalize() + ':'
+                if 'ingredient-amount-' in elem:
+                    ingredient += request.POST.get(
+                        f'ingredient-amount-{elem.split("-")[-1]}') + '-'
+                if 'ingredient-measure-' in elem:
+                    ingredient += request.POST.get(
+                        f'ingredient-measure-{elem.split("-")[-1]}')
+                    ings.append(ingredient)
+                    ingredient = ''
+            recipe.ingredients = ';'.join(ings)
+            
+
+            itog1 = []
+            for elem in request.POST:
+                if 'step-description-' in elem:
+                    itog1.append([x.capitalize() for x in request.POST[elem].replace('\r', '').split('\n') if x != ''])
+
+            j = 0
+            step_descs = []
+            for elem in itog1:
+                j += 1
+                step_descs.append('{}:{}'.format(j, "\n".join(elem)))
+
+            recipe.steps = ';'.join(step_descs)
+            
+
+            recipe.save()
+            print(5)
+            
+            return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/')
 
 
 def error_404(request, exception):

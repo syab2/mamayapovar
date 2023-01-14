@@ -4,7 +4,7 @@
 {% block concon %}
 <main class="new-recipe">
     <h1 class="visually-hidden">Создание рецепта</h1>
-    <form id="new-recipe-form" action="{% url 'new_recipe' %}" method="POST" class="new-recipe__form" enctype="multipart/form-data">
+    <form id="edit-recipe-form" action="{% url 'edit_recipe' recipe.id %}" method="POST" class="new-recipe__form" enctype="multipart/form-data">
         {% csrf_token %}
         <fieldset class="form-section  new-recipe-section  new-recipe-section--main" id="new-recipe-main">
             <legend class="section-h2  form-section__title">Основное</legend>
@@ -240,7 +240,7 @@
                                     <option>чайная ложка</option>
                                     <option>столовая ложка</option>
                                     <option>щепотка</option>
-                                    <option >зубчик</option>
+                                    <option selected>зубчик</option>
                                 {% endif %}
                             </select>
                             <svg class="icon" aria-hidden="true" focusable="false">
@@ -272,7 +272,7 @@
             <legend class="section-h2  form-section__title">Фото блюда</legend>
             <div class="imageuploader">
                 <label class="input  input--photo  imageuploader__input" style="background-image: url('{{ recipe.photo.url }}');">
-                    <input type="file" name="photo" accept=".jpg, .jpeg, .png" required>
+                    <input type="file" name="photo" accept=".jpg, .jpeg, .png">
                     <div class="imageuploader__placeholder">
                         <svg class="icon" aria-hidden="true" focusable="false">
                             <use href="{% static 'recipes/img/sprite.svg' %}#image"/>

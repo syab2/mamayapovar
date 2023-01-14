@@ -121,3 +121,24 @@ class ChangePasswordForm(forms.Form):
         password_new = cleaned_data.get('password_new')
         password_new_repeat = cleaned_data.get('password_new_repeat')
 
+
+
+class RecipeForm(forms.Form):
+    title = forms.CharField()
+    description = forms.CharField()
+    cat = forms.CharField()
+    persons = forms.IntegerField()
+    cooking_time_hours = forms.CharField()
+    cooking_time_minutes = forms.CharField()
+    photo = forms.ImageField()
+
+    def clean(self):
+        cleaned_data = super().clean()
+        title = cleaned_data.get('title')
+        description = cleaned_data.get('description')
+        cat = cleaned_data.get('cat')
+        persons = cleaned_data.get('persons')
+        cooking_time_hours = cleaned_data.get('cooking_time_hours')
+        cooking_time_minutes = cleaned_data.get('cooking_time_minutes')
+        photo = cleaned_data.get('photo')
+
