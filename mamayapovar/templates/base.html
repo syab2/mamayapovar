@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{% static 'recipes/css/vendor.css' %}">
     <link rel="stylesheet" href="{% static 'recipes/css/main.css' %}">
     <script defer src="{% static 'recipes/js/main.js' %}"></script>
+    {% if 'edit_recipe' in request.get_full_path %}
+        <script src="{% static 'recipes/js/edit.js' %}"></script>
+    {% endif %}
 </head>
 <body class="page__body">
 {% if request.get_full_path == '/new-recipe/' or 'edit_recipe' in request.get_full_path %}

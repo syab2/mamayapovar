@@ -310,15 +310,17 @@ def recipe(request, recipe_id):
 
     recipe.ingredients = [[x.split(':')[0], ' '.join(x.split(':')[1].split('-'))] for x in
                           recipe.ingredients.split(';')]
+
     recipe.steps = [[x.split(':')[0], x.split(':')[1].split('\n')] for x in recipe.steps.split(';')]
 
-    step_photos = StepImages.objects.filter(recipe_id=recipe_id)
+    step_photos = [x for x in StepImages.objects.filter(recipe_id=recipe_id)]
+    step_photos.sort(key=lambda x: int(str(x.image.url).split('/')[-1].split('.')[0]))
     if step_photos:
-        for elem in step_photos:
+        for i in range(len(step_photos)):
             for el in recipe.steps:
                 if len(el) == 2:
-                    if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
-                        el.append(elem.image)
+                    if str(step_photos[i].image.url).split('/')[-1].split('.')[0] == el[0]:
+                        el.append(step_photos[i].image)
                         break
                     else:
                         el.append(None)
@@ -607,13 +609,14 @@ def edit_recipe(request, id):
 
         recipe.persons = recipe.persons.split()[0]
 
-        step_photos = StepImages.objects.filter(recipe_id=id)
+        step_photos = [x for x in StepImages.objects.filter(recipe_id=id)]
+        step_photos.sort(key=lambda x: int(str(x.image.url).split('/')[-1].split('.')[0]))
         if step_photos:
             for elem in step_photos:
                 for el in recipe.steps:
                     if len(el) == 3:
                         if str(elem.image.url).split('/')[-1].split('.')[0] == el[0]:
-                            el.append(elem.image.url)
+                            el.append(elem.image)
                             break
                         else:
                             el.append(None)
@@ -624,7 +627,6 @@ def edit_recipe(request, id):
     elif request.method == 'POST':
         form = RecipeForm(request.POST)
         if not form.is_valid():
-            
             recipe = Recipe.objects.get(id=id)
             categories = {
                 "Выпечка": 1,
@@ -667,73 +669,94 @@ def edit_recipe(request, id):
                 step_descs.append('{}:{}'.format(j, "\n".join(elem)))
 
             recipe.steps = ';'.join(step_descs)
+            folder_id = str(recipe.photo.url).split('/')[3]
 
-            try:
-                # photo
-                folder_id = str(recipe.photo.url).split('/')[3]
-                folder = 'recipes'
-                second_folder = folder_id
-
+            if request.FILES['photo'].name != 'null':
                 try:
-                    uploaded_filename = '_'.join(transliterate.translit(request.FILES['photo'].name, reversed=True).split())
-                except transliterate.exceptions.LanguageDetectionError:
-                    uploaded_filename = '_'.join(request.FILES['photo'].name.split())
+                    # photo
+                    
+                    folder = 'recipes'
+                    second_folder = folder_id
 
-                try:
-                    os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
-                except:
+                    try:
+                        uploaded_filename = '_'.join(transliterate.translit(request.FILES['photo'].name, reversed=True).split())
+                    except transliterate.exceptions.LanguageDetectionError:
+                        uploaded_filename = '_'.join(request.FILES['photo'].name.split())
+
+                    try:
+                        os.mkdir(os.path.join(settings.MEDIA_ROOT, folder))
+                    except:
+                        pass
+                    
+                    try:
+                        os.mkdir(os.path.join(settings.MEDIA_ROOT, folder, second_folder))
+                    except:
+                        pass
+
+                    full_filename = os.path.join(
+                        settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
+                    fout = open(full_filename, 'wb+')
+
+                    file_content = ContentFile(request.FILES['photo'].read())
+
+                    for chunk in file_content.chunks():
+                        fout.write(chunk)
+                    fout.close()
+                    
+                    os.remove(recipe.photo.path)
+                    recipe.photo = os.path.join(folder, second_folder, uploaded_filename)
+                except datastructures.MultiValueDictKeyError:
                     pass
-                
-                try:
-                    os.mkdir(os.path.join(settings.MEDIA_ROOT, folder, second_folder))
-                except:
-                    pass
-
-                full_filename = os.path.join(
-                    settings.MEDIA_ROOT, folder, second_folder, uploaded_filename)
-                fout = open(full_filename, 'wb+')
-
-                file_content = ContentFile(request.FILES['photo'].read())
-
-                for chunk in file_content.chunks():
-                    fout.write(chunk)
-                fout.close()
-                
-                os.remove(recipe.photo.path)
-                recipe.photo = os.path.join(folder, second_folder, uploaded_filename)
-            except datastructures.MultiValueDictKeyError:
-                pass
 
             recipe.save()
 
             descs = []
             for elem in request.POST:
                 if 'step-description-' in elem:
-                    descs.append(elem)
+                    try:
+                        if [x for x in request.FILES].index(f'step-photo-{elem.split("-")[-1]}'):
+                            descs.append([elem, True])
+                    except ValueError:
+                        descs.append([elem, False])
+            
+            
 
             files = []
             for elem in request.FILES:
                 if 'step-photo-' in elem:
                     files.append(elem)
 
+
             itog = []
             for elem in files:
                 for el in descs:
-                    if elem.split('-')[-1] == el.split('-')[-1]:
-                        itog.append([descs.index(el), elem])
+                    if el[1] is True:
+                        if elem.split('-')[-1] == el[0].split('-')[-1]:
+                            itog.append([descs.index(el), elem])
+                    else:
+                        itog.append([descs.index(el), None])
 
+            print(itog)
 
-            if len(files) < len(StepImages.objects.filter(recipe_id=recipe.id)):
-                pass
 
             for elem in itog:
-
                 folder = 'recipes'
                 second_folder = folder_id
-                if elem:
+                if elem[1]:
                     uploaded_filename = str(elem[0] + 1) + '.' + request.FILES[elem[1]].name.split('.')[-1]
+                    if os.path.isfile(os.path.join(settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)):
+                        continue
                 else:
-                    continue
+                    try:
+                        for el in StepImages.objects.filter(recipe_id=id):
+                            if str(elem[0] + 1) in str(el.image.url).split('/')[-2:][1]:
+                                path_for_delete = os.path.join(settings.MEDIA_ROOT, folder, second_folder, 'steps', str(el.image.url).split('/')[-2:][1])
+                                os.remove(path_for_delete)
+                                StepImages.objects.get(id=el.id).delete()
+                                break
+                    except Exception:
+                        print(elem)
+                        continue
 
                 try:
                     os.mkdir(os.path.join(os.path.join(settings.MEDIA_ROOT, folder, second_folder), 'steps'))
@@ -742,10 +765,6 @@ def edit_recipe(request, id):
 
                 ful_fil = os.path.join(
                     settings.MEDIA_ROOT, folder, second_folder, 'steps', uploaded_filename)
-
-                if os.path.isfile(ful_fil):
-                    os.remove(ful_fil)
-                    StepImages.objects.get(image=ful_fil).delete()
                         
 
                 try:
@@ -761,6 +780,7 @@ def edit_recipe(request, id):
                     imgs.save()
                 except Exception:
                     pass
+                
             
             return HttpResponseRedirect('/')
     return HttpResponseRedirect('/')
